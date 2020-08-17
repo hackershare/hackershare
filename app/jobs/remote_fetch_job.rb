@@ -6,6 +6,6 @@ class RemoteFetchJob < ApplicationJob
     parser = LinkThumbnailer.generate(bookmark.url)
     bookmark.update(favicon: parser.favicon, description: parser.description, title: parser.title)
   rescue LinkThumbnailer::HTTPError
-    #TODO
+    # TODO
   end
 end
