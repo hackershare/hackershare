@@ -1,0 +1,29 @@
+<div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+  <h3 class="text-lg leading-6 font-medium text-gray-900">
+    Profile
+  </h3>
+</div>
+<div class="space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center xl:block xl:space-y-8">
+                  <!-- Profile -->
+  <div class="flex items-start space-x-3">
+    <div class="flex-shrink-0 h-14 w-14">
+      <%= image_tag user.avatar_url, class: 'h-12 w-12 rounded-full' %>
+    </div>
+    <div class="space-y-1">
+      <div class="text-sm leading-5 font-medium text-gray-900">@<%= user.username %></div>
+      <div class="text-sm leading-5 font-medium text-gray-900"><%= user.email %></div>
+    </div>
+  </div>
+  <!-- Action buttons -->
+  <div class="flex flex-col space-y-3 sm:space-y-0 sm:space-x-3 sm:flex-row xl:flex-col xl:space-x-0 xl:space-y-3">
+    <div class="text-sm leading-5 font-medium text-gray-900"><%= user.about %></div>
+    <div class="text-sm leading-5 font-medium text-gray-900"><%= user.homepage %></div>
+  </div>
+  <div class="flex flex-col space-y-3 sm:space-y-0 sm:space-x-3 sm:flex-row xl:flex-col xl:space-x-0 xl:space-y-3">
+    <span data-controller="follows" class="inline-flex rounded-md shadow-sm">
+      <%= link_to toggle_following_user_path(user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150", "data-target": "follows.button" do %>
+        <%= user.followed_by?(current_user) ? "Unfollow" : "Follow" %>
+      <% end %>
+    </span>
+  </div>
+</div>

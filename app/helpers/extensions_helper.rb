@@ -1,0 +1,2 @@
+module ExtensionsHelper
+end

@@ -1,0 +1,25 @@
+<div class="relative" data-target="userhover.card">
+  <div class="absolute bottom-8 left-0 z-50 bg-white shadow-lg rounded-lg p-2 min-w-max-content">
+    <div class="flex space-x-3 items-center w-64">
+      <%= image_tag @user.avatar_url, class: "flex-shrink-0 h-24 w-24 object-cover border border-gray-200 bg-gray-100 rounded" %>
+
+      <div class="flex flex-col">
+        <span class="text-sm leading-5 font-medium text-indigo-600">
+          <%= @user.username %>
+        </span>
+
+        <span class="text-lg leading-0 font-semibold text-gray-900">
+          <%= @user.username %>
+        </span>
+
+        <span class="flex text-sm text-gray-500">
+          <%= @user.email %>
+          <span class="mx-1">
+            &middot;
+          </span>
+          <%= number_to_currency(@user.created_at.to_i / 100) %>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

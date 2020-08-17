@@ -1,0 +1,58 @@
+<!-- Account profile -->
+<div class="xs:hidden xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+  <div class="pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+    <div class="flex items-center justify-between">
+      <div class="flex-1 space-y-8">
+
+        <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Top Hackers
+          </h3>
+        </div>
+        <div class="space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center xl:block xl:space-y-8">
+
+          <!-- Profile -->
+          <div class="flex flex-wrap">
+            <% User.all.each do |user| %>
+              <div data-target="userhover.avatar" class="h-18 w-18" data-controller="userhover" data-action="mouseenter->userhover#show mouseleave->userhover#hide" data-userhover-url-value="<%= hover_user_path(user) %>">
+                <%= link_to image_tag(user.avatar_url, class: "h-12 w-12 m-3 rounded-full"), user_path(user) %>
+              </div>
+            <% end %>
+            <% 10.times do |i| %>
+            <div class="h-18 w-18">
+              <img class="h-12 w-12 m-3 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80" alt="">
+            </div>
+            <% end %>
+          </div>
+          <!-- Action buttons -->
+          
+        </div>
+        <!-- Meta info -->
+
+        <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Top Activities
+          </h3>
+        </div>
+        <div class="space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center xl:block xl:space-y-8">
+          <!-- Profile -->
+          <div class="flex flex-wrap">
+            <% User.all.each do |user| %>
+              <div data-target="userhover.avatar" class="h-18 w-18" data-controller="userhover" data-action="mouseenter->userhover#show mouseleave->userhover#hide" data-userhover-url-value="<%= hover_user_path(user) %>">
+                <%= link_to image_tag(user.avatar_url, class: "h-12 w-12 m-3 rounded-full"), user_path(user) %>
+              </div>
+            <% end %>
+            <% 10.times do |i| %>
+            <div class="h-18 w-18">
+              <img class="h-12 w-12 m-3 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80" alt="">
+            </div>
+            <% end %>
+          </div>
+          <!-- Action buttons -->
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

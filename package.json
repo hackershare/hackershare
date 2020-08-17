@@ -1,0 +1,22 @@
+{
+  "name": "newreader",
+  "private": true,
+  "dependencies": {
+    "@popperjs/core": "^2.4.4",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "@tailwindcss/ui": "^0.3.1",
+    "alpinejs": "^2.5.0",
+    "stimulus": "^1.1.1",
+    "tailwindcss": "^1.5.2",
+    "tailwindcss-stimulus-components": "^2.0.2",
+    "timeago.js": "^4.0.2",
+    "turbolinks": "^5.2.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}

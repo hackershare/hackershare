@@ -1,0 +1,32 @@
+<% if current_user %>
+  <div class="pt-4 pb-3 border-t border-gray-200">
+      <div class="flex items-center px-4 sm:px-6">
+        <div class="flex-shrink-0">
+          <%= image_tag current_user.avatar_url, class: "h-10 w-10 rounded-full" %>
+        </div>
+        <div class="ml-3">
+          <div class="text-base font-medium leading-6 text-gray-800"><%= current_user.username %></div>
+          <div class="text-sm font-medium leading-5 text-gray-500"><%= current_user.email %></div>
+        </div>
+      </div>
+      <div class="mt-3">
+        <a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6">Your Profile</a>
+        <a href="#" class="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6">Settings</a>
+
+        <%= link_to('Sign out', destroy_session_path, method: :delete, role: 'menuitem', class: "mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6")%>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="py-6 px-5 space-y-6">
+    <div class="space-y-6">
+      <span class="w-full flex rounded-md shadow-sm">
+        <%= link_to "Sign up", new_registration_path, class: "w-full flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150" %>
+      </span>
+      <p class="text-center text-base leading-6 font-medium text-gray-500">
+        Existing account?
+        <%= link_to "Sign in", new_session_path, class: "text-indigo-600 hover:text-indigo-500 transition ease-in-out duration-150" %>
+      </p>
+    </div>
+  </div>
+<% end %>

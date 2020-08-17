@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id               :bigint           not null, primary key
+#  about            :text
+#  email            :string
+#  extension_token  :string
+#  followers_count  :integer          default(0)
+#  followings_count :integer          default(0)
+#  homepage         :string
+#  password_digest  :string
+#  remember_token   :string
+#  username         :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email               (email) UNIQUE
+#  index_users_on_email_lower_unique  (lower((email)::text)) UNIQUE
+#  index_users_on_remember_token      (remember_token) UNIQUE
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

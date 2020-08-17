@@ -1,0 +1,3 @@
+<% %i[error info success].each do |key| %>
+  <%= render "layouts/flash/#{key}" if flash[key] %>
+<% end %>

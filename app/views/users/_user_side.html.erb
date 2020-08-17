@@ -1,0 +1,10 @@
+<!-- Account profile -->
+<div class="xs:hidden xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
+  <div class="pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
+    <div class="flex items-center justify-between">
+      <div class="flex-1 space-y-8">
+        <%= render partial: "users/profile", locals: {user: @user}%>
+      </div>
+    </div>
+  </div>
+</div>

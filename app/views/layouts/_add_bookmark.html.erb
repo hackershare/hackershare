@@ -1,0 +1,25 @@
+<div data-controller="modal" data-modal-allow-background-close="false" class="flex-shrink-0">
+  <button data-action="click->modal#open" type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+    <svg class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+  </svg>
+    <span>Bookmark</span>
+  </button>
+  <!--modal box -->
+  <div data-target="modal.container" data-action="click->modal#closeBackground keyup@window->modal#closeWithKeyboard" class="hidden animated fadeIn fixed inset-0 overflow-y-auto flex items-center justify-center" style="z-index: 9999;">
+    <!-- Modal Inner Container -->
+    <div class="max-h-screen w-full max-w-lg relative">
+      <!-- Modal Card -->
+      <div class="m-1 bg-white rounded shadow">
+        <div class="p-8">
+          <h2 class="text-xl mb-4">Large Modal Content</h2>
+          <p class="mb-4">This is an example modal dialog box.</p>
+
+          <div class="flex justify-end items-center flex-wrap mt-6">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" data-action="click->modal#close">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

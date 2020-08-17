@@ -1,0 +1,7 @@
+<%= render partial: "users/filter", locals: {user: @user} %>
+<ul class="relative z-0 divide-y divide-gray-200 border-b border-gray-200" data-target='bookmarks.list'>
+  <% @bookmarks.each do |bookmark| %>
+    <%= render partial: "bookmarks/bookmark", object: bookmark %>
+  <% end %>
+</ul>
+<%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
