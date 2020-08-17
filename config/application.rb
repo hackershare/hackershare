@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 
 Dotenv::Railtie.load
 
-module Newreader
+module Hackershare
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.active_storage.service = :local
