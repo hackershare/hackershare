@@ -22,6 +22,7 @@ class AuthProvider < ApplicationRecord
     user.homepage = homepage if user.homepage.blank?
     user.about = description if user.about.blank?
     user.save
+    SaveAvatarJob.perform_now(self.id) unless user.avatar.attached?
   end
 
   def description
@@ -46,5 +47,13 @@ class AuthProvider < ApplicationRecord
     elsif provider == "twitter"
       data["info"]["image"]
     end
+  end
+
+  def save_img
+    downloaded_image = open(avatar)
+    user.avatar.attach(
+      io: downloaded_image,
+      filename: File.basename(URI.parse(avatar).path)
+    )
   end
 end
