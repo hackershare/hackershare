@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:hover]
+  skip_before_action :authenticate_user!, only: [:hover, :show]
 
   def show
     @user = User.find(params[:id])
