@@ -4,7 +4,7 @@
 lock "3.8.2"
 
 set :application, "hackershare"
-set :repo_url, "git@github.com:hooopo/hackershare.git"
+set :repo_url, "git@hackershare.github.com:hooopo/hackershare.git"
 
 set :assets_roles, [:app]
 
@@ -19,7 +19,7 @@ set :puma_init_active_record, true
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
-
+Rake::Task["deploy:assets:backup_manifest"].clear_actions
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
