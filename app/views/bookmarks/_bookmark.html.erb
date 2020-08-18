@@ -16,9 +16,7 @@
         
         <span class="block">
           <h2 class="text-sm font-medium leading-5">
-            <a href="#">
-              <%= bookmark.title || bookmark.url %>
-            </a>
+            <%= link_to bookmark.title || bookmark.url, bookmark_path(bookmark)  %>
           </h2>
         </span>
       </div>
@@ -44,7 +42,7 @@
         </span>
       </p>
       <p class="flex text-gray-500 text-sm leading-5 space-x-2">
-        <span data-target="userhover.avatar" data-controller="userhover" data-action="mouseenter->userhover#show mouseleave->userhover#hide" data-userhover-url-value="<%= hover_user_path(bookmark.user_id) %>" ><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
+        <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
         <span>&middot;</span>
         <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
       </p>
