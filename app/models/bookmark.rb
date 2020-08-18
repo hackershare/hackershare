@@ -58,7 +58,7 @@ class Bookmark < ApplicationRecord
 
   after_create_commit do
     # RemoteFetchJob.new.perform(id)
-    RemoteFetchJob.perform_now(id)
+    RemoteFetchJob.perform_later(id)
   end
 
   def self.sorting(params)
