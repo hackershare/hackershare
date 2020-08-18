@@ -291,7 +291,9 @@ CREATE TABLE public.users (
     about text,
     homepage character varying,
     followers_count integer DEFAULT 0,
-    followings_count integer DEFAULT 0
+    followings_count integer DEFAULT 0,
+    bookmarks_count integer DEFAULT 0,
+    score integer GENERATED ALWAYS AS ((bookmarks_count + (followers_count * 5))) STORED
 );
 
 
@@ -591,6 +593,20 @@ CREATE UNIQUE INDEX index_users_on_remember_token ON public.users USING btree (r
 
 
 --
+-- Name: index_users_on_score; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_score ON public.users USING btree (score DESC);
+
+
+--
+-- Name: index_users_on_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_updated_at ON public.users USING btree (updated_at DESC);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -621,6 +637,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200815190612'),
 ('20200816073156'),
 ('20200816095432'),
-('20200816114948');
+('20200816114948'),
+('20200818185211');
 
 

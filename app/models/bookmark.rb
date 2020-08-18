@@ -26,7 +26,7 @@
 #  index_bookmarks_on_user_id          (user_id)
 #
 class Bookmark < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, counter_cache: true, touch: true
   belongs_to :ref, class_name: "Bookmark", optional: true, counter_cache: :dups_count
   has_many :duplications, foreign_key: :ref_id, class_name: "Bookmark"
 

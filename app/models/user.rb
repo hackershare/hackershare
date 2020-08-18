@@ -4,6 +4,7 @@
 #
 #  id               :bigint           not null, primary key
 #  about            :text
+#  bookmarks_count  :integer          default(0)
 #  email            :string
 #  extension_token  :string
 #  followers_count  :integer          default(0)
@@ -11,6 +12,7 @@
 #  homepage         :string
 #  password_digest  :string
 #  remember_token   :string
+#  score            :integer
 #  username         :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -20,6 +22,8 @@
 #  index_users_on_email               (email) UNIQUE
 #  index_users_on_email_lower_unique  (lower((email)::text)) UNIQUE
 #  index_users_on_remember_token      (remember_token) UNIQUE
+#  index_users_on_score               (score)
+#  index_users_on_updated_at          (updated_at)
 #
 class User < ApplicationRecord
   has_secure_password

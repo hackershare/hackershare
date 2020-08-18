@@ -15,7 +15,7 @@
 #  index_likes_on_user_id_and_bookmark_id  (user_id,bookmark_id) UNIQUE
 #
 class Like < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :bookmark, counter_cache: true
 
   after_create :sync_cached_like_user_ids
