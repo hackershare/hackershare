@@ -21,7 +21,7 @@
   </div>
   <div class="flex flex-col space-y-3 sm:space-y-0 sm:space-x-3 sm:flex-row xl:flex-col xl:space-x-0 xl:space-y-3">
     <span data-controller="follows" class="inline-flex rounded-md shadow-sm">
-      <%= link_to toggle_following_user_path(user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150", "data-target": "follows.button" do %>
+      <%= link_to toggle_following_user_path(user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition ease-in-out duration-150 #{user.followed_by?(current_user) ? 'bg-gray-600 hover:bg-gray-500  focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700' : 'bg-indigo-600 hover:bg-indigo-500  focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'} ", "data-target": "follows.button" do %>
         <%= user.followed_by?(current_user) ? "Unfollow" : "Follow" %>
       <% end %>
     </span>

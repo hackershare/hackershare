@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
     base = Bookmark.sorting(params).original
     @pagy, @bookmarks = pagy_countless(
       base,
-      items: 15,
+      items: 10,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
     respond_to do |format|

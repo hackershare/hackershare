@@ -3,14 +3,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    limit = ({ weekly: 2, monthly: 3, all: 4, daily: 1 }[params[:dt].to_sym] if params[:dt])
+    base = Bookmark.filter(@user, params).includes(:ref)
     @pagy, @bookmarks = pagy_countless(
-      @user.bookmarks.original.order("id desc"),
-      items: limit || 10,
+      base,
+      items: 10,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
     respond_to do |format|
-      format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html" }
+      format.js { render partial: "users/bookmarks_with_pagination", content_type: "text/html" }
       format.html
     end
   end

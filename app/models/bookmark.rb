@@ -56,6 +56,10 @@ class Bookmark < ApplicationRecord
     cached_like_user_ids.include?(user.id)
   end
 
+  def only_first
+    ref || self
+  end
+
   after_create_commit do
     # RemoteFetchJob.new.perform(id)
     RemoteFetchJob.perform_later(id)
@@ -63,19 +67,40 @@ class Bookmark < ApplicationRecord
 
   def self.sorting(params)
     dt = Date.today
+
     if params[:dt].blank? || !%w[daily weekly monthly all].include?(params[:dt])
       return Bookmark.order("smart_score desc")
     end
-    return Bookmark.order("score desc") if params[:dt] == "all"
+     
+    if params[:dt] == "all"
+      return Bookmark.order("score desc")
+    end
+
     if params[:dt] == "daily"
       return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :daily, date_id: dt }).order("bookmark_stats.score desc")
     end
+
     if params[:dt] == "weekly"
       return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :weekly, date_id: dt.beginning_of_week }).order("bookmark_stats.score desc")
     end
 
     if params[:dt] == "monthly"
-      Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
+      return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
+    end
+  end
+
+  def self.filter(user, params)
+    return user.bookmarks.order(id: :desc) if !%w[created likes followings].include?(params[:type])
+    if params[:type] == 'created'
+      return user.bookmarks.order(id: :desc)
+    end
+
+    if params[:type] == 'likes'
+      return user.like_bookmarks.order(id: :desc)
+    end
+
+    if params[:type] == 'followings'
+      return Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: {user_id: user.id}).order(id: :desc)
     end
   end
 end

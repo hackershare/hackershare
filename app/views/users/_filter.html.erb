@@ -1,10 +1,11 @@
 <div class="pl-4 pr-6 pt-4 pb-4 border-b border-t border-gray-200 sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-6 xl:border-t-0">
   <div class="flex items-center justify-start">
     <span class="relative z-0 inline-flex shadow-sm rounded-md">
-      <%= link_to "Bookmarks", user_path(params.permit(:type, :page).merge(type: :bookmarks)), type: "button", class: "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", data: {remote: true, action: "ajax:success->listing#replace"} %>
+      <%= link_to "Created", user_path(params.permit(:type, :page).merge(type: :created)), type: "button", class: "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", data: {remote: true, action: "ajax:success->listing#replace"} %>
+
       <%= link_to "Likes", user_path(params.permit(:type, :page).merge(type: :likes)), type: 'button', class: "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", data: {remote: true, action: "ajax:success->listing#replace"} %>
 
-      <%= link_to "Likes", user_path(user, params.permit(:type, :page).merge(type: :likes)), type: "button", class: "-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", data: {remote: true, action: "ajax:success->listing#replace"} %>
+      <%= link_to "Followings", user_path(user, params.permit(:type, :page).merge(type: :followings)), type: "button", class: "-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", data: {remote: true, action: "ajax:success->listing#replace"} %>
     </span>
 
   </div>
