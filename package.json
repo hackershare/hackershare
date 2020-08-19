@@ -2,6 +2,7 @@
   "name": "hackershare",
   "private": true,
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
     "@popperjs/core": "^2.4.4",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
