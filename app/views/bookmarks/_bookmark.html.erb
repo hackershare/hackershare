@@ -16,7 +16,7 @@
         
         <span class="block">
           <h2 class="text-sm font-medium leading-5">
-            <%= link_to bookmark.title || bookmark.url, bookmark_path(bookmark)  %>
+            <%= link_to bookmark.title.presence || bookmark.url, bookmark_path(bookmark)  %>
           </h2>
         </span>
       </div>
