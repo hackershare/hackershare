@@ -71,7 +71,7 @@ class Bookmark < ApplicationRecord
     if params[:dt].blank? || !%w[daily weekly monthly all].include?(params[:dt])
       return Bookmark.order("smart_score desc")
     end
-     
+
     if params[:dt] == "all"
       return Bookmark.order("score desc")
     end
@@ -85,22 +85,22 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:dt] == "monthly"
-      return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
+      Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
     end
   end
 
   def self.filter(user, params)
     return user.bookmarks.order(id: :desc) if !%w[created likes followings].include?(params[:type])
-    if params[:type] == 'created'
+    if params[:type] == "created"
       return user.bookmarks.order(id: :desc)
     end
 
-    if params[:type] == 'likes'
+    if params[:type] == "likes"
       return user.like_bookmarks.order(id: :desc)
     end
 
-    if params[:type] == 'followings'
-      return Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: {user_id: user.id}).order(id: :desc)
+    if params[:type] == "followings"
+      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(id: :desc)
     end
   end
 end
