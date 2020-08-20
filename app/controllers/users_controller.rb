@@ -15,6 +15,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @pagy, @users = pagy_countless(
+      User.order(score: :desc),
+      items: 12,
+      link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
+    )
+
+    respond_to do |format|
+      format.js { render partial: "users/list", content_type: "text/html" }
+      format.html
+    end
+  end
+
   def hover
     @user = User.find(params[:id])
     render layout: false

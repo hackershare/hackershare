@@ -8,7 +8,9 @@ export default class extends Controller {
     let [data, status, xhr] = event.detail;
     this.containerTarget.innerHTML = xhr.response;
     const timeagos = document.querySelectorAll('.timeago');
-    render(timeagos);
+    if (timeagos.length > 0){
+      render(timeagos);
+    }
     window.history.pushState(null, null, event.target.getAttribute("href"));
   }
 }
