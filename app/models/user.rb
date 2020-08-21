@@ -75,16 +75,20 @@ class User < ApplicationRecord
     user.follows.where(following_user: self).exists?
   end
 
+  def self.email_or_fake(auth)
+    auth["info"]["email"] || [auth["uid"], "fakemail.com"].join("@")
+  end
+
   def self.find_or_create_from_auth(auth)
     auth_provider = AuthProvider.find_or_initialize_by(provider: auth["provider"], uid: auth["uid"])
     if auth_provider.new_record?
       auth_provider.data = auth
-      if user = User.where("lower(email) = ?", auth["info"]["email"].downcase).first
+      if user = User.where("lower(email) = ?", email_or_fake(auth).downcase).first
         auth_provider.user = user
         auth_provider.save
       else
         user = auth_provider.build_user(
-          email: auth["info"]["email"],
+          email: email_or_fake(auth),
           username: auth["info"]["nickname"],
           password: SecureRandom.hex,
           about: auth_provider.description,
