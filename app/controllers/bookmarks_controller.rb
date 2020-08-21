@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!, only: %i[index show]
   def new; end
 
   def index
