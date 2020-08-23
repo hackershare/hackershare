@@ -1,24 +1,18 @@
-# README
+# Hackershare
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket.
 
-Things you may want to cover:
+## Dependency
 
-* Ruby version
+* Postgresql 12+
+* Rails 6
 
-* System dependencies
+## Demo site
 
-* Configuration
+* https://hackershare.dev
 
-* Database creation
 
-* Database initialization
+## chrome extension
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* https://github.com/hooopo/hackershare-ext
+* https://chrome.google.com/webstore/detail/hackershare/pinmchdpdbjbhijbagmealcojjpeebmh
