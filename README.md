@@ -6,6 +6,9 @@ Social bookmarks website for hackers. Alternative to delicious, hackernews, pock
 
 * Postgresql 12+
 * Rails 6
+* Stimulusjs 
+* Turbolinks 5
+* rails-ujs
 
 ## Demo site
 
