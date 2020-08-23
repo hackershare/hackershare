@@ -29,3 +29,8 @@ document.addEventListener("turbolinks:load", function() {
       render(timeagos);
     }   
 });
+
+
+window.onpopstate = function(event) {
+  document.location.reload();
+};
