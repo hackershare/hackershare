@@ -3,7 +3,7 @@ class BookmarksController < ApplicationController
   def new; end
 
   def index
-    base = Bookmark.sorting(params).original
+    base = Bookmark.sorting(params).original.includes(:user)
     @pagy, @bookmarks = pagy_countless(
       base,
       items: 10,
