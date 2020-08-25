@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     member do
       post :toggle_liking
     end
+    resources :comments
   end
   resources :extensions, only: %i[create]
   resources :users do

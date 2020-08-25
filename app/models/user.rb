@@ -5,6 +5,7 @@
 #  id               :bigint           not null, primary key
 #  about            :text
 #  bookmarks_count  :integer          default(0)
+#  comments_count   :integer          default(0)
 #  email            :string
 #  extension_token  :string
 #  followers_count  :integer          default(0)
@@ -33,6 +34,7 @@ class User < ApplicationRecord
   has_many :like_bookmarks, through: :likes, source: "bookmark"
   has_many :follows, dependent: :destroy
   has_many :follow_users, through: :follows, source: "following_user"
+  has_many :comments, dependent: :destroy
 
   has_many :followers, class_name: "Follow", foreign_key: "following_user_id"
   has_many :follower_users, through: :followers, source: "user"

@@ -15,6 +15,11 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def show
+    @bookmark = Bookmark.find(params[:id]).only_first
+    @user = @bookmark.user
+  end
+
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
     if @bookmark.save

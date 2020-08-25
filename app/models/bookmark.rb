@@ -4,6 +4,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  cached_like_user_ids :integer          default([]), is an Array
+#  comments_count       :integer          default(0)
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
@@ -33,6 +34,7 @@ class Bookmark < ApplicationRecord
   has_many :likes
   has_many :like_users, through: :likes, source: "user"
   has_many :bookmark_stats
+  has_many :comments
   scope :original, -> { where("ref_id IS NULL") }
 
   validates :url, presence: true

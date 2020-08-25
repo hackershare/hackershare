@@ -1,0 +1,16 @@
+<div class="bg-white py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
+  <div class="max-w-lg mx-auto lg:max-w-none">
+    <%= form_with(url: bookmark_comments_path(bookmark), method: :post, class: "grid grid-cols-1 row-gap-6", data: { action: 'ajax:success->comments#append' }) do |f| %>
+      <div>
+        <div class="relative rounded-md shadow-sm">
+          <%= f.text_area :comment, class: "form-input block w-full py-3 px-4 placeholder-gray-500 transition ease-in-out duration-150", rows: 4, data: { target: 'comments.input' } %>
+        </div>
+      </div>
+      <div class="">
+        <span class="inline-flex rounded-md shadow-sm">
+          <%= f.submit "Comment", type: :submit, class: "inline-flex justify-center py-3 px-6 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", data: {disable_with: '...'}  %>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>

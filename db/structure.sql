@@ -179,7 +179,8 @@ CREATE TABLE public.bookmarks (
     likes_count integer DEFAULT 0,
     cached_like_user_ids integer[] DEFAULT '{}'::integer[],
     score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
-    smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED
+    smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
+    comments_count integer DEFAULT 0
 );
 
 
@@ -200,6 +201,39 @@ CREATE SEQUENCE public.bookmarks_id_seq
 --
 
 ALTER SEQUENCE public.bookmarks_id_seq OWNED BY public.bookmarks.id;
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.comments (
+    id bigint NOT NULL,
+    comment text,
+    user_id bigint,
+    bookmark_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 
 
 --
@@ -293,7 +327,8 @@ CREATE TABLE public.users (
     followers_count integer DEFAULT 0,
     followings_count integer DEFAULT 0,
     bookmarks_count integer DEFAULT 0,
-    score integer GENERATED ALWAYS AS ((bookmarks_count + (followers_count * 5))) STORED
+    score integer GENERATED ALWAYS AS ((bookmarks_count + (followers_count * 5))) STORED,
+    comments_count integer DEFAULT 0
 );
 
 
@@ -349,6 +384,13 @@ ALTER TABLE ONLY public.bookmark_stats ALTER COLUMN id SET DEFAULT nextval('publ
 --
 
 ALTER TABLE ONLY public.bookmarks ALTER COLUMN id SET DEFAULT nextval('public.bookmarks_id_seq'::regclass);
+
+
+--
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
 
 
 --
@@ -418,6 +460,14 @@ ALTER TABLE ONLY public.bookmark_stats
 
 ALTER TABLE ONLY public.bookmarks
     ADD CONSTRAINT bookmarks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -544,6 +594,20 @@ CREATE INDEX index_bookmarks_on_user_id ON public.bookmarks USING btree (user_id
 
 
 --
+-- Name: index_comments_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_bookmark_id ON public.comments USING btree (bookmark_id);
+
+
+--
+-- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_comments_on_user_id ON public.comments USING btree (user_id);
+
+
+--
 -- Name: index_follows_on_user_id_and_following_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -638,6 +702,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200816073156'),
 ('20200816095432'),
 ('20200816114948'),
-('20200818185211');
+('20200818185211'),
+('20200825073737');
 
 

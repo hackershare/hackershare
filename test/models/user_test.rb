@@ -5,6 +5,7 @@
 #  id               :bigint           not null, primary key
 #  about            :text
 #  bookmarks_count  :integer          default(0)
+#  comments_count   :integer          default(0)
 #  email            :string
 #  extension_token  :string
 #  followers_count  :integer          default(0)

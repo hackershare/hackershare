@@ -1,1 +1,31 @@
-TODO
+<!-- 3 column wrapper -->
+<div class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
+  <!-- Left sidebar & main wrapper -->
+  <div class="flex-1 min-w-0 bg-white xl:flex">
+    <%= render partial: "users/user_side", locals: {user: @bookmark.only_first.user } %>
+
+    <!-- Projects List -->
+    <div class="bg-white lg:min-w-0 lg:flex-1">
+      <ul class="relative z-0 divide-y divide-gray-200 border-b border-gray-200" >
+        <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first %>
+      </ul>
+      <div data-controller="comments">
+        <div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0" >
+          <div class="pl-6 w-full">
+            <div class="pt-6 pb-2">
+              <h2 class="text-sm leading-5 font-semibold">Comments</h2>
+            </div>
+            <div>
+              <ul class="divide-y divide-gray-200 " data-target='comments.list'>
+                <% @bookmark.comments.order(id: :asc).each do |comment| %>
+                  <%= render partial: "comments/comment", locals: {comment: comment} %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <%= render partial: 'comments/form', locals: {bookmark: @bookmark} %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  cached_like_user_ids :integer          default([]), is an Array
+#  comments_count       :integer          default(0)
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
