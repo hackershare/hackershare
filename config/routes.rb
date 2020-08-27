@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create_from_oauth"
   resources :registrations, only: %i[new create]
   resources :sessions, only: %i[new create]
+  resources :categories
   resources :bookmarks do
     member do
       post :toggle_liking

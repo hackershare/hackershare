@@ -3,14 +3,16 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="flex items-center px-2 lg:px-0">
           <div class="flex-shrink-0">
-            <%= link_to (image_tag "logo-clap.png", class: "block lg:hidden h-12 w-auto"), root_path %>
+            <%= link_to (image_tag "logo-white.png", class: "block lg:hidden h-12 w-auto"), root_path %>
             <%= link_to (image_tag "logo-white.png", class: "hidden lg:block h-12 w-auto"), root_path %>
           </div>
           <div class="hidden lg:block lg:ml-6">
             <div class="flex">
-              <%= link_to "Hackers", users_path, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+              <%= link_to_active "Hackers", users_path, :users, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
 
-              <%= link_to "Explore", root_path, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+              <%= link_to_active "Bookmarks", root_path, :bookmarks, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+
+              <%= link_to_active "Category", categories_path, :categories, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
             
             </div>
           </div>
@@ -49,9 +51,11 @@
 
     <div x-description="Mobile menu, toggle classes based on menu state." x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'block': open, 'hidden': !open }" class="lg:hidden hidden">
       <div class="px-2 pt-2 pb-3">
-        <%= link_to "Hackers", users_path, class: "block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+        <%= link_to_active "Hackers", users_path, :users, class: "block px-3 py-2 rounded-md text-base font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
         
-        <%= link_to "Explore", root_path, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+        <%= link_to_active "Bookmarks", root_path, :bookmarks, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+
+        <%= link_to_active "Category", categories_path, :categories, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
         
       </div>
 
