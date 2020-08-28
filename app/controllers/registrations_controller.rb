@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ApplicationController
   layout "auth"
   skip_before_action :authenticate_user!

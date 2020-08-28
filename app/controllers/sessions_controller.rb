@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   layout "auth"
   skip_before_action :authenticate_user!, only: %i[new create create_from_oauth]

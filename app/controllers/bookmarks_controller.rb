@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookmarksController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   def new; end
