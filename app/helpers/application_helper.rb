@@ -39,4 +39,8 @@ module ApplicationHelper
     end
     link_to text, url, options
   end
+
+  def ga_tracking_id
+    ENV["GA_TRACKING_ID"] || "UA-175643791-1"
+  end
 end
