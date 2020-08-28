@@ -15,9 +15,11 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :hover
+      post :toggle_following
+    end
+    collection do
       get :setting
       put :update_setting
-      post :toggle_following
     end
   end
   delete "sign_out" => "sessions#destroy", as: :destroy_session
