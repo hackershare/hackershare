@@ -11,6 +11,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'db/**/*'
     - 'bin/**/*'
+    - 'vendor/bundle/**/*'
 
 Performance:
   Exclude:

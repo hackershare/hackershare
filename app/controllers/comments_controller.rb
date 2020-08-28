@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def create
     @bookmark = Bookmark.find(params[:bookmark_id])

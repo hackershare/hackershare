@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 ActionView::Base.field_error_proc = proc do |html_tag, instance_tag|
   fragment = Nokogiri::HTML.fragment(html_tag)
   field = fragment.at("input,select,textarea")
 
   model = instance_tag.object
-
-  error_message = model.errors.full_messages.join(", ")
 
   html = if field
     attr = instance_tag.instance_eval { @method_name }

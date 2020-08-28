@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SaveAvatarJob < ApplicationJob
   queue_as :default
 
