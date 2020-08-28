@@ -6,8 +6,6 @@ ActionView::Base.field_error_proc = proc do |html_tag, instance_tag|
 
   model = instance_tag.object
 
-  error_message = model.errors.full_messages.join(", ")
-
   html = if field
     attr = instance_tag.instance_eval { @method_name }
     error_msg = model.errors.find { |x, _y| x.to_s == attr }.join(" ")
