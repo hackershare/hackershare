@@ -11,11 +11,14 @@ zh-CN:
   all: 全部
   avatar: 头像
   bookmarks: 书签
+  bookmark_destroy_ok: 书签删除成功
+  bookmark_destroy_fail: 书签删除失败
   category: 类目
   created: 分享列表
   comment: 评论
   comments: 评论列表
   chrome_extension: Chrome 插件
+  confirm_delete: 确定删除吗?
   daily: 每日
   email_or_password_is_wrong: 邮箱或密码错误
   forgot_your_password?: 忘记密码？

@@ -46,12 +46,33 @@ class Bookmark < ApplicationRecord
   after_create do
     if original = Bookmark.where(url: url).where("id !=?", id).first
       BookmarkStat.incr_dups_count(original.id)
-      self.ref = original
+      self.update!(ref: original)
     end
   end
 
   after_destroy do
     Bookmark.decr_dups_count(ref.id) if ref
+  end
+
+  def do_destroy!
+    if duplications.blank?
+      self.destroy
+    else
+      if new_root = duplications.first
+        Bookmark.transaction do
+          new_root.likes.destroy_all
+          new_root.bookmark_stats.destroy_all
+          likes.update(bookmark: new_root)
+          comments.update(bookmark: new_root)
+          bookmark_stats.update(bookmark: new_root)
+          duplications.where("id != ?", new_root.id).update(ref: new_root)
+          new_root.update!(ref: nil)
+          new_root.sync_cached_like_user_ids
+          self.destroy!
+        end
+      end
+    end
+    self
   end
 
   def liked_by?(user)
@@ -60,8 +81,17 @@ class Bookmark < ApplicationRecord
     cached_like_user_ids.include?(user.id)
   end
 
+  def created_by?(user)
+    return unless user
+    user_id == user.id
+  end
+
   def only_first
     ref || self
+  end
+
+  def sync_cached_like_user_ids
+    update!(cached_like_user_ids: reload.like_user_ids)
   end
 
   after_create_commit do
