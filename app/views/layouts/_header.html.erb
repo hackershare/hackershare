@@ -31,6 +31,13 @@
               </div>
           <% end %>
         </div>
+        <div class="flex">
+          <% if I18n.locale == :"zh-CN" %>
+            <%= link_to 'CN', { locale: nil, set_locale: true }, class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
+          <% else %>
+            <%= link_to 'EN', { locale: 'zh-CN', set_locale: true }, class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
+          <% end %>
+        </div>
 
         <div class="flex lg:hidden">
           <!-- Mobile menu button -->
