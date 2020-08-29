@@ -17,7 +17,7 @@ class RegistrationsController < ApplicationController
       }
       redirect_to root_path
     else
-      flash[:error] = "Sign up failed"
+      flash[:error] = t("sign_up_failed")
       render :new
     end
   end

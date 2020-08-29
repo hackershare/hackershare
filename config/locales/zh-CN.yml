@@ -1,0 +1,46 @@
+zh-CN:
+  attributes:
+    email: 邮箱
+    password: 密码
+    username: 用户名
+    homepage: 主页
+    about: 简介
+
+  about: 关于
+  active_hackers: 活跃会员
+  all: 全部
+  avatar: 头像
+  bookmarks: 书签
+  category: 类目
+  created: 分享列表
+  comment: 评论
+  comments: 评论列表
+  chrome_extension: Chrome 插件
+  daily: 每日
+  email_or_password_is_wrong: 邮箱或密码错误
+  forgot_your_password?: 忘记密码？
+  follow: 关注
+  followings: 关注列表
+  hackers: 会员
+  likes: 收藏列表
+  monthly: 每月
+  not_have_account?: 没有账户？
+  open_source: 开源
+  or_continue_with: 或者
+  profile: 个人信息
+  remember_me: 记住我
+  save: 保存
+  search: 搜索
+  send: 创建
+  settings: 设置
+  sign_in: 登录
+  sign_in_to_your_account: 登录账户
+  sign_out: 注销
+  sign_up: 注册
+  sign_up_failed: 注册失败
+  smart: 智能
+  this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
+  top_hackers: 最佳会员
+  unfollow: 取消关注
+  weekly: 每周
+  write_a_few_sentences_about_yourself: 介绍一下关于你的信息

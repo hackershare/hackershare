@@ -5,10 +5,10 @@
         <!-- 1-->
         <div>
           <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Profile
+            <%= t('profile') %>
           </h3>
           <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
-            This information will be displayed publicly so be careful what you share.
+            <%= t("this_information_will_be_displayed_publicly_so_be_careful_what_you_share") %>
           </p>
         </div>
         <div class="mt-6 sm:mt-5">
@@ -42,13 +42,13 @@
 
                 <%= f.text_area :about, class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", rows: 5 %>
               </div>
-              <p class="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
+              <p class="mt-2 text-sm text-gray-500"><%= t("write_a_few_sentences_about_yourself") %></p>
             </div>
           </div>
 
           <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
             <label for="photo" class="block text-sm leading-5 font-medium text-gray-700">
-              Avatar
+              <%= t("avatar") %>
             </label>
             <div class="mt-2 sm:mt-0 sm:col-span-2">
               <div class="flex items-center">
@@ -74,7 +74,7 @@
     <div class="mt-8 border-t border-gray-200 pt-5">
       <div class="flex justify-end">
         <span class="ml-3 inline-flex rounded-md shadow-sm">
-          <%= f.submit "Save", class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", data: {disable_with: "Waiting..."} %>
+          <%= f.submit t("save"), class: "inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", data: {disable_with: "Waiting..."} %>
         </span>
       </div>
     </div>

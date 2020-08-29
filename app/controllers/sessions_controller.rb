@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
       end
     else
-      flash.now[:error] = "Email or password is wrong"
+      flash.now[:error] = t("email_or_password_is_wrong")
       render "new"
     end
   end

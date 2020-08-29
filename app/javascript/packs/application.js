@@ -25,8 +25,9 @@ require("css/application.scss")
 
 document.addEventListener("turbolinks:load", function() {
     const timeagos = document.querySelectorAll('.timeago');
+    const locale = document.querySelector('[data-locale]').getAttribute('data-locale')
     if (timeagos.length > 0){
-      render(timeagos);
+      render(timeagos, locale);
     }   
 });
 
