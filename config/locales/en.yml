@@ -1,33 +1,46 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  attributes:
+    email: Email
+    password: Password
+    username: Username
+    homepage: Homepage
+    about: About
+
+  about: About
+  active_hackers: Active Hackers
+  all: All
+  avatar: Avatar
+  bookmarks: Bookmarks
+  category: Category
+  created: Created
+  comment: Comment
+  comments: Comments
+  chrome_extension: Chrome Extension
+  daily: Daily
+  email_or_password_is_wrong: Email or password is wrong
+  forgot_your_password?: Forgot your password?
+  follow: Follow
+  followings: Followings
+  hackers: Hackers
+  likes: Likes
+  monthly: Monthly
+  not_have_account?: Not have account?
+  open_source: Open Source
+  or_continue_with: Or continue with
+  profile: Profile
+  remember_me: Remember Me
+  save: Save
+  search: Search
+  send: Send
+  settings: Settings
+  sign_in: Sign In
+  sign_in_to_your_account: Sign in to your account
+  sign_out: Sign out
+  sign_up: Sign up
+  sign_up_failed: Sign up failed
+  smart: Smart
+  this_information_will_be_displayed_publicly_so_be_careful_what_you_share: This information will be displayed publicly so be careful what you share
+  top_hackers: Top Hackers
+  unfollow: Unfollow
+  weekly: Weekly
+  write_a_few_sentences_about_yourself: Write a few sentences about yourself

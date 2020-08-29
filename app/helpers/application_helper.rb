@@ -43,4 +43,10 @@ module ApplicationHelper
   def ga_tracking_id
     ENV["GA_TRACKING_ID"] || "UA-175643791-1"
   end
+
+  if Rails.env.development?
+    def t(*args, **options, &block)
+      super(*args, **options.merge(raise: true), &block)
+    end
+  end
 end
