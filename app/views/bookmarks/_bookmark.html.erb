@@ -26,16 +26,7 @@
     <!-- Repo meta info -->
     <div class=" flex-col flex-shrink-0 items-end space-y-3">
       <p class="flex items-center space-x-4">
-        <a href="<%= bookmark_path(bookmark) %>" class="relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium">
-          <svg class="w-5 h-5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg> 
-        </a>
-
-        <a target="_blank" href="<%= bookmark.url %>" class="relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium">
-          <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-        </a>
-
+        <!-- like button -->
         <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
           <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" do %>
             <svg data-target="likes.svg" class="h-5 w-5 <%= bookmark.liked_by?(current_user) ? "text-yellow-300 hover:text-yellow-400" : "text-gray-300 hover:text-gray-400" %>" viewBox="0 0 20 20" fill="currentColor">
@@ -46,6 +37,24 @@
             <%= bookmark.likes_count %>
           </button>
         </span>
+
+        <a href="<%= bookmark_path(bookmark) %>" class="relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium">
+          <svg class="w-5 h-5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg> 
+        </a>
+
+        <a target="_blank" href="<%= bookmark.url %>" class="relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium">
+          <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+        </a>
+
+        <% if bookmark_self.created_by?(current_user) %>
+          <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium" do %>
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          <% end %>
+        <% end %>
       </p>
       <p class="flex text-gray-500 text-sm leading-5 space-x-2">
         <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>

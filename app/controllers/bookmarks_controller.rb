@@ -26,7 +26,7 @@ class BookmarksController < ApplicationController
     @bookmark = current_user.bookmarks.new(bookmark_params)
     if @bookmark.save
       respond_to do |format|
-        format.js { render @bookmark.reload, content_type: "text/html" }
+        format.js { render @bookmark.reload, content_type: "text/html", locals: { bookmark: @bookmark.only_first, bookmark_self: @bookmark } }
         format.html do
           flash[:success] = "Bookmark added."
           redirect_to root_path
@@ -36,6 +36,17 @@ class BookmarksController < ApplicationController
       flash[:error] = "Bad url"
       redirect_to root_path
     end
+  end
+
+  def destroy
+    @bookmark = current_user.bookmarks.find(params[:id])
+    @bookmark.do_destroy!
+    if @bookmark.destroyed?
+      flash[:success] = t("bookmark_destroy_ok")
+    else
+      flash[:error] = t("bookmark_destroy_fail")
+    end
+    render js: "Turbolinks.visit(window.location);"
   end
 
   def toggle_liking

@@ -11,11 +11,14 @@ en:
   all: All
   avatar: Avatar
   bookmarks: Bookmarks
+  bookmark_destroy_ok: Bookmark destroyed successfully
+  bookmark_destroy_fail: Bookmark destroyed failed
   category: Category
   created: Created
   comment: Comment
   comments: Comments
   chrome_extension: Chrome Extension
+  confirm_delete: Are you sure?
   daily: Daily
   email_or_password_is_wrong: Email or password is wrong
   forgot_your_password?: Forgot your password?

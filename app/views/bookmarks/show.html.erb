@@ -10,7 +10,7 @@
     <!-- Projects List -->
     <div class="bg-white lg:min-w-0 lg:flex-1">
       <ul class="relative z-0 divide-y divide-gray-200 border-b border-gray-200" >
-        <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first %>
+        <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first, locals: {bookmark_self: @bookmark} %>
       </ul>
       <div data-controller="comments">
         <div class="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0" >

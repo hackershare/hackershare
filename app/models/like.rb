@@ -26,7 +26,7 @@ class Like < ApplicationRecord
   after_create :incr_stats
 
   def sync_cached_like_user_ids
-    bookmark.update(cached_like_user_ids: bookmark.reload.like_user_ids)
+    bookmark.sync_cached_like_user_ids
   end
 
   def incr_stats
