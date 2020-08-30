@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   def update_setting
     @user = current_user
     @user.update(params.require(:user).permit(:username, :about, :avatar, :homepage))
-    flash[:success] = "Your profile updated successfully."
+    flash[:success] = t("your_profile_updated_successfully")
     redirect_to setting_users_path
   end
 end

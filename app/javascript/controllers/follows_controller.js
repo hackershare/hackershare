@@ -24,7 +24,7 @@ export default class extends Controller {
       this.buttonTarget.classList.add("focus:shadow-outline-gray");
       this.buttonTarget.classList.add("active:bg-gray-700");
 
-      this.buttonTarget.innerHTML = "Unfollow"
+      this.buttonTarget.innerHTML = I18n.t("unfollow")
     } else {
       this.buttonTarget.classList.remove("bg-gray-600");
       this.buttonTarget.classList.remove("hover:bg-gray-500");
@@ -38,7 +38,7 @@ export default class extends Controller {
       this.buttonTarget.classList.add("focus:shadow-outline-indigo");
       this.buttonTarget.classList.add("active:bg-indigo-700");
 
-      this.buttonTarget.innerHTML = "Follow";
+      this.buttonTarget.innerHTML = I18n.t("follow");
     }
   }
 }

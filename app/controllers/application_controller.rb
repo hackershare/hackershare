@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate_user!
-      redirect_to new_session_path, error: "Login Required", status: 401 unless current_user
+      redirect_to new_session_path, error: t("login_required"), status: 401 unless current_user
     end
 
     def current_user
