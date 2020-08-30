@@ -13,7 +13,7 @@ set :assets_roles, [:app]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/hackershare"
-set :rvm_ruby_versiion, "2.6.5"
+set :rvm_ruby_version, "2.6.5"
 
 set :puma_init_active_record, true
 
