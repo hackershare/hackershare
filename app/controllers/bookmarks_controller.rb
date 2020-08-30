@@ -28,7 +28,7 @@ class BookmarksController < ApplicationController
       respond_to do |format|
         format.js { render @bookmark.reload, content_type: "text/html", locals: { bookmark: @bookmark.only_first, bookmark_self: @bookmark } }
         format.html do
-          flash[:success] = "Bookmark added."
+          flash[:success] = t("bookmark_added")
           redirect_to root_path
         end
       end

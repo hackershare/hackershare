@@ -10,13 +10,18 @@ en:
   active_hackers: Active Hackers
   all: All
   avatar: Avatar
-  bookmarks: Bookmarks
+  bad_comment: Bad comment
+  bad_url: Bad url
+  bookmark_added: Bookmark added
   bookmark_destroy_ok: Bookmark destroyed successfully
   bookmark_destroy_fail: Bookmark destroyed failed
+  bookmarks: Bookmarks
   category: Category
-  created: Created
+  chrome_extension_description: With the extension, you can add new bookmarks with the click of a button.
   comment: Comment
+  comment_added: Comment added
   comments: Comments
+  created: Created
   chrome_extension: Chrome Extension
   confirm_delete: Are you sure?
   daily: Daily
@@ -25,7 +30,12 @@ en:
   follow: Follow
   followings: Followings
   hackers: Hackers
+  install_the_chrome_extension: Install the Chrome extension
   likes: Likes
+  login_failed: Login failed
+  login_required: Login Required
+  login_successed: Login successed
+  logout_successed: Logout successed
   monthly: Monthly
   not_have_account?: Not have account?
   open_source: Open Source
@@ -46,4 +56,5 @@ en:
   top_hackers: Top Hackers
   unfollow: Unfollow
   weekly: Weekly
-  write_a_few_sentences_about_yourself: Write a few sentences about yourself
+  write_a_few_sentences_about_yourself: Write a few sentences about yourself.
+  your_profile_updated_successfully: Your profile updated successfully.

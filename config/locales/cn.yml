@@ -6,39 +6,49 @@ cn:
     homepage: 主页
     about: 简介
 
-  about: 关于
+  about: 关于我们
   active_hackers: 活跃会员
   all: 全部
   avatar: 头像
-  bookmarks: 书签
+  bad_comment: 评论不合法
+  bad_url: URL 不合法
+  bookmark_added: 书签已添加
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
+  bookmarks: 书签
   category: 类目
-  created: 分享列表
+  chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
+  comment_added: 评论已添加
   comments: 评论列表
+  created: 我的分享
   chrome_extension: Chrome 插件
   confirm_delete: 确定删除吗?
   daily: 每日
   email_or_password_is_wrong: 邮箱或密码错误
   forgot_your_password?: 忘记密码？
   follow: 关注
-  followings: 关注列表
+  followings: 关注人的分享
   hackers: 会员
-  likes: 收藏列表
+  install_the_chrome_extension: 安装 Chrome 插件
+  likes: 我的收藏
+  login_failed: 登录失败
+  login_required: 需要先登录
+  login_successed: 登录成功
+  logout_successed: 退出成功
   monthly: 每月
   not_have_account?: 没有账户？
-  open_source: 开源
-  or_continue_with: 或者
-  profile: 个人信息
+  open_source: 源码地址
+  or_continue_with: 便捷登录
+  profile: 我的主页
   remember_me: 记住我
   save: 保存
   search: 搜索
-  send: 创建
-  settings: 设置
+  send: 分享
+  settings: 个人资料设置
   sign_in: 登录
   sign_in_to_your_account: 登录账户
-  sign_out: 注销
+  sign_out: 退出
   sign_up: 注册
   sign_up_failed: 注册失败
   smart: 智能
@@ -46,4 +56,5 @@ cn:
   top_hackers: 最佳会员
   unfollow: 取消关注
   weekly: 每周
-  write_a_few_sentences_about_yourself: 介绍一下关于你的信息
+  write_a_few_sentences_about_yourself: 简单介绍一下你自己。
+  your_profile_updated_successfully: 你的资料更新成功。

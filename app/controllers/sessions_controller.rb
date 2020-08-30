@@ -23,14 +23,14 @@ class SessionsController < ApplicationController
     @user = User.find_or_create_from_auth(request.env["omniauth.auth"])
     if @user
       set_current_user(@user)
-      flash[:success] = "Login successed"
+      flash[:success] = t("login_successed")
       if request.env["omniauth.params"]["chrome-callback"].present?
         redirect_to request.env["omniauth.params"]["chrome-callback"] + "?extension-token=#{@user.extension_token}"
       else
         redirect_to root_path
       end
     else
-      flash[:error] = "Login failed"
+      flash[:error] = t("login_failed")
       redirect_to root_path
     end
   end
@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
     cookies[:remember_token_v2] = {
       value: nil
     }
-    flash[:success] = "Logout successed"
+    flash[:success] = t("logout_successed")
     redirect_to root_path
   end
 

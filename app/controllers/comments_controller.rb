@@ -8,12 +8,12 @@ class CommentsController < ApplicationController
       respond_to do |format|
         format.js { render @comment, content_type: "text/html" }
         format.html do
-          flash[:success] = "comment added."
+          flash[:success] = t("comment_added")
           redirect_to bookmark_path(@bookmark)
         end
       end
     else
-      flash[:error] = "Bad comment"
+      flash[:error] = t("bad_comment")
       redirect_to bookmark_path(@bookmark)
     end
   end
