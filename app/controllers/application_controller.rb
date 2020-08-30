@@ -49,36 +49,28 @@ class ApplicationController < ActionController::Base
   private
 
     def switch_locale(&action)
-      if params[:set_locale]
-        request_locale = params[:locale] || I18n.default_locale
-        cookies[:locale] = request_locale
+      if request.path == "/" && best_locale.to_sym != I18n.default_locale && !params[:set_locale]
+        redirect_to root_path(locale: best_locale)
       else
-        request_locale = params[:locale] || cookies[:locale] || extract_locale_from_accept_language_header || I18n.default_locale
-      end
-
-      if request.path == "/" && (I18n.available_locales - [I18n.default_locale]).include?(request_locale.to_sym)
-        redirect_to root_path(locale: request_locale)
-      else
-        locale = params[:locale]
-        locale = I18n.default_locale unless I18n.locale_available?(locale)
+        locale = I18n.locale_available?(params[:locale]) ? params[:locale] : I18n.default_locale
+        cookies[:locale] = locale
         I18n.with_locale(locale, &action)
       end
     end
 
     def default_url_options
-      locale_params = I18n.locale == I18n.default_locale ? nil : I18n.locale
+      locale = I18n.locale == I18n.default_locale ? nil : I18n.locale
       {
-        locale: locale_params,
+        locale: locale,
       }
     end
 
-    def extract_locale_from_accept_language_header
-      lang = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
-      case lang
-      when "en"
-        :en
-      when "zh"
-        :"zh-CN"
+    def best_locale
+      @best_locale ||= begin
+        lang = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
+        cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
+        client_locale = lang == "zh" ? :cn : :en
+        cookie_locale || client_locale || I18n.default_locale
       end
     end
 end

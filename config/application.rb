@@ -36,7 +36,7 @@ module Hackershare
     # the framework and any gems in your application.
     config.active_record.schema_format = :sql
 
-    config.i18n.available_locales = %i[en zh-CN]
+    config.i18n.available_locales = %i[en cn]
     config.i18n.default_locale = :en
   end
 end
