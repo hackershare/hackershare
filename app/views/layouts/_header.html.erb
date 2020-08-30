@@ -32,10 +32,10 @@
           <% end %>
         </div>
         <div class="flex">
-          <% if I18n.locale == :"zh-CN" %>
-            <%= link_to 'CN', { locale: nil, set_locale: true }, class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
+          <% if I18n.locale == :en %>
+            <%= link_to 'CN', url_for(set_locale: true, locale: 'cn'), class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
           <% else %>
-            <%= link_to 'EN', { locale: 'zh-CN', set_locale: true }, class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
+            <%= link_to 'EN', url_for(set_locale: true, locale: nil), class: 'text-sm text-gray-300 hover:text-white focus:text-white' %>
           <% end %>
         </div>
 

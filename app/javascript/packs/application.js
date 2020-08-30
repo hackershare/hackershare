@@ -25,9 +25,11 @@ require("css/application.scss")
 
 document.addEventListener("turbolinks:load", function() {
     const timeagos = document.querySelectorAll('.timeago');
-    const locale = document.querySelector('[data-locale]').getAttribute('data-locale')
-    if (timeagos.length > 0){
-      render(timeagos, locale);
+    const locale = document.cookie.replace(/(?:(?:^|.*;\s*)locale\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    let lang = locale
+    if (lang == 'cn') { lang = 'zh_CN' }
+    if (timeagos.length > 0) {
+      render(timeagos, lang);
     }   
 });
 
