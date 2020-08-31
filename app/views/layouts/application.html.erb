@@ -16,6 +16,10 @@
 </head>
 
   <body>
+    <script type="text/javascript">
+      I18n.locale = "<%= I18n.locale %>"
+      I18n.translations = <%= I18n.backend.translations.to_json.html_safe %>
+    </script>
     <%= render 'layouts/header' %>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
       <%= render "layouts/flash" %>

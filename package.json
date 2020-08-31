@@ -10,6 +10,7 @@
     "@rails/webpacker": "4.2.2",
     "@tailwindcss/ui": "^0.3.1",
     "alpinejs": "^2.5.0",
+    "i18n-js": "^3.7.1",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.5.2",
     "tailwindcss-stimulus-components": "^2.0.2",
