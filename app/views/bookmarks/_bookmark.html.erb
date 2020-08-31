@@ -1,4 +1,4 @@
-<li class="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+<li data-controller="remote-forms" class="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
   <div class="flex items-center justify-between space-x-4">
 
     <!-- Repo name and link -->
@@ -15,9 +15,19 @@
         <% end %>
         
         <span class="block">
-          <h2 class="text-sm font-medium leading-5">
+          <h2 class="text-md font-medium leading-5">
             <%= link_to bookmark.title.presence || bookmark.url, bookmark.url  %>
           </h2>
+        </span>
+        
+      </div>
+      <div class="flex items-center space-x-3">
+        <span class="pl-5 block">
+          <% bookmark.tags.each do |tag| %>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-sm font-medium leading-4 bg-orange-100 text-orange-800">
+              <%= tag.name %>
+            </span>
+          <% end %>
         </span>
       </div>
 
@@ -48,6 +58,15 @@
           <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
         </a>
 
+        <span>
+          <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+            </svg>
+          <% end %>
+        </span>
+        
+
         <% if bookmark_self.created_by?(current_user) %>
           <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium" do %>
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,6 +74,7 @@
             </svg>
           <% end %>
         <% end %>
+
       </p>
       <p class="flex text-gray-500 text-sm leading-5 space-x-2">
         <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
@@ -62,5 +82,7 @@
         <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
       </p>
     </div>
+  </div>
+  <div data-target="remote-forms.container">
   </div>
 </li>

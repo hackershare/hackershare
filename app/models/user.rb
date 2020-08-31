@@ -16,6 +16,8 @@
 #  password_digest  :string
 #  remember_token   :string
 #  score            :integer
+#  taggings_count   :integer          default(0)
+#  tags_count       :integer          default(0)
 #  username         :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -37,6 +39,8 @@ class User < ApplicationRecord
   has_many :follows, dependent: :destroy
   has_many :follow_users, through: :follows, source: "following_user"
   has_many :comments, dependent: :destroy
+  has_many :taggings
+  has_many :tags
 
   has_many :followers, class_name: "Follow", foreign_key: "following_user_id"
   has_many :follower_users, through: :followers, source: "user"

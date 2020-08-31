@@ -13,6 +13,7 @@
 #  likes_count          :integer          default(0)
 #  score                :integer
 #  smart_score          :float
+#  tags_count           :integer          default(0)
 #  title                :string
 #  url                  :string
 #  created_at           :datetime         not null
@@ -38,6 +39,9 @@ class Bookmark < ApplicationRecord
   has_many :bookmark_stats
   has_many :comments
   scope :original, -> { where("ref_id IS NULL") }
+
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   validates :url, presence: true
   validates :url, url: { no_local: true }
@@ -88,6 +92,11 @@ class Bookmark < ApplicationRecord
 
   def only_first
     ref || self
+  end
+
+  def tag_names_for(user)
+    return [] if user.blank?
+    tags.where(taggings: { user: user }).map { |tag| tag.name }
   end
 
   def sync_cached_like_user_ids

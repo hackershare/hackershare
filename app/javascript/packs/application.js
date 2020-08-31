@@ -11,6 +11,7 @@ require("channels")
 require("timeago.js")
 import { createPopper } from '@popperjs/core';
 import { format, render, cancel, register } from 'timeago.js';
+import Tagify from '@yaireo/tagify';
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -21,7 +22,9 @@ import { format, render, cancel, register } from 'timeago.js';
 // const imagePath = (name) => images(name, true)
 
 import "controllers"
+import "@yaireo/tagify/src/tagify.scss"
 require("css/application.scss")
+
 
 import I18n from "i18n-js"
 window.I18n = I18n

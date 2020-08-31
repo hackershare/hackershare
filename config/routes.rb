@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         post :toggle_liking
       end
       resources :comments
+      resources :tags, only: %i[new create]
     end
     resources :extensions, only: %i[create]
     resources :users do
