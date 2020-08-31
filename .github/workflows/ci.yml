@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.commits[0].message, '[skip ci]') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-18.04, macos-latest]
+        ruby: [2.6]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true
+    - run: bundle exec rubocop
+  deploy:
+    if: ${{ !contains(github.event.commits[0].message, '[skip ci]') && github.event == 'push' }}
+    needs: build
+    env:
+      ID_RSA: ${{ secrets.ID_RSA }}
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - run: |
+        mkdir -p ~/.ssh/
+        echo "$ID_RSA" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        touch ~/.ssh/known_hosts
+        ssh-keyscan hackershare.dev >> ~/.ssh/known_hosts
+        bundle exec cap production deploy

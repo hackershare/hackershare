@@ -2,6 +2,8 @@
 
 Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket.
 
+[![CI](https://github.com/hooopo/hackershare/workflows/CI/badge.svg)](https://github.com/hooopo/hackershare/actions)
+
 ## Dependency
 
 * Postgresql 12+
