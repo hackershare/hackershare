@@ -33,7 +33,7 @@ class BookmarksController < ApplicationController
         end
       end
     else
-      flash[:error] = "Bad url"
+      flash[:error] = t("bad_url")
       redirect_to root_path
     end
   end
