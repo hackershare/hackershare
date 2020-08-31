@@ -23,16 +23,16 @@ import { format, render, cancel, register } from 'timeago.js';
 import "controllers"
 require("css/application.scss")
 
+import I18n from "i18n-js"
+window.I18n = I18n
+
 document.addEventListener("turbolinks:load", function() {
     const timeagos = document.querySelectorAll('.timeago');
-    const locale = document.cookie.replace(/(?:(?:^|.*;\s*)locale\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-    let lang = locale
-    if (lang == 'cn') { lang = 'zh_CN' }
+    const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
     if (timeagos.length > 0) {
       render(timeagos, lang);
     }   
 });
-
 
 window.onpopstate = function(event) {
   document.location.reload();
