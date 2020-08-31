@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         redirect_to root_path(locale: best_locale)
       else
         locale = I18n.locale_available?(params[:locale]) ? params[:locale] : I18n.default_locale
-        cookies[:locale] = locale
+        cookies[:locale] = locale if params[:set_locale]
         I18n.with_locale(locale, &action)
       end
     end
@@ -67,8 +67,8 @@ class ApplicationController < ActionController::Base
 
     def best_locale
       @best_locale ||= begin
-        lang = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
         cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
+        lang = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
         client_locale = lang == "zh" ? :cn : :en
         cookie_locale || client_locale || I18n.default_locale
       end
