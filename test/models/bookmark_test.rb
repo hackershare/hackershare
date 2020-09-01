@@ -13,6 +13,7 @@
 #  likes_count          :integer          default(0)
 #  score                :integer
 #  smart_score          :float
+#  tags_count           :integer          default(0)
 #  title                :string
 #  url                  :string
 #  created_at           :datetime         not null

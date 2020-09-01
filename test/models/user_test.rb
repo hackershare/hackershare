@@ -16,6 +16,8 @@
 #  password_digest  :string
 #  remember_token   :string
 #  score            :integer
+#  taggings_count   :integer          default(0)
+#  tags_count       :integer          default(0)
 #  username         :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

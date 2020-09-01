@@ -180,7 +180,8 @@ CREATE TABLE public.bookmarks (
     cached_like_user_ids integer[] DEFAULT '{}'::integer[],
     score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
-    comments_count integer DEFAULT 0
+    comments_count integer DEFAULT 0,
+    tags_count integer DEFAULT 0
 );
 
 
@@ -310,6 +311,72 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.taggings (
+    id bigint NOT NULL,
+    tag_id bigint,
+    bookmark_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    user_id bigint
+);
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.taggings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.taggings_id_seq OWNED BY public.taggings.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tags (
+    id bigint NOT NULL,
+    name character varying,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    bookmarks_count integer DEFAULT 0
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -328,7 +395,9 @@ CREATE TABLE public.users (
     followings_count integer DEFAULT 0,
     bookmarks_count integer DEFAULT 0,
     score integer GENERATED ALWAYS AS ((bookmarks_count + (followers_count * 5))) STORED,
-    comments_count integer DEFAULT 0
+    comments_count integer DEFAULT 0,
+    tags_count integer DEFAULT 0,
+    taggings_count integer DEFAULT 0
 );
 
 
@@ -405,6 +474,20 @@ ALTER TABLE ONLY public.follows ALTER COLUMN id SET DEFAULT nextval('public.foll
 --
 
 ALTER TABLE ONLY public.likes ALTER COLUMN id SET DEFAULT nextval('public.likes_id_seq'::regclass);
+
+
+--
+-- Name: taggings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings ALTER COLUMN id SET DEFAULT nextval('public.taggings_id_seq'::regclass);
+
+
+--
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
 
 
 --
@@ -492,6 +575,22 @@ ALTER TABLE ONLY public.likes
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: taggings taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -636,6 +735,41 @@ CREATE UNIQUE INDEX index_likes_on_user_id_and_bookmark_id ON public.likes USING
 
 
 --
+-- Name: index_taggings_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_bookmark_id ON public.taggings USING btree (bookmark_id);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_tag_id ON public.taggings USING btree (tag_id);
+
+
+--
+-- Name: index_taggings_on_tag_id_and_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_taggings_on_tag_id_and_bookmark_id ON public.taggings USING btree (tag_id, bookmark_id);
+
+
+--
+-- Name: index_taggings_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_user_id ON public.taggings USING btree (user_id);
+
+
+--
+-- Name: index_tags_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tags_on_user_id ON public.tags USING btree (user_id);
+
+
+--
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -703,6 +837,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200816095432'),
 ('20200816114948'),
 ('20200818185211'),
-('20200825073737');
+('20200825073737'),
+('20200830015612'),
+('20200830015625'),
+('20200831233455');
 
 

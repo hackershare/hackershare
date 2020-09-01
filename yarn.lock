@@ -1111,6 +1111,11 @@
   resolved "https://registry.npm.taobao.org/@xtuc/long/download/@xtuc/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha1-0pHGpOl5ibXGHZrPOWrk/hM6cY0=
 
+"@yaireo/tagify@^3.17.10":
+  version "3.17.10"
+  resolved "https://registry.npm.taobao.org/@yaireo/tagify/download/@yaireo/tagify-3.17.10.tgz#89f4fa6947fbbea8a1785a720d98e47b68040d85"
+  integrity sha1-ifT6aUf7vqiheFpyDZjke2gEDYU=
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"

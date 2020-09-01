@@ -84,3 +84,5 @@ gem "omniauth-github", "~> 1.4"
 gem "omniauth-twitter", "~> 1.4"
 
 gem "rack-cors", "~> 1.1"
+
+gem "simple_command", "~> 0.1.0"

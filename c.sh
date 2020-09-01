@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-bundle exec rubocop -a
+bundle exec rubocop -A
