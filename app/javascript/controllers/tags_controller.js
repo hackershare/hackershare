@@ -16,6 +16,8 @@ export default class extends Controller {
 
   connect() {
     console.log(111);
-    new Tagify(this.outputTarget);
+    let t = new Tagify(this.outputTarget);
+    console.log(this.outputTarget);
+    console.log(Tagify);
   }
 }
