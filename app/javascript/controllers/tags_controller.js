@@ -9,7 +9,7 @@
 // document.querySelector("#hello-target").textContent = "aaa";
 
 import { Controller } from "stimulus"
-import Tagify from '@yaireo/tagify/src/tagify';
+import Tagify from '@yaireo/tagify';
 
 export default class extends Controller {
   static targets = [ "output" ]
