@@ -3,13 +3,13 @@
     <%= form_for(@bookmark, url: bookmark_tags_path(@bookmark), method: :post) do |f| %>
       <div>
         <div class="mt-1 shadow-sm" data-controller="tags">
-          <input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' autofocus>
+          <input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' >
         </div>
       </div>
 
       <div class="mt-6">
         <span class="block">
-          <%= f.button t("save"), class: "w-20 flex justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", type: 'submit' %>
+          <%= f.button t("save"), class: "w-20 flex justify-center py-2 px-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", type: 'submit', data: {disable_with: disable_with_spinner(t("save"))} %>
         </span>
       </div>
     <% end %>
