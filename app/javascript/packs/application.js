@@ -27,9 +27,6 @@ require("css/application.scss")
 import I18n from "i18n-js"
 window.I18n = I18n
 
-import Tagify from '@yaireo/tagify'
-window.Tagify = Tagify;
-
 document.addEventListener("turbolinks:load", function() {
     const timeagos = document.querySelectorAll('.timeago');
     const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
