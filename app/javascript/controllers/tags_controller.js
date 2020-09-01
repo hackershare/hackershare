@@ -15,6 +15,7 @@ export default class extends Controller {
   static targets = [ "output" ]
 
   connect() {
+    console.log(111);
     new Tagify(this.outputTarget);
   }
 }
