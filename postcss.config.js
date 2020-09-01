@@ -17,6 +17,10 @@ let environment = {
 if (process.env.RAILS_ENV === "production") {
   environment.plugins.push(
     require('@fullhuman/postcss-purgecss')({
+      keyframes: true,
+      whitelistPatterns: [
+          /^tagify(.*?)$/,
+        ],
       content: [
         './app/**/*.html.erb',
         './app/helpers/**/*.rb',
