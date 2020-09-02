@@ -397,7 +397,8 @@ CREATE TABLE public.users (
     score integer GENERATED ALWAYS AS ((bookmarks_count + (followers_count * 5))) STORED,
     comments_count integer DEFAULT 0,
     tags_count integer DEFAULT 0,
-    taggings_count integer DEFAULT 0
+    taggings_count integer DEFAULT 0,
+    admin boolean DEFAULT false
 );
 
 
@@ -840,6 +841,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200825073737'),
 ('20200830015612'),
 ('20200830015625'),
-('20200831233455');
+('20200831233455'),
+('20200902043615');
 
 

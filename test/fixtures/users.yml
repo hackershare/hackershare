@@ -4,6 +4,7 @@
 #
 #  id               :bigint           not null, primary key
 #  about            :text
+#  admin            :boolean          default(FALSE)
 #  bookmarks_count  :integer          default(0)
 #  comments_count   :integer          default(0)
 #  email            :string
