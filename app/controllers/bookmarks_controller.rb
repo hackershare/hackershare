@@ -39,7 +39,11 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = current_user.bookmarks.find(params[:id])
+    if current_user.admin?
+      @bookmark = Bookmark.find(params[:id])
+    else
+      @bookmark = current_user.bookmarks.find(params[:id])
+    end
     @bookmark.do_destroy!
     if @bookmark.destroyed?
       flash[:success] = t("bookmark_destroy_ok")

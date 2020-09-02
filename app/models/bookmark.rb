@@ -90,6 +90,11 @@ class Bookmark < ApplicationRecord
     user_id == user.id
   end
 
+  def can_destroy_by?(user)
+    return unless user
+    created_by?(user) || user.admin?
+  end
+
   def only_first
     ref || self
   end
