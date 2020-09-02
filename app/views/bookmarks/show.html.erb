@@ -1,6 +1,10 @@
 <% content_for(:title) do %>
   <%= @bookmark.title %>
 <% end %>
+
+<% content_for(:keywords) do %>
+  <%= @bookmark.tags.map{|t| t.name}.join(", ") %>
+<% end %>
 <!-- 3 column wrapper -->
 <div class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
   <!-- Left sidebar & main wrapper -->
