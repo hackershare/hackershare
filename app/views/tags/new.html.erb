@@ -1,9 +1,31 @@
+<style>
+  .tags-look .tagify__dropdown__item{
+  display: inline-block;
+  border-radius: 3px;
+  padding: .3em .5em;
+  border: 1px solid #CCC;
+  background: #F3F3F3;
+  margin: .2em;
+  font-size: .85em;
+  color: black;
+  transition: 0s;
+}
+
+.tags-look .tagify__dropdown__item--active{
+  color: black;
+}
+
+.tags-look .tagify__dropdown__item:hover{
+  background: lightyellow;
+  border-color: gold;
+}
+</style>
 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="py-8 px-4">
+  <div class="py-4 px-4">
     <%= form_for(@bookmark, url: bookmark_tags_path(@bookmark), method: :post) do |f| %>
       <div>
         <div class="mt-1 shadow-sm" data-controller="tags">
-          <input class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' >
+          <input data-whitelist="<%= Tag.list_names(20) %>" placeholder='write some tags' class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' >
         </div>
       </div>
 

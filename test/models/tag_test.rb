@@ -13,7 +13,8 @@
 #
 # Indexes
 #
-#  index_tags_on_user_id  (user_id)
+#  index_tags_on_bookmarks_count  (bookmarks_count)
+#  index_tags_on_user_id          (user_id)
 #
 require "test_helper"
 
