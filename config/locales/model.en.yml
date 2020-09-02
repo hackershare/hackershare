@@ -1,0 +1,7 @@
+en:
+  attributes:
+    email: Email
+    password: Password
+    username: Username
+    homepage: Homepage
+    about: About

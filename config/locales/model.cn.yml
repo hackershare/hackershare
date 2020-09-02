@@ -1,0 +1,7 @@
+cn:
+  attributes:
+    email: 邮箱
+    password: 密码
+    username: 用户名
+    homepage: 主页
+    about: 简介

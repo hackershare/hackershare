@@ -8,7 +8,8 @@ export default class extends Controller {
     const [data, status, xhr] = event.detail;
     this.listTarget.innerHTML =  this.listTarget.innerHTML + xhr.response;
     const timeagos = document.querySelectorAll('.timeago');
-    render(timeagos);
+    const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
+    render(timeagos, lang);
 
     this.inputTarget.value = '';
   }

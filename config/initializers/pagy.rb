@@ -148,8 +148,6 @@ require "pagy/extras/countless"
 #                 {locale: 'xyz',  # not built-in
 #                  filepath: 'path/to/pagy-xyz.yml',
 #                  pluralize: lambda{|count| ... } )
-Pagy::I18n.load({ locale: "en", filepath: Rails.root.join("config", "locales", "pagy.en.yml") },
-                { locale: "cn", filepath: Rails.root.join("config", "locales", "pagy.cn.yml") })
 
 # I18n extra: uses the standard i18n gem which is ~18x slower using ~10x more memory
 # than the default pagy internal i18n (see above)
@@ -158,3 +156,7 @@ Pagy::I18n.load({ locale: "en", filepath: Rails.root.join("config", "locales", "
 
 # Default i18n key
 # Pagy::VARS[:i18n_key] = 'pagy.item_name'   # default
+
+require 'pagy/extras/i18n'
+Pagy::I18n.load({ locale: "en", filepath: Rails.root.join("config", "locales", "pagy.en.yml") },
+                { locale: "cn", filepath: Rails.root.join("config", "locales", "pagy.cn.yml") })
