@@ -1,11 +1,4 @@
 en:
-  attributes:
-    email: Email
-    password: Password
-    username: Username
-    homepage: Homepage
-    about: About
-
   about: About
   active_hackers: Active Hackers
   all: All
