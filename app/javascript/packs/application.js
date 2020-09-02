@@ -22,7 +22,6 @@ import Tagify from '@yaireo/tagify';
 // const imagePath = (name) => images(name, true)
 
 import "controllers"
-import "@yaireo/tagify/src/tagify.scss"
 require("css/application.scss")
 
 
