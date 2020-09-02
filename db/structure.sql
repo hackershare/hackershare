@@ -764,6 +764,13 @@ CREATE INDEX index_taggings_on_user_id ON public.taggings USING btree (user_id);
 
 
 --
+-- Name: index_tags_on_bookmarks_count; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tags_on_bookmarks_count ON public.tags USING btree (bookmarks_count DESC);
+
+
+--
 -- Name: index_tags_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -842,6 +849,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200830015612'),
 ('20200830015625'),
 ('20200831233455'),
-('20200902043615');
+('20200902043615'),
+('20200902233139');
 
 

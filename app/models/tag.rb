@@ -13,7 +13,8 @@
 #
 # Indexes
 #
-#  index_tags_on_user_id  (user_id)
+#  index_tags_on_bookmarks_count  (bookmarks_count)
+#  index_tags_on_user_id          (user_id)
 #
 class Tag < ApplicationRecord
   belongs_to :user, counter_cache: true
@@ -21,4 +22,8 @@ class Tag < ApplicationRecord
   has_many :bookmarks, through: :taggings
 
   validates :name, uniqueness: true
+
+  def self.list_names(limit)
+    Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
+  end
 end
