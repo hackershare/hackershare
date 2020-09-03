@@ -137,6 +137,11 @@ class Bookmark < ApplicationRecord
     end
   end
 
+  def self.tag_filter(scope, tag_name)
+    tag = Tag.find_by!(name: tag_name)
+    scope.joins(:taggings).where(taggings: { tag_id: tag.id })
+  end
+
   def self.filter(user, params)
     return user.bookmarks.order(id: :desc) if !%w[created likes followings].include?(params[:type])
     if params[:type] == "created"

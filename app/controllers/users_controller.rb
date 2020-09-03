@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    base = Bookmark.filter(@user, params).includes(:ref, :tags)
+    base = Bookmark.filter(@user, params).preload(:ref, :tags)
+    base = Bookmark.tag_filter(base, params[:tag]) if params[:tag].present?
     @pagy, @bookmarks = pagy_countless(
       base,
       items: 10,

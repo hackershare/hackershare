@@ -5,7 +5,8 @@ class BookmarksController < ApplicationController
   def new; end
 
   def index
-    base = Bookmark.sorting(params).original.includes(:user, :tags)
+    base = Bookmark.sorting(params).original.preload(:user, :tags)
+    base = Bookmark.tag_filter(base, params[:tag]) if params[:tag].present?
     @pagy, @bookmarks = pagy_countless(
       base,
       items: 10,
