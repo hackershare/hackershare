@@ -59,6 +59,15 @@ module ApplicationHelper
     ENV["GA_TRACKING_ID"] || "UA-175643791-1"
   end
 
+  def tag_url_for(tag, options = {})
+    path = Rails.application.routes.recognize_path(request.path)
+    if path[:controller] == "bookmarks" && path[:action] == "show"
+      link_to tag.name, root_path(tag: tag.name)
+    else
+      link_to tag.name, url_for(tag: tag.name, only_path: true), data: { remote: true, action: "ajax:success->listing#replace" }
+    end
+  end
+
   if Rails.env.development?
     def t(*args, **options, &block)
       super(*args, **options.merge(raise: true), &block)
