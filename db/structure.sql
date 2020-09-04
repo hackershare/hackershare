@@ -181,7 +181,11 @@ CREATE TABLE public.bookmarks (
     score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
     comments_count integer DEFAULT 0,
-    tags_count integer DEFAULT 0
+    tags_count integer DEFAULT 0,
+    content text,
+    cached_tag_names character varying,
+    cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
+    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -603,6 +607,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: fulltext_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX fulltext_idx ON public.bookmarks USING gin (tsv);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -850,6 +861,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200830015625'),
 ('20200831233455'),
 ('20200902043615'),
-('20200902233139');
+('20200902233139'),
+('20200904050621'),
+('20200904102721'),
+('20200904200608');
 
 

@@ -6,7 +6,10 @@
 #
 #  id                   :bigint           not null, primary key
 #  cached_like_user_ids :integer          default([]), is an Array
+#  cached_tag_ids       :bigint           default([]), is an Array
+#  cached_tag_names     :string
 #  comments_count       :integer          default(0)
+#  content              :text
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
@@ -15,6 +18,7 @@
 #  smart_score          :float
 #  tags_count           :integer          default(0)
 #  title                :string
+#  tsv                  :tsvector
 #  url                  :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -23,6 +27,7 @@
 #
 # Indexes
 #
+#  fulltext_idx                        (tsv) USING gin
 #  index_bookmarks_on_ref_id           (ref_id)
 #  index_bookmarks_on_score            (score)
 #  index_bookmarks_on_smart_score      (smart_score)
@@ -105,7 +110,12 @@ class Bookmark < ApplicationRecord
   end
 
   def sync_cached_like_user_ids
-    update!(cached_like_user_ids: reload.like_user_ids)
+    update(cached_like_user_ids: reload.like_user_ids)
+  end
+
+  def sync_cached_tag_ids
+    last_tags = tags.reload
+    update(cached_tag_ids: last_tags.map(&:id), cached_tag_names: last_tags.map(&:name).join(", "))
   end
 
   after_create_commit do
