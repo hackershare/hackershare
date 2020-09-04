@@ -1,0 +1,15 @@
+.btn-primary {
+  @apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 transition ease-in-out duration-150 mr-2;
+}
+
+.btn-primary:hover {
+  @apply bg-indigo-500;
+}
+
+.btn-primary:focus {
+  @apply outline-none border-indigo-700 shadow-outline-indigo;
+}
+
+.btn-primary:active {
+  @apply bg-indigo-500 bg-indigo-700;
+}

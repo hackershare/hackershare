@@ -1,21 +1,22 @@
 
 
 <!-- 3 column wrapper -->
-<div class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
+<div class="flex-grow w-full max-w-7xl mx-auto">
   <!-- Left sidebar & main wrapper -->
-  <div class="flex-1 min-w-0 bg-white xl:flex">
+  <div class="flex min-w-0 bg-white">
     <%= render "bookmarks/user_side" %>
 
     <!-- Projects List -->
-    <div class="bg-white lg:min-w-0 lg:flex-1" data-controller='bookmarks'>
-      <% if current_user %>
-        <%= render template: "bookmarks/new" %>
-      <% end %>
+    <div class="bg-white w-full" data-controller='bookmarks'>
+      <div class="py-4 lg:pl-4 lg:py-8">
+        <% if current_user %>
+          <%= render template: "bookmarks/new" %>
+        <% end %>
       
-      <div data-controller="listing" data-target="listing.container">
-        <%= render partial: "bookmarks/bookmarks_with_pagination" %>
+        <div data-controller="listing" data-target="listing.container">
+          <%= render partial: "bookmarks/bookmarks_with_pagination" %>
+        </div>
       </div>
     </div>
   </div>
-  <%= render partial: "common/extension_bar" %>
 </div>
