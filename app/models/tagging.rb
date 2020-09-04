@@ -24,4 +24,11 @@ class Tagging < ApplicationRecord
   belongs_to :tag, counter_cache: :bookmarks_count
 
   validates :tag_id, uniqueness: { scope: :bookmark_id }
+
+  after_create :sync_cached_tag_ids
+  after_destroy :sync_cached_tag_ids
+
+  def sync_cached_tag_ids
+    bookmark.sync_cached_tag_ids
+  end
 end
