@@ -1,13 +1,11 @@
-
-
 <!-- 3 column wrapper -->
-<div class="flex-grow w-full max-w-7xl mx-auto xl:px-8 lg:flex">
+<div class="">
   <!-- Left sidebar & main wrapper -->
-  <div class="flex-1 min-w-0 bg-white xl:flex">
+  <div class="flex min-w-0 bg-white">
     <%= render partial: "users/user_side", locals: {user: @user } %>
-
     <!-- Projects List -->
-    <div class="bg-white lg:min-w-0 lg:flex-1" data-controller='bookmarks'>
+    <div class="bg-white w-full" data-controller='bookmarks'>
+      <div class="lg:pl-4 lg:pt-8">
       <% if current_user %>
         <%= render template: "bookmarks/new" %>
       <% end %>
@@ -17,5 +15,4 @@
       </div>
     </div>
   </div>
-  <%= render partial: "common/extension_bar" %>
 </div>
