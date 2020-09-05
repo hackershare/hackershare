@@ -1,5 +1,9 @@
 @import "tailwindcss/base";
+@import "./base.scss";
+
 @import "tailwindcss/components";
 @import "./components.scss";
+
 @import "tailwindcss/utilities";
+
 @import "@yaireo/tagify/src/tagify.scss";

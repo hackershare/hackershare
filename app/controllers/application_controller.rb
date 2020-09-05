@@ -49,15 +49,18 @@ class ApplicationController < ActionController::Base
   private
 
     def switch_locale(&action)
-      if request.path == "/" && best_locale.to_sym != I18n.default_locale && !params[:set_locale]
-        redirect_to root_path(locale: best_locale)
+      if params[:set_locale]
+        cookies[:locale] = params[:locale] || I18n.default_locale
+      end
+      if dync_locale_routes?
+        locale = best_locale
       else
         locale = I18n.locale_available?(params[:locale]) ? params[:locale] : I18n.default_locale
-        cookies[:locale] = locale if params[:set_locale]
-        I18n.with_locale(locale, &action)
       end
+      I18n.with_locale(locale, &action)
     end
 
+    # Cannot use this this method until I18n.locale is already setted
     def default_url_options
       locale = I18n.locale == I18n.default_locale ? nil : I18n.locale
       {
@@ -72,5 +75,10 @@ class ApplicationController < ActionController::Base
         client_locale = lang == "zh" ? :cn : :en
         cookie_locale || client_locale || I18n.default_locale
       end
+    end
+
+    def dync_locale_routes?
+      request.path == "/" ||
+        (controller_name == "sessions" && action_name == "create_from_oauth")
     end
 end

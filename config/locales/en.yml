@@ -19,6 +19,7 @@ en:
   confirm_delete: Are you sure?
   daily: Daily
   email_or_password_is_wrong: Email or password is wrong
+  empty_data: Empty data
   forgot_your_password?: Forgot your password?
   follow: Follow
   followings: Followings
@@ -30,10 +31,10 @@ en:
   login_successed: Login successed
   logout_successed: Logout successed
   monthly: Monthly
+  my_profile: My Profile
   not_have_account?: Not have account?
   open_source: Open Source
   or_continue_with: Or continue with
-  profile: Profile
   remember_me: Remember Me
   save: Save
   search: Search
@@ -49,6 +50,7 @@ en:
   top_hackers: Top Hackers
   top_categories: Top Categories
   unfollow: Unfollow
+  user_profile: User's Profile
   weekly: Weekly
   write_a_few_sentences_about_yourself: Write a few sentences about yourself.
   your_profile_updated_successfully: Your profile updated successfully.
