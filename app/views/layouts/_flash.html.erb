@@ -1,3 +1,7 @@
-<% %i[error info success].each do |key| %>
-  <%= render "layouts/flash/#{key}" if flash[key] %>
+<% flash.each do |key, value| %>
+  <% if %w[error info success].include?(key) && value.present? %>
+    <div class="mt-1 lg:mt-2 space-y-1 lg:space-y-2">
+      <%= render "layouts/flash/#{key}" %>
+    </div>
+  <% end %>
 <% end %>
