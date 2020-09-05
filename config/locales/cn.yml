@@ -2,6 +2,7 @@ cn:
   about: 关于我们
   active_hackers: 活跃会员
   all: 全部
+  already_have_account?: 已有账户？
   avatar: 头像
   bad_comment: 评论不合法
   bad_url: URL 不合法
@@ -45,6 +46,7 @@ cn:
   sign_out: 退出
   sign_up: 注册
   sign_up_failed: 注册失败
+  sign_up_new_account: 注册新账户
   smart: 智能
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
   top_hackers: 最佳会员

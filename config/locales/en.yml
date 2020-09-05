@@ -2,6 +2,7 @@ en:
   about: About
   active_hackers: Active Hackers
   all: All
+  already_have_account?: Already have account?
   avatar: Avatar
   bad_comment: Bad comment
   bad_url: Bad url
@@ -40,11 +41,12 @@ en:
   search: Search
   send: Send
   settings: Settings
-  sign_in: Sign In
+  sign_in: Sign in
   sign_in_to_your_account: Sign in to your account
   sign_out: Sign out
   sign_up: Sign up
   sign_up_failed: Sign up failed
+  sign_up_new_account: Sign up new account
   smart: Smart
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: This information will be displayed publicly so be careful what you share
   top_hackers: Top Hackers
