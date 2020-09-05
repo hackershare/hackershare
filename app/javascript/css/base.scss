@@ -1,3 +1,7 @@
 button, [type="button"], [type="reset"], [type="submit"] {
   -webkit-appearance: none;
 }
+
+textarea, input[type="range"], input, input:matches([type="password"], [type="search"]) {
+  -webkit-appearance: none;
+}
