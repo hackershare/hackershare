@@ -4,9 +4,9 @@
     <!-- Repo name and link -->
     <div class="min-w-0 space-y-3">
       <div class="flex items-center space-x-3">
-        <% if bookmark.favicon.present? %>
+        <% if bookmark.favicon_local.attached? %>
           <span>
-            <%= image_tag(bookmark.favicon, class: "max-h-4 max-w-4") %>
+            <%= image_tag(bookmark.favicon_local, class: "max-h-4 max-w-4") %>
           </span>
         <% else %>
           <span>

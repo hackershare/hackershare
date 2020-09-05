@@ -35,6 +35,7 @@
 #  index_bookmarks_on_user_id          (user_id)
 #
 class Bookmark < ApplicationRecord
+  has_one_attached :favicon_local
   belongs_to :user, counter_cache: true, touch: true
   belongs_to :ref, class_name: "Bookmark", optional: true, counter_cache: :dups_count
   has_many :duplications, foreign_key: :ref_id, class_name: "Bookmark"
@@ -116,6 +117,14 @@ class Bookmark < ApplicationRecord
   def sync_cached_tag_ids
     last_tags = tags.reload
     update(cached_tag_ids: last_tags.map(&:id), cached_tag_names: last_tags.map(&:name).join(", "))
+  end
+
+  def save_favicon
+    downloaded_image = open(favicon)
+    favicon_local.attach(
+      io: downloaded_image,
+      filename: File.basename(URI.parse(favicon).path)
+    )
   end
 
   after_create_commit do
