@@ -1,0 +1,9 @@
+<div class="relative" data-target="hover-like-users.card">
+  <div class="absolute bottom-8 left-0 z-50 bg-white shadow-lg rounded-lg p-4 min-w-max-content">
+      <div class="flex relative z-0 overflow-hidden">
+        <% @users.each do |user| %>
+          <%= image_tag(user.avatar_url, class: "h-12 w-12 rounded-full text-white shadow-solid", alt: user.username, title: user.username) %>
+        <% end %>
+    </div>
+  </div>
+</div>
