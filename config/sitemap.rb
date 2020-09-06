@@ -5,7 +5,7 @@ require "sitemap_generator"
 SitemapGenerator::Sitemap.create_index = :auto
 
 SitemapGenerator::Sitemap.default_host = "https://hackershare.dev"
-#SitemapGenerator::Sitemap.public_path = "public/sitemap"
+# SitemapGenerator::Sitemap.public_path = "public/sitemap"
 
 SitemapGenerator::Sitemap.sitemaps_path = "sitemap/"
 
