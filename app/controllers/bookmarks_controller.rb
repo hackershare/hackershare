@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BookmarksController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index show]
+  skip_before_action :authenticate_user!, only: %i[index show hover_like_users]
   def new; end
 
   def index
@@ -70,6 +70,12 @@ class BookmarksController < ApplicationController
       @bookmark.likes.create(user: current_user)
     end
     render json: { like: @like, bookmark: @bookmark.as_json(only: %i[id url likes_count]) }
+  end
+
+  def hover_like_users
+    @bookmark = Bookmark.find(params[:id])
+    @users = @bookmark.like_users
+    render layout: false
   end
 
   def bookmark_params

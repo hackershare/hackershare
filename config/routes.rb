@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :bookmarks, except: %i[index] do
       member do
         post :toggle_liking
+        get :hover_like_users
       end
       resources :comments
       resources :tags, only: %i[new create]

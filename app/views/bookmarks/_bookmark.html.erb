@@ -43,9 +43,11 @@
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           <% end %>
-          <button data-target="likes.data" type="button" class="-ml-px relative inline-flex items-center p-1 lg:px-3 lg:py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-            <%= bookmark.likes_count %>
-          </button>
+          <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseenter->hover-like-users#show mouseleave->hover-like-users#hide">
+            <button data-target="likes.data" type="button" class="-ml-px relative inline-flex items-center p-1 lg:px-3 lg:py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+              <%= bookmark.likes_count %>
+            </button>
+          </span>
         </span>
 
         <a href="<%= bookmark_path(bookmark) %>" class="relative text-sm leading-5 text-gray-500 hover:text-gray-900 font-medium">
