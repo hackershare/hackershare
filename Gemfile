@@ -86,3 +86,5 @@ gem "omniauth-twitter", "~> 1.4"
 gem "rack-cors", "~> 1.1"
 
 gem "simple_command", "~> 0.1.0"
+
+gem "sitemap_generator", "~> 6.1"

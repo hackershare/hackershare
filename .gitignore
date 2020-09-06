@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+public/sitemap/*
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*

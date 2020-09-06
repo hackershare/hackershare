@@ -21,3 +21,7 @@ Social bookmarks website for hackers. Alternative to delicious, hackernews, pock
 
 * https://github.com/hooopo/hackershare-ext
 * https://chrome.google.com/webstore/detail/hackershare/pinmchdpdbjbhijbagmealcojjpeebmh
+
+## refresh sitemap
+
+* bundle exec rake sitemap:refresh
