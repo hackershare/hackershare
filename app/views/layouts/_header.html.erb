@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gray-800">
+<nav x-data="{ open: false }" class="bg-gray-800 sticky top-0 z-20">
   <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -40,11 +40,11 @@
           </div>
         <% end %>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center md:static md:inset-auto md:ml-6 md:pr-0">
-        <% if I18n.locale == :en %>
-          <%= link_to 'CN', url_for(set_locale: true, locale: 'cn'), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' %>
-        <% else %>
-          <%= link_to 'EN', url_for(set_locale: true, locale: nil), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' %>
+      <div class="flex items-center between-x-1 space-x-2 md:space-x-4 absolute right-0">
+        <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
         <% end %>
         <% if current_user %>
           <button class="hidden p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" aria-label="Notifications">
@@ -68,16 +68,7 @@
             </div>
           </div>
         <% else %>
-          <div class="flex md:hidden space-x-2 ml-4">
-            <%= link_to t("sign_in"), new_session_path, class: "whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150" %>
-            <%= link_to t("sign_up"), new_registration_path, class: "whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150" %>
-          </div>
-          <div class="hidden md:flex items-center justify-end space-x-8 ml-4">
-            <%= link_to t("sign_in"), new_session_path, class: "whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150" %>
-            <span class="inline-flex rounded-md shadow-sm">
-              <%= link_to t("sign_up"), new_registration_path, class: "whitespace-no-wrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150" %>
-            </span>
-          </div>
+          <%= link_to t("sign_in"), new_session_path, class: "whitespace-no-wrap inline-flex items-center justify-center px-2 py-1 md:px-4 md:py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150" %>
         <% end %>
       </div>
     </div>
