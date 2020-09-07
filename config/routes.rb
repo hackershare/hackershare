@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
     delete "sign_out" => "sessions#destroy", as: :destroy_session
     root to: "bookmarks#index"
+    get "landing", to: "landing#index"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
