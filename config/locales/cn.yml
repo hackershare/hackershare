@@ -15,7 +15,7 @@ cn:
   comment: 评论
   comment_added: 评论已添加
   comments: 评论列表
-  created: 我的分享
+  created: 分享
   chrome_extension: Chrome 插件
   confirm_delete: 确定删除吗?
   daily: 每日
@@ -26,7 +26,7 @@ cn:
   followings: 关注人的分享
   hackers: 会员
   install_the_chrome_extension: 安装 Chrome 插件
-  likes: 我的收藏
+  likes: 收藏
   login_failed: 登录失败
   login_required: 需要先登录
   login_successed: 登录成功
