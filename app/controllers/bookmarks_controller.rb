@@ -8,6 +8,7 @@ class BookmarksController < ApplicationController
     query = Util.escape_quote(params[:query]) if params[:query]
     base = Bookmark.sorting(params).original.preload(:user, :tags)
     base = Bookmark.tag_filter(base, params[:tag]) if params[:tag].present?
+    base = Bookmark.where(lang: params[:bookmark_lang]) if params[:bookmark_lang].in?(Bookmark.langs.keys)
     if params[:query].present?
       base = base.where("bookmarks.tsv @@ plainto_tsquery('simple', E'#{query}')")
       base = base.select("bookmarks.*, ts_rank_cd(bookmarks.tsv, plainto_tsquery('simple', E'#{query}')) AS relevance")
@@ -26,6 +27,7 @@ class BookmarksController < ApplicationController
 
   def show
     @bookmark = Bookmark.find(params[:id]).only_first
+    @comments = @bookmark.comments.order(id: :asc)
     @user = @bookmark.user
   end
 

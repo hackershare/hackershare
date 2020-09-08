@@ -1,33 +1,19 @@
-<nav x-data="{ open: false }" class="bg-gray-800 sticky top-0 z-20">
-  <div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
-        <!-- Mobile menu button-->
-        <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out" x-bind:aria-label="open ? 'Close main menu' : 'Main menu'" aria-label="Main menu" x-bind:aria-expanded="open">
-          <!-- Icon when menu is closed. -->
-          <svg x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'hidden': open, 'block': !open }" class="h-6 w-6 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <!-- Icon when menu is open. -->
-          <svg x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'hidden': !open, 'block': open }" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-start">
+<nav x-data="{ open: false }" class="bg-gray-800">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between space-x-4 h-14 lg:h-16">
+      <div class="flex items-center space-x-4 lg:space-x-8 flex-auto">
         <div class="flex-shrink-0">
-          <%= link_to (image_tag "logo-clap.png", class: "block md:hidden h-8 w-auto"), root_path %>
-          <%= link_to (image_tag "logo-white.png", class: "hidden md:block h-10 w-auto"), root_path %>
+          <%= link_to (image_tag "logo-clap.png", class: "block lg:hidden h-8 w-auto"), root_path %>
+          <%= link_to (image_tag "logo-white.png", class: "hidden lg:block h-10 w-auto"), root_path %>
         </div>
-        <div class="hidden md:block md:ml-6">
-          <div class="flex">
+        <div class="hidden lg:block">
+          <div class="flex space-x-2">
             <%= link_to_active t("hackers"), users_path, :users, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-            <%= link_to_active t("bookmarks"), root_path, :bookmarks, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-            <%= link_to_active t("category"), categories_path, :categories, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+            <%= link_to_active t("bookmarks"), root_path, :bookmarks, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+            <%= link_to_active t("category"), categories_path, :categories, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
           </div>
         </div>
-
-        <%= form_with(url: root_path, local: true, method: :get, class: "hidden lg:block lg:ml-8 max-w-lg w-full lg:max-w-xs") do |f| %>
+        <%= form_with(url: root_path, local: true, method: :get, class: "flex-auto max-w-sm") do |f| %>
           <label for="search" class="sr-only"><%= t("search") %></label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -40,7 +26,7 @@
           </div>
         <% end %>
       </div>
-      <div class="flex items-center between-x-1 space-x-2 md:space-x-4 absolute right-0">
+      <div class="flex flex-shrink-0 items-center space-x-2 md:space-x-4">
         <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -71,26 +57,6 @@
           <%= link_to t("sign_in"), new_session_path, class: "whitespace-no-wrap inline-flex items-center justify-center px-2 py-1 md:px-4 md:py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150" %>
         <% end %>
       </div>
-    </div>
-  </div>
-
-  <div x-description="Mobile menu, toggle classes based on menu state." x-state:on="Menu open" x-state:off="Menu closed" :class="{ 'block': open, 'hidden': !open }" class="md:hidden hidden">
-    <div class="px-2 pt-2 pb-3">
-      <%= form_with(url: root_path, local: true, method: :get, class: 'mb-2') do |f| %>
-        <label for="search" class="sr-only"><%= t("search") %></label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <%= f.search_field :query, value: params[:query], id: 'search', class: 'block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:text-gray-900 md:text-sm transition duration-150 ease-in-out', placeholder: t("search") %>
-          <input type="submit" hidden />
-        </div>
-      <% end %>
-      <%= link_to_active t("hackers"), users_path, :users, class: "block px-3 py-2 rounded-md text-base font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-      <%= link_to_active t("bookmarks"), root_path, :bookmarks, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-      <%= link_to_active t("category"), categories_path, :categories, class: "mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
     </div>
   </div>
 </nav>
