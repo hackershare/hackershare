@@ -31,8 +31,12 @@
               </div>
               <div>
                 <ul class="divide-y divide-gray-200 " data-target='comments.list'>
-                  <% @bookmark.comments.order(id: :asc).each do |comment| %>
-                    <%= render partial: "comments/comment", locals: {comment: comment} %>
+                  <% if @comments.present? %>
+                    <% @comments.each do |comment| %>
+                      <%= render partial: "comments/comment", locals: {comment: comment} %>
+                    <% end %>
+                  <% else %>
+                    <div class="py-4 text-sm text-gray-500"><%= t("empty_data") %></div>
                   <% end %>
                 </ul>
               </div>
