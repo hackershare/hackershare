@@ -20,7 +20,8 @@ class RemoteFetchJob < ApplicationJob
         favicon_url = nil
       end
     end
-    bookmark.update(favicon: favicon_url, description: parser.description, title: parser.title)
+    lang = parser.title.each_char.any? { |char| char.ord.in?(0x4E00..0x9FFF) } ? :chinese : :english
+    bookmark.update(favicon: favicon_url, description: parser.description, title: parser.title, lang: lang)
     bookmark.save_favicon if bookmark.favicon.present?
   rescue LinkThumbnailer::HTTPError
     # TODO

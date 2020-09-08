@@ -13,6 +13,7 @@
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
+#  lang                 :integer          default("english"), not null
 #  likes_count          :integer          default(0)
 #  score                :integer
 #  smart_score          :float
@@ -52,6 +53,11 @@ class Bookmark < ApplicationRecord
   validates :url, presence: true
   validates :url, url: { no_local: true }
   validates :url, uniqueness: { scope: :user }
+
+  enum lang: {
+    english: 0,
+    chinese: 1,
+  }
 
   after_create do
     if original = Bookmark.where(url: url).where("id !=?", id).first

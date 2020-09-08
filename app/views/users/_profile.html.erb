@@ -20,7 +20,7 @@
   </div>
   <div class="space-y-2 lg:space-y-4">
     <span data-controller="follows" class="rounded-md shadow-sm">
-      <%= link_to toggle_following_user_path(user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full max-w-md inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition ease-in-out duration-150 #{user.followed_by?(current_user) ? 'bg-gray-600 hover:bg-gray-500  focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700' : 'bg-indigo-600 hover:bg-indigo-500  focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'} ", "data-target": "follows.button" do %>
+      <%= link_to toggle_following_user_path(user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full max-w-sm inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition ease-in-out duration-150 #{user.followed_by?(current_user) ? 'bg-gray-600 hover:bg-gray-500  focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700' : 'bg-indigo-600 hover:bg-indigo-500  focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'} ", "data-target": "follows.button" do %>
         <%= render_follow_text(user) %>
       <% end %>
     </span>

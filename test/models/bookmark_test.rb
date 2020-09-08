@@ -13,6 +13,7 @@
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
+#  lang                 :integer          default("english"), not null
 #  likes_count          :integer          default(0)
 #  score                :integer
 #  smart_score          :float
