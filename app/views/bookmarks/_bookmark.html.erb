@@ -35,7 +35,7 @@
 
     <!-- Repo meta info -->
     <div class=" flex-col flex-shrink-0 items-end space-y-1 lg:space-y-3">
-      <p class="flex items-center space-x-1 lg:space-x-4">
+      <p class="flex items-center justify-end space-x-1 lg:space-x-4">
         <!-- like button -->
         <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
           <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" do %>
@@ -78,7 +78,7 @@
         <% end %>
 
       </p>
-      <p class="flex text-gray-500 text-sm leading-5 space-x-0.5 lg:space-x-2">
+      <p class="flex justify-end text-gray-500 text-sm leading-5 space-x-0.5 lg:space-x-2">
         <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
         <span>&middot;</span>
         <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
