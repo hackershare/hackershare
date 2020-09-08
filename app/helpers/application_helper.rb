@@ -46,6 +46,22 @@ module ApplicationHelper
     link_to text, url, options
   end
 
+  def filter_dt
+    valid_filter_dts.include?(params[:dt]) ? params[:dt] : "smart"
+  end
+
+  def valid_filter_dts
+    %w[daily weekly monthly smart all]
+  end
+
+  def filter_bookmark_lang
+    valid_filter_bookmark_langs.include?(params[:bookmark_lang]) ? params[:bookmark_lang] : "language"
+  end
+
+  def valid_filter_bookmark_langs
+    %w[language chinese english]
+  end
+
   def hacker_link_to_active(text, url, current = :created, options = {})
     if options[:class]
       if (params[:type].to_s == current.to_s) || (params[:type].blank? && current.to_s == "created")

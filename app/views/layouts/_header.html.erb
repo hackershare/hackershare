@@ -7,13 +7,13 @@
           <%= link_to (image_tag "logo-white.png", class: "hidden lg:block h-10 w-auto"), root_path %>
         </div>
         <div class="hidden lg:block">
-          <div class="flex">
+          <div class="flex space-x-2">
             <%= link_to_active t("hackers"), users_path, :users, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-            <%= link_to_active t("bookmarks"), root_path, :bookmarks, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-            <%= link_to_active t("category"), categories_path, :categories, class: "ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+            <%= link_to_active t("bookmarks"), root_path, :bookmarks, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+            <%= link_to_active t("category"), categories_path, :categories, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
           </div>
         </div>
-        <%= form_with(url: root_path, local: true, method: :get, class: "flex-auto max-w-md") do |f| %>
+        <%= form_with(url: root_path, local: true, method: :get, class: "flex-auto max-w-sm") do |f| %>
           <label for="search" class="sr-only"><%= t("search") %></label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -26,7 +26,7 @@
           </div>
         <% end %>
       </div>
-      <div class="flex items-center space-x-2 md:space-x-4">
+      <div class="flex flex-shrink-0 items-center space-x-2 md:space-x-4">
         <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
