@@ -26,6 +26,7 @@ class BookmarksController < ApplicationController
 
   def show
     @bookmark = Bookmark.find(params[:id]).only_first
+    @comments = @bookmark.comments.order(id: :asc)
     @user = @bookmark.user
   end
 
