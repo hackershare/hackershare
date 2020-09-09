@@ -11,8 +11,8 @@
             
             <p><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
             <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
-            <div class="rounded-md shadow-sm mt-3">
-              <button onclick="alert('todo')" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+            <div class="mt-3">
+              <button onclick="alert('todo')" type="button" class="btn-primary">
                 <%= t('follow') %>
               </button>
             </div>
