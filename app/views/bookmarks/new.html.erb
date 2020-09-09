@@ -1,4 +1,4 @@
-<%= form_with(model: Bookmark.new, url: bookmarks_path, data: { action: 'ajax:success->bookmarks#append' }) do |f| %>
+<%= form_with(model: Bookmark.new, url: bookmarks_path, html: {autocomplete: :off}, data: { action: 'ajax:success->bookmarks#append' }) do |f| %>
   <div class="flex items-center border-b py-2 mb-4">
     <%= f.url_field :url, placeholder: 'https://', class: "w-full appearance-none bg-transparent border-none flex-1 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", data: { target: 'bookmarks.input' } %>
     <div class="rounded-md shadow">
