@@ -185,7 +185,8 @@ CREATE TABLE public.bookmarks (
     content text,
     cached_tag_names character varying,
     cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
-    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
+    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
+    lang integer DEFAULT 0 NOT NULL
 );
 
 
@@ -864,6 +865,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200902233139'),
 ('20200904050621'),
 ('20200904102721'),
-('20200904200608');
+('20200904200608'),
+('20200908133408');
 
 
