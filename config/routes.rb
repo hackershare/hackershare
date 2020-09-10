@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]
     resources :categories
-    resources :bookmarks, except: %i[index] do
+    resources :bookmarks do
       member do
         post :toggle_liking
         get :hover_like_users
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
     end
     delete "sign_out" => "sessions#destroy", as: :destroy_session
-    root to: "bookmarks#index"
+    root "home#index"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
