@@ -2,12 +2,13 @@
 #
 # Table name: tags
 #
-#  id              :bigint           not null, primary key
-#  bookmarks_count :integer          default(0)
-#  name            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  user_id         :bigint
+#  id                  :bigint           not null, primary key
+#  bookmarks_count     :integer          default(0)
+#  name                :string
+#  subscriptions_count :integer          default(0)
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  user_id             :bigint
 #
 # Indexes
 #
