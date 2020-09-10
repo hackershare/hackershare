@@ -316,6 +316,38 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: tag_subscriptions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tag_subscriptions (
+    id bigint NOT NULL,
+    user_id bigint,
+    tag_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: tag_subscriptions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tag_subscriptions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tag_subscriptions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tag_subscriptions_id_seq OWNED BY public.tag_subscriptions.id;
+
+
+--
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -358,7 +390,8 @@ CREATE TABLE public.tags (
     user_id bigint,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    bookmarks_count integer DEFAULT 0
+    bookmarks_count integer DEFAULT 0,
+    subscriptions_count integer DEFAULT 0
 );
 
 
@@ -403,7 +436,8 @@ CREATE TABLE public.users (
     comments_count integer DEFAULT 0,
     tags_count integer DEFAULT 0,
     taggings_count integer DEFAULT 0,
-    admin boolean DEFAULT false
+    admin boolean DEFAULT false,
+    follow_tags_count integer DEFAULT 0
 );
 
 
@@ -480,6 +514,13 @@ ALTER TABLE ONLY public.follows ALTER COLUMN id SET DEFAULT nextval('public.foll
 --
 
 ALTER TABLE ONLY public.likes ALTER COLUMN id SET DEFAULT nextval('public.likes_id_seq'::regclass);
+
+
+--
+-- Name: tag_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tag_subscriptions ALTER COLUMN id SET DEFAULT nextval('public.tag_subscriptions_id_seq'::regclass);
 
 
 --
@@ -581,6 +622,14 @@ ALTER TABLE ONLY public.likes
 
 ALTER TABLE ONLY public.schema_migrations
     ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: tag_subscriptions tag_subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tag_subscriptions
+    ADD CONSTRAINT tag_subscriptions_pkey PRIMARY KEY (id);
 
 
 --
@@ -748,6 +797,27 @@ CREATE UNIQUE INDEX index_likes_on_user_id_and_bookmark_id ON public.likes USING
 
 
 --
+-- Name: index_tag_subscriptions_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tag_subscriptions_on_tag_id ON public.tag_subscriptions USING btree (tag_id);
+
+
+--
+-- Name: index_tag_subscriptions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_tag_subscriptions_on_user_id ON public.tag_subscriptions USING btree (user_id);
+
+
+--
+-- Name: index_tag_subscriptions_on_user_id_and_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_tag_subscriptions_on_user_id_and_tag_id ON public.tag_subscriptions USING btree (user_id, tag_id);
+
+
+--
 -- Name: index_taggings_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -866,6 +936,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200904050621'),
 ('20200904102721'),
 ('20200904200608'),
-('20200908133408');
+('20200908133408'),
+('20200909084519'),
+('20200909104055');
 
 
