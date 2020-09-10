@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
   layout :home_layout
@@ -20,10 +22,10 @@ class HomeController < ApplicationController
       )
       respond_to do |format|
         format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html" }
-        format.html { render 'bookmarks/index' }
+        format.html { render "bookmarks/index" }
       end
     else
-      render 'landing'
+      render "landing"
     end
   end
 
