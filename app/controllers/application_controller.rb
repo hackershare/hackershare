@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
     def best_locale
       @best_locale ||= begin
         cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
-        lang = request.env["HTTP_ACCEPT_LANGUAGE"].scan(/^[a-z]{2}/).first
+        lang = request.env["HTTP_ACCEPT_LANGUAGE"]&.scan(/^[a-z]{2}/)&.first
         client_locale = lang == "zh" ? :cn : :en
         cookie_locale || client_locale || I18n.default_locale
       end
