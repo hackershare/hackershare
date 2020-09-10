@@ -20,39 +20,40 @@
       </svg>
     </div>
   </div>
-
   <div class="relative pt-6 pb-12 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6">
       <nav class="flex items-center justify-between sm:h-10">
-        <a href="#" aria-label="Home">
+        <%= link_to root_path do %>
           <%= image_tag("logo.png", class: "h-8 w-auto sm:h-10") %>
-        </a>
-        <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'flex space-x-0.5 whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-600 transition ease-in-out duration-150' do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <% end %>
+        <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'flex items-center space-x-0.5 whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-gray-600 transition ease-in-out duration-150' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
-          <span>中文</span>
+          <span>English</span>
         <% end %>
       </nav>
     </div>
+
     <main class="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 xl:mt-28">
       <div class="text-center">
         <h2 class="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
-          Social bookmarking, reinvented!
+          <span>Social bookmarking</span>
+          <span class="text-indigo-600">reinvented!</span>
         </h2>
         <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          Hackershare is where you discover, share, preserve, and organize pages from around the web.
+          Hackershare is where you discover, share, preserve, and organize pages from around the web
         </p>
         <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
           <div class="rounded-md shadow">
             <%= link_to new_session_path, class: 'w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10' do %>
-              Get your early access! It's free!
+              Get early access free!
             <% end %>
           </div>
           <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-            <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+            <%= link_to bookmarks_path, class: 'w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10' do %>
               Live demo
-            </a>
+            <% end %>
           </div>
         </div>
       </div>
@@ -60,10 +61,8 @@
   </div>
 </div>
 
-
-
-<!-- feature list -->
-<div class="py-16 bg-gray-50 overflow-hidden lg:py-24">
+<!-- feature one -->
+<div class="bg-white overflow-hidden">
   <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl">
     <svg class="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4" width="404" height="784" fill="none" viewBox="0 0 404 784">
       <defs>
@@ -73,181 +72,219 @@
       </defs>
       <rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
     </svg>
-
-    <div class="relative">
-      <h3 class="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-        The new home for your bookmarking list
-      </h3>
-      <p class="mt-4 max-w-3xl mx-auto text-center text-xl leading-7 text-gray-500">
-        Track web page you’ve read, share you’ve loved, and bookmark that you think you could love. Bring your friends and discover new faves.
-      </p>
-    </div>
-
-    <div class="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-      <div class="relative">
+    <div class="my-12 sm:my-16 lg:my-24 lg:flex space-y-8 lg:space-y-0 items-center">
+      <div class="lg:w-1/3 space-y-4">
         <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
           The new home for your bookmarkings
         </h4>
         <p class="mt-3 text-lg leading-7 text-gray-500">
           Track web page you’ve read, share you’ve loved, and bookmark that you think you could love. Bring your friends and discover new faves.
         </p>
-
-        <ul class="mt-10">
+        <ul class="space-y-2">
           <li>
-            <div class="flex">
+            <div class="flex items-center space-x-2">
               <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                  </svg>
-                </div>
-              </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-medium text-gray-900">Read it later</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-                  Save webpages to read later, and eliminate cluttering of bookmarks with sites that are merely of a one-time interest. With Hackershare, you can read at home, work, on the way
-                </p>
-              </div>
-            </div>
-          </li>
-          <li class="mt-10">
-            <div class="flex">
-              <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
                   </svg>
                 </div>
               </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-medium text-gray-900">Discover new favs</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-                  We’re not about advertisements and algorithms. We like to think a human will like what his friends like.
-                </p>
+              <div>
+                <h5 class="text-base leading-6">Read it later</h5>
               </div>
             </div>
           </li>
-          <li class="mt-10">
-            <div class="flex">
+          <li>
+            <div class="flex items-center space-x-2">
               <div class="flex-shrink-0">
-                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
               </div>
-              <div class="ml-4">
-                <h5 class="text-lg leading-6 font-medium text-gray-900">Organize with tag</h5>
-                <p class="mt-2 text-base leading-6 text-gray-500">
-                  Organize your bookmarks with tags and notes, powerful searching and filting
-                </p>
+              <div>
+                <h5 class="text-base leading-6">Discover new favs</h5>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">Organize with tag, powerful searching and filtering</h5>
               </div>
             </div>
           </li>
         </ul>
       </div>
-
-      <div class="mt-10 -mx-4 relative lg:mt-0">
-        <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
-          <defs>
-            <pattern id="ca9667ae-9f92-4be7-abcb-9e3d727f2941" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="784" height="404" fill="url(#ca9667ae-9f92-4be7-abcb-9e3d727f2941)" />
-        </svg>
-        <%= image_tag("h-en.png", class: "relative mx-auto", width: "400") %>
-      </div>
-    </div>
-
-    <svg class="hidden lg:block absolute right-full transform translate-x-1/2 translate-y-12" width="404" height="784" fill="none" viewBox="0 0 404 784">
-      <defs>
-        <pattern id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-        </pattern>
-      </defs>
-      <rect width="404" height="784" fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)" />
-    </svg>
-
-    <div class="relative mt-12 sm:mt-16 lg:mt-24">
-      <div class="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
-        <div class="lg:col-start-2">
-          <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
-            Design for coders
-          </h4>
-          <p class="mt-3 text-lg leading-7 text-gray-500">
-            Hackershare is the best place to keep all your webpage, opensource project, new product or whatever else you come across while browsing
-          </p>
-
-          <ul class="mt-10">
-            <li>
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <h5 class="text-lg leading-6 font-medium text-gray-900">Chrome extension</h5>
-                  <p class="mt-2 text-base leading-6 text-gray-500">
-                    With the extension, you can save and share web page from the address, add new bookmarks with the click of a button.
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li class="mt-10">
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <h5 class="text-lg leading-6 font-medium text-gray-900">Reminder emails</h5>
-                  <p class="mt-2 text-base leading-6 text-gray-500">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="mt-10 -mx-4 relative lg:mt-0 lg:col-start-1">
-          <svg class="absolute left-1/2 transform -translate-x-1/2 translate-y-16 lg:hidden" width="784" height="404" fill="none" viewBox="0 0 784 404">
-            <defs>
-              <pattern id="e80155a9-dfde-425a-b5ea-1f6fadd20131" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
-              </pattern>
-            </defs>
-            <rect width="784" height="404" fill="url(#e80155a9-dfde-425a-b5ea-1f6fadd20131)" />
-          </svg>
-          <img class="relative mx-auto" width="490" src="https://tailwindui.com/img/features/feature-example-2.png" alt="">
-        </div>
+      <div class="lg:w-2/3 lg:ml-8">
+        <%= image_tag("landing-feature-1-en.png", class: "relative w-full shadow-2xl") %>
       </div>
     </div>
   </div>
 </div>
 
+<!-- feature two -->
+<div class="bg-gray-50 overflow-hidden">
+  <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl">
+    <svg class="hidden lg:block absolute right-full transform translate-x-1/2 -translate-y-1/4" width="404" height="784" fill="none" viewBox="0 0 404 784">
+      <defs>
+        <pattern id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
+    </svg>
+    <div class="my-12 sm:my-16 lg:my-24 lg:flex lg:flex-row-reverse space-y-8 lg:space-y-0 items-center">
+      <div class="lg:w-1/3 space-y-4">
+        <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
+          Design for hackers
+        </h4>
+        <p class="mt-3 text-lg leading-7 text-gray-500">
+          hackershare is the best place to keep all your webpage, opensource project, new product or whatever else you come across while browsing
+        </p>
+        <ul class="space-y-2">
+          
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">Favorite, comment and follow</h5>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">Hacker list</h5>
+              </div>
+            </div>
+          </li>
 
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">With  
+                  <a target="_blank" href="https://chrome.google.com/webstore/detail/hackershare/pinmchdpdbjbhijbagmealcojjpeebmh">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-md font-medium leading-5 bg-red-200 text-orange-800">chrome extension
+                    </span>
+                  </a>
+                  , you can save and share web page with the click of a button.</h5>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      <div class="lg:w-2/3 lg:mr-8">
+        <%= image_tag("landing-feature-2.png", class: "relative w-full") %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- feature three -->
+
+<!--
+<div class="bg-white overflow-hidden">
+  <div class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-screen-xl">
+    <svg class="hidden lg:block absolute left-full transform -translate-x-1/2 -translate-y-1/4" width="404" height="784" fill="none" viewBox="0 0 404 784">
+      <defs>
+        <pattern id="b1e6e422-73f8-40a6-b5d9-c8586e37e0e7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="404" height="784" fill="url(#b1e6e422-73f8-40a6-b5d9-c8586e37e0e7)" />
+    </svg>
+    <div class="my-12 sm:my-16 lg:my-24 lg:flex space-y-8 lg:space-y-0 items-center">
+      <div class="lg:w-1/3 space-y-4">
+        <h4 class="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
+          开放订阅
+        </h4>
+        <p class="mt-3 text-lg leading-7 text-gray-500">
+          对于很忙的你，即使不来极客分享，我们也能为你提供每周/每月精品书签汇总，精品书签将全部由人工评选，尽可能保证质量。你要做的只有扫描二维码关注我们。
+        </p>
+        <ul class="space-y-2">
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">每周/每月精品书签汇总</h5>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center space-x-2">
+              <div class="flex-shrink-0">
+                <div class="flex items-center justify-center p-1 rounded-md bg-indigo-500 text-white">
+                  <svg class="w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-base leading-6">公众号客服</h5>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="lg:w-2/3 lg:ml-8">
+        <%= image_tag("landing-feature-3.png", class: "relative w-full shadow-2xl") %>
+      </div>
+    </div>
+  </div>
+</div>
+
+-->
 
 <!-- stats -->
-<div class="bg-gray-50 pt-12 sm:pt-16">
+<div class="bg-gray-50 py-12 sm:py-16 lg:py-24">
   <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
-        Trusted by developers from over 80 planets
+        Open source 
       </h2>
       <p class="mt-3 text-xl leading-7 text-gray-500 sm:mt-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
+        Forks Stars and PullRequest are welcome
       </p>
     </div>
   </div>
-  <div class="mt-10 pb-12 bg-white sm:pb-16">
+  <div class="mt-10 pb-12 sm:pb-16">
     <div class="relative">
       <div class="absolute inset-0 h-1/2 bg-gray-50"></div>
       <div class="relative max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -255,26 +292,26 @@
           <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
             <div class="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
               <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500" id="item-1">
-                Pepperoni
+                Version
               </dt>
               <dd class="order-1 text-5xl leading-none font-extrabold text-indigo-600" aria-describedby="item-1">
-                100%
+                Beta
               </dd>
             </div>
             <div class="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
               <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                Delivery
+                State
               </dt>
               <dd class="order-1 text-5xl leading-none font-extrabold text-indigo-600">
-                24/7
+                Active
               </dd>
             </div>
             <div class="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
               <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                Calories
+                CI
               </dt>
               <dd class="order-1 text-5xl leading-none font-extrabold text-indigo-600">
-                100k
+                100%
               </dd>
             </div>
           </dl>
@@ -283,27 +320,3 @@
     </div>
   </div>
 </div>
-
-<!-- call to action -->
-<div class="bg-white">
-  <div class="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
-    <h2 class="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-      Ready to dive in?
-      <br>
-      <span class="text-indigo-600">Start your free trial today.</span>
-    </h2>
-    <div class="mt-8 flex">
-      <div class="inline-flex rounded-md shadow">
-        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-          Get started
-        </a>
-      </div>
-      <div class="ml-3 inline-flex">
-        <a href="#" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out">
-          Learn more
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
