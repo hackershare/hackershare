@@ -13,3 +13,19 @@
 .btn-primary:active {
   @apply bg-indigo-500 bg-indigo-700;
 }
+
+.btn-cancel {
+  @apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white transition ease-in-out duration-150 bg-gray-600;
+}
+
+.btn-cancel:hover {
+  @apply bg-gray-500;
+}
+
+.btn-cancel:focus {
+  @apply border-gray-700 shadow-outline-gray;
+}
+
+.btn-cancel:active {
+  @apply bg-gray-700; 
+}

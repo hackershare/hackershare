@@ -30,4 +30,9 @@ class Tag < ApplicationRecord
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
   end
+
+  def followed_by?(user)
+    return unless user
+    user.follow_tag_ids.include?(self.id)
+  end
 end
