@@ -4,24 +4,25 @@
 #
 # Table name: users
 #
-#  id               :bigint           not null, primary key
-#  about            :text
-#  admin            :boolean          default(FALSE)
-#  bookmarks_count  :integer          default(0)
-#  comments_count   :integer          default(0)
-#  email            :string
-#  extension_token  :string
-#  followers_count  :integer          default(0)
-#  followings_count :integer          default(0)
-#  homepage         :string
-#  password_digest  :string
-#  remember_token   :string
-#  score            :integer
-#  taggings_count   :integer          default(0)
-#  tags_count       :integer          default(0)
-#  username         :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id                :bigint           not null, primary key
+#  about             :text
+#  admin             :boolean          default(FALSE)
+#  bookmarks_count   :integer          default(0)
+#  comments_count    :integer          default(0)
+#  email             :string
+#  extension_token   :string
+#  follow_tags_count :integer          default(0)
+#  followers_count   :integer          default(0)
+#  followings_count  :integer          default(0)
+#  homepage          :string
+#  password_digest   :string
+#  remember_token    :string
+#  score             :integer
+#  taggings_count    :integer          default(0)
+#  tags_count        :integer          default(0)
+#  username          :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
@@ -42,6 +43,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :taggings
   has_many :tags
+
+  has_many :tag_subscriptions
+  has_many :follow_tags, through: :tag_subscriptions, class_name: "Tag", source: "tag"
 
   has_many :followers, class_name: "Follow", foreign_key: "following_user_id"
   has_many :follower_users, through: :followers, source: "user"
