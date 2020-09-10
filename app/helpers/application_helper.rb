@@ -78,7 +78,7 @@ module ApplicationHelper
   def tag_url_for(tag, options = {})
     path = Rails.application.routes.recognize_path(request.path)
     if path[:controller] == "bookmarks" && path[:action] == "show"
-      link_to tag.name, root_path(tag: tag.name)
+      link_to tag.name, bookmarks_path(tag: tag.name)
     else
       link_to tag.name, url_for(tag: tag.name, only_path: true), data: { remote: true, action: "ajax:success->listing#replace" }
     end

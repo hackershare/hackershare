@@ -14,7 +14,7 @@
       <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg z-10" style="display: none;">
         <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
           <% valid_filter_dts.each do |filter| %>
-            <%= filter_link_to_active t(filter), root_path(params.permit(:dt, :tag, :bookmark_lang).merge(dt: filter)), filter, class: "block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
+            <%= filter_link_to_active t(filter), bookmarks_path(params.permit(:dt, :tag, :bookmark_lang).merge(dt: filter)), filter, class: "block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
           <% end %>
         </div>
       </div>
@@ -33,7 +33,7 @@
       <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg z-10" style="display: none;">
         <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
           <% valid_filter_bookmark_langs.each do |filter| %>
-            <%= link_to t(filter), root_path(params.permit(:dt, :tag, :bookmark_lang).merge(bookmark_lang: filter)), class: "#{'bg-gray-200' if filter == filter_bookmark_lang} block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
+            <%= link_to t(filter), bookmarks_path(params.permit(:dt, :tag, :bookmark_lang).merge(bookmark_lang: filter)), class: "#{'bg-gray-200' if filter == filter_bookmark_lang} block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
           <% end %>
         </div>
       </div>
