@@ -5,7 +5,7 @@
     <%= render partial: "users/user_side", locals: {user: @user } %>
     <!-- Projects List -->
     <div class="bg-white w-full" data-controller='bookmarks'>
-      <div class="lg:pl-4 lg:pt-8">
+      <div class="lg:pl-4">
       <% if current_user %>
         <%= render template: "bookmarks/new" %>
       <% end %>

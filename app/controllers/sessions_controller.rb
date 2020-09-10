@@ -39,7 +39,6 @@ class SessionsController < ApplicationController
     cookies[:remember_token_v2] = {
       value: nil
     }
-    flash[:success] = t("logout_successed")
     redirect_to root_path
   end
 
