@@ -11,6 +11,7 @@
             
             <p><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
             <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
+            <p><span class="text-xl"> <%=tag.subscriptions_count %></span> <span class="text-gray-500">subscriptions</span></p>
             <div data-controller="follow-tag" class="mt-3">
               <div data-target="follow-tag.container">
                 <%= render partial: "categories/follow_button", locals: {tag: tag, user: current_user} %>
