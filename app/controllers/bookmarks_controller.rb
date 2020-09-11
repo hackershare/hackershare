@@ -34,6 +34,8 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
     if @bookmark.save
+      UserFeedNotification.with(bookmark: @bookmark).deliver(current_user.follower_users)
+
       respond_to do |format|
         format.js { render @bookmark.reload, content_type: "text/html", locals: { bookmark: @bookmark.only_first, bookmark_self: @bookmark } }
         format.html do
@@ -69,7 +71,8 @@ class BookmarksController < ApplicationController
       @bookmark.likes.where(user: current_user).first&.destroy
     else
       @like = true
-      @bookmark.likes.create(user: current_user)
+      like = @bookmark.likes.create(user: current_user)
+      LikeNotification.with(like: like).deliver(@bookmark.user)
     end
     render json: { like: @like, bookmark: @bookmark.as_json(only: %i[id url likes_count]) }
   end

@@ -59,3 +59,17 @@ cn:
   weekly: 每周
   write_a_few_sentences_about_yourself: 简单介绍一下你自己。
   your_profile_updated_successfully: 你的资料更新成功。
+
+  notifications:
+    comment_notification:
+      type_name: 评论
+      commented: 评论了
+    like_notification:
+      type_name: 喜欢
+      liked_your_bookmark: 喜欢了你的分享
+    follow_notification:
+      type_name: 关注
+      followed_you: 关注了你
+    user_feed_notification:
+      type_name: 用户订阅
+      shared: 分享了

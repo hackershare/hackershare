@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   around_action :switch_locale
   before_action :authenticate_user!
+  before_action :mark_notification
 
   helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host
 
@@ -80,5 +81,13 @@ class ApplicationController < ActionController::Base
     def dync_locale_routes?
       request.path == "/" ||
         (controller_name == "sessions" && action_name == "create_from_oauth")
+    end
+
+    def mark_notification
+      if current_user && params[:n_id].present?
+        if notification = current_user.notifications.where(id: params[:n_id]).first
+          notification.mark_as_read!
+        end
+      end
     end
 end

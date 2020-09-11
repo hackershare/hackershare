@@ -36,4 +36,14 @@ class Like < ApplicationRecord
   def decr_stats
     BookmarkStat.decr_likes_count(bookmark_id)
   end
+
+  def notifications
+    @notifications ||= Notification.where(params: { like: self })
+  end
+
+  before_destroy :destroy_notifications
+
+  def destroy_notifications
+    notifications.destroy_all
+  end
 end
