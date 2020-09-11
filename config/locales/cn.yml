@@ -1,6 +1,6 @@
 cn:
   about: 关于我们
-  active_hackers: 活跃会员
+  active_hackers: 活跃极客
   all: 全部
   already_have_account?: 已有账户？
   avatar: 头像
@@ -10,7 +10,7 @@ cn:
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
   bookmarks: 书签
-  category: 类目
+  category: 标签
   chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
   comment_added: 评论已添加
@@ -26,7 +26,7 @@ cn:
   forgot_your_password?: 忘记密码？
   follow: 关注
   followings: 关注人的分享
-  hackers: 会员
+  hackers: 极客
   install_the_chrome_extension: 安装 Chrome 插件
   language: 语言
   likes: 收藏
@@ -52,8 +52,8 @@ cn:
   sign_up_new_account: 注册新账户
   smart: 智能
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
-  top_hackers: 最佳会员
-  top_categories: 最佳标签
+  top_hackers: 极客排行
+  top_categories: 热门标签
   unfollow: 取消关注
   user_profile: 用户主页
   weekly: 每周
