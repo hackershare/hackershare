@@ -181,4 +181,14 @@ class Bookmark < ApplicationRecord
       Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(id: :desc)
     end
   end
+
+  def notifications
+    @notifications ||= Notification.where(params: { bookmark: self }).where(type: "UserFeedNotification")
+  end
+
+  before_destroy :destroy_notifications
+
+  def destroy_notifications
+    notifications.destroy_all
+  end
 end

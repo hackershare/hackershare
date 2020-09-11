@@ -307,6 +307,41 @@ ALTER SEQUENCE public.likes_id_seq OWNED BY public.likes.id;
 
 
 --
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.notifications (
+    id bigint NOT NULL,
+    recipient_type character varying NOT NULL,
+    recipient_id bigint NOT NULL,
+    type character varying NOT NULL,
+    params jsonb,
+    read_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -517,6 +552,13 @@ ALTER TABLE ONLY public.likes ALTER COLUMN id SET DEFAULT nextval('public.likes_
 
 
 --
+-- Name: notifications id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('public.notifications_id_seq'::regclass);
+
+
+--
 -- Name: tag_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -614,6 +656,14 @@ ALTER TABLE ONLY public.follows
 
 ALTER TABLE ONLY public.likes
     ADD CONSTRAINT likes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
 
 
 --
@@ -797,6 +847,20 @@ CREATE UNIQUE INDEX index_likes_on_user_id_and_bookmark_id ON public.likes USING
 
 
 --
+-- Name: index_notifications_on_params; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notifications_on_params ON public.notifications USING btree (params);
+
+
+--
+-- Name: index_notifications_on_recipient_type_and_recipient_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_notifications_on_recipient_type_and_recipient_id ON public.notifications USING btree (recipient_type, recipient_id);
+
+
+--
 -- Name: index_tag_subscriptions_on_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -895,6 +959,13 @@ CREATE INDEX index_users_on_updated_at ON public.users USING btree (updated_at D
 
 
 --
+-- Name: notifications_idx_0; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX notifications_idx_0 ON public.notifications USING btree (recipient_type DESC, recipient_id DESC, read_at DESC, created_at DESC);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -938,6 +1009,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200904200608'),
 ('20200908133408'),
 ('20200909084519'),
-('20200909104055');
+('20200909104055'),
+('20200911090207'),
+('20200912122912');
 
 

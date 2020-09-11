@@ -88,3 +88,5 @@ gem "rack-cors", "~> 1.1"
 gem "simple_command", "~> 0.1.0"
 
 gem "sitemap_generator", "~> 6.1"
+
+gem "noticed", "~> 1.2"

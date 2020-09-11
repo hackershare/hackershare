@@ -47,7 +47,8 @@ class UsersController < ApplicationController
       current_user.follows.where(following_user: @user).first&.destroy
     else
       @follow = true
-      @current_user.follows.create(following_user: @user)
+      follow = @current_user.follows.create(following_user: @user)
+      FollowNotification.with(follow: follow).deliver(@user)
     end
     render json: { follow: @follow, user: @user.as_json(only: %i[id followers_count]) }
   end
