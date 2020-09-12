@@ -26,7 +26,7 @@
           </div>
         <% end %>
       </div>
-      <div class="flex flex-shrink-0 items-center space-x-2 md:space-x-4">
+      <div class="flex flex-shrink-0 items-center space-x-1 md:space-x-2">
         <%= link_to url_for(set_locale: true, locale: (I18n.locale == :en ? :cn : nil)), class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -34,7 +34,7 @@
         <% end %>
         <% if current_user %>
         
-          <a href="<%= notifications_path %>" class="inline-block relative p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" aria-label="Notifications">
+          <a href="<%= notifications_path %>" class="whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150" aria-label="Notifications">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
             </svg>
@@ -44,7 +44,7 @@
           </a>
         
           <!-- Profile dropdown -->
-          <div @click.away="open = false" class="ml-3 relative" x-data="{ open: false }">
+          <div @click.away="open = false" class="relative" x-data="{ open: false }">
             <div>
               <button @click="open = !open" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out" id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
                 <%= image_tag current_user.avatar_url, class: "h-8 w-8 rounded-full" %>
