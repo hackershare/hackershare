@@ -4,25 +4,26 @@
 #
 # Table name: users
 #
-#  id                :bigint           not null, primary key
-#  about             :text
-#  admin             :boolean          default(FALSE)
-#  bookmarks_count   :integer          default(0)
-#  comments_count    :integer          default(0)
-#  email             :string
-#  extension_token   :string
-#  follow_tags_count :integer          default(0)
-#  followers_count   :integer          default(0)
-#  followings_count  :integer          default(0)
-#  homepage          :string
-#  password_digest   :string
-#  remember_token    :string
-#  score             :integer
-#  taggings_count    :integer          default(0)
-#  tags_count        :integer          default(0)
-#  username          :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id                    :bigint           not null, primary key
+#  about                 :text
+#  admin                 :boolean          default(FALSE)
+#  bookmarks_count       :integer          default(0)
+#  comments_count        :integer          default(0)
+#  default_bookmark_lang :integer          default("all_lang"), not null
+#  email                 :string
+#  extension_token       :string
+#  follow_tags_count     :integer          default(0)
+#  followers_count       :integer          default(0)
+#  followings_count      :integer          default(0)
+#  homepage              :string
+#  password_digest       :string
+#  remember_token        :string
+#  score                 :integer
+#  taggings_count        :integer          default(0)
+#  tags_count            :integer          default(0)
+#  username              :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #
 # Indexes
 #
@@ -57,6 +58,19 @@ class User < ApplicationRecord
 
   before_create { generate_token(:remember_token) }
   before_create { generate_token(:extension_token) }
+
+  enum default_bookmark_lang: {
+    all_lang:            0,
+    follow_website_lang: 1,
+  }
+
+  def bookmark_lang
+    locales_lang = {
+      en: "english",
+      cn: "chinese",
+    }
+    follow_website_lang? ? locales_lang[I18n.locale] : "language"
+  end
 
   def generate_token(column)
     begin

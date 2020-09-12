@@ -141,23 +141,23 @@ class Bookmark < ApplicationRecord
   def self.sorting(params)
     dt = Date.today
 
-    if params[:dt].blank? || !%w[daily weekly monthly all].include?(params[:dt])
+    if params[:sortby].blank? || !%w[daily weekly monthly all].include?(params[:sortby])
       return Bookmark.order("smart_score desc")
     end
 
-    if params[:dt] == "all"
+    if params[:sortby] == "all"
       return Bookmark.order("score desc")
     end
 
-    if params[:dt] == "daily"
+    if params[:sortby] == "daily"
       return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :daily, date_id: dt }).order("bookmark_stats.score desc")
     end
 
-    if params[:dt] == "weekly"
+    if params[:sortby] == "weekly"
       return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :weekly, date_id: dt.beginning_of_week }).order("bookmark_stats.score desc")
     end
 
-    if params[:dt] == "monthly"
+    if params[:sortby] == "monthly"
       Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
     end
   end

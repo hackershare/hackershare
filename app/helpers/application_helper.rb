@@ -39,27 +39,19 @@ module ApplicationHelper
 
   def filter_link_to_active(text, url, current = :smart, options = {})
     if options[:class]
-      if (params[:dt].to_s == current.to_s) || (params[:dt].blank? && current.to_s == "smart")
+      if (params[:sortby].to_s == current.to_s) || (params[:sortby].blank? && current.to_s == "smart")
         options[:class] = options[:class] << " bg-gray-200"
       end
     end
     link_to text, url, options
   end
 
-  def filter_dt
-    valid_filter_dts.include?(params[:dt]) ? params[:dt] : "smart"
+  def sortby
+    valid_sortbys.include?(params[:sortby]) ? params[:sortby] : "smart"
   end
 
-  def valid_filter_dts
+  def valid_sortbys
     %w[daily weekly monthly smart all]
-  end
-
-  def filter_bookmark_lang
-    valid_filter_bookmark_langs.include?(params[:bookmark_lang]) ? params[:bookmark_lang] : "language"
-  end
-
-  def valid_filter_bookmark_langs
-    %w[language chinese english]
   end
 
   def hacker_link_to_active(text, url, current = :created, options = {})
