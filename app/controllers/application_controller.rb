@@ -108,9 +108,9 @@ class ApplicationController < ActionController::Base
         items: 10,
         link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
       )
-      @suggest_tags = Tag.where.not(name: params[:tag]).order(bookmarks_count: :desc).limit(3)
+      @suggest_tags = Tag.order(bookmarks_count: :desc).limit(3)
       respond_to do |format|
-        format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html" }
+        format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html", locals: { suggest_tags: @suggest_tags, lang: @lang } }
         format.html { render "bookmarks/index" }
       end
     end

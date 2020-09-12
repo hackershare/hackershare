@@ -5,7 +5,7 @@
       <%= render partial: "bookmarks/bookmark", object: bookmark.only_first, locals: {bookmark_self: bookmark} %>
     <% end %>
   <% else %>
-    <div class="py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
+    <div class="px-1 py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
   <% end %>
 </ul>
 <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>

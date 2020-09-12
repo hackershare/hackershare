@@ -1,7 +1,7 @@
 <div class="px-1 pb-4 lg:pb-8 text-gray-700">
-  <div class="flex items-center justify-between">
-    <div class="flex items-center space-x-1 lg:space-x-2">
-      <div @click.away="open = false" class="relative" x-data="{ open: false }">
+  <div class="flex items-center justify-between space-x-4">
+    <div class="overflow-x-auto flex items-center space-x-1 lg:space-x-2">
+      <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
         <div>
           <span class="rounded-md shadow-sm">
             <button @click="open = !open" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-2 py-1 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
@@ -20,14 +20,15 @@
           </div>
         </div>
       </div>
-      <% if params[:tag] %>
-        <%= link_to params[:tag], request.params.merge(tag: params[:tag]), class: 'px-2 py-1 rounded text-sm font-medium bg-orange-100 text-orange-800' %>
-      <% end %>
       <% Array(suggest_tags).each do |tag| %>
-        <%= link_to tag.name, request.params.merge(tag: tag.name), class: 'px-2 py-1 rounded text-sm font-medium hover:bg-orange-50 text-orange-800' %>
+        <% selected_class = tag.name == params[:tag] ? 'bg-orange-100' : 'hover:bg-orange-50' %>
+        <%= link_to tag.name, request.params.merge(tag: tag.name), class: "flex-shrink-0 px-2 py-1 rounded text-sm font-medium text-orange-800 #{selected_class}" %>
+      <% end %>
+      <% if params[:tag] && suggest_tags.pluck(:name).exclude?(params[:tag]) %>
+        <%= link_to params[:tag], request.params.merge(tag: params[:tag]), class: 'flex-shrink-0 px-2 py-1 rounded text-sm font-medium text-orange-800 bg-orange-100' %>
       <% end %>
     </div>
-    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+    <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
       <div>
         <span class="rounded-md shadow-sm">
           <a @click="open = !open" type="button" class="cursor-pointer inline-flex justify-center w-full rounded-md py-1 lg:py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
