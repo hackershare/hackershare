@@ -1,12 +1,12 @@
 <div class="bg-white border-b border-gray-200">
-  <h3 class="mr-2 pb-4 lg:pb-8 text-lg leading-6 font-medium text-gray-900">
+  <h3 class="mr-2 pb-2 lg:pb-4 text-lg leading-6 font-medium text-gray-900">
     <%= t("top_hackers") %>
   </h3>
 </div>
 <div class="flex flex-wrap">
-  <% User.order(score: :desc).limit(18).each do |user| %>
+  <% User.order(score: :desc).limit(48).each do |user| %>
     <div class="" data-controller="userhover" >
-      <%= link_to image_tag(user.avatar_url, class: "h-12 w-12 rounded-full mr-2 mb-2"), user_path(user) %>
+      <%= link_to image_tag(user.avatar_url, class: "h-6 w-6 rounded-full mr-1 mb-1"), user_path(user) %>
     </div>
   <% end %>
 </div>
