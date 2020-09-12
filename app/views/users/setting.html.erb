@@ -34,6 +34,15 @@
             </div>
           </div>
 
+           <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <%= f.label :default_bookmark_lang, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <div class="flex rounded-md shadow-sm">
+                <%= f.select :default_bookmark_lang, User.default_bookmark_langs.keys.map { |lang| [t(lang), lang] }, {}, class: "form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5", type: 'url' %>
+              </div>
+            </div>
+          </div>
+
           <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
             <%= f.label :about, class: "block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2" %>
             <div class="mt-1 sm:mt-0 sm:col-span-2">
@@ -53,9 +62,9 @@
               <div class="lg:flex items-center">
                 <div class="h-8 w-8 mb-1 lg:mb-0 lg:mr-4 lg:h-12 lg:w-12 rounded-full overflow-hidden bg-gray-100">
                   <% if @user.avatar_url %>
-                    <%= image_tag @user.avatar_url %>
+                    <%= image_tag @user.avatar_url, class: 'w-full' %>
                   <% else %>
-                    <svg class="h-8 w-8 lg:h-12 lg:w-12 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-full lg:h-12 lg:w-12 text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   <% end %>

@@ -6,13 +6,12 @@
     <!-- Projects List -->
     <div class="bg-white w-full" data-controller='bookmarks'>
       <div class="lg:pl-4">
-      <% if current_user %>
-        <%= render template: "bookmarks/new" %>
-      <% end %>
-      
-      <div data-controller="listing" data-target="listing.container">
-        <%= render partial: "users/bookmarks_with_pagination" %>
-      </div>
+        <% if current_user %>
+          <%= render template: "bookmarks/new" %>
+        <% end %>
+        <div data-controller="listing" data-target="listing.container">
+          <%= render partial: "users/bookmarks_with_pagination" %>
+        </div>
     </div>
   </div>
 </div>

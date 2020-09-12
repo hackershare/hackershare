@@ -13,5 +13,8 @@ export default class extends Controller {
       render(timeagos, lang);
     }
     window.history.pushState(null, null, event.target.getAttribute("href"));
+    // For alpinejs's dropdown in dynamic element
+    // https://github.com/alpinejs/alpine/issues/282
+    Alpine.discoverUninitializedComponents(function(el) { Alpine.initializeComponent(el) })
   }
 }

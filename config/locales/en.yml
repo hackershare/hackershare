@@ -2,6 +2,7 @@ en:
   about: About
   active_hackers: Active Hackers
   all: All
+  all_lang: All languages
   already_have_account?: Already have account?
   avatar: Avatar
   bad_comment: Bad comment
@@ -25,6 +26,7 @@ en:
   english: English
   forgot_your_password?: Forgot your password?
   follow: Follow
+  follow_website_lang: Follow website language
   followings: Followings
   hackers: Hackers
   install_the_chrome_extension: Install the Chrome extension

@@ -90,4 +90,28 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+
+    def render_bookmarks
+      query = Util.escape_quote(params[:query]) if params[:query]
+      base = Bookmark.sorting(params).original.preload(:user, :tags)
+      base = base.tag_filter(base, params[:tag]) if params[:tag].present?
+      user_lang = current_user.bookmark_lang if user_signed_in?
+      @lang = (["language"] + Bookmark.langs.keys).include?(params[:lang]) ? params[:lang] : user_lang
+      base = base.where(lang: @lang) if Bookmark.langs.key?(@lang)
+      if params[:query].present?
+        base = base.where("bookmarks.tsv @@ plainto_tsquery('simple', E'#{query}')")
+        base = base.select("bookmarks.*, ts_rank_cd(bookmarks.tsv, plainto_tsquery('simple', E'#{query}')) AS relevance")
+        base = base.order("relevance DESC")
+      end
+      @pagy, @bookmarks = pagy_countless(
+        base,
+        items: 10,
+        link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
+      )
+      @suggest_tags = Tag.where.not(name: params[:tag]).order(bookmarks_count: :desc).limit(3)
+      respond_to do |format|
+        format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html" }
+        format.html { render "bookmarks/index" }
+      end
+    end
 end

@@ -472,7 +472,8 @@ CREATE TABLE public.users (
     tags_count integer DEFAULT 0,
     taggings_count integer DEFAULT 0,
     admin boolean DEFAULT false,
-    follow_tags_count integer DEFAULT 0
+    follow_tags_count integer DEFAULT 0,
+    default_bookmark_lang integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1011,6 +1012,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200909084519'),
 ('20200909104055'),
 ('20200911090207'),
-('20200912122912');
+('20200912122912'),
+('20200912175453');
 
 
