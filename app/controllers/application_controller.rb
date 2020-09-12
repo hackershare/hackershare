@@ -97,6 +97,7 @@ class ApplicationController < ActionController::Base
       base = base.tag_filter(base, params[:tag]) if params[:tag].present?
       user_lang = current_user.bookmark_lang if user_signed_in?
       @lang = (["language"] + Bookmark.langs.keys).include?(params[:lang]) ? params[:lang] : user_lang
+      @lang ||= 'language'
       base = base.where(lang: @lang) if Bookmark.langs.key?(@lang)
       if params[:query].present?
         base = base.where("bookmarks.tsv @@ plainto_tsquery('simple', E'#{query}')")
