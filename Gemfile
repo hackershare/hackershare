@@ -90,3 +90,4 @@ gem "simple_command", "~> 0.1.0"
 gem "sitemap_generator", "~> 6.1"
 
 gem "noticed", "~> 1.2"
+gem "actionview", ">= 6.0.3.3"
