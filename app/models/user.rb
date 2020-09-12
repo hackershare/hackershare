@@ -50,6 +50,8 @@ class User < ApplicationRecord
   has_many :followers, class_name: "Follow", foreign_key: "following_user_id"
   has_many :follower_users, through: :followers, source: "user"
 
+  has_many :notifications, as: :recipient
+
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
   validates :email, uniqueness: true
 
@@ -80,6 +82,10 @@ class User < ApplicationRecord
     else
       ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(email)].join("/")
     end
+  end
+
+  def has_unread_notifications?
+    !!notifications.unread.order(created_at: :desc).first
   end
 
   def followed_by?(user)

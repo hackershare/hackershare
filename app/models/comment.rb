@@ -20,4 +20,14 @@ class Comment < ApplicationRecord
   belongs_to :user, counter_cache: true
   belongs_to :bookmark, counter_cache: true
   validates :comment, presence: true
+
+  def notifications
+    @notifications ||= Notification.where(params: { comment: self })
+  end
+
+  before_destroy :destroy_notifications
+
+  def destroy_notifications
+    notifications.destroy_all
+  end
 end
