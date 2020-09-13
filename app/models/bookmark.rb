@@ -8,6 +8,7 @@
 #  cached_like_user_ids :integer          default([]), is an Array
 #  cached_tag_ids       :bigint           default([]), is an Array
 #  cached_tag_names     :string
+#  clicks_count         :integer          default(0)
 #  comments_count       :integer          default(0)
 #  content              :text
 #  description          :text
@@ -49,6 +50,9 @@ class Bookmark < ApplicationRecord
 
   has_many :taggings
   has_many :tags, through: :taggings
+
+  has_many :clicks
+  has_many :click_users, through: :clicks, source: "user"
 
   validates :url, presence: true
   validates :url, url: { no_local: true }

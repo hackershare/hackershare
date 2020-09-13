@@ -2,13 +2,14 @@
 #
 # Table name: bookmark_stats
 #
-#  id          :bigint           not null, primary key
-#  date_type   :string           default("daily")
-#  dups_count  :integer          default(0)
-#  likes_count :integer          default(0)
-#  score       :integer
-#  bookmark_id :bigint
-#  date_id     :date
+#  id           :bigint           not null, primary key
+#  clicks_count :integer          default(0)
+#  date_type    :string           default("daily")
+#  dups_count   :integer          default(0)
+#  likes_count  :integer          default(0)
+#  score        :integer
+#  bookmark_id  :bigint
+#  date_id      :date
 #
 # Indexes
 #

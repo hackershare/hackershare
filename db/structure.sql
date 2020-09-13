@@ -9,6 +9,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -138,7 +152,8 @@ CREATE TABLE public.bookmark_stats (
     date_type character varying DEFAULT 'daily'::character varying,
     likes_count integer DEFAULT 0,
     dups_count integer DEFAULT 0,
-    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED
+    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
+    clicks_count integer DEFAULT 0
 );
 
 
@@ -186,7 +201,8 @@ CREATE TABLE public.bookmarks (
     cached_tag_names character varying,
     cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
     tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
-    lang integer DEFAULT 0 NOT NULL
+    lang integer DEFAULT 0 NOT NULL,
+    clicks_count integer DEFAULT 0
 );
 
 
@@ -207,6 +223,38 @@ CREATE SEQUENCE public.bookmarks_id_seq
 --
 
 ALTER SEQUENCE public.bookmarks_id_seq OWNED BY public.bookmarks.id;
+
+
+--
+-- Name: clicks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.clicks (
+    id bigint NOT NULL,
+    bookmark_id bigint,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: clicks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.clicks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clicks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.clicks_id_seq OWNED BY public.clicks.id;
 
 
 --
@@ -532,6 +580,13 @@ ALTER TABLE ONLY public.bookmarks ALTER COLUMN id SET DEFAULT nextval('public.bo
 
 
 --
+-- Name: clicks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clicks ALTER COLUMN id SET DEFAULT nextval('public.clicks_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -633,6 +688,14 @@ ALTER TABLE ONLY public.bookmark_stats
 
 ALTER TABLE ONLY public.bookmarks
     ADD CONSTRAINT bookmarks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: clicks clicks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clicks
+    ADD CONSTRAINT clicks_pkey PRIMARY KEY (id);
 
 
 --
@@ -803,6 +866,27 @@ CREATE UNIQUE INDEX index_bookmarks_on_url_and_user_id ON public.bookmarks USING
 --
 
 CREATE INDEX index_bookmarks_on_user_id ON public.bookmarks USING btree (user_id);
+
+
+--
+-- Name: index_clicks_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_bookmark_id ON public.clicks USING btree (bookmark_id);
+
+
+--
+-- Name: index_clicks_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_user_id ON public.clicks USING btree (user_id);
+
+
+--
+-- Name: index_clicks_on_user_id_and_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_user_id_and_bookmark_id ON public.clicks USING btree (user_id, bookmark_id);
 
 
 --
@@ -1013,6 +1097,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200909104055'),
 ('20200911090207'),
 ('20200912122912'),
-('20200912175453');
+('20200912175453'),
+('20200913050836'),
+('20200913051111');
 
 

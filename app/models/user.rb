@@ -45,6 +45,9 @@ class User < ApplicationRecord
   has_many :taggings
   has_many :tags
 
+  has_many :clicks
+  has_many :click_bookmarks, through: :clicks, source: "bookmark"
+
   has_many :tag_subscriptions
   has_many :follow_tags, through: :tag_subscriptions, class_name: "Tag", source: "tag"
 
