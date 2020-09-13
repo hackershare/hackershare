@@ -63,6 +63,7 @@ class Bookmark < ApplicationRecord
     if original = Bookmark.where(url: url).where("id !=?", id).first
       BookmarkStat.incr_dups_count(original.id)
       self.update!(ref: original)
+      original.touch(:created_at)
     end
   end
 
