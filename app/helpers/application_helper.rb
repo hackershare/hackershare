@@ -29,7 +29,7 @@ module ApplicationHelper
   def link_to_active(text, url, options = {})
     route = Rails.application.routes.recognize_path(url)
     if options[:class]
-      if controller_name == route[:controller]
+      if controller_name == route[:controller] || (route[:controller] == "home" && controller_name == "bookmarks")
         options[:class] = options[:class] << " bg-gray-900"
       else
         options[:class] = options[:class] << " hover:bg-gray-700"
@@ -38,7 +38,7 @@ module ApplicationHelper
     link_to text, url, options
   end
 
-  def filter_link_to_active(text, url, current = :smart, options = {})
+  def sortby_link_to_active(text, url, current = :smart, options = {})
     if options[:class]
       if (params[:sortby].to_s == current.to_s) || (params[:sortby].blank? && current.to_s == "smart")
         options[:class] = options[:class] << " bg-gray-200"

@@ -21,6 +21,7 @@ en:
   chrome_extension: Chrome Extension
   confirm_delete: Are you sure?
   daily: Daily
+  delete: Delete
   email_or_password_is_wrong: Email or password is wrong
   empty_data: Empty data
   english: English
@@ -32,6 +33,7 @@ en:
   install_the_chrome_extension: Install the Chrome extension
   language: Language
   likes: Likes
+  link: Link
   login_failed: Login failed
   login_required: Login Required
   login_successed: Login successed
@@ -53,6 +55,7 @@ en:
   sign_up_failed: Sign up failed
   sign_up_new_account: Sign up new account
   smart: Smart
+  tagging: Tagging
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: This information will be displayed publicly so be careful what you share
   top_hackers: Top Hackers
   top_categories: Top Categories
