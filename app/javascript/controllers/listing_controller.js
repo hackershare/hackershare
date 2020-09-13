@@ -1,6 +1,9 @@
 import { Controller } from 'stimulus';
 import { format, render, cancel, register } from 'timeago.js';
 
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
+
 export default class extends Controller {
   static targets = ["container"];
 
@@ -16,5 +19,6 @@ export default class extends Controller {
     // For alpinejs's dropdown in dynamic element
     // https://github.com/alpinejs/alpine/issues/282
     Alpine.discoverUninitializedComponents(function(el) { Alpine.initializeComponent(el) })
+    this.containerTarget.scrollIntoView({ behavior: 'smooth' });
   }
 }
