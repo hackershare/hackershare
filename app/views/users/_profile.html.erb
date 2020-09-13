@@ -16,7 +16,7 @@
   <!-- Action buttons -->
   <div class="space-y-2 lg:space-y-4">
     <div class="text-sm leading-5 font-medium text-gray-900"><%= user.about %></div>
-    <div class="text-sm leading-5 font-medium text-gray-900"><%= user.homepage %></div>
+    <div class="text-sm leading-5 font-medium text-gray-900"><%= link_to user.homepage, user.homepage if user.homepage.present? %></div>
   </div>
   <div class="space-y-2 lg:space-y-4">
     <span data-controller="follows" class="rounded-md shadow-sm">
