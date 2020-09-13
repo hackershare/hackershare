@@ -150,15 +150,15 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:sortby] == "daily"
-      return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :daily, date_id: dt }).order("bookmark_stats.score desc")
+      return Bookmark.joins("LEFT JOIN bookmark_stats ON bookmarks.id = bookmark_stats.bookmark_id AND date_type = 'daily' AND date_id = '#{dt}'").order("bookmark_stats.score desc")
     end
 
     if params[:sortby] == "weekly"
-      return Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :weekly, date_id: dt.beginning_of_week }).order("bookmark_stats.score desc")
+      return Bookmark.joins("LEFT JOIN bookmark_stats on bookmarks.id = bookmark_stats.bookmark_id AND date_type = 'weekly' AND date_id = '#{dt.beginning_of_week}'").order("bookmark_stats.score desc")
     end
 
     if params[:sortby] == "monthly"
-      Bookmark.joins(:bookmark_stats).where(bookmark_stats: { date_type: :monthly, date_id: dt.beginning_of_month }).order("bookmark_stats.score desc")
+      Bookmark.joins("LEFT JOIN bookmark_stats on bookmarks.id = bookmark_stats.bookmark_id AND date_type = 'monthly' AND date_id = '#{dt.beginning_of_month}'").order("bookmark_stats.score desc")
     end
   end
 
