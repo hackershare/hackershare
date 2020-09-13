@@ -27,8 +27,9 @@ module ApplicationHelper
   end
 
   def link_to_active(text, url, options = {})
+    route = Rails.application.routes.recognize_path(url)
     if options[:class]
-      if current_page?(url)
+      if controller_name == route[:controller]
         options[:class] = options[:class] << " bg-gray-900"
       else
         options[:class] = options[:class] << " hover:bg-gray-700"
@@ -67,12 +68,11 @@ module ApplicationHelper
     ENV["GA_TRACKING_ID"] || "UA-175643791-1"
   end
 
-  def tag_url_for(tag, options = {})
-    path = Rails.application.routes.recognize_path(request.path)
-    if path[:controller] == "bookmarks" && path[:action] == "show"
-      link_to tag.name, bookmarks_path(tag: tag.name)
+  def tag_url_for(tag)
+    if current_page?(users_path)
+      link_to tag.name, request.params.except(:page).merge(tag: tag.name, only_path: true), data: { remote: true, action: "ajax:success->listing#replace" }
     else
-      link_to tag.name, url_for(tag: tag.name, only_path: true), data: { remote: true, action: "ajax:success->listing#replace" }
+      link_to tag.name, request.params.except(:page).merge(tag: tag.name)
     end
   end
 
