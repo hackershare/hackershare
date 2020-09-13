@@ -48,10 +48,10 @@
           </svg>
         </a>
       </div>
-      <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="w-24 text-right origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
+      <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-24 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
         <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
           <% valid_sortbys.each do |filter| %>
-            <%= filter_link_to_active t(filter), request.params.except(:page).merge(sortby: filter), filter, class: "block px-4 py-1 lg:py-2 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out", role: "menuitem" %>
+            <%= sortby_link_to_active t(filter), request.params.except(:page).merge(sortby: filter), filter, class: "block px-4 py-1 lg:py-2 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out", role: "menuitem" %>
           <% end %>
         </div>
       </div>

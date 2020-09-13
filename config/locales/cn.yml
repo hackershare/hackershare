@@ -21,6 +21,7 @@ cn:
   chrome_extension: Chrome 插件
   confirm_delete: 确定删除吗?
   daily: 按天排序
+  delete: 删除
   email_or_password_is_wrong: 邮箱或密码错误
   empty_data: 暂无数据
   english: 英文
@@ -32,6 +33,7 @@ cn:
   install_the_chrome_extension: 安装 Chrome 插件
   language: 语言
   likes: 收藏
+  link: 链接
   login_failed: 登录失败
   login_required: 需要先登录
   login_successed: 登录成功
@@ -53,6 +55,7 @@ cn:
   sign_up_failed: 注册失败
   sign_up_new_account: 注册新账户
   smart: 智能排序
+  tagging: 打标签
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
   top_hackers: 极客排行
   top_categories: 热门标签
