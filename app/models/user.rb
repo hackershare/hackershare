@@ -92,7 +92,7 @@ class User < ApplicationRecord
 
   def avatar_url
     if avatar.attached?
-      avatar.variant(resize_to_limit: [150, nil])
+      avatar.variant(resize_to_limit: [300, nil])
     else
       ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(email)].join("/")
     end

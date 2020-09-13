@@ -91,3 +91,9 @@ gem "sitemap_generator", "~> 6.1"
 
 gem "noticed", "~> 1.2"
 gem "actionview", ">= 6.0.3.3"
+
+gem "pghero", "~> 2.7"
+
+gem "pg_query", "~> 1.2"
+
+gem "marginalia", "~> 1.9"

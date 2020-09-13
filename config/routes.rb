@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount PgHero::Engine, at: "pghero"
   scope "(:locale)", locale: /cn/ do
     get "auth/:provider/callback", to: "sessions#create_from_oauth"
     resources :registrations, only: %i[new create]
