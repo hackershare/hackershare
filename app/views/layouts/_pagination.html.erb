@@ -3,10 +3,10 @@
   <nav class="bg-white py-3 flex items-center justify-between border-gray-200">
     <div class="w-full">
       <% if pagy.prev %>
-        <%== link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'class="float-left relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="previous"') %>
+        <%== link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'class="float-left inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="previous"') %>
       <% end %>
       <% if pagy.next %>
-        <%== link.call(pagy.next, pagy_t('pagy.nav.next'), 'class="float-right relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="previous"') %>
+        <%== link.call(pagy.next, pagy_t('pagy.nav.next'), 'class="float-right inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" aria-label="previous"') %>
       <% end %>
     </div>
   </nav>
