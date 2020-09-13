@@ -138,7 +138,8 @@ CREATE TABLE public.bookmark_stats (
     date_type character varying DEFAULT 'daily'::character varying,
     likes_count integer DEFAULT 0,
     dups_count integer DEFAULT 0,
-    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED
+    clicks_count integer DEFAULT 0,
+    score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED
 );
 
 
@@ -178,15 +179,16 @@ CREATE TABLE public.bookmarks (
     dups_count integer DEFAULT 0,
     likes_count integer DEFAULT 0,
     cached_like_user_ids integer[] DEFAULT '{}'::integer[],
-    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
-    smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
     comments_count integer DEFAULT 0,
     tags_count integer DEFAULT 0,
     content text,
     cached_tag_names character varying,
     cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
     tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
-    lang integer DEFAULT 0 NOT NULL
+    lang integer DEFAULT 0 NOT NULL,
+    clicks_count integer DEFAULT 0,
+    score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
+    smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED
 );
 
 
@@ -207,6 +209,38 @@ CREATE SEQUENCE public.bookmarks_id_seq
 --
 
 ALTER SEQUENCE public.bookmarks_id_seq OWNED BY public.bookmarks.id;
+
+
+--
+-- Name: clicks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.clicks (
+    id bigint NOT NULL,
+    bookmark_id bigint,
+    user_id bigint,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: clicks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.clicks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: clicks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.clicks_id_seq OWNED BY public.clicks.id;
 
 
 --
@@ -532,6 +566,13 @@ ALTER TABLE ONLY public.bookmarks ALTER COLUMN id SET DEFAULT nextval('public.bo
 
 
 --
+-- Name: clicks id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clicks ALTER COLUMN id SET DEFAULT nextval('public.clicks_id_seq'::regclass);
+
+
+--
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -633,6 +674,14 @@ ALTER TABLE ONLY public.bookmark_stats
 
 ALTER TABLE ONLY public.bookmarks
     ADD CONSTRAINT bookmarks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: clicks clicks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.clicks
+    ADD CONSTRAINT clicks_pkey PRIMARY KEY (id);
 
 
 --
@@ -803,6 +852,27 @@ CREATE UNIQUE INDEX index_bookmarks_on_url_and_user_id ON public.bookmarks USING
 --
 
 CREATE INDEX index_bookmarks_on_user_id ON public.bookmarks USING btree (user_id);
+
+
+--
+-- Name: index_clicks_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_bookmark_id ON public.clicks USING btree (bookmark_id);
+
+
+--
+-- Name: index_clicks_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_user_id ON public.clicks USING btree (user_id);
+
+
+--
+-- Name: index_clicks_on_user_id_and_bookmark_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_clicks_on_user_id_and_bookmark_id ON public.clicks USING btree (user_id, bookmark_id);
 
 
 --
@@ -1013,6 +1083,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200909104055'),
 ('20200911090207'),
 ('20200912122912'),
-('20200912175453');
+('20200912175453'),
+('20200913050836'),
+('20200913051111'),
+('20200913101207');
 
 

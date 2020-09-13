@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: clicks
+#
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  bookmark_id :bigint
+#  user_id     :bigint
+#
+# Indexes
+#
+#  index_clicks_on_bookmark_id              (bookmark_id)
+#  index_clicks_on_user_id                  (user_id)
+#  index_clicks_on_user_id_and_bookmark_id  (user_id,bookmark_id)
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

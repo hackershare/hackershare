@@ -4,13 +4,14 @@
 #
 # Table name: bookmark_stats
 #
-#  id          :bigint           not null, primary key
-#  date_type   :string           default("daily")
-#  dups_count  :integer          default(0)
-#  likes_count :integer          default(0)
-#  score       :integer
-#  bookmark_id :bigint
-#  date_id     :date
+#  id           :bigint           not null, primary key
+#  clicks_count :integer          default(0)
+#  date_type    :string           default("daily")
+#  dups_count   :integer          default(0)
+#  likes_count  :integer          default(0)
+#  score        :integer
+#  bookmark_id  :bigint
+#  date_id      :date
 #
 # Indexes
 #
@@ -45,6 +46,12 @@ class BookmarkStat < ApplicationRecord
     end
   end
 
+  def self.incr_clicks_count(bookmark_id)
+    dt_params.each do |dt_type, dt|
+      incr_clicks_count_by_dt(dt_type, dt, bookmark_id)
+    end
+  end
+
   def self.decr_dups_count(bookmark_id)
     dt_params.each do |dt_type, dt|
       BookmarkStat.where(date_type: dt_type, date_id: dt, bookmark_id: bookmark_id).update_all("dups_count = dups_count -1")
@@ -54,6 +61,12 @@ class BookmarkStat < ApplicationRecord
   def self.decr_likes_count(bookmark_id)
     dt_params.each do |dt_type, dt|
       BookmarkStat.where(date_type: dt_type, date_id: dt, bookmark_id: bookmark_id).update_all("likes_count = likes_count -1")
+    end
+  end
+
+  def self.decr_clicks_count(bookmark_id)
+    dt_params.each do |dt_type, dt|
+      BookmarkStat.where(date_type: dt_type, date_id: dt, bookmark_id: bookmark_id).update_all("clicks_count = clicks_count -1")
     end
   end
 
@@ -71,6 +84,23 @@ class BookmarkStat < ApplicationRecord
         1
       ) ON CONFLICT ("date_id","date_type","bookmark_id") 
       DO UPDATE SET dups_count = bookmark_stats.dups_count + 1 RETURNING id
+    SQL
+  end
+
+  def self.incr_clicks_count_by_dt(dt_type, dt, bookmark_id)
+    connection.execute(<<~SQL)
+      INSERT INTO bookmark_stats (
+        bookmark_id,
+        date_id,
+        date_type,
+        clicks_count
+      ) VALUES (
+        #{bookmark_id},
+        '#{dt}', 
+        '#{dt_type}', 
+        1
+      ) ON CONFLICT ("date_id","date_type","bookmark_id") 
+      DO UPDATE SET clicks_count = bookmark_stats.clicks_count + 1 RETURNING id
     SQL
   end
 
