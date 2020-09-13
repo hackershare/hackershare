@@ -19,4 +19,10 @@
 class Click < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :bookmark, counter_cache: true
+
+  after_create :incr_stats
+
+  def incr_stats
+    BookmarkStat.incr_clicks_count(bookmark_id)
+  end
 end

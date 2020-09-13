@@ -9,20 +9,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track planning and execution statistics of all SQL statements executed';
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -152,8 +138,8 @@ CREATE TABLE public.bookmark_stats (
     date_type character varying DEFAULT 'daily'::character varying,
     likes_count integer DEFAULT 0,
     dups_count integer DEFAULT 0,
-    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
-    clicks_count integer DEFAULT 0
+    clicks_count integer DEFAULT 0,
+    score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED
 );
 
 
@@ -193,8 +179,6 @@ CREATE TABLE public.bookmarks (
     dups_count integer DEFAULT 0,
     likes_count integer DEFAULT 0,
     cached_like_user_ids integer[] DEFAULT '{}'::integer[],
-    score integer GENERATED ALWAYS AS ((dups_count + likes_count)) STORED,
-    smart_score double precision GENERATED ALWAYS AS (((log((((likes_count + dups_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
     comments_count integer DEFAULT 0,
     tags_count integer DEFAULT 0,
     content text,
@@ -202,7 +186,9 @@ CREATE TABLE public.bookmarks (
     cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
     tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
     lang integer DEFAULT 0 NOT NULL,
-    clicks_count integer DEFAULT 0
+    clicks_count integer DEFAULT 0,
+    score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
+    smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED
 );
 
 
@@ -1099,6 +1085,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912122912'),
 ('20200912175453'),
 ('20200913050836'),
-('20200913051111');
+('20200913051111'),
+('20200913101207');
 
 
