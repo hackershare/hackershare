@@ -7,6 +7,7 @@ en:
   avatar: Avatar
   bad_comment: Bad comment
   bad_url: Bad url
+  banner_chrome_extension: With the Chrome Extension, you can save and share web page with the click of a button.
   bookmark_added: Bookmark added
   bookmark_destroy_ok: Bookmark destroyed successfully
   bookmark_destroy_fail: Bookmark destroyed failed
@@ -30,6 +31,7 @@ en:
   follow_website_lang: Follow website language
   followings: Followings
   hackers: Hackers
+  install: Install
   install_the_chrome_extension: Install the Chrome extension
   language: Language
   likes: Likes

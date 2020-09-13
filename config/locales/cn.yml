@@ -7,6 +7,7 @@ cn:
   avatar: 头像
   bad_comment: 评论不合法
   bad_url: URL 不合法
+  banner_chrome_extension: 请使用我们开发的 Chrome 插件，帮助你一键分享你当前浏览的网站。
   bookmark_added: 书签已添加
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
@@ -30,6 +31,7 @@ cn:
   follow_website_lang: 跟随网站语言
   followings: 关注人的分享
   hackers: 极客
+  install: 安装
   install_the_chrome_extension: 安装 Chrome 插件
   language: 语言
   likes: 收藏
