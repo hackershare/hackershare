@@ -1,5 +1,5 @@
 <%= render partial: "users/filter", locals: {user: @user} %>
-<ul class="relative z-0 divide-y divide-gray-200 border-b border-gray-200" data-target='bookmarks.list'>
+<ul class="relative z-0 divide-y divide-gray-200 border-b border-t border-gray-200" data-target='bookmarks.list'>
   <% if @bookmarks.present? %>
     <% @bookmarks.each do |bookmark| %>
       <%= render partial: "bookmarks/bookmark", object: bookmark.only_first, locals: {bookmark_self: bookmark} %>

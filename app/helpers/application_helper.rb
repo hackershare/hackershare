@@ -26,9 +26,9 @@ module ApplicationHelper
     end
   end
 
-  def link_to_active(text, url, current = :bookmarks, options = {})
+  def link_to_active(text, url, options = {})
     if options[:class]
-      if params[:controller].to_s == current.to_s
+      if current_page?(url)
         options[:class] = options[:class] << " bg-gray-900"
       else
         options[:class] = options[:class] << " hover:bg-gray-700"
