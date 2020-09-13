@@ -6,7 +6,7 @@
 <div class="flex flex-wrap">
   <% User.order(updated_at: :desc).limit(48).each do |user| %>
     <div>
-      <%= link_to image_tag(user.avatar_url, class: "h-6 w-6 rounded-full mr-1 mb-1"), user_path(user) %>
+      <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "h-6 w-6 rounded-full mr-1 mb-1"), user_path(user) %>
     </div>
   <% end %>
 </div>
