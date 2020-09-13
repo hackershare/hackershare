@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BookmarksController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index show hover_like_users]
+  skip_before_action :authenticate_user!, only: %i[index show hover_like_users goto]
   def new; end
 
   def index
@@ -12,6 +12,11 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id]).only_first
     @comments = @bookmark.comments.order(id: :asc)
     @user = @bookmark.user
+  end
+
+  def goto
+    @bookmark = Bookmark.find(params[:id]).only_first
+    redirect_to @bookmark.url
   end
 
   def create

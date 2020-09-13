@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       member do
         post :toggle_liking
         get :hover_like_users
+        get :goto
       end
       resources :comments
       resources :tags, only: %i[new create]
