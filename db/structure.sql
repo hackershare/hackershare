@@ -507,7 +507,8 @@ CREATE TABLE public.users (
     taggings_count integer DEFAULT 0,
     admin boolean DEFAULT false,
     follow_tags_count integer DEFAULT 0,
-    default_bookmark_lang integer DEFAULT 0 NOT NULL
+    default_bookmark_lang integer DEFAULT 0 NOT NULL,
+    enable_email_notification boolean DEFAULT true
 );
 
 
@@ -1086,6 +1087,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200912175453'),
 ('20200913050836'),
 ('20200913051111'),
-('20200913101207');
+('20200913101207'),
+('20200915072409');
 
 

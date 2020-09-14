@@ -9,6 +9,7 @@ class UserFeedNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
+  # not email notify feed, too noisy
   # deliver_by :email, mailer: "UserMailer"
   # deliver_by :slack
   # deliver_by :custom, class: "MyDeliveryMethod"

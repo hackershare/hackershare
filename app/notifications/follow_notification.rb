@@ -9,6 +9,7 @@ class FollowNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
+  deliver_by :email, mailer: "Notifications::FollowMailer", method: :notify, if: :email_notifications?
   # deliver_by :email, mailer: "UserMailer"
   # deliver_by :slack
   # deliver_by :custom, class: "MyDeliveryMethod"

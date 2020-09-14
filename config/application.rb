@@ -35,6 +35,11 @@ module Hackershare
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.active_record.schema_format = :sql
+    config.action_mailer.delivery_method = :sendgrid_actionmailer
+    config.action_mailer.sendgrid_actionmailer_settings = {
+      api_key: ENV["SENDGRID_API_KEY"],
+      raise_delivery_errors: true
+    }
 
     config.active_storage.content_types_to_serve_as_binary -= ["image/svg+xml"]
     config.i18n.available_locales = %i[en cn]
