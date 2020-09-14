@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     get "auth/:provider/callback", to: "sessions#create_from_oauth"
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]
-    resources :notifications
+    resources :notifications do
+      collection do
+        post :read_all
+        post :clear_all
+      end
+    end
     resources :categories do
       member do
         post :toggle_following

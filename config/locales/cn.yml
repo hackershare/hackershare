@@ -67,6 +67,9 @@ cn:
   write_a_few_sentences_about_yourself: 简单介绍一下你自己。
   your_profile_updated_successfully: 你的资料更新成功。
 
+  clear_all: 清空
+  read_all: 已读
+
   notifications:
     comment_notification:
       type_name: 评论

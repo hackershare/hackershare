@@ -4,12 +4,15 @@
         <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
           
           <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-              Notifications
-            </h3>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              
-            </p>
+            <div class="flex justify-between">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Notifications
+              </h3>
+              <div>
+                <%= link_to t("clear_all"), clear_all_notifications_path, method: :post, class: "btn-cancel", remote: true, data: {disable_with: disable_with_spinner(t("clear_all"))} %>
+                <%= link_to t("read_all"), read_all_notifications_path, method: :post, class: "btn-primary", remote: true, data: {disable_with: disable_with_spinner(t("read_all"))} %>
+              </div>
+            </div>
           </div>
           <div data-controller="listing" data-target="listing.container">
             <%= render partial: "notifications/list" %>
