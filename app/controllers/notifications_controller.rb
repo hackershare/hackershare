@@ -13,4 +13,14 @@ class NotificationsController < ApplicationController
       format.html
     end
   end
+
+  def read_all
+    current_user.notifications.mark_as_read!
+    redirect_to notifications_path
+  end
+
+  def clear_all
+    current_user.notifications.destroy_all
+    redirect_to notifications_path
+  end
 end

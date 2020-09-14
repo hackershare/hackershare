@@ -66,6 +66,8 @@ en:
   weekly: Weekly
   write_a_few_sentences_about_yourself: Write a few sentences about yourself.
   your_profile_updated_successfully: Your profile updated successfully.
+  clear_all: Clear All
+  read_all: Read All
 
   notifications:
     comment_notification:
