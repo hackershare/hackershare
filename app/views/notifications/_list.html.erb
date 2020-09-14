@@ -1,12 +1,15 @@
 <ul class="" aria-disabled="true">
   <% @notifications.each do |notification| %>
     <% n=notification.to_notification%>
-    <li class="<%= notification.read? ? 'bg-gray-100' : '' %>">
+    <li class="">
       <a href="<%= n.url %>" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
         <div class="px-4 py-4 sm:px-6">
           <div class="flex items-center justify-between">
             <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
-              <%= n.message %>
+              <div class="flex items-center  leading-5">
+                <span class="block h-2 w-2 rounded-full text-white shadow-solid <%= notification.read? ? 'bg-gray-400' : 'bg-red-400' %>"></span>
+                <div class="ml-2 <%= notification.read? ? 'text-gray-500' : '' %> "><%= n.message %></div>
+             </div>
               
             </div>
             <div class="ml-2 flex-shrink-0 flex">
