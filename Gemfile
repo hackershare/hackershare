@@ -93,3 +93,5 @@ gem "noticed", "~> 1.2"
 gem "actionview", ">= 6.0.3.3"
 
 gem "sendgrid-actionmailer", "~> 3.1"
+
+gem "sentry-raven", "~> 3.0"
