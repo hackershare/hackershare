@@ -72,7 +72,7 @@ class Bookmark < ApplicationRecord
   end
 
   after_destroy do
-    Bookmark.decr_dups_count(ref.id) if ref
+    BookmarkStat.decr_dups_count(ref.id) if ref
   end
 
   def do_destroy!
