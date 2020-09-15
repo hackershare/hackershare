@@ -33,7 +33,7 @@ class BookmarksController < ApplicationController
         end
       end
     else
-      flash[:error] = t("bad_url")
+      flash[:error] = @bookmark.errors.full_messages.to_sentence
       redirect_to root_path
     end
   end
