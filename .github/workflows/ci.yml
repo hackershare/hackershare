@@ -4,28 +4,25 @@ on:
   push:
     branches:
       - master
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - '!README.md'
+      - '!docs/**'
   pull_request:
     branches:
       - master
-    paths-ignore:
-      - 'docs/**'
+    paths:
+      - '!README.md'
+      - '!docs/**'
 
 jobs:
   build:
     if: ${{ !contains(github.event.commits[0].message, '[skip ci]') }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-18.04, macos-latest]
-        ruby: [2.6]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby }}
+        ruby-version: 2.6
         bundler-cache: true
     - run: bundle exec rubocop
   deploy:
