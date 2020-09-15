@@ -4,15 +4,15 @@ on:
   push:
     branches:
       - master
-    paths:
-      - '!README.md'
-      - '!docs/**'
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
   pull_request:
     branches:
       - master
-    paths:
-      - '!README.md'
-      - '!docs/**'
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
 
 jobs:
   build:
