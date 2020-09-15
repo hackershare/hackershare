@@ -10,19 +10,24 @@ SitemapGenerator::Sitemap.default_host = "https://hackershare.dev"
 SitemapGenerator::Sitemap.sitemaps_path = "sitemap/"
 
 SitemapGenerator::Sitemap.create do
-  add "/categories", changefreq: "daily"
-  add "/users", changefreq: "daily"
-  add "/bookmarks", changefreq: "daily"
-  Bookmark.find_each do |bookmark|
-    add bookmark_path(nil, bookmark), lastmod: bookmark.updated_at, changefreq: "daily"
-  end
+  # The path locale of english is nil
+  path_locales = [nil, 'cn']
+  path_locales.each do |locale|
+    add root_path(locale: locale), changefreq: "daily"
+    add categories_path(locale: locale), changefreq: "daily"
+    add users_path(locale: locale), changefreq: "daily"
+    add bookmarks_path(locale: locale), changefreq: "daily"
+    Bookmark.find_each do |bookmark|
+      add bookmark_path(bookmark, locale: locale), lastmod: bookmark.updated_at, changefreq: "daily"
+    end
 
-  User.find_each do |user|
-    add user_path(nil, user), lastmod: user.updated_at, changefreq: "daily"
-  end
+    User.find_each do |user|
+      add user_path(user, locale: locale), lastmod: user.updated_at, changefreq: "daily"
+    end
 
-  Tag.find_each do |tag|
-    add bookmarks_path(nil, tag: tag.name), changefreq: "daily"
+    Tag.find_each do |tag|
+      add bookmarks_path(tag: tag.name, locale: locale), changefreq: "daily"
+    end
   end
 end
 
