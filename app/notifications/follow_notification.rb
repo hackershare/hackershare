@@ -5,7 +5,7 @@
 # FollowNotification.with(post: @post).deliver_later(current_user)
 # FollowNotification.with(post: @post).deliver(current_user)
 
-class FollowNotification < Noticed::Base
+class FollowNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
@@ -33,6 +33,6 @@ class FollowNotification < Noticed::Base
   end
   #
   def url
-    user_path(nil, params[:follow]&.user, n_id: record.id)
+    user_path(params[:follow]&.user, n_id: record.id)
   end
 end

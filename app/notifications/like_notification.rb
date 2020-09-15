@@ -5,7 +5,7 @@
 # LikeNotification.with(post: @post).deliver_later(current_user)
 # LikeNotification.with(post: @post).deliver(current_user)
 
-class LikeNotification < Noticed::Base
+class LikeNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
@@ -33,6 +33,6 @@ class LikeNotification < Noticed::Base
   end
   #
   def url
-    bookmark_path(nil, params[:like]&.bookmark, n_id: record.id)
+    bookmark_path(params[:like]&.bookmark, n_id: record.id)
   end
 end

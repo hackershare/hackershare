@@ -5,7 +5,7 @@
 # UserFeedNotification.with(post: @post).deliver_later(current_user)
 # UserFeedNotification.with(post: @post).deliver(current_user)
 
-class UserFeedNotification < Noticed::Base
+class UserFeedNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
@@ -33,6 +33,6 @@ class UserFeedNotification < Noticed::Base
   end
   #
   def url
-    bookmark_path(nil, params[:bookmark]&.only_first, n_id: record.id)
+    bookmark_path(params[:bookmark]&.only_first, n_id: record.id)
   end
 end

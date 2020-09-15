@@ -5,7 +5,7 @@
 # CommentNotification.with(post: @post).deliver_later(current_user)
 # CommentNotification.with(post: @post).deliver(current_user)
 
-class CommentNotification < Noticed::Base
+class CommentNotification < ApplicationNotification
   # Add your delivery methods
   #
   deliver_by :database
@@ -33,6 +33,6 @@ class CommentNotification < Noticed::Base
   end
   #
   def url
-    bookmark_path(nil, params[:comment]&.bookmark, n_id: record.id)
+    bookmark_path(params[:comment]&.bookmark, n_id: record.id)
   end
 end
