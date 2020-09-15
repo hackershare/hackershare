@@ -35,7 +35,6 @@ en:
   install_the_chrome_extension: Install the Chrome extension
   language: Language
   likes: Likes
-  link: Origin Link
   login_failed: Login failed
   login_required: Login Required
   login_successed: Login successed
@@ -45,6 +44,7 @@ en:
   not_have_account?: Not have account?
   open_source: Open Source
   or_continue_with: Or continue with
+  origin_link: Origin Link
   remember_me: Remember Me
   save: Save
   search: Search

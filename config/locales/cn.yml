@@ -34,8 +34,7 @@ cn:
   install: 安装
   install_the_chrome_extension: 安装 Chrome 插件
   language: 语言
-  likes: 收藏
-  link: 原始链接
+  likes: 喜欢
   login_failed: 登录失败
   login_required: 需要先登录
   login_successed: 登录成功
@@ -45,6 +44,7 @@ cn:
   not_have_account?: 没有账户？
   open_source: 源码地址
   or_continue_with: 便捷登录
+  origin_link: 原始链接
   remember_me: 记住我
   save: 保存
   search: 搜索
