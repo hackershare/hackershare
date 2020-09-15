@@ -10,4 +10,8 @@ class ApplicationNotification < Noticed::Base
         locale: locale,
       }
     end
+
+    def email_notifications?
+      recipient.enable_email_notification? && recipient.email !~ /fakemail.com/
+    end
 end
