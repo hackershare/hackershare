@@ -63,7 +63,7 @@
               </svg>
             </a>
           </div>
-          <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-24 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
+          <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-32 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
             <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
               <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-900", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -71,7 +71,7 @@
                 </svg>
                 <span><%= t("tagging") %></span>
               <% end %>
-              <a target="_blank" href="<%= goto_bookmark_path(bookmark) %>" class="relative flex space-x-1 px-2 py-2 hover:text-gray-900">
+              <a target="_blank" href="<%= bookmark.url %>" class="relative flex space-x-1 px-2 py-2 hover:text-gray-900">
                 <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                 </svg>
