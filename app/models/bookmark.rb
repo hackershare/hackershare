@@ -14,6 +14,7 @@
 #  description          :text
 #  dups_count           :integer          default(0)
 #  favicon              :string
+#  is_rss               :boolean          default(FALSE), not null
 #  lang                 :integer          default("english"), not null
 #  likes_count          :integer          default(0)
 #  score                :integer

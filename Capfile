@@ -26,6 +26,8 @@ install_plugin Capistrano::SCM::Git
 require "capistrano/puma"
 install_plugin Capistrano::Puma  # Default puma tasks
 install_plugin Capistrano::Puma::Nginx  # if you want to upload a nginx site template
+require "capistrano/sidekiq"
+install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
 
 # Include tasks from other gems included in your Gemfile
 #

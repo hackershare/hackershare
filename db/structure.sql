@@ -188,7 +188,8 @@ CREATE TABLE public.bookmarks (
     lang integer DEFAULT 0 NOT NULL,
     clicks_count integer DEFAULT 0,
     score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
-    smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED
+    smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
+    is_rss boolean DEFAULT false NOT NULL
 );
 
 
@@ -373,6 +374,39 @@ CREATE SEQUENCE public.notifications_id_seq
 --
 
 ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
+
+
+--
+-- Name: rss_sources; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.rss_sources (
+    id bigint NOT NULL,
+    name character varying NOT NULL,
+    url character varying NOT NULL,
+    processed_at timestamp without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: rss_sources_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.rss_sources_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rss_sources_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.rss_sources_id_seq OWNED BY public.rss_sources.id;
 
 
 --
@@ -602,6 +636,13 @@ ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('publi
 
 
 --
+-- Name: rss_sources id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rss_sources ALTER COLUMN id SET DEFAULT nextval('public.rss_sources_id_seq'::regclass);
+
+
+--
 -- Name: tag_subscriptions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -715,6 +756,14 @@ ALTER TABLE ONLY public.likes
 
 ALTER TABLE ONLY public.notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rss_sources rss_sources_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.rss_sources
+    ADD CONSTRAINT rss_sources_pkey PRIMARY KEY (id);
 
 
 --
@@ -1088,6 +1137,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200913050836'),
 ('20200913051111'),
 ('20200913101207'),
-('20200915072409');
+('20200915072409'),
+('20200915154102'),
+('20200916065305'),
+('20200916065824');
 
 

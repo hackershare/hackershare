@@ -7,6 +7,9 @@ class RemoteFetchJob < ApplicationJob
 
   def perform(bookmark_id)
     bookmark = Bookmark.find(bookmark_id)
+    if [bookmark.favicon, bookmark.title, bookmark.description, bookmark.lang].all?(&:present?)
+      return
+    end
     parser = LinkThumbnailer.generate(bookmark.url)
     favicon_url = parser.favicon
     begin
@@ -21,9 +24,16 @@ class RemoteFetchJob < ApplicationJob
         favicon_url = nil
       end
     end
-    lang = [parser.title, parser.description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
-    bookmark.update({ favicon: favicon_url, description: parser.description, title: parser.title, lang: lang }.compact)
-    bookmark.save_favicon if bookmark.favicon.present?
+    bookmark.title = parser.title.presence if bookmark.title.blank?
+    bookmark.description = parser.description.presence if bookmark.description.blank?
+    bookmark.favicon = favicon_url.presence if bookmark.favicon.blank?
+    lang = [bookmark.title, bookmark.description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
+    bookmark.lang = lang if bookmark.lang.blank?
+    if bookmark.save
+      bookmark.save_favicon if bookmark.favicon.present?
+    else
+      logger.error "[RemoteFetchJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
+    end
   rescue LinkThumbnailer::HTTPError
     # TODO
   end

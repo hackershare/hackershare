@@ -1,0 +1,14 @@
+default: &default
+  concurrency: 5
+  queues:
+    - [critical, 200]
+    - [default, 100]
+    - [seldom, 40]
+    - [hardly, 5]
+development:
+  <<: *default
+test:
+  <<: *default
+production:
+  <<: *default
+  concurrency: 20
