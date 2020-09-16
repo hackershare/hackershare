@@ -12,6 +12,7 @@ class ApplicationNotification < Noticed::Base
     end
 
     def email_notifications?
+      return if Rails.env.development?
       recipient.enable_email_notification? && recipient.email !~ /fakemail.com/
     end
 end

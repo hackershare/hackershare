@@ -6,8 +6,4 @@ class ApplicationJob < ActiveJob::Base
 
   # Most jobs are safe to ignore if the underlying records are no longer available
   # discard_on ActiveJob::DeserializationError
-  self.queue_adapter = ActiveJob::QueueAdapters::AsyncAdapter.new(
-    min_threads: 4,
-    max_threads: 10 * Concurrent.processor_count
-  )
 end

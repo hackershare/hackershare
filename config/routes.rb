@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
+require "sidekiq/web"
+require "sidekiq-scheduler/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
+
   scope "(:locale)", locale: /cn/ do
     get "auth/:provider/callback", to: "sessions#create_from_oauth"
     resources :registrations, only: %i[new create]

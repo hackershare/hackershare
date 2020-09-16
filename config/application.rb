@@ -26,8 +26,6 @@ Dotenv::Railtie.load
 module Hackershare
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.active_storage.service = :local
-    config.active_storage.service_urls_expire_in = 99.years
     config.load_defaults 6.0
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -40,8 +38,13 @@ module Hackershare
       api_key: ENV["SENDGRID_API_KEY"],
       raise_delivery_errors: true
     }
+    config.active_job.queue_adapter = :sidekiq
 
+    config.active_storage.service = :local
+    config.active_storage.service_urls_expire_in = 99.years
     config.active_storage.content_types_to_serve_as_binary -= ["image/svg+xml"]
+    config.active_storage.queue = :default
+
     config.i18n.available_locales = %i[en cn]
     config.i18n.default_locale = :en
     config.generators do |g|
