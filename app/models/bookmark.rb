@@ -116,6 +116,10 @@ class Bookmark < ApplicationRecord
     ref || self
   end
 
+  def letter_char
+    URI.parse(url).host.split(".")[-2..-1][0][0].upcase
+  end
+
   def tag_names_for(user)
     return [] if user.blank?
     tags.where(taggings: { user: user }).map { |tag| tag.name }
