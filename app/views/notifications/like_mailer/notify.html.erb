@@ -1,3 +1,7 @@
 <p>
   Your bookmark has a new favorite in <%= link_to @bookmark.title || @bookmark.url, bookmark_url(@bookmark, n_id: @record.id) %>
 </p>
+<hr/>
+<p>
+  You can disable email notification here: <%= link_to "Email Notification Setting", setting_users_url %>
+</p>

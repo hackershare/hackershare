@@ -1,3 +1,7 @@
 <p>
   You have a new follower: <%= link_to @user.username, user_url(@user, n_id: @record.id) %>
 </p>
+<hr/>
+<p>
+  You can disable email notification here: <%= link_to "Email Notification Setting", setting_users_url %>
+</p>
