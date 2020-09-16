@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # config valid only for current version of Capistrano
-lock "3.8.2"
+lock "~> 3.14.1"
 
 set :application, "hackershare"
 set :repo_url, "git@hackershare.github.com:hooopo/hackershare.git"
