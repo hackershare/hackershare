@@ -2,3 +2,4 @@ bookmark_robot_meituan:
   every: '1d'
   class: BookmarkRobotJob
   args: '美团'
+  queue: hardly
