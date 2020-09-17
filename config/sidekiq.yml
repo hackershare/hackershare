@@ -5,27 +5,6 @@ default: &default
     - [default, 100]
     - [seldom, 40]
     - [hardly, 5]
-  schedule:
-    bookmark_robot_meituan_tech:
-      cron: '0 0 16 * * *'
-      class: BookmarkRobotJob
-      args: 'meituan_tech'
-      queue: hardly
-    bookmark_robot_hackernews_best:
-      cron: '0 0 0 * * *'
-      class: BookmarkRobotJob
-      args: 'hackernews_best'
-      queue: hardly
-    bookmark_robot_manong_weekly:
-      cron: '0 0 16 * 1'
-      class: BookmarkRobotJob
-      args: 'manong_weekly'
-      queue: hardly
-    bookmark_robot_github_trending:
-      cron: '0 0 16 * * *'
-      class: BookmarkRobotJob
-      args: 'github_trending'
-      queue: hardly
 development:
   <<: *default
 test:

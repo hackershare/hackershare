@@ -1,5 +1,20 @@
-bookmark_robot_meituan:
-  every: '1d'
+bookmark_robot_meituan_tech:
+  cron: '0 0 0 * * *'
   class: BookmarkRobotJob
-  args: '美团'
+  args: 'meituan_tech'
+  queue: hardly
+bookmark_robot_hackernews_best:
+  cron: '0 0 1 * * *'
+  class: BookmarkRobotJob
+  args: 'hackernews_best'
+  queue: hardly
+bookmark_robot_manong_weekly:
+  cron: '0 0 2 * 1'
+  class: BookmarkRobotJob
+  args: 'manong_weekly'
+  queue: hardly
+bookmark_robot_github_trending:
+  cron: '0 0 3 * * *'
+  class: BookmarkRobotJob
+  args: 'github_trending'
   queue: hardly
