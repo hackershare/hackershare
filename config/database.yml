@@ -64,6 +64,4 @@ test:
 #
 production:
   <<: *default
-  database: hackershare_production
-  username: postgres
-  password: <%= ENV['HACKERSHARE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

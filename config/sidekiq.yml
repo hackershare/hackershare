@@ -3,7 +3,6 @@ default: &default
   queues:
     - [critical, 200]
     - [default, 100]
-    - [mailers, 50]
     - [seldom, 40]
     - [hardly, 5]
 development:
