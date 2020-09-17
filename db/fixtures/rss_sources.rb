@@ -5,4 +5,5 @@ RssSource.seed(:id,
   { id: 4, code: "github_trending",  url: "https://rsshub.app/github/trending/daily", name: "GitHub Trending",  limit: 1   },
   { id: 5, code: "wanqu",            url: "https://wanqu.co/feed/",                   name: "湾区日报",          limit: nil  },
   { id: 6, code: "dribbble_popular", url: "https://rsshub.app/dribbble/popular/week", name: "Dribbble Popular", limit: nil  },
+  { id: 7, code: "v2ex_hot",         url: "https://rsshub.app/v2ex/topics/hot",       name: "V2EX 热点",         limit: 1  },
 )

@@ -28,3 +28,8 @@ bookmark_robot_dribbble_popular:
   class: BookmarkRobotJob
   args: 'dribbble_popular'
   queue: hardly
+bookmark_robot_v2ex_hot:
+  cron: '0 0 6 * * *'
+  class: BookmarkRobotJob
+  args: 'v2ex_hot'
+  queue: hardly
