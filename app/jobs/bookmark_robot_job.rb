@@ -10,8 +10,9 @@ class BookmarkRobotJob < ApplicationJob
     processed_at = Time.current
     res = HTTP.get(rss_source.url)
     feed = Feedjira.parse(res.to_s)
+    return if rss_source.processed_at && rss_source.processed_at > feed.last_built
+
     feed.entries.each do |entry|
-      break if rss_source.processed_at && rss_source.processed_at > entry.published
       next if robot_user.bookmarks.exists?(url: entry.url)
 
       title = entry.title.force_encoding("utf-8")

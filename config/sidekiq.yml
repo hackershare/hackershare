@@ -5,6 +5,12 @@ default: &default
     - [default, 100]
     - [seldom, 40]
     - [hardly, 5]
+  schedule:
+    bookmark_robot_meituan:
+      cron: '0 0 16 * * *'
+      class: BookmarkRobotJob
+      args: '美团'
+      queue: hardly
 development:
   <<: *default
 test:
