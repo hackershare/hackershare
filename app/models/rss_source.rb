@@ -5,6 +5,7 @@
 # Table name: rss_sources
 #
 #  id           :bigint           not null, primary key
+#  limit        :integer
 #  name         :string           not null
 #  processed_at :datetime
 #  url          :string           not null

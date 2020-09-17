@@ -8,11 +8,12 @@ class BookmarkRobotJob < ApplicationJob
     return unless rss_source
 
     processed_at = Time.current
-    res = HTTP.get(rss_source.url)
+    res = http.get(rss_source.url)
     feed = Feedjira.parse(res.to_s)
     return if rss_source.processed_at && rss_source.processed_at > feed.last_built
 
-    feed.entries.each do |entry|
+    entries = rss_source.limit ? feed.entries.take(rss_source.limit) : feed.entries
+    entries.each do |entry|
       next if robot_user.bookmarks.exists?(url: entry.url)
 
       title = entry.title.force_encoding("utf-8")
@@ -39,5 +40,15 @@ class BookmarkRobotJob < ApplicationJob
 
     def robot_user
       @robot_user ||= User.find_by!(username: "hackershare")
+    end
+
+    def http
+      @http ||= \
+        if proxy = ENV["https_proxy"] || ENV["http_proxy"]
+          uri = URI.parse(proxy)
+          HTTP.via(uri.host, uri.port)
+        else
+          HTTP
+        end
     end
 end

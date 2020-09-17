@@ -11,6 +11,11 @@ default: &default
       class: BookmarkRobotJob
       args: '美团'
       queue: hardly
+    bookmark_robot_hackernews:
+      cron: '0 0 0 * * *'
+      class: BookmarkRobotJob
+      args: 'hackernews'
+      queue: hardly
 development:
   <<: *default
 test:

@@ -386,7 +386,8 @@ CREATE TABLE public.rss_sources (
     url character varying NOT NULL,
     processed_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    "limit" integer
 );
 
 
@@ -1139,6 +1140,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200913101207'),
 ('20200915072409'),
 ('20200916065305'),
-('20200916065824');
+('20200916065824'),
+('20200917081924');
 
 
