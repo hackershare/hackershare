@@ -16,7 +16,12 @@ class BookmarkRobotJob < ApplicationJob
     entries.each do |entry|
       next if robot_user.bookmarks.exists?(url: entry.url)
 
-      title = entry.title.force_encoding("utf-8")
+      title = \
+        if %w[码农周刊].include?(name)
+          entry.summary.force_encoding("utf-8")
+        else
+          entry.title.force_encoding("utf-8")
+        end
       summary = entry.summary.force_encoding("utf-8")
       lang = [title, summary].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
       bookmark = robot_user.bookmarks.new(
