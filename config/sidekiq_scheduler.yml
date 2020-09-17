@@ -23,3 +23,8 @@ bookmark_robot_wanqu:
   class: BookmarkRobotJob
   args: 'wanqu'
   queue: hardly
+bookmark_robot_dribbble_popular:
+  cron: '0 0 5 * * *'
+  class: BookmarkRobotJob
+  args: 'dribbble_popular'
+  queue: hardly
