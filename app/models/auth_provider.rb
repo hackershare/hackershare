@@ -52,7 +52,7 @@ class AuthProvider < ApplicationRecord
   end
 
   def save_img
-    downloaded_image = open(avatar)
+    downloaded_image = open(avatar, read_timeout: 10)
     user.avatar.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(avatar).path)

@@ -136,7 +136,7 @@ class Bookmark < ApplicationRecord
   end
 
   def save_favicon
-    downloaded_image = open(favicon)
+    downloaded_image = open(favicon, read_timeout: 10)
     favicon_local.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(favicon).path)

@@ -13,12 +13,12 @@ class RemoteFetchJob < ApplicationJob
     parser = LinkThumbnailer.generate(bookmark.url)
     favicon_url = parser.favicon
     begin
-      open(parser.favicon, open_timeout: 8)
+      open(parser.favicon, read_timeout: 10)
     rescue OpenURI::HTTPError, Errno::ENOENT
       url_parser = URI.parse(bookmark.url)
       favicon_url = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
       begin
-        result = open(favicon_url, open_timeout: 8)
+        result = open(favicon_url, read_timeout: 10)
         favicon_url = nil if /html|text/i.match?(result.content_type)
       rescue OpenURI::HTTPError, Errno::ENOENT
         favicon_url = nil
