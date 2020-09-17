@@ -31,6 +31,9 @@ require "capistrano/sidekiq"
 install_plugin Capistrano::Sidekiq  # Default sidekiq tasks
 install_plugin Capistrano::Sidekiq::Systemd
 
+require "seed-fu/capistrano3"
+before "deploy:publishing", "db:seed_fu"
+
 # Include tasks from other gems included in your Gemfile
 #
 # For documentation on these, see for example:

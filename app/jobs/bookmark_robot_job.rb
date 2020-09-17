@@ -3,10 +3,8 @@
 class BookmarkRobotJob < ApplicationJob
   queue_as :hardly
 
-  def perform(name)
-    rss_source = RssSource.find_by(name: name)
-    return unless rss_source
-
+  def perform(code)
+    rss_source = RssSource.find_by!(code: code)
     processed_at = Time.current
     res = http.get(rss_source.url)
     feed = Feedjira.parse(res.to_s)
@@ -17,10 +15,10 @@ class BookmarkRobotJob < ApplicationJob
       next if robot_user.bookmarks.exists?(url: entry.url)
 
       title = \
-        if %w[码农周刊].include?(name)
+        if %w[manong_weekly].include?(rss_source.code)
           entry.summary.force_encoding("utf-8")
-        elsif ["GitHub Trending"].include?(name)
-          "#{entry.title.force_encoding("utf-8")} | GitHub Trending"
+        elsif %w[github_trending].include?(rss_source.code)
+          "#{entry.title.force_encoding("utf-8")} | #{rss_source.name}"
         else
           entry.title.force_encoding("utf-8")
         end
@@ -35,7 +33,7 @@ class BookmarkRobotJob < ApplicationJob
         lang:        lang,
       )
       if bookmark.save
-        CreateTag.call(bookmark, [rss_source.name], robot_user)
+        CreateTag.call(bookmark, [rss_source.tag], robot_user)
       else
         logger.error "[BookmarkRobotJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
       end

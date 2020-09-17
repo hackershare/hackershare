@@ -106,3 +106,5 @@ gem "httplog", "~> 1.4"
 gem "sidekiq", "~> 6.1", ">= 6.1.2"
 
 gem "sidekiq-scheduler", "~> 3.0", ">= 3.0.1"
+
+gem "seed-fu", "~> 2.3", ">= 2.3.9"
