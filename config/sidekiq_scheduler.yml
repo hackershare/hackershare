@@ -18,3 +18,8 @@ bookmark_robot_github_trending:
   class: BookmarkRobotJob
   args: 'github_trending'
   queue: hardly
+bookmark_robot_wanqu:
+  cron: '0 0 4 * * *'
+  class: BookmarkRobotJob
+  args: 'wanqu'
+  queue: hardly
