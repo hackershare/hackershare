@@ -41,5 +41,3 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/uplo
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
-
-set :sidekiq_service_unit_user, :system
