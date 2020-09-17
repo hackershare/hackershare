@@ -19,6 +19,8 @@ class BookmarkRobotJob < ApplicationJob
       title = \
         if %w[码农周刊].include?(name)
           entry.summary.force_encoding("utf-8")
+        elsif ["GitHub Trending"].include?(name)
+          "#{entry.title.force_encoding("utf-8")} | GitHub Trending"
         else
           entry.title.force_encoding("utf-8")
         end
