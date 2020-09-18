@@ -11,13 +11,13 @@ class BookmarkRobotJob < ApplicationJob
     return if rss_source.processed_at && rss_source.processed_at > feed.last_built
 
     entries = rss_source.limit ? feed.entries.take(rss_source.limit) : feed.entries
-    entries.each do |entry|
+    entries.reverse_each do |entry|
       next if robot_user.bookmarks.exists?(url: entry.url)
 
       title = \
         if %w[manong_weekly].include?(rss_source.code)
           entry.summary.force_encoding("utf-8")
-        elsif %w[github_trending].include?(rss_source.code)
+        elsif %w[github].include?(rss_source.code)
           "#{entry.title.force_encoding("utf-8")} | #{rss_source.name}"
         else
           entry.title.force_encoding("utf-8")

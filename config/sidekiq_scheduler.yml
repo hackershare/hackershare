@@ -3,33 +3,33 @@ bookmark_robot_meituan_tech:
   class: BookmarkRobotJob
   args: 'meituan_tech'
   queue: hardly
-bookmark_robot_hackernews_best:
+bookmark_robot_wanqu_daily:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'wanqu_daily'
+  queue: hardly
+bookmark_robot_dribbble:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'dribbble'
+  queue: hardly
+bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
-  args: 'hackernews_best'
+  args: 'hackernews'
   queue: hardly
 bookmark_robot_manong_weekly:
-  cron: '0 0 2 * 1'
+  cron: '0 0 2 * * *'
   class: BookmarkRobotJob
   args: 'manong_weekly'
   queue: hardly
-bookmark_robot_github_trending:
+bookmark_robot_github:
   cron: '0 0 3 * * *'
   class: BookmarkRobotJob
-  args: 'github_trending'
+  args: 'github'
   queue: hardly
-bookmark_robot_wanqu:
+bookmark_robot_v2ex:
   cron: '0 0 4 * * *'
   class: BookmarkRobotJob
-  args: 'wanqu'
-  queue: hardly
-bookmark_robot_dribbble_popular:
-  cron: '0 0 5 * * *'
-  class: BookmarkRobotJob
-  args: 'dribbble_popular'
-  queue: hardly
-bookmark_robot_v2ex_hot:
-  cron: '0 0 6 * * *'
-  class: BookmarkRobotJob
-  args: 'v2ex_hot'
+  args: 'v2ex'
   queue: hardly
