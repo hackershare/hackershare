@@ -31,4 +31,18 @@ class Tagging < ApplicationRecord
   def sync_cached_tag_ids
     bookmark.sync_cached_tag_ids
   end
+
+  after_create_commit do
+    TagNotification.with(tagging: self).deliver(tag.followers)
+  end
+
+  def notifications
+    @notifications ||= Notification.where(params: { tagging: self }).where(type: "TagNotification")
+  end
+
+  before_destroy :destroy_notifications
+
+  def destroy_notifications
+    notifications.destroy_all
+  end
 end

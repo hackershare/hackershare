@@ -82,3 +82,6 @@ en:
     user_feed_notification:
       type_name: UserFeed
       shared: shared
+    tag_notification:
+      type_name: subscription
+      have_a_new_item: has a new item

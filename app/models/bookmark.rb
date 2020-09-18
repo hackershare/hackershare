@@ -43,17 +43,19 @@ class Bookmark < ApplicationRecord
   belongs_to :ref, class_name: "Bookmark", optional: true, counter_cache: :dups_count
   has_many :duplications, foreign_key: :ref_id, class_name: "Bookmark"
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: "user"
-  has_many :bookmark_stats
+
   has_many :comments
   scope :original, -> { where("ref_id IS NULL") }
 
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
-  has_many :clicks
+  has_many :clicks, dependent: :destroy
   has_many :click_users, through: :clicks, source: "user"
+
+  has_many :bookmark_stats, dependent: :destroy
 
   validates :url, presence: true
   validates :url, url: { no_local: true }
@@ -63,6 +65,10 @@ class Bookmark < ApplicationRecord
     english: 0,
     chinese: 1,
   }
+
+  def title_or_url
+    title.presence || url
+  end
 
   after_create do
     if original = Bookmark.where(url: url).where("id !=?", id).first
