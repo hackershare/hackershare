@@ -8,11 +8,7 @@
             <div class="mb-4 inline-flex items-center px-2 py-1 rounded text-sm font-medium leading-4 bg-orange-100 text-orange-800">
               
               <%= link_to tag.name, pretty_bookmarks_path(tag: tag.name) %>
-              <% if tag.is_rss %>
-                <svg class="ml-1.5 h-4 w-4 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 5c7.18 0 13 5.82 13 13M6 11a7 7 0 017 7m-6 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                </svg>
-              <% end %>
+              <%= render_rss_icon(tag) %>
             </div>
             
             <p><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
