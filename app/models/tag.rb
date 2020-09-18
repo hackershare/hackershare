@@ -6,6 +6,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  bookmarks_count     :integer          default(0)
+#  is_rss              :boolean          default(FALSE)
 #  name                :string
 #  subscriptions_count :integer          default(0)
 #  created_at          :datetime         not null
@@ -19,6 +20,7 @@
 #
 class Tag < ApplicationRecord
   belongs_to :user, counter_cache: true
+  has_one :rss_source
   has_many :taggings
   has_many :bookmarks, through: :taggings
 

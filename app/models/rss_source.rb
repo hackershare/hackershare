@@ -12,11 +12,17 @@
 #  url          :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  tag_id       :bigint
 #
 class RssSource < ApplicationRecord
   validates :code, :url, presence: true, uniqueness: true
+  belongs_to :tag, optional: true
 
-  def tag
+  def tag_name
     name || code.humanize
+  end
+
+  def find_or_init_tag
+    tag || create_tag(is_rss: true, name: tag_name, user: User.rss_bot)
   end
 end

@@ -6,6 +6,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  bookmarks_count     :integer          default(0)
+#  is_rss              :boolean          default(FALSE)
 #  name                :string
 #  subscriptions_count :integer          default(0)
 #  created_at          :datetime         not null

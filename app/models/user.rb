@@ -35,6 +35,8 @@
 #  index_users_on_updated_at          (updated_at)
 #
 class User < ApplicationRecord
+  RSS_BOT_NAME  = "hackershare"
+  RSS_BOT_EMAIL = "robot@hackershare.dev"
   has_secure_password
   has_one_attached :avatar
   has_many :auth_providers, dependent: :destroy
@@ -110,6 +112,10 @@ class User < ApplicationRecord
     return unless user
 
     user.follows.where(following_user: self).exists?
+  end
+
+  def self.rss_bot
+    User.create_with(email: RSS_BOT_EMAIL, password: SecureRandom.hex).find_or_create_by(username: RSS_BOT_NAME)
   end
 
   def self.email_or_fake(auth)
