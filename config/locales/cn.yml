@@ -69,7 +69,8 @@ cn:
 
   clear_all: 清空
   read_all: 已读
-
+  
+  notification: 通知
   notifications:
     comment_notification:
       type_name: 评论

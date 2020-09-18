@@ -68,7 +68,8 @@ en:
   your_profile_updated_successfully: Your profile updated successfully.
   clear_all: Clear All
   read_all: Read All
-
+  
+  notification: Notifications
   notifications:
     comment_notification:
       type_name: Comment
