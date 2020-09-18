@@ -1,5 +1,5 @@
 <p>
-  Your bookmark has a new favorite in <%= link_to @bookmark.title || @bookmark.url, bookmark_url(@bookmark, n_id: @record.id) %>
+  Your bookmark has a new favorite in <%= link_to @bookmark.title_or_url, bookmark_url(@bookmark, n_id: @record.id) %>
 </p>
 <hr/>
 <p>

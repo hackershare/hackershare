@@ -16,7 +16,7 @@
         
         <span class="block break-all">
           <h2 class="text-md font-medium leading-5">
-            <%= link_to bookmark.title.presence || bookmark.url, goto_bookmark_path(bookmark), target: '_blank'  %>
+            <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
           </h2>
         </span>
         

@@ -68,7 +68,8 @@ en:
   your_profile_updated_successfully: Your profile updated successfully.
   clear_all: Clear All
   read_all: Read All
-
+  
+  notification: Notifications
   notifications:
     comment_notification:
       type_name: Comment
@@ -82,3 +83,6 @@ en:
     user_feed_notification:
       type_name: UserFeed
       shared: shared
+    tag_notification:
+      type_name: subscription
+      have_a_new_item: has a new item

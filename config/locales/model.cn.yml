@@ -7,3 +7,14 @@ cn:
     about: 简介
     enable_email_notification: 开启邮件通知
     default_bookmark_lang: 默认书签语言
+
+  activerecord:
+    errors:
+      models:
+        bookmark:
+          attributes:
+            url:
+              url: 格式不正确
+
+
+
