@@ -14,21 +14,15 @@ class BookmarkRobotJob < ApplicationJob
     entries.reverse_each do |entry|
       next if User.rss_robot.bookmarks.exists?(url: entry.url)
 
-      title = \
-        if %w[manong_weekly].include?(rss_source.code)
-          entry.summary.force_encoding("utf-8")
-        elsif %w[github].include?(rss_source.code)
-          "#{entry.title.force_encoding("utf-8")} | #{rss_source.name}"
-        else
-          entry.title.force_encoding("utf-8")
-        end
-      summary = entry.summary.force_encoding("utf-8")
-      lang = [title, summary].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
+      title = entry.title.force_encoding("utf-8")
+      description = (entry.summary || entry.content).force_encoding("utf-8")
+      title = description if %w[manong_weekly].include?(rss_source.code)
+      lang = [title, description].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
       bookmark = User.rss_robot.bookmarks.new(
         is_rss:      true,
         url:         entry.url,
         title:       title,
-        description: summary,
+        description: description,
         created_at:  entry.published,
         lang:        lang,
       )

@@ -13,6 +13,11 @@ bookmark_robot_dribbble:
   class: BookmarkRobotJob
   args: 'dribbble'
   queue: hardly
+bookmark_robot_producthunt:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'producthunt'
+  queue: hardly
 bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
