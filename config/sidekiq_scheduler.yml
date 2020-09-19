@@ -1,25 +1,45 @@
 bookmark_robot_meituan_tech:
-  every: ['1d', first_in: '0h']
+  every: ['1d', first_in: '0.5h']
   class: BookmarkRobotJob
   args: 'meituan_tech'
   queue: hardly
-bookmark_robot_wanqu_daily:
+bookmark_robot_hackernews:
   every: ['1d', first_in: '1h']
+  class: BookmarkRobotJob
+  args: 'hackernews'
+  queue: hardly
+bookmark_robot_manong_weekly:
+  every: ['1d', first_in: '1.5h']
+  class: BookmarkRobotJob
+  args: 'manong_weekly'
+  queue: hardly
+bookmark_robot_github:
+  every: ['1d', first_in: '2h']
+  class: BookmarkRobotJob
+  args: 'github'
+  queue: hardly
+bookmark_robot_wanqu_daily:
+  every: ['1d', first_in: '2.5h']
   class: BookmarkRobotJob
   args: 'wanqu_daily'
   queue: hardly
 bookmark_robot_dribbble:
-  every: ['1d', first_in: '2h']
+  every: ['1d', first_in: '3h']
   class: BookmarkRobotJob
   args: 'dribbble'
   queue: hardly
+bookmark_robot_v2ex:
+  every: ['1d', first_in: '3.5h']
+  class: BookmarkRobotJob
+  args: 'v2ex'
+  queue: hardly
 bookmark_robot_producthunt:
-  every: ['1d', first_in: '3h']
+  every: ['1d', first_in: '4h']
   class: BookmarkRobotJob
   args: 'producthunt'
   queue: hardly
 bookmark_robot_devto:
-  every: ['1d', first_in: '4h']
+  every: ['1d', first_in: '4.5h']
   class: BookmarkRobotJob
   args: 'devto'
   queue: hardly
@@ -29,62 +49,42 @@ bookmark_robot_rubyweekly:
   args: 'rubyweekly'
   queue: hardly
 bookmark_robot_javascriptweekly:
-  every: ['1d', first_in: '6h']
+  every: ['1d', first_in: '5.5h']
   class: BookmarkRobotJob
   args: 'javascriptweekly'
   queue: hardly
 bookmark_robot_golangweekly:
-  every: ['1d', first_in: '7h']
+  every: ['1d', first_in: '6h']
   class: BookmarkRobotJob
   args: 'golangweekly'
   queue: hardly
-bookmark_robot_chaping:
-  every: ['1d', first_in: '8h']
-  class: BookmarkRobotJob
-  args: 'chaping'
-  queue: hardly
-bookmark_robot_ifanr:
-  every: ['1d', first_in: '9h']
-  class: BookmarkRobotJob
-  args: 'ifanr'
-  queue: hardly
-bookmark_robot_qdaily:
-  every: ['1d', first_in: '10h']
-  class: BookmarkRobotJob
-  args: 'qdaily'
-  queue: hardly
-bookmark_robot_hackernews:
-  every: ['1d', first_in: '11h']
-  class: BookmarkRobotJob
-  args: 'hackernews'
-  queue: hardly
-bookmark_robot_manong_weekly:
-  every: ['1d', first_in: '12h']
-  class: BookmarkRobotJob
-  args: 'manong_weekly'
-  queue: hardly
-bookmark_robot_github:
-  every: ['1d', first_in: '13h']
-  class: BookmarkRobotJob
-  args: 'github'
-  queue: hardly
-bookmark_robot_v2ex:
-  every: ['1d', first_in: '14h']
-  class: BookmarkRobotJob
-  args: 'v2ex'
-  queue: hardly
 bookmark_robot_bilibiliweekly:
-  every: ['1d', first_in: '15h']
+  every: ['1d', first_in: '6.5h']
   class: BookmarkRobotJob
   args: 'bilibiliweekly'
   queue: hardly
 bookmark_robot_doubanweekly:
-  every: ['1d', first_in: '16h']
+  every: ['1d', first_in: '7h']
   class: BookmarkRobotJob
   args: 'doubanweekly'
   queue: hardly
+bookmark_robot_chaping:
+  every: ['1d', first_in: '7.5h']
+  class: BookmarkRobotJob
+  args: 'chaping'
+  queue: hardly
 bookmark_robot_zhihuhot:
-  every: ['1d', first_in: '17h']
+  every: ['1d', first_in: '8h']
   class: BookmarkRobotJob
   args: 'zhihuhot'
+  queue: hardly
+bookmark_robot_ifanr:
+  every: ['1d', first_in: '8.5h']
+  class: BookmarkRobotJob
+  args: 'ifanr'
+  queue: hardly
+bookmark_robot_qdaily:
+  every: ['1d', first_in: '9h']
+  class: BookmarkRobotJob
+  args: 'qdaily'
   queue: hardly
