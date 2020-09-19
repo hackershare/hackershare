@@ -7,4 +7,5 @@ RssSource.seed(:id,
   { id: 6, code: "dribbble",      url: "https://rsshub.app/dribbble/popular/week", name: "Dribbble",   limit: nil  },
   { id: 7, code: "v2ex",          url: "https://rsshub.app/v2ex/topics/hot",       name: "V2EX",       limit: 1  },
   { id: 8, code: "producthunt",   url: "https://www.producthunt.com/feed",         name: "ProductHunt", limit: nil  },
+  { id: 9, code: "devto",         url: "https://dev.to/feed/tag/beginners",        name: "devto",       limit: nil  },
 )

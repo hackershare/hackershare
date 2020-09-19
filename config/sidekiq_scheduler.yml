@@ -18,6 +18,11 @@ bookmark_robot_producthunt:
   class: BookmarkRobotJob
   args: 'producthunt'
   queue: hardly
+bookmark_robot_devto:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'devto'
+  queue: hardly
 bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
