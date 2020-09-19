@@ -33,7 +33,7 @@ class BookmarkRobotJob < ApplicationJob
         lang:        lang,
       )
       if bookmark.save
-        rss_tag = User.rss_robot.tags.find_or_create_by!(name: rss_source.tag_name)
+        rss_tag = rss_source.find_or_init_tag
         CreateTag.call(bookmark, [rss_tag.name], User.rss_robot)
       else
         logger.error "[BookmarkRobotJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
