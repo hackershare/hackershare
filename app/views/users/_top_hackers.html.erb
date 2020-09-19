@@ -4,7 +4,7 @@
   </h3>
 </div>
 <div class="flex flex-wrap">
-  <% User.where.not(username: 'hackershare').order(score: :desc).limit(48).each do |user| %>
+  <% User.order(score: :desc).limit(48).each do |user| %>
     <div class="" data-controller="userhover" >
       <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "h-6 w-6 rounded-full mr-1 mb-1"), user_path(user) %>
     </div>
