@@ -38,6 +38,21 @@ bookmark_robot_golangweekly:
   class: BookmarkRobotJob
   args: 'golangweekly'
   queue: hardly
+bookmark_robot_chaping:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'chaping'
+  queue: hardly
+bookmark_robot_ifanr:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'ifanr'
+  queue: hardly
+bookmark_robot_qdaily:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'qdaily'
+  queue: hardly
 bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
@@ -57,4 +72,19 @@ bookmark_robot_v2ex:
   cron: '0 0 4 * * *'
   class: BookmarkRobotJob
   args: 'v2ex'
+  queue: hardly
+bookmark_robot_bilibiliweekly:
+  cron: '0 0 5 * * *'
+  class: BookmarkRobotJob
+  args: 'bilibiliweekly'
+  queue: hardly
+bookmark_robot_doubanweekly:
+  cron: '0 0 6 * * *'
+  class: BookmarkRobotJob
+  args: 'doubanweekly'
+  queue: hardly
+bookmark_robot_zhihuhot:
+  cron: '0 0 7 * * *'
+  class: BookmarkRobotJob
+  args: 'zhihuhot'
   queue: hardly
