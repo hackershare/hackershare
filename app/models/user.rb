@@ -115,7 +115,7 @@ class User < ApplicationRecord
   end
 
   def self.rss_robot
-    @rss_robot ||= User.find_by!(username: RSS_BOT_NAME)
+    @rss_robot ||= User.find_by!(email: RSS_BOT_EMAIL)
   end
 
   def self.email_or_fake(auth)
