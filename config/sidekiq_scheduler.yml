@@ -88,3 +88,33 @@ bookmark_robot_qdaily:
   class: BookmarkRobotJob
   args: 'qdaily'
   queue: hardly
+bookmark_robot_thoughtbot:
+  every: ['1d', first_in: '9.5h']
+  class: BookmarkRobotJob
+  args: 'thoughtbot'
+  queue: hardly
+bookmark_robot_sitepoint:
+  every: ['1d', first_in: '10h']
+  class: BookmarkRobotJob
+  args: 'sitepoint'
+  queue: hardly
+bookmark_robot_ruanyifeng:
+  every: ['1d', first_in: '10.5h']
+  class: BookmarkRobotJob
+  args: 'ruanyifeng'
+  queue: hardly
+bookmark_robot_dbweekly:
+  every: ['1d', first_in: '11h']
+  class: BookmarkRobotJob
+  args: 'dbweekly'
+  queue: hardly
+bookmark_robot_cssweekly:
+  every: ['1d', first_in: '11.5h']
+  class: BookmarkRobotJob
+  args: 'cssweekly'
+  queue: hardly
+bookmark_robot_nodeweekly:
+  every: ['1d', first_in: '12h']
+  class: BookmarkRobotJob
+  args: 'nodeweekly'
+  queue: hardly
