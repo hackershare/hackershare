@@ -28,7 +28,7 @@ class Tag < ApplicationRecord
   has_many :tag_subscriptions
   has_many :followers, through: :tag_subscriptions, source: "user"
 
-  validates :name, uniqueness: { scope: :is_rss }
+  validates :name, uniqueness: true
 
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
