@@ -4,8 +4,10 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
+    base = Tag.preload(:user).order(subscriptions_count: :desc)
+    base = base.where(is_rss: true) if params[:is_rss].present?
     @pagy, @tags = pagy_countless(
-      Tag.preload(:user).order(subscriptions_count: :desc),
+      base,
       items: 12,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
