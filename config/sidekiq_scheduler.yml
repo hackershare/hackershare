@@ -23,6 +23,16 @@ bookmark_robot_devto:
   class: BookmarkRobotJob
   args: 'devto'
   queue: hardly
+bookmark_robot_rubyweekly:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'rubyweekly'
+  queue: hardly
+bookmark_robot_javascriptweekly:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'javascriptweekly'
+  queue: hardly
 bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
