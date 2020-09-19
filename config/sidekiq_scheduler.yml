@@ -33,6 +33,11 @@ bookmark_robot_javascriptweekly:
   class: BookmarkRobotJob
   args: 'javascriptweekly'
   queue: hardly
+bookmark_robot_golangweekly:
+  cron: '0 0 0 * * *'
+  class: BookmarkRobotJob
+  args: 'golangweekly'
+  queue: hardly
 bookmark_robot_hackernews:
   cron: '0 0 1 * * *'
   class: BookmarkRobotJob
