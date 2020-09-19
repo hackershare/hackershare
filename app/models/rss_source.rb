@@ -21,8 +21,4 @@ class RssSource < ApplicationRecord
   def tag_name
     name || code.humanize
   end
-
-  def find_or_init_tag
-    tag || create_tag!(is_rss: true, name: tag_name, user: User.rss_robot)
-  end
 end
