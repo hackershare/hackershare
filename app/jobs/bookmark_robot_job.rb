@@ -5,9 +5,6 @@ class BookmarkRobotJob < ApplicationJob
 
   def perform(code)
     rss_source = RssSource.find_by!(code: code)
-    # TODO resouce可以设置额外tag：
-    # 比如rubyweekly可以带ruby这个tag，javascript weekly带 javascript，producthunt带startup
-    rss_tag = rss_source.find_or_init_tag
     processed_at = Time.current
     res = http.get(rss_source.url)
     feed = Feedjira.parse(res.to_s)
@@ -15,7 +12,7 @@ class BookmarkRobotJob < ApplicationJob
 
     entries = rss_source.limit ? feed.entries.take(rss_source.limit) : feed.entries
     entries.reverse_each do |entry|
-      next if robot_user.bookmarks.exists?(url: entry.url)
+      next if User.rss_robot.bookmarks.exists?(url: entry.url)
 
       title = \
         if %w[manong_weekly].include?(rss_source.code)
@@ -27,7 +24,7 @@ class BookmarkRobotJob < ApplicationJob
         end
       summary = entry.summary.force_encoding("utf-8")
       lang = [title, summary].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
-      bookmark = robot_user.bookmarks.new(
+      bookmark = User.rss_robot.bookmarks.new(
         is_rss:      true,
         url:         entry.url,
         title:       title,
@@ -36,7 +33,8 @@ class BookmarkRobotJob < ApplicationJob
         lang:        lang,
       )
       if bookmark.save
-        CreateTag.call(bookmark, [rss_tag.name], robot_user)
+        rss_tag = User.rss_robot.tags.find_or_create_by!(name: rss_source.tag_name)
+        CreateTag.call(bookmark, [rss_tag.name], User.rss_robot)
       else
         logger.error "[BookmarkRobotJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
       end
@@ -45,10 +43,6 @@ class BookmarkRobotJob < ApplicationJob
   end
 
   private
-
-    def robot_user
-      @robot_user ||= User.robot
-    end
 
     def http
       @http ||= \

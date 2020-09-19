@@ -114,8 +114,8 @@ class User < ApplicationRecord
     user.follows.where(following_user: self).exists?
   end
 
-  def self.rss_bot
-    User.create_with(email: RSS_BOT_EMAIL, password: SecureRandom.hex).find_or_create_by(username: RSS_BOT_NAME)
+  def self.rss_robot
+    @rss_robot ||= User.find_by!(username: RSS_BOT_NAME)
   end
 
   def self.email_or_fake(auth)
