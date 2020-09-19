@@ -1,90 +1,90 @@
 bookmark_robot_meituan_tech:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '0h']
   class: BookmarkRobotJob
   args: 'meituan_tech'
   queue: hardly
 bookmark_robot_wanqu_daily:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '1h']
   class: BookmarkRobotJob
   args: 'wanqu_daily'
   queue: hardly
 bookmark_robot_dribbble:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '2h']
   class: BookmarkRobotJob
   args: 'dribbble'
   queue: hardly
 bookmark_robot_producthunt:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '3h']
   class: BookmarkRobotJob
   args: 'producthunt'
   queue: hardly
 bookmark_robot_devto:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '4h']
   class: BookmarkRobotJob
   args: 'devto'
   queue: hardly
 bookmark_robot_rubyweekly:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '5h']
   class: BookmarkRobotJob
   args: 'rubyweekly'
   queue: hardly
 bookmark_robot_javascriptweekly:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '6h']
   class: BookmarkRobotJob
   args: 'javascriptweekly'
   queue: hardly
 bookmark_robot_golangweekly:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '7h']
   class: BookmarkRobotJob
   args: 'golangweekly'
   queue: hardly
 bookmark_robot_chaping:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '8h']
   class: BookmarkRobotJob
   args: 'chaping'
   queue: hardly
 bookmark_robot_ifanr:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '9h']
   class: BookmarkRobotJob
   args: 'ifanr'
   queue: hardly
 bookmark_robot_qdaily:
-  cron: '0 0 0 * * *'
+  every: ['1d', first_in: '10h']
   class: BookmarkRobotJob
   args: 'qdaily'
   queue: hardly
 bookmark_robot_hackernews:
-  cron: '0 0 1 * * *'
+  every: ['1d', first_in: '11h']
   class: BookmarkRobotJob
   args: 'hackernews'
   queue: hardly
 bookmark_robot_manong_weekly:
-  cron: '0 0 2 * * *'
+  every: ['1d', first_in: '12h']
   class: BookmarkRobotJob
   args: 'manong_weekly'
   queue: hardly
 bookmark_robot_github:
-  cron: '0 0 3 * * *'
+  every: ['1d', first_in: '13h']
   class: BookmarkRobotJob
   args: 'github'
   queue: hardly
 bookmark_robot_v2ex:
-  cron: '0 0 4 * * *'
+  every: ['1d', first_in: '14h']
   class: BookmarkRobotJob
   args: 'v2ex'
   queue: hardly
 bookmark_robot_bilibiliweekly:
-  cron: '0 0 5 * * *'
+  every: ['1d', first_in: '15h']
   class: BookmarkRobotJob
   args: 'bilibiliweekly'
   queue: hardly
 bookmark_robot_doubanweekly:
-  cron: '0 0 6 * * *'
+  every: ['1d', first_in: '16h']
   class: BookmarkRobotJob
   args: 'doubanweekly'
   queue: hardly
 bookmark_robot_zhihuhot:
-  cron: '0 0 7 * * *'
+  every: ['1d', first_in: '17h']
   class: BookmarkRobotJob
   args: 'zhihuhot'
   queue: hardly

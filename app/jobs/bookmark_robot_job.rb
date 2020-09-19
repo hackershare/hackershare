@@ -3,14 +3,11 @@
 class BookmarkRobotJob < ApplicationJob
   queue_as :hardly
 
-  def perform(code)
+  def perform(code, is_all: false)
     rss_source = RssSource.find_by!(code: code)
-    processed_at = Time.current
     res = http.get(rss_source.url)
     feed = Feedjira.parse(res.to_s)
-    return if rss_source.processed_at && rss_source.processed_at > feed.last_built
-
-    entries = rss_source.limit ? feed.entries.take(rss_source.limit) : feed.entries
+    entries = is_all ? feed.entries : feed.entries.take(1)
     entries.reverse_each do |entry|
       next if User.rss_robot.bookmarks.exists?(url: entry.url)
 
@@ -41,7 +38,6 @@ class BookmarkRobotJob < ApplicationJob
         logger.error "[BookmarkRobotJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
       end
     end
-    rss_source.touch(:processed_at, time: processed_at)
   end
 
   private

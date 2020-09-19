@@ -384,10 +384,8 @@ CREATE TABLE public.rss_sources (
     id bigint NOT NULL,
     name character varying NOT NULL,
     url character varying NOT NULL,
-    processed_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    "limit" integer,
     code character varying NOT NULL,
     tag_id bigint
 );
@@ -1155,6 +1153,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200917131007'),
 ('20200918081447'),
 ('20200918124007'),
-('20200919040123');
+('20200919040123'),
+('20200919062959'),
+('20200919063317');
 
 
