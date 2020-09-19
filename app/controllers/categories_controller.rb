@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
 
   def index
     @pagy, @tags = pagy_countless(
-      Tag.preload(:user).order(bookmarks_count: :desc),
+      Tag.preload(:user).order(subscriptions_count: :desc),
       items: 12,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
