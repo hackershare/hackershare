@@ -184,17 +184,17 @@ class Bookmark < ApplicationRecord
   end
 
   def self.filter(user, params)
-    return user.bookmarks.order(id: :desc) if !%w[created likes followings].include?(params[:type])
+    return user.bookmarks.order(created_at: :desc) if !%w[created likes followings].include?(params[:type])
     if params[:type] == "created"
-      return user.bookmarks.order(id: :desc)
+      return user.bookmarks.order(created_at: :desc)
     end
 
     if params[:type] == "likes"
-      return user.like_bookmarks.order(id: :desc)
+      return user.like_bookmarks.order(created_at: :desc)
     end
 
     if params[:type] == "followings"
-      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(id: :desc)
+      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(created_at: :desc)
     end
   end
 
