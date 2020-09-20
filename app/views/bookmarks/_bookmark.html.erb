@@ -1,46 +1,39 @@
-<li data-controller="remote-forms" class="px-1 py-4 lg:py-8 relative hover:bg-gray-50">
+<li data-controller="remote-forms" class="padding-primary py-2 lg:py-4 relative hover:bg-gray-50">
   <div class="flex items-center justify-between space-x-4">
-
     <!-- Repo name and link -->
     <div class="min-w-0 space-y-3">
-      <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2">
         <% if bookmark.favicon_local.attached? %>
           <span>
-            <%= image_tag(bookmark.favicon_local, class: "max-h-4 max-w-4") %>
+            <%= image_tag(bookmark.favicon_local, class: "h-4 w-4") %>
           </span>
         <% else %>
           <span>
-            <%= lavatar_tag(bookmark.letter_char, 16, class: "max-w-4 max-h-4") %>
+            <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
           </span>
         <% end %>
-        
         <span class="block break-all">
           <h2 class="text-md font-medium leading-5">
             <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
           </h2>
         </span>
-        
       </div>
-      <div class="flex items-center space-x-3">
-        <span class="pl-5 block">
-          <% bookmark.tags.each do |tag| %>
-            <span class="inline-flex items-center px-2 py-1 rounded text-sm font-medium leading-4 bg-orange-100 text-orange-800">
-              <%= tag_url_for(tag) %>
-              <%= render_rss_icon(tag) %>
-            </span>
-          <% end %>
-        </span>
+      <div class="flex pl-6 items-center space-x-2">
+        <% bookmark.tags.each do |tag| %>
+          <span class="btn-tag">
+            <%= tag_url_for(tag) %>
+            <%= render_rss_icon(tag) %>
+          </span>
+        <% end %>
       </div>
-
     </div>
-
     <!-- Repo meta info -->
     <div class=" flex-col flex-shrink-0 items-end space-y-1 lg:space-y-3">
-      <div class="flex items-center justify-end space-x-1 lg:space-x-4 text-sm leading-5 text-gray-500 font-medium">
+      <div class="flex items-center justify-end space-x-1 lg:space-x-4 text-sm leading-5 text-gray-400 font-medium">
         <!-- like button -->
         <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
           <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150" do %>
-            <svg data-target="likes.svg" class="h-5 w-5 <%= bookmark.liked_by?(current_user) ? "text-yellow-300 hover:text-yellow-400" : "text-gray-300 hover:text-gray-400" %>" viewBox="0 0 20 20" fill="currentColor">
+            <svg data-target="likes.svg" class="h-5 w-5 <%= bookmark.liked_by?(current_user) ? "text-yellow-300 hover:text-yellow-400" : "text-gray-300 hover:text-gray-500" %>" viewBox="0 0 20 20" fill="currentColor">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           <% end %>
@@ -50,7 +43,7 @@
             </button>
           </span>
         </span>
-        <a href="<%= bookmark_path(bookmark) %>" class="flex space-x-0.5 relative hover:text-gray-900">
+        <a href="<%= bookmark_path(bookmark) %>" class="flex space-x-0.5 relative hover:text-gray-500">
           <svg class="w-5 h-5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg> 
@@ -66,20 +59,20 @@
           </div>
           <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-32 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
             <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-              <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-900", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
+              <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-500", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
                 <span><%= t("tagging") %></span>
               <% end %>
-              <a target="_blank" href="<%= bookmark.url %>" class="relative flex space-x-1 px-2 py-2 hover:text-gray-900">
+              <a target="_blank" href="<%= bookmark.url %>" class="relative flex space-x-1 px-2 py-2 hover:text-gray-500">
                 <svg class="w-5 h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                 </svg>
                 <span><%= t("origin_link") %></span>
               </a>
               <% if bookmark_self.can_destroy_by?(current_user) %>
-                <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-900" do %>
+                <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-500" do %>
                   <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>

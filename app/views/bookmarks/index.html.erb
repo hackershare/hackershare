@@ -1,19 +1,12 @@
-<div class="flex-grow w-full max-w-7xl mx-auto">
-  <!-- Left sidebar & main wrapper -->
-  <div class="flex min-w-0 bg-white">
-    <!-- Projects List -->
-    <div class="bg-white w-full lg:border-r lg:border-gray-200" data-controller='bookmarks'>
-      <div class="lg:pr-4">
-        <% if current_user %>
-          <%= render template: "bookmarks/new" %>
-        <% end %>
-        <div data-controller="listing" data-target="listing.container">
-          <%= render "bookmarks/bookmarks_with_pagination", suggest_tags: @suggest_tags, lang: @lang %>
-        </div>
-      </div>
+<!-- Left sidebar & main wrapper -->
+<div class="flex space-x-4">
+  <!-- Projects List -->
+  <div data-controller="bookmarks" class="flex-auto rounded-primary border border-color-primary">
+    <div data-controller="listing" data-target="listing.container">
+      <%= render "bookmarks/bookmarks_with_pagination", suggest_tags: @suggest_tags, lang: @lang %>
     </div>
-    <div class="hidden lg:block">
-      <%= render "bookmarks/user_side" %>
-    </div>
+  </div>
+  <div class="hidden lg:block w-80">
+    <%= render "bookmarks/user_side" %>
   </div>
 </div>

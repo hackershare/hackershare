@@ -1,5 +1,5 @@
 .btn-primary {
-  @apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 transition ease-in-out duration-150;
+  @apply inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-sm text-white bg-indigo-600 transition ease-in-out duration-150;
 }
 
 .btn-primary:hover {
@@ -28,4 +28,28 @@
 
 .btn-cancel:active {
   @apply bg-gray-700; 
+}
+
+.bg-primary {
+  @apply bg-gray-50; 
+}
+
+.rounded-primary {
+  @apply rounded-md;
+}
+
+.padding-primary {
+  @apply p-2;
+}
+
+.border-color-primary {
+  @apply border-gray-200;
+}
+
+.btn-tag {
+  @apply flex items-center px-2 py-1 rounded-lg text-sm leading-4 bg-gray-100 text-gray-600 whitespace-no-wrap;
+}
+
+.btn-tag:hover {
+  @apply bg-gray-200;
 }
