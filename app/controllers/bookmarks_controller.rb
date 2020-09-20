@@ -2,7 +2,6 @@
 
 class BookmarksController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show hover_like_users goto]
-  def new; end
 
   def index
     render_bookmarks

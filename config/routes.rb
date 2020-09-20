@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         post :toggle_following
       end
     end
-    resources :bookmarks do
+    resources :bookmarks, except: %i[new] do
       member do
         post :toggle_liking
         get :hover_like_users

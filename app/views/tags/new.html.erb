@@ -20,20 +20,13 @@
   border-color: gold;
 }
 </style>
-<div class="w-full">
-  <div class="py-2 lg:py-4 px-4">
-    <%= form_for(@bookmark, url: bookmark_tags_path(@bookmark), method: :post) do |f| %>
-      <div>
-        <div class="mt-1 shadow-sm" data-controller="tags">
-          <input data-whitelist="<%= Tag.list_names(20) %>" placeholder='write some tags' class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' >
-        </div>
-      </div>
-
-      <div class="mt-2 lg:mt-6">
-        <span class="block">
-          <%= f.button t("save"), class: "btn-primary", type: 'submit', data: {disable_with: disable_with_spinner(t("save"))} %>
-        </span>
-      </div>
-    <% end %>
+<%= form_for(@bookmark, url: bookmark_tags_path(@bookmark), method: :post) do |f| %>
+  <div class="py-2 pl-6 space-y-2">
+    <div class="shadow-sm" data-controller="tags">
+      <input data-whitelist="<%= Tag.list_names(20) %>" placeholder='write some tags' class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" data-target="tags.output" name='basic' value='<%= @bookmark.tag_names_for(current_user).join(",") %>' >
+    </div>
+    <div>
+      <%= f.button t("save"), class: "btn-primary", type: 'submit', data: {disable_with: disable_with_spinner(t("save"))} %>
+    </div>
   </div>
-</div>
+<% end %>
