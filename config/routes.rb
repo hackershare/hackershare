@@ -17,8 +17,9 @@ end
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
-  
+
   namespace :admin do
+    root "users#index"
     resources :users
   end
 
