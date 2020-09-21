@@ -20,10 +20,7 @@
       </div>
       <div class="flex flex-wrap pl-6 items-center space-x-2">
         <% bookmark.tags.each do |tag| %>
-          <span class="btn-tag">
-            <%= tag_url_for(tag) %>
-            <%= render_rss_icon(tag) %>
-          </span>
+          <%= tag_url_for(tag) %>
         <% end %>
       </div>
     </div>

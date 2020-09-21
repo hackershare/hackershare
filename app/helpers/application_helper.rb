@@ -69,10 +69,21 @@ module ApplicationHelper
   end
 
   def tag_url_for(tag)
-    if current_page?(users_path)
-      link_to "##{tag.name}", request.params.except(:page).merge(tag: tag.name, only_path: true), data: { remote: true, action: "ajax:success->listing#replace" }
-    else
-      link_to "##{tag.name}", request.params.except(:page).merge(tag: tag.name)
+    if current_page?(pretty_bookmarks_path)
+      link_to request.params.except(:page).merge(tag: tag.name), class: 'btn-tag' do
+        concat "##{tag.name}"
+        concat render_rss_icon(tag)
+      end
+    elsif current_page?(categories_path)
+      link_to pretty_bookmarks_path(tag: tag.name), class: 'btn-tag' do
+        concat "##{tag.name}"
+        concat render_rss_icon(tag)
+      end
+    elsif current_page?(user_path)
+      link_to request.params.except(:page).merge(tag: tag.name, only_path: true), class: 'btn-tag', data: { remote: true, action: "ajax:success->listing#replace" } do
+        concat "##{tag.name}"
+        concat render_rss_icon(tag)
+      end
     end
   end
 

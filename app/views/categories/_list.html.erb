@@ -5,13 +5,8 @@
     
         <div class="flex-1 flex items-center justify-between border border-gray-200 rounded-md truncate">
           <div class="flex-1 px-4 py-2 text-sm leading-5 truncate">
-            <div class="mb-4 inline-flex items-center px-2 py-1 rounded text-sm font-medium leading-4 bg-orange-100 text-orange-800">
-              
-              <%= link_to tag.name, pretty_bookmarks_path(tag: tag.name) %>
-              <%= render_rss_icon(tag) %>
-            </div>
-            
-            <p><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
+            <div class="flex"><%= tag_url_for(tag) %></div>
+            <p class="mt-2"><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
             <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
             <p><span class="text-xl"> <%=tag.subscriptions_count %></span> <span class="text-gray-500">subscriptions</span></p>
             <div data-controller="follow-tag" class="mt-3">
