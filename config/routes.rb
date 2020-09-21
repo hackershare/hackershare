@@ -18,6 +18,11 @@ end
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
+  namespace :admin do
+    root "users#index"
+    resources :users
+  end
+
   scope "(:locale)", locale: /cn/ do
     get "auth/:provider/callback", to: "sessions#create_from_oauth"
     resources :registrations, only: %i[new create]
