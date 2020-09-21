@@ -38,6 +38,6 @@ class CategoriesController < ApplicationController
     end
     @followed_tags = current_user.follow_tags.order(bookmarks_count: :desc)
     @unfollowed_tags = Tag.order(bookmarks_count: :desc).where.not(is_rss: true, id: @followed_tags.pluck(:id)).limit(10)
-    render partial: 'bookmarks/tag_subscribe_container', locals: { followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags } 
+    render partial: "bookmarks/tag_subscribe_container", locals: { followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags }
   end
 end
