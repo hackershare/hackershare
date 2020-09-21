@@ -1,7 +1,11 @@
-<% flash.each do |key, value| %>
-  <% if %w[error info success].include?(key) && value.present? %>
-    <div class="space-y-1 lg:space-y-2 mb-2 lg:mb-4">
-      <%= render "layouts/flash/#{key}" %>
-    </div>
-  <% end %>
-<% end %>
+<div class="mt-2 lg:mt-4">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <% flash.each do |key, value| %>
+      <% if %w[error info success].include?(key) && value.present? %>
+        <div class="space-y-1 lg:space-y-2">
+          <%= render "layouts/flash/#{key}" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
