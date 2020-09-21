@@ -52,6 +52,7 @@ cn:
   remember_me: 记住我
   save: 保存
   search: 搜索
+  search_results: "搜索结果: %{query}"
   send: 分享
   settings: 个人资料设置
   sign_in: 登录

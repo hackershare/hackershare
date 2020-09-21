@@ -1,3 +1,8 @@
+<% if @tag.present? %>
+  <% title(@tag) %>
+<% elsif @query.present %>
+  <% title(t("search_results", query: @query)) %>
+<% end %>
 <!-- Left sidebar & main wrapper -->
 <div class="flex space-x-4">
   <!-- Projects List -->
