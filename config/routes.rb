@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   namespace :admin do
-    root "users#index"
+    root "dashboard#index"
     resources :users
     resources :tags
     resources :bookmarks
+    resources :dashboard, only: [:index]
   end
 
   scope "(:locale)", locale: /cn/ do
