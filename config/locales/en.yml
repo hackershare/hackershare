@@ -52,6 +52,7 @@ en:
   remember_me: Remember Me
   save: Save
   search: Search
+  search_results: "Search Results: %{query}"
   send: Send
   settings: Settings
   sign_in: Sign in
