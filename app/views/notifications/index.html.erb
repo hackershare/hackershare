@@ -1,25 +1,17 @@
 <% title(t("notification")) %>
-<div class="">
-    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-      <div class="max-w-none mx-auto">
-        <div class="bg-white overflow-hidden sm:rounded-lg sm:shadow">
-          
-          <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <div class="flex justify-between">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                <%= t("notification") %>
-              </h3>
-              <div>
-                <%= link_to t("clear_all"), clear_all_notifications_path, method: :post, class: "btn-cancel", remote: true, data: {disable_with: disable_with_spinner(t("clear_all"))} %>
-                <%= link_to t("read_all"), read_all_notifications_path, method: :post, class: "btn-primary", remote: true, data: {disable_with: disable_with_spinner(t("read_all"))} %>
-              </div>
-            </div>
-          </div>
-          <div data-controller="listing" data-target="listing.container">
-            <%= render partial: "notifications/list" %>
-          </div>
-          
-        </div>
+<div class="overflow-hidden sm:rounded-lg sm:shadow">
+  <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+    <div class="flex justify-between">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        <%= t("notification") %>
+      </h3>
+      <div>
+        <%= link_to t("clear_all"), clear_all_notifications_path, method: :post, class: "btn-cancel", remote: true, data: {disable_with: disable_with_spinner(t("clear_all"))} %>
+        <%= link_to t("read_all"), read_all_notifications_path, method: :post, class: "btn-primary", remote: true, data: {disable_with: disable_with_spinner(t("read_all"))} %>
       </div>
     </div>
   </div>
+  <div data-controller="listing" data-target="listing.container">
+    <%= render partial: "notifications/list" %>
+  </div>
+</div>
