@@ -6,7 +6,7 @@
       <%= render "bookmarks/bookmarks_with_pagination", suggest_tags: @suggest_tags, lang: @lang %>
     </div>
   </div>
-  <div class="hidden lg:block w-80">
+  <div class="hidden lg:block w-80 flex-shrink-0">
     <%= render "bookmarks/user_side", followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags %>
   </div>
 </div>

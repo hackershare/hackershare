@@ -1,7 +1,7 @@
 <div class="mt-2 lg:mt-4">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <% if current_user %>
-      <%= form_with(model: Bookmark.new, url: bookmarks_path, html: {autocomplete: :off}, data: { action: 'ajax:success->bookmarks#append' }) do |f| %>
+      <%= form_with(model: Bookmark.new, url: bookmarks_path, html: { autocomplete: :off }) do |f| %>
         <div class="bg-primary rounded-primary padding-primary border-color-primary border flex items-stretch">
           <%= f.url_field :url, placeholder: 'https://', class: "bg-white w-full appearance-none bg-transparent border border-color-primary flex-1 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", data: { target: 'bookmarks.input' } %>
           <div class="rounded-sm shadow">
