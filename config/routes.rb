@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     root "users#index"
     resources :users
     resources :tags
+    resources :bookmarks
   end
 
   scope "(:locale)", locale: /cn/ do
