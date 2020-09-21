@@ -1,0 +1,36 @@
+<div class="pb-4 space-y-2">
+  <h4><%= t("my_tags") %></h4>
+  <% if followed_tags.present? %>
+    <% followed_tags.each do |tag| %>
+      <div class="flex justify-between items-center">
+        <div><%= tag_url_for(tag) %></div>
+        <div>
+          <%= link_to toggle_subscribe_category_path(tag), remote: true, method: 'post', 'data-action': 'ajax:success->tag-subscribe#toggle', class: 'text-sm flex items-center px-2 py-1 rounded bg-indigo-50 hover:bg-indigo-100 hover:shadow-lg text-color-white' do %>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span><%= t("cancel_subscribe") %><span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="text-sm text-gray-500"><%= t('empty_data') %></div>
+  <% end %>
+</div>
+<div class="pt-4 space-y-2">
+  <h4><%= t("other_hot_tags") %></h4>
+  <% unfollowed_tags.each do |tag| %>
+    <div class="flex justify-between items-center">
+      <div><%= tag_url_for(tag) %></div>
+      <div>
+        <%= link_to toggle_subscribe_category_path(tag), remote: true, method: 'post', 'data-action': 'ajax:success->tag-subscribe#toggle', class: 'text-sm flex items-center px-2 py-1 rounded bg-indigo-50 hover:bg-indigo-100 hover:shadow-md text-color-white' do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span><%= t("subscribe") %><span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

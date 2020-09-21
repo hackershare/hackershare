@@ -12,6 +12,7 @@ en:
   bookmark_destroy_ok: Bookmark destroyed successfully
   bookmark_destroy_fail: Bookmark destroyed failed
   bookmarks: Bookmarks
+  cancel_subscribe: Cancel Subscribe
   category: Category
   chrome_extension_description: With the extension, you can add new bookmarks with the click of a button.
   comment: Comment
@@ -42,10 +43,12 @@ en:
   logout_successed: Logout successed
   monthly: Monthly
   my_profile: My Profile
+  my_tags: My Tags
   not_have_account?: Not have account?
   open_source: Open Source
   or_continue_with: Or continue with
   origin_link: Origin Link
+  other_hot_tags: Other Hot Tags
   remember_me: Remember Me
   save: Save
   search: Search
@@ -58,7 +61,9 @@ en:
   sign_up_failed: Sign up failed
   sign_up_new_account: Sign up new account
   subscriptions: Subscriptions
+  subscribe: Subscribe
   smart: Smart
+  tag_subscription: Tag subscription
   tagging: Tagging
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: This information will be displayed publicly so be careful what you share
   top_hackers: Top Hackers

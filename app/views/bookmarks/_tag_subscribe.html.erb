@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <div class="border border-color-primary rounded-primary">
+    <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+        <%= t("tag_subscription") %>
+      </h3>
+    </div>
+    <div class="padding-primary divide-y divide-gray-200" data-controller="tag-subscribe">
+      <div data-target="tag-subscribe.container">
+        <%= render 'bookmarks/tag_subscribe_container', followed_tags: followed_tags, unfollowed_tags: unfollowed_tags %>
+      </div>
+    </div>
+  </div>
+<% end %>

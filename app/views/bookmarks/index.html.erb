@@ -7,6 +7,6 @@
     </div>
   </div>
   <div class="hidden lg:block w-80">
-    <%= render "bookmarks/user_side" %>
+    <%= render "bookmarks/user_side", followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags %>
   </div>
 </div>

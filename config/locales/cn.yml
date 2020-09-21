@@ -12,6 +12,7 @@ cn:
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
   bookmarks: 书签
+  cancel_subscribe: 取消订阅
   category: 标签
   chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
@@ -42,10 +43,12 @@ cn:
   logout_successed: 退出成功
   monthly: 按月排序
   my_profile: 我的主页
+  my_tags: 我的标签
   not_have_account?: 没有账户？
   open_source: 源码地址
   or_continue_with: 便捷登录
   origin_link: 原始链接
+  other_hot_tags: 其他热门标签
   remember_me: 记住我
   save: 保存
   search: 搜索
@@ -58,7 +61,9 @@ cn:
   sign_up_failed: 注册失败
   sign_up_new_account: 注册新账户
   subscriptions: 订阅
+  subscribe: 订阅
   smart: 智能排序
+  tag_subscription: 标签订阅
   tagging: 打标签
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
   top_hackers: 极客排行

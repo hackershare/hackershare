@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :categories do
       member do
         post :toggle_following
+        post :toggle_subscribe
       end
     end
     resources :bookmarks, except: %i[new] do
