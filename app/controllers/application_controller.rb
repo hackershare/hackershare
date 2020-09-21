@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
       end
       @pagy, @bookmarks = pagy_countless(
         base,
-        items: 10,
+        items: 25,
         link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
       )
       @suggest_tags = if current_user
