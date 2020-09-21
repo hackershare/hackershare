@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
         base = base.order("relevance DESC")
       end
       @pagy, @bookmarks = pagy_countless(
-        base,
+        base.with_attached_favicon_local,
         items: 25,
         link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
       )

@@ -37,6 +37,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_silent_logs (0.1.1)
+      rails
     activejob (6.0.3.3)
       activesupport (= 6.0.3.3)
       globalid (>= 0.3.6)
@@ -400,6 +402,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview (>= 6.0.3.3)
+  active_storage_silent_logs
   annotate (~> 3.1)
   bcrypt (~> 3.1)
   bootsnap (>= 1.4.2)

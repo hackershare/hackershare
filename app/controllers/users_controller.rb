@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     base = Bookmark.filter(@user, params).preload(:ref, :tags)
     base = base.tag_filter(base, params[:tag]) if params[:tag].present?
     @pagy, @bookmarks = pagy_countless(
-      base,
+      base.with_attached_favicon_local,
       items: 10,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def index
     @pagy, @users = pagy_countless(
-      User.order(score: :desc),
+      User.order(score: :desc).with_attached_avatar,
       items: 12,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
