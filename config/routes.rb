@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     root "dashboard#index"
     resources :users
     resources :tags
-    resources :bookmarks
+    resources :bookmarks do
+      member do
+        post :up
+      end
+    end
     resources :dashboard, only: [:index]
   end
 
