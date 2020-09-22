@@ -13,7 +13,7 @@ en:
   bookmark_destroy_ok: Bookmark destroyed successfully
   bookmark_destroy_fail: Bookmark destroyed failed
   bookmarks: Bookmarks
-  cancel_subscribe: Cancel Subscribe
+  unsubscribe: Unsubscribe
   category: Category
   chrome_extension_description: With the extension, you can add new bookmarks with the click of a button.
   comment: Comment

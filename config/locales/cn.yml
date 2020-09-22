@@ -13,7 +13,7 @@ cn:
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
   bookmarks: 书签
-  cancel_subscribe: 取消订阅
+  unsubscribe: 取消订阅
   category: 标签
   chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
