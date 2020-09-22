@@ -111,10 +111,8 @@ class ApplicationController < ActionController::Base
         link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
       )
       @suggest_tags = Tag.order(bookmarks_count: :desc).where(is_rss: false).limit(5).pluck(:name)
-      if user_signed_in?
-        @followed_tags = current_user.follow_tags.order(bookmarks_count: :desc)
-        @unfollowed_tags = Tag.order(bookmarks_count: :desc).where.not(is_rss: true, id: @followed_tags.pluck(:id)).limit(10)
-      end
+      @followed_tags = user_signed_in? ? current_user.follow_tags.order(bookmarks_count: :desc) : []
+      @unfollowed_tags = Tag.order(bookmarks_count: :desc).where.not(is_rss: true, id: @followed_tags.pluck(:id)).limit(10)
       respond_to do |format|
         format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html", locals: { suggest_tags: @suggest_tags, lang: @lang } }
         format.html { render "bookmarks/index" }

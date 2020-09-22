@@ -1,7 +1,5 @@
-<% if user_signed_in? %>
-  <div class="border border-color-primary rounded-primary">
-    <div class="padding-primary divide-y divide-gray-200" data-controller="tag-subscribe" data-target="tag-subscribe.container">
-      <%= render 'bookmarks/tag_subscribe_container', followed_tags: followed_tags, unfollowed_tags: unfollowed_tags %>
-    </div>
+<div class="border border-color-primary rounded-primary">
+  <div class="padding-primary divide-y divide-gray-200" data-controller="tag-subscribe" data-target="tag-subscribe.container">
+    <%= render 'bookmarks/tag_subscribe_container', followed_tags: followed_tags, unfollowed_tags: unfollowed_tags %>
   </div>
-<% end %>
+</div>

@@ -1,21 +1,23 @@
-<div class="pb-4">
-  <h4 class="mb-2"><%= t("my_tags") %></h4>
-  <% if followed_tags.present? %>
-    <% followed_tags.each do |tag| %>
-      <div class="relative flex items-center hover:bg-gray-100 hover:shadow-sm" data-controller="toggles" data-action="mouseover->toggles#show mouseout->toggles#hide">
-        <%= link_to "##{tag.name}", pretty_bookmarks_path(request.params.except(:page).merge(tag: tag.name)), class: 'w-full px-1 py-2 rounded-sm text-sm leading-4' %>
-        <%= link_to toggle_subscribe_category_path(tag), 'data-target': 'toggles.element', remote: true, method: 'post', 'data-action': 'ajax:success->tag-subscribe#toggle', class: 'hidden absolute top-0 right-1 text-sm flex items-center px-2 py-1 rounded bg-indigo-500 hover:bg-indigo-600 hover:shadow-lg text-white' do %>
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span><%= t("unsubscribe") %><span>
-        <% end %>
-      </div>
+<% if user_signed_in? %>
+  <div class="pb-4">
+    <h4 class="mb-2"><%= t("my_tags") %></h4>
+    <% if followed_tags.present? %>
+      <% followed_tags.each do |tag| %>
+        <div class="relative flex items-center hover:bg-gray-100 hover:shadow-sm" data-controller="toggles" data-action="mouseover->toggles#show mouseout->toggles#hide">
+          <%= link_to "##{tag.name}", pretty_bookmarks_path(request.params.except(:page).merge(tag: tag.name)), class: 'w-full px-1 py-2 rounded-sm text-sm leading-4' %>
+          <%= link_to toggle_subscribe_category_path(tag), 'data-target': 'toggles.element', remote: true, method: 'post', 'data-action': 'ajax:success->tag-subscribe#toggle', class: 'hidden absolute top-0 right-1 text-sm flex items-center px-2 py-1 rounded bg-indigo-500 hover:bg-indigo-600 hover:shadow-lg text-white' do %>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span><%= t("unsubscribe") %><span>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="text-sm text-gray-500"><%= t('empty_data') %></div>
     <% end %>
-  <% else %>
-    <div class="text-sm text-gray-500"><%= t('empty_data') %></div>
-  <% end %>
-</div>
+  </div>
+<% end %>
 <div class="pt-4">
   <h4 class="mb-2"><%= t("other_hot_tags") %></h4>
     <% if unfollowed_tags.present? %>
