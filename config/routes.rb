@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :bookmarks do
       member do
         post :up
+        post :down
       end
     end
     resources :dashboard, only: [:index]
