@@ -1,3 +1,9 @@
+# Hackershare
+
+[英文](https://github.com/hackershare/hackershare/blob/master/README.md)
+
+[![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
+
 hackershare是一个书签分享平台，你可以通过chrome extension一键分享你正在浏览的网页。与pocket之类书签管理工具不同的是，hackershare鼓励分享你的书签，而不是私藏，独乐乐不如众乐乐。
 
 大众标签是书签工具必备的一个特性，可以便于管理你的书签。成为一个强大的信息组织工具，是hackershare的目标，未来在标签上会做很多优化，比如同义词环、优选术语、上位术语等。

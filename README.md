@@ -1,5 +1,7 @@
 # Hackershare
 
+[中文](https://github.com/hackershare/hackershare/blob/master/README_cn.md)
+
 Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket.
 
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
