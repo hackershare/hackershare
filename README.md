@@ -2,7 +2,7 @@
 
 Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket.
 
-[![CI](https://github.com/hooopo/hackershare/workflows/CI/badge.svg)](https://github.com/hooopo/hackershare/actions)
+[![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
 
 ## Dependency
 
@@ -19,7 +19,7 @@ Social bookmarks website for hackers. Alternative to delicious, hackernews, pock
 
 ## chrome extension
 
-* https://github.com/hooopo/hackershare-ext
+* https://github.com/hackershare/hackershare-ext
 * https://chrome.google.com/webstore/detail/hackershare/pinmchdpdbjbhijbagmealcojjpeebmh
 
 ## refresh sitemap

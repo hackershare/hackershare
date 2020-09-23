@@ -4,7 +4,7 @@
 lock "~> 3.14.1"
 
 set :application, "hackershare"
-set :repo_url, "git@hackershare.github.com:hooopo/hackershare.git"
+set :repo_url, "git@hackershare.github.com:hackershare/hackershare.git"
 
 set :assets_roles, [:app]
 
