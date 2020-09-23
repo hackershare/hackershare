@@ -26,12 +26,12 @@
     </div>
     <!-- Repo meta info -->
     <div class=" flex-col flex-shrink-0 items-end space-y-1 lg:space-y-3">
-      <div class="flex items-center justify-end space-x-1 lg:space-x-4 text-sm leading-5 text-gray-600">
+      <div class="flex items-center justify-end space-x-1 lg:space-x-4 text-sm leading-5 text-gray-500">
         <!-- like button -->
         <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
           <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150" do %>
             <svg data-target="likes.svg" class="h-5 w-5 <%= bookmark.liked_by?(current_user) ? "text-yellow-300 hover:text-yellow-400" : "text-gray-300 hover:text-gray-500" %>" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
             </svg>
           <% end %>
           <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseenter->hover-like-users#show mouseleave->hover-like-users#hide">
@@ -40,8 +40,8 @@
             </button>
           </span>
         </span>
-        <a href="<%= bookmark_path(bookmark) %>" class="flex space-x-0.5 relative hover:text-gray-800">
-          <svg class="w-5 h-5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href="<%= bookmark_path(bookmark) %>" class="flex items-center space-x-0.5 relative hover:text-gray-700">
+          <svg class="w-6 h-6" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg> 
           <span><%= bookmark.comments_count %></span>
@@ -49,21 +49,21 @@
         <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
           <div class="hover:text-gray-900">
             <a @click="open = !open" type="button" class="cursor-pointer rounded-md transition ease-in-out duration-150" aria-haspopup="true" aria-expanded="true">
-              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
               </svg>
             </a>
           </div>
           <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-32 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
             <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-              <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-800", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
+              <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
                 <span><%= t("tagging") %></span>
               <% end %>
               <% if bookmark_self.can_destroy_by?(current_user) %>
-                <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex space-x-1 px-2 py-2 hover:text-gray-800" do %>
+                <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800" do %>
                   <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>
