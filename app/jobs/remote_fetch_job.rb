@@ -28,7 +28,7 @@ class RemoteFetchJob < ApplicationJob
     bookmark.description = parser.description.presence if bookmark.description.blank?
     bookmark.favicon = favicon_url.presence if bookmark.favicon.blank?
     lang = [bookmark.title, bookmark.description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
-    bookmark.lang = lang if bookmark.lang.blank?
+    bookmark.lang = lang
     if bookmark.save
       bookmark.save_favicon if bookmark.favicon.present?
     else
