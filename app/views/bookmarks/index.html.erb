@@ -6,7 +6,7 @@
 <!-- Left sidebar & main wrapper -->
 <div class="flex space-x-4">
   <!-- Projects List -->
-  <div data-controller="bookmarks" class="-mx-2 flex-auto rounded-primary border-0 md:border md:border-color-primary">
+  <div data-controller="bookmarks" class="-mx-2 flex-auto rounded-primary border-0 md:border border-color-primary">
     <div data-controller="listing" data-target="listing.container">
       <%= render "bookmarks/bookmarks_with_pagination", suggest_tags: @suggest_tags, lang: @lang %>
     </div>
