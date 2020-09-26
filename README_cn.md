@@ -1,6 +1,6 @@
 # Hackershare
 
-[英文](https://github.com/hackershare/hackershare/blob/master/README.md)
+[English](https://github.com/hackershare/hackershare/blob/master/README.md)
 
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
 
