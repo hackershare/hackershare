@@ -11,6 +11,7 @@
 #  subscriptions_count :integer          default(0)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  preferred_id        :bigint
 #  user_id             :bigint
 #
 # Indexes
@@ -27,6 +28,9 @@ class Tag < ApplicationRecord
 
   has_many :tag_subscriptions
   has_many :followers, through: :tag_subscriptions, source: "user"
+
+  has_many :aliases, foreign_key: :preferred_id, class_name: "Tag"
+  belongs_to :preferred, class_name: "Tag", optional: true
 
   validates :name, uniqueness: true
 

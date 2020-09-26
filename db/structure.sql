@@ -189,7 +189,9 @@ CREATE TABLE public.bookmarks (
     clicks_count integer DEFAULT 0,
     score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
-    is_rss boolean DEFAULT false NOT NULL
+    is_rss boolean DEFAULT false NOT NULL,
+    cached_tag_with_aliases_names character varying[] DEFAULT '{}'::character varying[],
+    cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[]
 );
 
 
@@ -496,7 +498,8 @@ CREATE TABLE public.tags (
     updated_at timestamp(6) without time zone NOT NULL,
     bookmarks_count integer DEFAULT 0,
     subscriptions_count integer DEFAULT 0,
-    is_rss boolean DEFAULT false
+    is_rss boolean DEFAULT false,
+    preferred_id bigint
 );
 
 
@@ -1156,6 +1159,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200919040123'),
 ('20200919062959'),
 ('20200919063317'),
-('20200922060346');
+('20200922060346'),
+('20200924120624'),
+('20200926084820');
 
 
