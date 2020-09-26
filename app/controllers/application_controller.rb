@@ -6,9 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :mark_notification
 
-  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host
-
-  helper_method :default_host
+  helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :best_locale
 
   protected
 
@@ -53,17 +51,20 @@ class ApplicationController < ActionController::Base
       if params[:set_locale]
         cookies[:locale] = params[:locale] || I18n.default_locale
       end
-      if dync_locale_routes?
-        locale = best_locale
+      if request.path == "/" && best_locale != I18n.default_locale
+        redirect_to root_path(locale: best_locale)
+      elsif dync_locale_routes?
+        locale = best_locale == :cn ? :'zh-CN' : best_locale
+        I18n.with_locale(locale, &action)
       else
-        locale = I18n.locale_available?(params[:locale]) ? params[:locale] : I18n.default_locale
+        locale = params[:locale] == "cn" ? :'zh-CN' : I18n.default_locale
+        I18n.with_locale(locale, &action)
       end
-      I18n.with_locale(locale, &action)
     end
 
     # Cannot use this this method until I18n.locale is already setted
     def default_url_options
-      locale = I18n.locale == I18n.default_locale ? nil : I18n.locale
+      locale = I18n.locale == I18n.default_locale ? nil : "cn"
       {
         locale: locale,
       }
@@ -74,13 +75,12 @@ class ApplicationController < ActionController::Base
         cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
         lang = request.env["HTTP_ACCEPT_LANGUAGE"]&.scan(/^[a-z]{2}/)&.first
         client_locale = lang == "zh" ? :cn : :en
-        cookie_locale || client_locale || I18n.default_locale
+        (cookie_locale || client_locale || I18n.default_locale).to_sym
       end
     end
 
     def dync_locale_routes?
-      request.path == "/" ||
-        (controller_name == "sessions" && action_name == "create_from_oauth")
+      controller_name == "sessions" && action_name == "create_from_oauth"
     end
 
     def mark_notification

@@ -46,7 +46,7 @@ module Hackershare
     config.active_storage.content_types_to_serve_as_binary -= ["image/svg+xml"]
     config.active_storage.queue = :default
 
-    config.i18n.available_locales = %i[en cn]
+    config.i18n.available_locales = %i[en zh-CN]
     config.i18n.default_locale = :en
     config.generators do |g|
       g.stylesheets false
