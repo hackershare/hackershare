@@ -34,6 +34,18 @@ class Tag < ApplicationRecord
 
   validates :name, uniqueness: true
 
+  def self_with_aliases_ids
+    if is_alias?
+      [preferred.id, preferred.aliases.map(&:id)].flatten.uniq
+    else
+      [id, aliases.map(&:id)].flatten.uniq
+    end
+  end
+
+  def is_alias?
+    preferred.present?
+  end
+
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
   end

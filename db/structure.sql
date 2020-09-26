@@ -190,7 +190,7 @@ CREATE TABLE public.bookmarks (
     score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
     is_rss boolean DEFAULT false NOT NULL,
-    cached_tag_with_aliases_names character varying[] DEFAULT '{}'::character varying[],
+    cached_tag_with_aliases_names character varying,
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[]
 );
 

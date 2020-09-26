@@ -7,7 +7,7 @@
 #  cached_tag_ids                :bigint           default([]), is an Array
 #  cached_tag_names              :string
 #  cached_tag_with_aliases_ids   :bigint           default([]), is an Array
-#  cached_tag_with_aliases_names :string           default([]), is an Array
+#  cached_tag_with_aliases_names :string
 #  clicks_count                  :integer          default(0)
 #  comments_count                :integer          default(0)
 #  content                       :text

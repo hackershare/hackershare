@@ -9,7 +9,7 @@
 #  cached_tag_ids                :bigint           default([]), is an Array
 #  cached_tag_names              :string
 #  cached_tag_with_aliases_ids   :bigint           default([]), is an Array
-#  cached_tag_with_aliases_names :string           default([]), is an Array
+#  cached_tag_with_aliases_names :string
 #  clicks_count                  :integer          default(0)
 #  comments_count                :integer          default(0)
 #  content                       :text
@@ -139,8 +139,13 @@ class Bookmark < ApplicationRecord
   end
 
   def sync_cached_tag_ids
-    last_tags = tags.reload
-    update(cached_tag_ids: last_tags.map(&:id), cached_tag_names: last_tags.map(&:name).join(", "))
+    last_tags = tags.preload(:aliases).reload
+    update(
+      cached_tag_with_aliases_ids: last_tags.map { |t| [t, t.aliases.to_a] }.flatten.map(&:id).uniq,
+      cached_tag_with_aliases_names: last_tags.map { |t| [t, t.aliases.to_a] }.flatten.map(&:name).uniq.join(", "),
+      cached_tag_ids: last_tags.map(&:id),
+      cached_tag_names: last_tags.map(&:name).join(", ")
+    )
   end
 
   def save_favicon
