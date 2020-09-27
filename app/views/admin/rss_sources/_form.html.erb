@@ -1,0 +1,17 @@
+<%= form_with model: [:admin, rss_source], local: true, class: 'max-w-md space-y-2' do |f| %>
+  <div>
+    <%= f.label :url, class: 'block text-sm leading-5 font-medium text-gray-700' %>
+    <%= f.url_field :url, class: 'mt-1 form-input block w-full sm:text-sm sm:leading-5' %>
+  </div>
+  <div>
+    <%= f.label :tag_name, class: 'block text-sm leading-5 font-medium text-gray-700' %>
+    <%= f.text_field :tag_name, class: 'mt-1 form-input block w-full sm:text-sm sm:leading-5' %>
+  </div>
+  <div>
+    <%= f.label :is_display, class: 'block text-sm leading-5 font-medium text-gray-700' %>
+    <%= f.check_box :is_display, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+  </div>
+  <div>
+    <%= f.submit 'Submit', class: 'btn-primary' %>
+  </div>
+<% end %>

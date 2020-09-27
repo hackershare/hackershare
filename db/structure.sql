@@ -189,6 +189,7 @@ CREATE TABLE public.bookmarks (
     score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
     is_rss boolean DEFAULT false NOT NULL,
+    is_display boolean DEFAULT true NOT NULL,
     cached_tag_with_aliases_names character varying,
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
     tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
@@ -384,12 +385,13 @@ ALTER SEQUENCE public.notifications_id_seq OWNED BY public.notifications.id;
 
 CREATE TABLE public.rss_sources (
     id bigint NOT NULL,
-    name character varying NOT NULL,
+    tag_name character varying NOT NULL,
     url character varying NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    code character varying NOT NULL,
-    tag_id bigint
+    tag_id bigint,
+    processed_at timestamp without time zone,
+    is_display boolean DEFAULT false NOT NULL
 );
 
 
@@ -1163,6 +1165,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200924120624'),
 ('20200926084820'),
 ('20200926140955'),
-('20200927145907');
+('20200927080653'),
+('20200927145907'),
+('20200927152340');
 
 

@@ -1,0 +1,9 @@
+<div class="mb-2">
+  <% flash.each do |key, value| %>
+    <% if %w[error info success].include?(key) && value.present? %>
+      <div class="space-y-1 lg:space-y-2">
+        <%= render "layouts/flash/#{key}" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
