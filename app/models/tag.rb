@@ -11,6 +11,7 @@
 #  subscriptions_count :integer          default(0)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  preferred_id        :bigint
 #  user_id             :bigint
 #
 # Indexes
@@ -28,10 +29,27 @@ class Tag < ApplicationRecord
   has_many :tag_subscriptions
   has_many :followers, through: :tag_subscriptions, source: "user"
 
+  has_many :aliases, foreign_key: :preferred_id, class_name: "Tag"
+  belongs_to :preferred, class_name: "Tag", optional: true
+
+  scope :main, -> { where(preferred_id: nil) }
+
   validates :name, uniqueness: true
 
+  def self_with_aliases_ids
+    if is_alias?
+      [preferred.id, preferred.aliases.map(&:id)].flatten.uniq
+    else
+      [id, aliases.map(&:id)].flatten.uniq
+    end
+  end
+
+  def is_alias?
+    preferred.present?
+  end
+
   def self.list_names(limit)
-    Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
+    Tag.order(bookmarks_count: :desc).where(is_rss: false).main.limit(limit).map(&:name).join(",")
   end
 
   def followed_by?(user)

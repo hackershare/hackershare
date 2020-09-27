@@ -4,38 +4,40 @@
 #
 # Table name: bookmarks
 #
-#  id                   :bigint           not null, primary key
-#  cached_like_user_ids :integer          default([]), is an Array
-#  cached_tag_ids       :bigint           default([]), is an Array
-#  cached_tag_names     :string
-#  clicks_count         :integer          default(0)
-#  comments_count       :integer          default(0)
-#  content              :text
-#  description          :text
-#  dups_count           :integer          default(0)
-#  favicon              :string
-#  is_rss               :boolean          default(FALSE), not null
-#  lang                 :integer          default("english"), not null
-#  likes_count          :integer          default(0)
-#  score                :integer
-#  smart_score          :float
-#  tags_count           :integer          default(0)
-#  title                :string
-#  tsv                  :tsvector
-#  url                  :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  ref_id               :bigint
-#  user_id              :bigint
+#  id                            :bigint           not null, primary key
+#  cached_like_user_ids          :integer          default([]), is an Array
+#  cached_tag_ids                :bigint           default([]), is an Array
+#  cached_tag_names              :string
+#  cached_tag_with_aliases_ids   :bigint           default([]), is an Array
+#  cached_tag_with_aliases_names :string
+#  clicks_count                  :integer          default(0)
+#  comments_count                :integer          default(0)
+#  content                       :text
+#  description                   :text
+#  dups_count                    :integer          default(0)
+#  favicon                       :string
+#  is_rss                        :boolean          default(FALSE), not null
+#  lang                          :integer          default("english"), not null
+#  likes_count                   :integer          default(0)
+#  score                         :integer
+#  smart_score                   :float
+#  tags_count                    :integer          default(0)
+#  title                         :string
+#  tsv                           :tsvector
+#  url                           :string
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#  ref_id                        :bigint
+#  user_id                       :bigint
 #
 # Indexes
 #
-#  fulltext_idx                        (tsv) USING gin
-#  index_bookmarks_on_ref_id           (ref_id)
-#  index_bookmarks_on_score            (score)
-#  index_bookmarks_on_smart_score      (smart_score)
-#  index_bookmarks_on_url_and_user_id  (url,user_id) UNIQUE
-#  index_bookmarks_on_user_id          (user_id)
+#  index_bookmarks_on_cached_tag_with_aliases_ids  (cached_tag_with_aliases_ids) USING gin
+#  index_bookmarks_on_ref_id                       (ref_id)
+#  index_bookmarks_on_score                        (score)
+#  index_bookmarks_on_smart_score                  (smart_score)
+#  index_bookmarks_on_url_and_user_id              (url,user_id) UNIQUE
+#  index_bookmarks_on_user_id                      (user_id)
 #
 class Bookmark < ApplicationRecord
   has_one_attached :favicon_local
@@ -137,8 +139,13 @@ class Bookmark < ApplicationRecord
   end
 
   def sync_cached_tag_ids
-    last_tags = tags.reload
-    update(cached_tag_ids: last_tags.map(&:id), cached_tag_names: last_tags.map(&:name).join(", "))
+    last_tags = tags.preload(:aliases).reload
+    update(
+      cached_tag_with_aliases_ids: last_tags.map { |t| [t, t.aliases.to_a] }.flatten.map(&:id).uniq,
+      cached_tag_with_aliases_names: last_tags.map { |t| [t, t.aliases.to_a] }.flatten.map(&:name).uniq.join(", "),
+      cached_tag_ids: last_tags.map(&:id),
+      cached_tag_names: last_tags.map(&:name).join(", ")
+    )
   end
 
   def save_favicon
@@ -180,7 +187,8 @@ class Bookmark < ApplicationRecord
 
   def self.tag_filter(scope, tag_name)
     tag = Tag.find_by!(name: tag_name)
-    scope.joins(:taggings).where(taggings: { tag_id: tag.id })
+    tag_ids = tag.self_with_aliases_ids
+    scope.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(tag_ids))
   end
 
   def self.filter(user, params)
@@ -194,8 +202,8 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:type] == "subscriptions"
-      tag_ids = user.follow_tag_ids
-      return Bookmark.joins(:tags).where(tags: { id: tag_ids }).distinct.original.order(id: :desc)
+      tag_ids = user.follow_tags.map { |x| x.self_with_aliases_ids }.flatten.uniq
+      return Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(tag_ids)).original.order(id: :desc)
     end
 
     if params[:type] == "followings"

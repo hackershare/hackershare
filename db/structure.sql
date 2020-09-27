@@ -184,12 +184,14 @@ CREATE TABLE public.bookmarks (
     content text,
     cached_tag_names character varying,
     cached_tag_ids bigint[] DEFAULT '{}'::bigint[],
-    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
     lang integer DEFAULT 0 NOT NULL,
     clicks_count integer DEFAULT 0,
     score integer GENERATED ALWAYS AS ((((dups_count * 3) + (likes_count * 2)) + clicks_count)) STORED,
     smart_score double precision GENERATED ALWAYS AS (((log((((((likes_count * 2) + (dups_count * 3)) + clicks_count))::numeric + 1.1)))::double precision + (date_part('epoch'::text, (created_at - '2020-08-10 00:00:00'::timestamp without time zone)) / (4500)::double precision))) STORED,
-    is_rss boolean DEFAULT false NOT NULL
+    is_rss boolean DEFAULT false NOT NULL,
+    cached_tag_with_aliases_names character varying,
+    cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
+    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -496,7 +498,8 @@ CREATE TABLE public.tags (
     updated_at timestamp(6) without time zone NOT NULL,
     bookmarks_count integer DEFAULT 0,
     subscriptions_count integer DEFAULT 0,
-    is_rss boolean DEFAULT false
+    is_rss boolean DEFAULT false,
+    preferred_id bigint
 );
 
 
@@ -809,13 +812,6 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: fulltext_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX fulltext_idx ON public.bookmarks USING gin (tsv);
-
-
---
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -869,6 +865,13 @@ CREATE UNIQUE INDEX index_bookmark_stats_on_date_id_and_date_type_and_bookmark_i
 --
 
 CREATE INDEX index_bookmark_stats_on_date_id_and_date_type_and_score ON public.bookmark_stats USING btree (date_id DESC, date_type DESC, score DESC);
+
+
+--
+-- Name: index_bookmarks_on_cached_tag_with_aliases_ids; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_bookmarks_on_cached_tag_with_aliases_ids ON public.bookmarks USING gin (cached_tag_with_aliases_ids);
 
 
 --
@@ -1156,6 +1159,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200919040123'),
 ('20200919062959'),
 ('20200919063317'),
-('20200922060346');
+('20200922060346'),
+('20200924120624'),
+('20200926084820'),
+('20200926140955'),
+('20200927145907');
 
 
