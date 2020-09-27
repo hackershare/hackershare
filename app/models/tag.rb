@@ -32,6 +32,8 @@ class Tag < ApplicationRecord
   has_many :aliases, foreign_key: :preferred_id, class_name: "Tag"
   belongs_to :preferred, class_name: "Tag", optional: true
 
+  scope :main, -> { where(preferred_id: nil) }
+
   validates :name, uniqueness: true
 
   def self_with_aliases_ids
@@ -47,7 +49,7 @@ class Tag < ApplicationRecord
   end
 
   def self.list_names(limit)
-    Tag.order(bookmarks_count: :desc).limit(limit).map(&:name).join(",")
+    Tag.order(bookmarks_count: :desc).where(is_rss: false).main.limit(limit).map(&:name).join(",")
   end
 
   def followed_by?(user)
