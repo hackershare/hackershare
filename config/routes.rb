@@ -30,6 +30,18 @@ Rails.application.routes.draw do
       end
     end
     resources :dashboard, only: [:index]
+    resources :rss_sources, only: %i[index new create edit update destroy] do
+      member do
+        patch :display
+        patch :undisplay
+      end
+    end
+    resources :rss_bookmarks, only: %i[index] do
+      member do
+        patch :display
+        patch :undisplay
+      end
+    end
   end
 
   scope "(:locale)", locale: /cn/ do

@@ -16,6 +16,7 @@
 #  description                   :text
 #  dups_count                    :integer          default(0)
 #  favicon                       :string
+#  is_display                    :boolean          default(TRUE), not null
 #  is_rss                        :boolean          default(FALSE), not null
 #  lang                          :integer          default("english"), not null
 #  likes_count                   :integer          default(0)
@@ -62,6 +63,11 @@ class Bookmark < ApplicationRecord
   validates :url, presence: true
   validates :url, url: { no_local: true }
   validates :url, uniqueness: { scope: :user }
+
+  scope :rss, lambda { where(is_rss: true) }
+  scope :unrss, lambda { where(is_rss: false) }
+  scope :display, lambda { where(is_display: true) }
+  scope :undisplay, lambda { where(is_display: false) }
 
   enum lang: {
     english: 0,

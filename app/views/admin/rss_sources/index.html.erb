@@ -1,0 +1,81 @@
+<% content_for :title, 'RSS Sources' %>
+
+<div class="flex justify-end">
+  <%= link_to new_admin_rss_source_path, class: 'btn-primary' do %>
+    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+    </svg>
+    Add
+  <% end %>
+</div>
+
+<div class="flex flex-col mt-4">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Url
+              </th>
+
+              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Tag Name
+              </th>
+
+              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Is Display
+              </th>
+
+              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Processed At
+              </th>
+              <th class="px-3 py-3 bg-gray-50"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200"> 
+            <% @rss_sources.each do |rss_source| %>
+              <tr>
+                <td class="px-3 py-4 whitespace-no-wrap">
+                  <%= rss_source.url %>
+                </td>
+                <td class="px-3 py-4 whitespace-no-wrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <%= rss_source.tag_name %>
+                  </span>
+                </td>
+                <td class="px-3 py-4 whitespace-no-wrap">
+                  <% if rss_source.is_display? %>
+                    <%= link_to undisplay_admin_rss_source_path(rss_source), method: 'patch', class: 'text-gray-500' do %>
+                      <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    <% end %>
+                  <% else %>
+                    <%= link_to display_admin_rss_source_path(rss_source), method: 'patch', class: 'text-gray-300' do %>
+                      <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                      </svg>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td class="px-3 py-4 whitespace-no-wrap">
+                  <%= rss_source.processed_at %>
+                </td>
+                <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                  <%= link_to 'Edit', edit_admin_rss_source_path(rss_source), class: 'text-indigo-600 hover:text-indigo-900' %>
+                </td>
+              </tr>
+            <% end %>
+
+            <!-- More rows... -->
+          </tbody>
+        </table>
+        <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+      </div>
+    </div>
+  </div>
+</div>
+
