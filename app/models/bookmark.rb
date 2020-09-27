@@ -32,12 +32,12 @@
 #
 # Indexes
 #
-#  fulltext_idx                        (tsv) USING gin
-#  index_bookmarks_on_ref_id           (ref_id)
-#  index_bookmarks_on_score            (score)
-#  index_bookmarks_on_smart_score      (smart_score)
-#  index_bookmarks_on_url_and_user_id  (url,user_id) UNIQUE
-#  index_bookmarks_on_user_id          (user_id)
+#  index_bookmarks_on_cached_tag_with_aliases_ids  (cached_tag_with_aliases_ids) USING gin
+#  index_bookmarks_on_ref_id                       (ref_id)
+#  index_bookmarks_on_score                        (score)
+#  index_bookmarks_on_smart_score                  (smart_score)
+#  index_bookmarks_on_url_and_user_id              (url,user_id) UNIQUE
+#  index_bookmarks_on_user_id                      (user_id)
 #
 class Bookmark < ApplicationRecord
   has_one_attached :favicon_local
@@ -187,7 +187,8 @@ class Bookmark < ApplicationRecord
 
   def self.tag_filter(scope, tag_name)
     tag = Tag.find_by!(name: tag_name)
-    scope.joins(:taggings).where(taggings: { tag_id: tag.id })
+    tag_ids = tag.self_with_aliases_ids
+    scope.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(tag_ids))
   end
 
   def self.filter(user, params)
@@ -201,8 +202,8 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:type] == "subscriptions"
-      tag_ids = user.follow_tag_ids
-      return Bookmark.joins(:tags).where(tags: { id: tag_ids }).distinct.original.order(id: :desc)
+      tag_ids = user.follow_tags.map { |x| x.self_with_aliases_ids }.flatten.uniq
+      return Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(tag_ids)).original.order(id: :desc)
     end
 
     if params[:type] == "followings"

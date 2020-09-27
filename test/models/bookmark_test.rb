@@ -32,12 +32,12 @@
 #
 # Indexes
 #
-#  fulltext_idx                        (tsv) USING gin
-#  index_bookmarks_on_ref_id           (ref_id)
-#  index_bookmarks_on_score            (score)
-#  index_bookmarks_on_smart_score      (smart_score)
-#  index_bookmarks_on_url_and_user_id  (url,user_id) UNIQUE
-#  index_bookmarks_on_user_id          (user_id)
+#  index_bookmarks_on_cached_tag_with_aliases_ids  (cached_tag_with_aliases_ids) USING gin
+#  index_bookmarks_on_ref_id                       (ref_id)
+#  index_bookmarks_on_score                        (score)
+#  index_bookmarks_on_smart_score                  (smart_score)
+#  index_bookmarks_on_url_and_user_id              (url,user_id) UNIQUE
+#  index_bookmarks_on_user_id                      (user_id)
 #
 require "test_helper"
 
