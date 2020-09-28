@@ -36,7 +36,7 @@
                         <%= tag.name %>
                       </div>
                       <div class="text-sm leading-5 text-gray-500">
-                        <%= tag.created_at.to_s(:db) %>
+                        <%= tag.aliases.map(&:name).join(", ") %>
                       </div>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                 </td>
 
                 <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  <%=link_to "Edit", edit_admin_tag_path(tag), class: "text-indigo-600 hover:text-indigo-900" %>
                 </td>
               </tr>
             <% end %>

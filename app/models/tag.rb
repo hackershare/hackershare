@@ -48,6 +48,15 @@ class Tag < ApplicationRecord
     preferred.present?
   end
 
+  def alias_names
+    aliases.map(&:name).join(", ")
+  end
+
+  def alias_names=(text)
+    return if text.blank?
+    alias_name_array = text.split(/\b,\b/)
+  end
+
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).where(is_rss: false).main.limit(limit).map(&:name).join(",")
   end
