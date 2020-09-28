@@ -63,6 +63,7 @@ class Tag < ApplicationRecord
     remove_aliases = aliases.to_a - new_aliases
     remove_aliases.each { |t| t.update(preferred: nil) }
     new_aliases.each { |t| t.update(preferred: self) }
+    Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(self.reload.self_with_aliases_ids)).each { |b| b.sync_cached_tag_ids }
   end
 
   def similar_tag_names(limit = 10)
