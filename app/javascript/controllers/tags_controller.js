@@ -25,7 +25,7 @@ export default class extends Controller {
         editTags: 1,
         autoComplete: { enabled: true },
         dropdown: {
-          caseSensitive: false,
+          caseSensitive: true,
           maxItems: 20,           // <- mixumum allowed rendered suggestions
           classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
           enabled: 0,             // <- show suggestions on focus

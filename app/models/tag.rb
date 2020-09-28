@@ -48,6 +48,28 @@ class Tag < ApplicationRecord
     preferred.present?
   end
 
+  def alias_names
+    aliases.map(&:name).join(", ")
+  end
+
+  def alias_names=(text)
+    # text format: [{"value":"mysql"},{"value":"Mysql"},{"value":"a"}]
+    return if text.blank?
+    alias_name_array = JSON.parse(text).map { |x| x["value"] }.reject { |x| x == self.name }.uniq
+    new_aliases = alias_name_array.map do |alias_name|
+      Tag.create_with(user: User.rss_robot).find_or_create_by(name: alias_name)
+    end
+
+    remove_aliases = aliases.to_a - new_aliases
+    remove_aliases.each { |t| t.update(preferred: nil) }
+    new_aliases.each { |t| t.update(preferred: self) }
+    Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(self.reload.self_with_aliases_ids)).each { |b| b.sync_cached_tag_ids }
+  end
+
+  def similar_tag_names(limit = 10)
+    Tag.where("ratio(name, ?) >= 50", self.name).where("id != ?", self.id).limit(limit).map(&:name).join(",")
+  end
+
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).where(is_rss: false).main.limit(limit).map(&:name).join(",")
   end
