@@ -8,7 +8,7 @@
     <%= f.label :alias_names, class: 'block text-sm leading-5 font-medium text-gray-700' %>
     <%= f.text_field :alias_names, 
       class: 'mt-1 form-input block w-full sm:text-sm sm:leading-5',
-      data: {whitelist: '', target: "tags.output"},
+      data: {whitelist: tag.similar_tag_names, target: "tags.output"},
       placeholder: "add alias names"
 
     %>

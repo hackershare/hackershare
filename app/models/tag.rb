@@ -65,6 +65,10 @@ class Tag < ApplicationRecord
     new_aliases.each { |t| t.update(preferred: self) }
   end
 
+  def similar_tag_names(limit = 10)
+    Tag.where("ratio(name, ?) >= 50", self.name).where("id != ?", self.id).limit(limit).map(&:name).join(",")
+  end
+
   def self.list_names(limit)
     Tag.order(bookmarks_count: :desc).where(is_rss: false).main.limit(limit).map(&:name).join(",")
   end
