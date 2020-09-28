@@ -53,8 +53,16 @@ class Tag < ApplicationRecord
   end
 
   def alias_names=(text)
+    # text format: [{"value":"mysql"},{"value":"Mysql"},{"value":"a"}]
     return if text.blank?
-    alias_name_array = text.split(/\b,\b/)
+    alias_name_array = JSON.parse(text).map { |x| x["value"] }.reject { |x| x == self.name }.uniq
+    new_aliases = alias_name_array.map do |alias_name|
+      Tag.create_with(user: User.rss_robot).find_or_create_by(name: alias_name)
+    end
+
+    remove_aliases = aliases.to_a - new_aliases
+    remove_aliases.each { |t| t.update(preferred: nil) }
+    new_aliases.each { |t| t.update(preferred: self) }
   end
 
   def self.list_names(limit)
