@@ -1,6 +1,9 @@
 {
   "name": "hackershare",
   "private": true,
+  "scripts": {
+    "start": "./bin/webpack-dev-server"
+  },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@popperjs/core": "^2.4.4",
