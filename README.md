@@ -18,6 +18,18 @@ Social bookmarks website for hackers. Alternative to delicious, hackernews, pock
 
 * https://hackershare.dev
 
+## Setup local
+
+* [PG extension install](https://github.com/hackershare/hackershare/blob/master/pg_extension.md)
+* rails db:create
+* rails db:migrate
+* rails db:seed_fu
+
+## Deployment
+
+* Nginx conf sync: bundle exec cap production puma:nginx_config
+* Deploy: bundle exec cap production deploy
+
 
 ## chrome extension
 
