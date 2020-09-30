@@ -37,8 +37,11 @@
 class User < ApplicationRecord
   RSS_BOT_NAME  = "hackershare"
   RSS_BOT_EMAIL = "robot@hackershare.dev"
+
+  include User::Avatar
+
   has_secure_password
-  has_one_attached :avatar
+
   has_many :auth_providers, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_bookmarks, through: :likes, source: "bookmark"
@@ -94,14 +97,6 @@ class User < ApplicationRecord
 
   def username
     read_attribute(:username) || email.split("@")[0]
-  end
-
-  def avatar_url
-    if avatar.attached?
-      avatar.variant(resize_to_limit: [150, nil])
-    else
-      ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(email)].join("/")
-    end
   end
 
   def has_unread_notifications?
