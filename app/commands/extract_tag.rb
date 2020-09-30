@@ -18,6 +18,7 @@ class ExtractTag
         FROM bookmarks, tags 
        WHERE bookmarks.id = #{bookmark.id} 
              AND plainto_tsquery('zh', tags.name) @@ bookmarks.tsv
+             AND tags.name not IN (#{Util.stop_words_for_where})
     ORDER BY rev_score ASC
        LIMIT 5
     SQL
