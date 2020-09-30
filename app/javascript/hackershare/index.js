@@ -15,10 +15,13 @@ TubrolinksPrefetch.start()
 import I18n from "./i18n"
 window.I18n = I18n
 
-
 document.addEventListener("turbolinks:load", function () {
+  const metaLocale = document.querySelector('meta[name=locale]');
+  I18n.locale = metaLocale && metaLocale.content || 'en';
+
   const timeagos = document.querySelectorAll('.timeago');
-  const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
+  const lang = I18n.locale == 'zh-CN' ? 'zh_CN' : 'en_US'
+
   if (timeagos.length > 0) {
     render(timeagos, lang);
   }
