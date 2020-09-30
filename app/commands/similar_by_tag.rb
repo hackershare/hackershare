@@ -12,6 +12,7 @@ class SimilarByTag
   end
 
   def call
+    # TODO 如果没有标签，使用文本相似度
     return [] if bookmark.cached_tag_with_aliases_ids.blank?
     pg_ids = Util.to_pg_array(bookmark.cached_tag_with_aliases_ids)
     Bookmark

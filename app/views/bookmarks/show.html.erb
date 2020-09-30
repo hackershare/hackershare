@@ -23,6 +23,9 @@
             <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first, locals: {bookmark_self: @bookmark} %>
           </ul>
         </div>
+
+       <%= render partial: "bookmarks/similars", locals: { bookmark: @bookmark.only_first } %>
+
         <div data-controller="comments">
           <div class="lg:flex-shrink-0" >
             <div class="lg:pl-4 w-full">
