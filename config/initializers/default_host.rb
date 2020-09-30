@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-# NOTICE: http://lulalala.logdown.com/posts/5835445-rails-many-default-url-options
-if Rails.env.production?
-  Rails.application.routes.default_url_options[:host] = "hackershare.dev"
-  Rails.application.routes.default_url_options[:protocol] == "https"
-else
-  Rails.application.routes.default_url_options[:host] = "localhost:3000"
+Rails.application.routes.default_url_options[:host] = if Rails.env.development?
+  "localhost:3000"
+elsif Rails.env.test?
+  "localhost:3000"
+elsif Rails.env.production?
+  "hackershare.dev"
 end
+
+# NOTICE: http://lulalala.logdown.com/posts/5835445-rails-many-default-url-options
+Rails.application.routes.default_url_options[:protocol] = "https"
