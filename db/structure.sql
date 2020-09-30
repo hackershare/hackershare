@@ -10,6 +10,20 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: zhparser; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS zhparser WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION zhparser; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION zhparser IS 'a parser for full-text search of Chinese';
+
+
+--
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -21,6 +35,20 @@ CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
 --
 
 COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: rum; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS rum WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION rum; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION rum IS 'RUM index access method';
 
 
 --
@@ -58,6 +86,92 @@ CREATE FUNCTION public.ratio(l text, r text) RETURNS integer
         RETURN(result);
       END;
     $$;
+
+
+--
+-- Name: zh; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION public.zh (
+    PARSER = public.zhparser );
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR a WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR b WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR c WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR d WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR e WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR f WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR g WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR h WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR i WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR j WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR k WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR l WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR m WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR n WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR o WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR p WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR q WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR r WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR s WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR t WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR u WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR v WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR w WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR x WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR y WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR z WITH simple;
 
 
 SET default_tablespace = '';
@@ -242,8 +356,8 @@ CREATE TABLE public.bookmarks (
     is_rss boolean DEFAULT false NOT NULL,
     cached_tag_with_aliases_names character varying,
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
-    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
-    is_display boolean DEFAULT true NOT NULL
+    is_display boolean DEFAULT true NOT NULL,
+    tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -865,6 +979,20 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: boomkark_rum_tsv_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX boomkark_rum_tsv_idx ON public.bookmarks USING rum (tsv);
+
+
+--
+-- Name: idx_similar_by_tag; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_similar_by_tag ON public.bookmarks USING rum (cached_tag_with_aliases_ids);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1219,6 +1347,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200927080653'),
 ('20200927145907'),
 ('20200927152340'),
-('20200928161133');
+('20200928161133'),
+('20200929203628'),
+('20200930090041'),
+('20200930135043');
 
 

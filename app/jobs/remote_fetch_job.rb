@@ -31,6 +31,7 @@ class RemoteFetchJob < ApplicationJob
     bookmark.lang = lang
     if bookmark.save
       bookmark.save_favicon if bookmark.favicon.present?
+      CreateTag.call(bookmark, ExtractTag.call(bookmark).result.map(&:name), bookmark.user, false)
     else
       logger.error "[RemoteFetchJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
     end
