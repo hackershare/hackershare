@@ -1,6 +1,9 @@
 {
   "name": "hackershare",
   "private": true,
+  "scripts": {
+    "start": "./bin/webpack-dev-server"
+  },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@popperjs/core": "^2.4.4",
@@ -17,7 +20,8 @@
     "tailwindcss": "^1.6",
     "tailwindcss-stimulus-components": "^2.0.2",
     "timeago.js": "^4.0.2",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "turbolinks-prefetch": "^0.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {

@@ -17,7 +17,7 @@ default: &default
   cache_manifest: false
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
   static_assets_extensions:
     - .jpg
@@ -71,10 +71,9 @@ development:
     quiet: false
     pretty: false
     headers:
-      'Access-Control-Allow-Origin': '*'
+      "Access-Control-Allow-Origin": "*"
     watch_options:
-      ignored: '**/node_modules/**'
-
+      ignored: "**/node_modules/**"
 
 test:
   <<: *default
