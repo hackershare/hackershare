@@ -6,7 +6,7 @@ class SimilarByTag
 
   attr_reader :bookmark, :limit
 
-  def initialize(bookmark, limit = 10)
+  def initialize(bookmark, limit = 6)
     @bookmark = bookmark
     @limit    = limit
   end
