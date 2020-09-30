@@ -48,6 +48,10 @@ class Tag < ApplicationRecord
     preferred.present?
   end
 
+  def preferred_or_self
+    preferred || self
+  end
+
   def alias_names
     aliases.map(&:name).join(", ")
   end
