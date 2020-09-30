@@ -1,0 +1,5 @@
+import I18n from "i18n-js"
+<% I18n.backend.eager_load! %>
+I18n.locale = "<%= I18n.locale %>"
+I18n.translations = <%= I18n.backend.translations.to_json %>
+export default I18n;

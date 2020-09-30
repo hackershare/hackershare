@@ -15,6 +15,7 @@
     "@yaireo/tagify": "^3.17.10",
     "alpinejs": "^2.5.0",
     "i18n-js": "^3.7.1",
+    "rails-erb-loader": "^5.5.2",
     "smoothscroll-polyfill": "^0.4.4",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.6",
