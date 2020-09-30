@@ -10,6 +10,20 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- Name: zhparser; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS zhparser WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION zhparser; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION zhparser IS 'a parser for full-text search of Chinese';
+
+
+--
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -58,6 +72,92 @@ CREATE FUNCTION public.ratio(l text, r text) RETURNS integer
         RETURN(result);
       END;
     $$;
+
+
+--
+-- Name: zh; Type: TEXT SEARCH CONFIGURATION; Schema: public; Owner: -
+--
+
+CREATE TEXT SEARCH CONFIGURATION public.zh (
+    PARSER = public.zhparser );
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR a WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR b WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR c WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR d WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR e WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR f WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR g WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR h WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR i WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR j WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR k WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR l WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR m WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR n WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR o WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR p WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR q WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR r WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR s WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR t WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR u WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR v WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR w WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR x WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR y WITH simple;
+
+ALTER TEXT SEARCH CONFIGURATION public.zh
+    ADD MAPPING FOR z WITH simple;
 
 
 SET default_tablespace = '';
@@ -1219,6 +1319,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200927080653'),
 ('20200927145907'),
 ('20200927152340'),
-('20200928161133');
+('20200928161133'),
+('20200929203628');
 
 
