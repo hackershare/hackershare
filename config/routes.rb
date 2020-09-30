@@ -44,9 +44,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # short upload file url
-  get "/uploads/:id" => "uploads#show", as: :upload
-
   scope "(:locale)", locale: /cn/ do
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]

@@ -62,7 +62,7 @@ server {
     error_log <%= shared_path %>/log/nginx.error.log;
   }
 
-  location ~ ^(/packs|/assets|/uploads) {
+  location ^~ /assets/ {
     gzip_static on;
     expires max;
     add_header Cache-Control public;
