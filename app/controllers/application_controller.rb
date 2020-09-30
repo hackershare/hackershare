@@ -101,9 +101,9 @@ class ApplicationController < ActionController::Base
       @lang ||= "language"
       base = base.where(lang: @lang) if Bookmark.langs.key?(@lang)
       if params[:query].present?
-        base = base.where("bookmarks.tsv @@ plainto_tsquery('simple', E'#{@query}')")
-        base = base.select("bookmarks.*, ts_rank_cd(bookmarks.tsv, plainto_tsquery('simple', E'#{@query}')) AS relevance")
-        base = base.order("relevance DESC")
+        base = base.where("bookmarks.tsv @@ plainto_tsquery('zh', E'#{@query}')")
+        base = base.select("bookmarks.*, bookmarks.tsv <=> plainto_tsquery('zh', E'#{@query}') AS relevance")
+        base = base.order("relevance ASC")
       end
       @pagy, @bookmarks = pagy_countless(
         base.with_attached_favicon_local,
