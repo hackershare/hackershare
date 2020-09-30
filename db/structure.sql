@@ -38,6 +38,20 @@ COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance betwe
 
 
 --
+-- Name: rum; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS rum WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION rum; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION rum IS 'RUM index access method';
+
+
+--
 -- Name: ratio(text, text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -342,8 +356,8 @@ CREATE TABLE public.bookmarks (
     is_rss boolean DEFAULT false NOT NULL,
     cached_tag_with_aliases_names character varying,
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
-    tsv tsvector GENERATED ALWAYS AS ((((setweight(to_tsvector('simple'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('simple'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('simple'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
-    is_display boolean DEFAULT true NOT NULL
+    is_display boolean DEFAULT true NOT NULL,
+    tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
 );
 
 
@@ -965,6 +979,13 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: boomkark_rum_tsv_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX boomkark_rum_tsv_idx ON public.bookmarks USING rum (tsv);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1320,6 +1341,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200927145907'),
 ('20200927152340'),
 ('20200928161133'),
-('20200929203628');
+('20200929203628'),
+('20200930090041');
 
 

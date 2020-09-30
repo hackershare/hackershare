@@ -33,6 +33,7 @@
 #
 # Indexes
 #
+#  boomkark_rum_tsv_idx                            (tsv) USING rum
 #  index_bookmarks_on_cached_tag_with_aliases_ids  (cached_tag_with_aliases_ids) USING gin
 #  index_bookmarks_on_ref_id                       (ref_id)
 #  index_bookmarks_on_score                        (score)
