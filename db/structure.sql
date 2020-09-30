@@ -986,6 +986,13 @@ CREATE INDEX boomkark_rum_tsv_idx ON public.bookmarks USING rum (tsv);
 
 
 --
+-- Name: idx_similar_by_tag; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_similar_by_tag ON public.bookmarks USING rum (cached_tag_with_aliases_ids);
+
+
+--
 -- Name: index_active_storage_attachments_on_blob_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1342,6 +1349,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200927152340'),
 ('20200928161133'),
 ('20200929203628'),
-('20200930090041');
+('20200930090041'),
+('20200930135043');
 
 
