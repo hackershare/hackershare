@@ -2,8 +2,10 @@
 
 class Admin::TagsController < Admin::ApplicationController
   def index
+    base = Tag.order(subscriptions_count: :desc).main.preload(:aliases)
+    base = base.where("name ILIKE '%#{Util.escape_quote(params[:query])}%'") if params[:query].present?
     @pagy, @tags = pagy_countless(
-      Tag.order(subscriptions_count: :desc).main.preload(:aliases),
+      base,
       items: 20
     )
   end

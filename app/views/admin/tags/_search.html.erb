@@ -1,0 +1,14 @@
+<div class="mb-5">
+  <div class="mt-1 flex rounded-md shadow-sm">
+    <div class="relative flex-grow focus-within:z-10">
+      <%= form_with(url: admin_tags_path, local: true, method: :get) do |f| %>
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M14.5 14.5l-4-4m-4 2a6 6 0 110-12 6 6 0 010 12z" stroke="currentColor"></path></svg>
+        </div>
+        <%= f.search_field :query, value: params[:query], id: 'search', class: "form-input block w-full rounded-none rounded-l-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5"  %>
+        <input type="submit" hidden />
+      <% end %>
+    </div>
+
+  </div>
+</div>
