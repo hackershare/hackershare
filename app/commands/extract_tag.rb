@@ -24,6 +24,10 @@ class ExtractTag
     ORDER BY rev_score ASC
        LIMIT 10
     SQL
-    tags.map(&:preferred_or_self).uniq[0, 3]
+    tags = tags.map(&:preferred_or_self)
+    tags = tags.group_by do |tag|
+      tag.name.downcase.gsub(/-\s/, "")
+    end.map { |name, records| records.sort_by { |record| record.preferred_id || 0 }[0] }
+    tags.flatten.uniq[0, 3]
   end
 end
