@@ -10,7 +10,7 @@ class RemoteFetchJob < ApplicationJob
     if [bookmark.favicon, bookmark.title, bookmark.description, bookmark.lang].all?(&:present?)
       return
     end
-    parser = LinkThumbnailer.generate(bookmark.url)
+    parser = LinkThumbnailer.generate(bookmark.url, verify_ssl: false)
     favicon_url = parser.favicon
     begin
       open(parser.favicon, read_timeout: 10)
