@@ -14,7 +14,11 @@
         <% end %>
         <span class="block break-all">
           <h2 class="text-md font-medium leading-5">
-            <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
+            <% if params[:controller] == 'bookmarks' && params[:action] == 'show' %>
+              <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
+            <% else %>
+              <%= link_to bookmark.title_or_url, bookmark_path(bookmark) %>
+            <% end %>
           </h2>
         </span>
       </div>
