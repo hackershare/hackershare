@@ -9,11 +9,11 @@
         <div class="hidden lg:block">
           <div class="flex space-x-2">
             <%= link_to_active t("hackers"), users_path, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-white text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
-            <%= link_to_active t("bookmarks"), pretty_bookmarks_path, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
+            <%= link_to_active t("bookmarks"), bookmarks_path, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
             <%= link_to_active t("category"), categories_path, class: "px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-300 hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" %>
           </div>
         </div>
-        <%= form_with(url: pretty_bookmarks_path, local: true, method: :get, class: "flex-auto max-w-sm") do |f| %>
+        <%= form_with(url: bookmarks_path, local: true, method: :get, class: "flex-auto max-w-sm") do |f| %>
           <label for="search" class="sr-only"><%= t("search") %></label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

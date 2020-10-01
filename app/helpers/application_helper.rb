@@ -79,7 +79,7 @@ module ApplicationHelper
         concat render_rss_icon(tag)
       end
     else
-      link_to pretty_bookmarks_path(request.params.except(:page).merge(tag: tag.name)), class: "btn-tag" do
+      link_to bookmarks_path(request.params.except(:page).merge(tag: tag.name)), class: "btn-tag" do
         concat "##{tag.name}"
         concat render_rss_icon(tag)
       end
