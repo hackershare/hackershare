@@ -19,9 +19,11 @@ class ExtractTag
        WHERE bookmarks.id = #{bookmark.id} 
              AND plainto_tsquery('zh', tags.name) @@ bookmarks.tsv
              AND tags.name not IN (#{Util.stop_words_for_where})
+             AND length(tags.name) > 3
+             AND tags.bookmarks_count > 10
     ORDER BY rev_score ASC
-       LIMIT 5
+       LIMIT 10
     SQL
-    tags.map(&:preferred_or_self).uniq
+    tags.map(&:preferred_or_self).uniq[0, 3]
   end
 end
