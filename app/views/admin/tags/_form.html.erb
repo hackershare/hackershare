@@ -15,6 +15,16 @@
   </div>
 
   <div>
+    <%= f.label :is_rss, class: 'block text-sm leading-5 font-medium text-gray-700' %>
+    <%= f.check_box :is_rss, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+  </div>
+
+  <div>
+    <%= f.label :auto_extract, class: 'block text-sm leading-5 font-medium text-gray-700' %>
+    <%= f.check_box :auto_extract, class: "form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out" %>
+  </div>
+
+  <div>
     <%= f.submit 'Submit', class: 'btn-primary' %>
   </div>
 <% end %>

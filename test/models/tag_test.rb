@@ -5,6 +5,7 @@
 # Table name: tags
 #
 #  id                  :bigint           not null, primary key
+#  auto_extract        :boolean          default(TRUE)
 #  bookmarks_count     :integer          default(0)
 #  is_rss              :boolean          default(FALSE)
 #  name                :string

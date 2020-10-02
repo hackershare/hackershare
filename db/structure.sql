@@ -666,7 +666,8 @@ CREATE TABLE public.tags (
     bookmarks_count integer DEFAULT 0,
     subscriptions_count integer DEFAULT 0,
     is_rss boolean DEFAULT false,
-    preferred_id bigint
+    preferred_id bigint,
+    auto_extract boolean DEFAULT true
 );
 
 
@@ -1350,6 +1351,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200928161133'),
 ('20200929203628'),
 ('20200930090041'),
-('20200930135043');
+('20200930135043'),
+('20201002114935');
 
 

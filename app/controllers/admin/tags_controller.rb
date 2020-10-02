@@ -16,7 +16,7 @@ class Admin::TagsController < Admin::ApplicationController
 
   def update
     @tag = Tag.find(params[:id])
-    @tag.update(params.require(:tag).permit(:name, :alias_names))
+    @tag.update(params.require(:tag).permit(:name, :alias_names, :is_rss, :auto_extract))
     flash[:success] = "Tag was uccessfully updated"
     redirect_to admin_tags_path
   end
