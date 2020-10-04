@@ -18,6 +18,7 @@ module Util
       com
       www
       cn
+      blog
     ]
   end
 
