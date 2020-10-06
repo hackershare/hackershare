@@ -3,7 +3,7 @@
 [中文](https://github.com/hackershare/hackershare/blob/master/README_cn.md)
 
 Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket. 
-Hackershare is the open source software which powers [hackershare.dev][https://hackershare.dev]
+Hackershare is the open source software which powers [hackershare.dev](https://hackershare.dev)
 
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
 
