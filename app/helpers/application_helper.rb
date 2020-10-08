@@ -33,7 +33,7 @@ module ApplicationHelper
   def link_to_active(text, url, options = {})
     route = Rails.application.routes.recognize_path(url)
     if options[:class]
-      if controller_name == route[:controller] || (route[:controller] == "home" && controller_name == "bookmarks")
+      if controller_name == route[:controller] || (route[:controller] == "bookmarks" && controller_name == "home")
         options[:class] = options[:class] << " bg-gray-900"
       else
         options[:class] = options[:class] << " hover:bg-gray-700"
