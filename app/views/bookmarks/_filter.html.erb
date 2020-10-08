@@ -21,16 +21,16 @@
       <% suggest_tags.each_with_index do |tag, index| %>
         <% hidden_class = 'hidden lg:block' if index >= 3 %>
         <% if tag == params[:tag] %>
-          <%=  link_to "##{tag}", request.params.except(:page, :tag), class: "#{hidden_class} btn-tag bg-gray-200" %>
+          <%=  link_to "##{tag}", bookmarks_path(request.params.except(:page, :tag)), class: "#{hidden_class} btn-tag bg-gray-200" %>
         <% else %>
-          <%=  link_to "##{tag}", request.params.except(:page).merge(tag: tag), class: "#{hidden_class} btn-tag hover:bg-gray-200" %>
+          <%=  link_to "##{tag}", bookmarks_path(request.params.except(:page).merge(tag: tag)), class: "#{hidden_class} btn-tag hover:bg-gray-200" %>
         <% end %>
       <% end %>
       <% if params[:tag] %>
         <% if suggest_tags.exclude?(params[:tag]) %>
-          <%= link_to "##{params[:tag]}", request.params.except(:page, :tag), class: 'flex-shrink-0 btn-tag bg-gray-200' %>
+          <%= link_to "##{params[:tag]}", bookmarks_path(request.params.except(:page, :tag)), class: 'flex-shrink-0 btn-tag bg-gray-200' %>
         <% elsif suggest_tags.first(3).exclude?(params[:tag]) %>
-          <%= link_to "##{params[:tag]}", request.params.except(:page, :tag), class: 'lg:hidden btn-tag bg-gray-200' %>
+          <%= link_to "##{params[:tag]}", bookmarks_path(request.params.except(:page, :tag)), class: 'lg:hidden btn-tag bg-gray-200' %>
         <% end %>
       <% end %>
     </div>
@@ -49,7 +49,7 @@
       <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-24 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
         <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
           <% valid_sortbys.each do |filter| %>
-            <%= sortby_link_to_active t(filter), request.params.except(:page).merge(sortby: filter), filter, class: "block px-4 py-1 lg:py-2 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out", role: "menuitem" %>
+            <%= sortby_link_to_active t(filter), bookmarks_path(request.params.except(:page).merge(sortby: filter)), filter, class: "block px-4 py-1 lg:py-2 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out", role: "menuitem" %>
           <% end %>
         </div>
       </div>

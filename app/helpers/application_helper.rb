@@ -74,7 +74,7 @@ module ApplicationHelper
 
   def tag_url_for(tag)
     if controller_name == "users"
-      link_to request.params.except(:page).merge(tag: tag.name, only_path: true), class: "btn-tag", data: { remote: true, action: "ajax:success->listing#replace" } do
+      link_to bookmarks_path(request.params.except(:page).merge(tag: tag.name, only_path: true)), class: "btn-tag", data: { remote: true, action: "ajax:success->listing#replace" } do
         concat "##{tag.name}"
         concat render_rss_icon(tag)
       end
