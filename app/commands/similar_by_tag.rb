@@ -12,14 +12,21 @@ class SimilarByTag
   end
 
   def call
-    # TODO 如果没有标签，使用文本相似度
-    return [] if bookmark.cached_tag_with_aliases_ids.blank?
     pg_ids = Util.to_pg_array(bookmark.cached_tag_with_aliases_ids)
-    Bookmark
+    return Bookmark
       .original
       .where("cached_tag_with_aliases_ids && ?", pg_ids)
       .where.not(id: bookmark.id)
       .order("cached_tag_with_aliases_ids <=> '#{pg_ids}'")
-      .limit(limit)
+      .limit(limit) if bookmark.cached_tag_with_aliases_ids.present?
+
+    return Bookmark
+      .original
+      .where("bookmarks.tsv @@ replace(plainto_tsquery('zh', E'#{bookmark.title}')::text, '&', '|')::tsquery")
+      .where.not(id: bookmark.id)
+      .select("bookmarks.*, bookmarks.tsv <=> replace(plainto_tsquery('zh', E'#{bookmark.title}')::text, '&', '|')::tsquery AS relevance")
+      .order("relevance ASC")
+      .limit(limit) if bookmark.title.present?
+    []
   end
 end
