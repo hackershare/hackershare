@@ -22,7 +22,7 @@
     "tailwindcss-stimulus-components": "^2.0.2",
     "timeago.js": "^4.0.2",
     "turbolinks": "^5.2.0",
-    "turbolinks-prefetch": "^0.2.0"
+    "turbolinks-prefetch": "^1.0.2"
   },
   "version": "0.1.0",
   "devDependencies": {
