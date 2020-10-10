@@ -1,13 +1,16 @@
 <% title(t("top_hackers")) %>
-<div class="bg-white">
-  <div class="max-w-screen-xl mx-auto text-center py-4 lg:py-12">
-    <div class="space-y-8 sm:space-y-12">
-      <div class="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
-        <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl"><%= t("top_hackers") %></h2>
-      </div>
-      <div data-controller="listing" data-target="listing.container">
-        <%= render partial: "users/list" %>
-      </div>
+
+<div class="border border-color-primary rounded-primary">
+  <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+    <div class="flex justify-between items-center">
+      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+        <%= t("top_hackers") %>
+      </h3>
+    </div>
+  </div>
+  <div class="padding-primary">
+    <div data-controller="listing" data-target="listing.container">
+      <%= render partial: "users/list" %>
     </div>
   </div>
 </div>
