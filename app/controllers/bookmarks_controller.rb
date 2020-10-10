@@ -15,7 +15,7 @@ class BookmarksController < ApplicationController
 
   def goto
     @bookmark = Bookmark.find(params[:id]).only_first
-    @bookmark.clicks.create(user: current_user) # unless request.headers['HTTP_VND.PREFETCH'] == 'true'
+    @bookmark.clicks.create(user: current_user)
     redirect_to @bookmark.url
   end
 
