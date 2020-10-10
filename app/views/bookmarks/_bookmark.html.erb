@@ -1,94 +1,92 @@
 <li data-controller="remote-forms" class="padding-primary py-2 lg:py-4 relative hover:bg-gray-50" data-prefetch="<%= bookmark_path(bookmark) %>">
-  <div class="flex items-center flex-col md:flex-row justify-between md:space-x-4">
-    <!-- Repo name and link -->
-    <div class="min-w-0 space-y-3 w-full md:w-auto">
-      <div class="flex items-center space-x-2">
-        <% if bookmark.favicon_local.attached? %>
-          <span>
-            <%= image_tag(bookmark.favicon_local, class: "h-4 w-4") %>
-          </span>
-        <% else %>
-          <span>
-            <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
-          </span>
-        <% end %>
-        <span class="block break-all">
-          <h2 class="text-md font-medium leading-5">
-            <% if params[:controller] == 'bookmarks' && params[:action] == 'show' %>
-              <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
-            <% else %>
-              <%= link_to bookmark.title_or_url, bookmark_path(bookmark) %>
-            <% end %>
-          </h2>
+  <!-- Repo name and link -->
+  <div class="min-w-0 space-y-3 w-full md:w-auto">
+    <div class="flex items-center space-x-2">
+      <% if bookmark.favicon_local.attached? %>
+        <span>
+          <%= image_tag(bookmark.favicon_local, class: "h-4 w-4") %>
         </span>
-      </div>
-      <div class="flex flex-wrap pl-6 items-center space-x-2">
-        <% bookmark.tags.each do |tag| %>
-          <%= tag_url_for(tag) %>
-        <% end %>
-      </div>
-    </div>
-    <!-- Repo meta info -->
-    <div class="flex flex-row-reverse w-full pl-6 md:w-auto md:flex-col items-center justify-between flex-shrink-0 items-end md:space-y-1 lg:space-y-3 mt-3">
-      <div class="flex items-center justify-end space-x-4 text-sm leading-5 text-gray-500">
-        <!-- like button -->
-        <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
-          <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150" do %>
-            <% if bookmark.liked_by?(current_user) %>
-              <svg data-target="likes.svg" class="h-5 w-5 text-yellow-300 hover:text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-              </svg>
-            <% else %>
-              <svg data-target="likes.svg" class="h-5 w-5 text-gray-300 hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            <% end %>
+      <% else %>
+        <span>
+          <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
+        </span>
+      <% end %>
+      <span class="block break-all">
+        <h2 class="text-md font-medium leading-5">
+          <% if params[:controller] == 'bookmarks' && params[:action] == 'show' %>
+            <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank'  %>
+          <% else %>
+            <%= link_to bookmark.title_or_url, bookmark_path(bookmark) %>
           <% end %>
-          <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseenter->hover-like-users#show mouseleave->hover-like-users#hide">
-            <button data-target="likes.data" type="button" class="-ml-px relative inline-flex items-center p-1 lg:px-3 lg:py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150">
-              <%= bookmark.likes_count %>
-            </button>
-          </span>
+        </h2>
+      </span>
+    </div>
+    <div class="flex flex-wrap pl-6 items-center space-x-2">
+      <% bookmark.tags.each do |tag| %>
+        <%= tag_url_for(tag) %>
+      <% end %>
+    </div>
+  </div>
+  <!-- Repo meta info -->
+  <div class="flex flex-row-reverse pl-6 items-center justify-between flex-shrink-0 mt-3">
+    <div class="flex items-center justify-end space-x-2 lg:space-x-4 text-sm leading-5 text-gray-500">
+      <!-- like button -->
+      <span data-controller="likes" class="relative z-0 inline-flex shadow-sm rounded-md">
+        <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150" do %>
+          <% if bookmark.liked_by?(current_user) %>
+            <svg data-target="likes.svg" class="h-5 w-5 text-yellow-300 hover:text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+            </svg>
+          <% else %>
+            <svg data-target="likes.svg" class="h-5 w-5 text-gray-300 hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          <% end %>
+        <% end %>
+        <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseenter->hover-like-users#show mouseleave->hover-like-users#hide">
+          <button data-target="likes.data" type="button" class="-ml-px relative inline-flex items-center p-1 lg:px-3 lg:py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150">
+            <%= bookmark.likes_count %>
+          </button>
         </span>
-        <a href="<%= bookmark_path(bookmark) %>" class="flex items-center space-x-0.5 relative hover:text-gray-700">
-          <svg class="w-6 h-6" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
-          <span><%= bookmark.comments_count %></span>
-        </a>
-        <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
-          <div class="hover:text-gray-900">
-            <a @click="open = !open" type="button" class="cursor-pointer rounded-md transition ease-in-out duration-150" aria-haspopup="true" aria-expanded="true">
-              <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+      </span>
+      <a href="<%= bookmark_path(bookmark) %>" class="flex items-center space-x-0.5 relative hover:text-gray-700">
+        <svg class="w-6 h-6" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <span><%= bookmark.comments_count %></span>
+      </a>
+      <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
+        <div class="hover:text-gray-900">
+          <a @click="open = !open" type="button" class="cursor-pointer rounded-md transition ease-in-out duration-150" aria-haspopup="true" aria-expanded="true">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+            </svg>
+          </a>
+        </div>
+        <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-32 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
+          <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+            <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
               </svg>
-            </a>
-          </div>
-          <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-32 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
-            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-              <%= link_to new_bookmark_tag_path(bookmark), remote: true, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800", data: {type: :script, action: "ajax:success->remote-forms#append"} do %>
+              <span><%= t("tagging") %></span>
+            <% end %>
+            <% if bookmark_self.can_destroy_by?(current_user) %>
+              <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800" do %>
                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
-                <span><%= t("tagging") %></span>
+                <span><%= t("delete") %></span>
               <% end %>
-              <% if bookmark_self.can_destroy_by?(current_user) %>
-                <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800" do %>
-                  <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                  <span><%= t("delete") %></span>
-                <% end %>
-              <% end %>
-            </div>
+            <% end %>
           </div>
         </div>
       </div>
-      <div class="flex justify-end text-gray-500 text-sm leading-5 space-x-0.5 lg:space-x-2">
-        <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
-        <span>&middot;</span>
-        <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
-      </div>
+    </div>
+    <div class="flex justify-end text-gray-500 text-sm leading-5 space-x-0.5 lg:space-x-2">
+      <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
+      <span>&middot;</span>
+      <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
     </div>
   </div>
   <div data-target="remote-forms.container">
