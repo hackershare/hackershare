@@ -38,7 +38,7 @@ class Admin::RssSourcesController < Admin::ApplicationController
 
   def destroy
     if @rss_source.destroy
-      flash[:success] = "Updated successfully"
+      flash[:success] = "Destroyed successfully"
       redirect_to action: :index
     else
       flash[:error] = "Destroyed failed: #{@rss_source.short_error_message}"

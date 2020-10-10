@@ -21,6 +21,7 @@
 #  lang                          :integer          default("english"), not null
 #  likes_count                   :integer          default(0)
 #  score                         :integer
+#  shared_at                     :datetime
 #  smart_score                   :float
 #  tags_count                    :integer          default(0)
 #  title                         :string
@@ -62,9 +63,7 @@ class Bookmark < ApplicationRecord
 
   has_many :bookmark_stats, dependent: :destroy
 
-  validates :url, presence: true
-  validates :url, url: { no_local: true }
-  validates :url, uniqueness: { scope: :user }
+  validates :url, url: { no_local: true }, uniqueness: { scope: :user }
 
   scope :rss, lambda { where(is_rss: true) }
   scope :unrss, lambda { where(is_rss: false) }
@@ -79,6 +78,8 @@ class Bookmark < ApplicationRecord
   def title_or_url
     title.presence || url
   end
+
+  after_initialize :set_defaults, if: :new_record?
 
   after_create do
     if original = Bookmark.where(url: url).where("id !=?", id).first
@@ -200,13 +201,13 @@ class Bookmark < ApplicationRecord
   end
 
   def self.filter(user, params)
-    return user.bookmarks.order(created_at: :desc) if !%w[created likes followings subscriptions].include?(params[:type])
+    return user.bookmarks.order(shared_at: :desc) if !%w[created likes followings subscriptions].include?(params[:type])
     if params[:type] == "created"
-      return user.bookmarks.order(created_at: :desc)
+      return user.bookmarks.order(shared_at: :desc)
     end
 
     if params[:type] == "likes"
-      return user.like_bookmarks.order(created_at: :desc)
+      return user.like_bookmarks.order(shared_at: :desc)
     end
 
     if params[:type] == "subscriptions"
@@ -215,7 +216,7 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:type] == "followings"
-      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(created_at: :desc)
+      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(shared_at: :desc)
     end
   end
 
@@ -228,4 +229,10 @@ class Bookmark < ApplicationRecord
   def destroy_notifications
     notifications.destroy_all
   end
+
+  private
+
+    def set_defaults
+      self.shared_at ||= Time.current
+    end
 end

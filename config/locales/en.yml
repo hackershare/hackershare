@@ -51,6 +51,8 @@ en:
   origin_link: Origin Link
   other_hot_tags: Other Hot Tags
   remember_me: Remember Me
+  rss_source_add_successfully: RSS Source added successfully
+  rss_source_invalid: RSS Source parsed failed
   save: Save
   search: Search
   search_results: "Search Results: %{query}"
@@ -62,6 +64,7 @@ en:
   sign_up: Sign up
   sign_up_failed: Sign up failed
   sign_up_new_account: Sign up new account
+  submit_rss: Submit RSS
   subscriptions: Subscriptions
   subscribe: Subscribe
   smart: Smart

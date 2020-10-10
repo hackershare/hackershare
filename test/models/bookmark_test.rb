@@ -21,6 +21,7 @@
 #  lang                          :integer          default("english"), not null
 #  likes_count                   :integer          default(0)
 #  score                         :integer
+#  shared_at                     :datetime
 #  smart_score                   :float
 #  tags_count                    :integer          default(0)
 #  title                         :string
