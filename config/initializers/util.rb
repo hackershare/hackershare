@@ -2,6 +2,7 @@
 
 module Util
   def self.escape_quote(str)
+    return "" if str.nil?
     str.gsub(/'/, { "'" => "\\'" })
   end
 

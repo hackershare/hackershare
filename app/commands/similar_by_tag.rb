@@ -22,9 +22,9 @@ class SimilarByTag
 
     return Bookmark
       .original
-      .where("bookmarks.tsv @@ replace(plainto_tsquery('zh', E'#{bookmark.title}')::text, '&', '|')::tsquery")
+      .where("bookmarks.tsv @@ replace(plainto_tsquery('zh', E'#{Util.escape_quote bookmark.title}')::text, '&', '|')::tsquery")
       .where.not(id: bookmark.id)
-      .select("bookmarks.*, bookmarks.tsv <=> replace(plainto_tsquery('zh', E'#{bookmark.title}')::text, '&', '|')::tsquery AS relevance")
+      .select("bookmarks.*, bookmarks.tsv <=> replace(plainto_tsquery('zh', E'#{Util.escape_quote bookmark.title}')::text, '&', '|')::tsquery AS relevance")
       .order("relevance ASC")
       .limit(limit) if bookmark.title.present?
     []
