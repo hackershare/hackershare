@@ -1,6 +1,23 @@
-<div class="space-y-2 lg:space-y-4 bg-primary rounded-t-md padding-primary">
+<div class="space-y-2 lg:space-y-4 bg-primary rounded-t-md padding-primary py-4">
   <div class="flex flex-wrap items-center">
     <div class="flex flex-wrap items-center space-x-1 lg:space-x-2">
+      <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
+        <div class="rounded-sm shadow-md">
+          <button @click="open = !open" type="button" class="space-x-1 rounded-sm flex items-center justify-center w-full border border-gray-200 px-2 py-1 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
+            <%= t(sortby) %>
+            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-left absolute left-0 mt-2 w-28 rounded-md shadow-lg z-10" style="display: none;">
+          <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+            <% valid_sortbys.each do |filter| %>
+              <%= link_to t(filter), request.query_parameters.except(:page).merge(sortby: filter), class: "#{'bg-gray-200' if filter == sortby} block px-2 py-1 lg:px-4 lg:py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
       <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
         <div class="rounded-sm shadow-md">
           <button @click="open = !open" type="button" class="space-x-1 rounded-sm flex items-center justify-center w-full border border-gray-200 px-2 py-1 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
@@ -33,26 +50,6 @@
           <%= link_to "##{params[:tag]}", bookmarks_path(request.query_parameters.except(:page, :tag)), class: 'lg:hidden btn-tag bg-gray-200' %>
         <% end %>
       <% end %>
-    </div>
-  </div>
-  <div class="flex justify-between leading-5 text-gray-500 text-sm">
-    <div><%= t("bookmarks") %></div>
-    <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
-      <div>
-        <a @click="open = !open" type="button" class="cursor-pointer inline-flex justify-center w-full rounded-md transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
-          <%= t(sortby) %>
-          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </div>
-      <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="mt-1 w-24 origin-top-right absolute right-0 rounded-md shadow-lg z-10" style="display: none;">
-        <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-          <% valid_sortbys.each do |filter| %>
-            <%= sortby_link_to_active t(filter), bookmarks_path(request.query_parameters.except(:page).merge(sortby: filter)), filter, class: "block px-4 py-1 lg:py-2 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out", role: "menuitem" %>
-          <% end %>
-        </div>
-      </div>
     </div>
   </div>
 </div>
