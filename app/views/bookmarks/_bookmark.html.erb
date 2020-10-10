@@ -86,7 +86,7 @@
     <div class="flex justify-end text-gray-500 text-sm leading-5 space-x-0.5 lg:space-x-2">
       <span><%= link_to bookmark.user&.username, user_path(bookmark.user_id) %></span>
       <span>&middot;</span>
-      <span class="timeago" datetime="<%= bookmark.created_at.to_s %>"></span>
+      <span class="timeago" datetime="<%= controller_name == "users" ? bookmark.shared_at.to_s : bookmark.created_at.to_s %>"></span>
     </div>
   </div>
   <div data-target="remote-forms.container">
