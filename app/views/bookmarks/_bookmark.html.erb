@@ -1,4 +1,4 @@
-<li data-controller="remote-forms" class="padding-primary py-2 lg:py-4 relative hover:bg-gray-50" data-prefetch="<%= bookmark_path(bookmark) %>">
+<li data-controller="remote-forms" class="px-0.5 py-2 lg:py-4 relative hover:bg-gray-50" data-prefetch="<%= bookmark_path(bookmark) %>">
   <!-- Repo name and link -->
   <div class="min-w-0 space-y-3 w-full md:w-auto">
     <div class="flex items-center space-x-2">
@@ -21,7 +21,7 @@
         </h2>
       </span>
     </div>
-    <div class="flex flex-wrap pl-6 items-center space-x-2">
+    <div class="flex flex-wrap pl-6 items-center">
       <% bookmark.tags.each do |tag| %>
         <%= tag_url_for(tag) %>
       <% end %>
@@ -35,15 +35,15 @@
         <%= link_to toggle_liking_bookmark_path(bookmark), method: :post, type: 'button', remote: true, data: {type: :json, action: "ajax:success->likes#toggle"}, class: "relative inline-flex items-center p-1 lg:px-4 lg:py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150" do %>
           <% if bookmark.liked_by?(current_user) %>
             <svg data-target="likes.svg" class="h-5 w-5 text-yellow-300 hover:text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
             </svg>
           <% else %>
             <svg data-target="likes.svg" class="h-5 w-5 text-gray-300 hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
             </svg>
           <% end %>
         <% end %>
-        <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseenter->hover-like-users#show mouseleave->hover-like-users#hide">
+        <span data-controller="hover-like-users" data-hover-like-users-url-value="<%= hover_like_users_bookmark_path(bookmark) %>" data-action="mouseover->hover-like-users#show mouseout->hover-like-users#hide">
           <button data-target="likes.data" type="button" class="-ml-px relative inline-flex items-center p-1 lg:px-3 lg:py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-800 hover:text-gray-800 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-800 transition ease-in-out duration-150">
             <%= bookmark.likes_count %>
           </button>

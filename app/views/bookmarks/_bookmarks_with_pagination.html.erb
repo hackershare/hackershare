@@ -1,13 +1,15 @@
-<div>
+<div class="border border-color-primary rounded-primary">
   <%= render "bookmarks/filter", suggest_tags: suggest_tags, lang: lang %>
-  <ul class="relative z-0 divide-y divide-gray-200 border-b border-t border-color-primary" data-target='bookmarks.list'>
-    <% if @bookmarks.present? %>
-      <% @bookmarks.each do |bookmark| %>
-        <%= render partial: "bookmarks/bookmark", object: bookmark.only_first, locals: {bookmark_self: bookmark} %>
+  <div class="padding-primary">
+    <ul class="relative z-0 divide-y divide-gray-200 border-b border-color-primary" data-target='bookmarks.list'>
+      <% if @bookmarks.present? %>
+        <% @bookmarks.each do |bookmark| %>
+          <%= render partial: "bookmarks/bookmark", object: bookmark.only_first, locals: {bookmark_self: bookmark} %>
+        <% end %>
+      <% else %>
+        <div class="px-1 py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
       <% end %>
-    <% else %>
-      <div class="px-1 py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
-    <% end %>
-  </ul>
-  <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+    </ul>
+    <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+  </div>
 </div>
