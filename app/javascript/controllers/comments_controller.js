@@ -6,6 +6,9 @@ export default class extends Controller {
 
   append(event) {
     const [data, status, xhr] = event.detail;
+    if (RegExp('^Turbolinks').test(xhr.response)){
+      return
+    }
     this.listTarget.innerHTML =  this.listTarget.innerHTML + xhr.response;
     const timeagos = document.querySelectorAll('.timeago');
     const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
