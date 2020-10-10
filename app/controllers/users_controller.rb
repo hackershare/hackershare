@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def index
     @pagy, @users = pagy_countless(
       User.order(score: :desc).with_attached_avatar,
-      items: 12,
+      items: 32,
       link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
     )
 
