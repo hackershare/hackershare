@@ -357,7 +357,8 @@ CREATE TABLE public.bookmarks (
     is_display boolean DEFAULT true NOT NULL,
     cached_tag_with_aliases_names character varying,
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
-    tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED
+    tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
+    shared_at timestamp without time zone
 );
 
 
@@ -556,7 +557,7 @@ CREATE TABLE public.rss_sources (
     updated_at timestamp(6) without time zone NOT NULL,
     tag_id bigint,
     processed_at timestamp without time zone,
-    is_display boolean DEFAULT false NOT NULL
+    is_display boolean DEFAULT true NOT NULL
 );
 
 
@@ -1352,6 +1353,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200929203628'),
 ('20200930090041'),
 ('20200930135043'),
-('20201002114935');
+('20201002114935'),
+('20201010110915'),
+('20201010113850');
 
 

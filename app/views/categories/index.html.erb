@@ -1,22 +1,48 @@
 <% title(t("top_categories")) %>
-<div class="bg-white">
-  <div class="mt-4 lg:mt-8">
-    <div class="space-y-8 sm:space-y-12">
-      <div class="">
-        <div class="flex justify-between">
-          <h2 class="text-3xl leading-9 font-extrabold tracking-tight sm:text-4xl"><%= t("top_categories") %></h2>
-            <%= link_to categories_path(is_rss: true) do %>
-              <svg class="w-6 h-6 text-orange-600" viewBox="0 0 16 16" class="bi bi-rss" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                <path d="M5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                <path fill-rule="evenodd" d="M2.5 3.5a1 1 0 0 1 1-1c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1-1-1zm0 4a1 1 0 0 1 1-1 6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1-1-1z"/>
-              </svg>
-            <% end %>
+
+<div class="border border-color-primary rounded-primary">
+  <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+    <div class="flex justify-between items-center">
+      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+        <%= t("top_categories") %>
+      </h3>
+      <% if params[:is_rss] %>
+        <%= link_to request.query_parameters.except(:is_rss) do %>
+          <svg class="w-6 h-6 text-orange-600" viewBox="0 0 16 16" class="bi bi-rss" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+            <path fill-rule="evenodd" d="M2.5 3.5a1 1 0 0 1 1-1c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1-1-1zm0 4a1 1 0 0 1 1-1 6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1-1-1z"/>
+          </svg>
+        <% end %>
+      <% else %>
+        <%= link_to request.query_parameters.merge(is_rss: true) do %>
+          <svg class="w-6 h-6 text-gray-600" viewBox="0 0 16 16" class="bi bi-rss" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+            <path fill-rule="evenodd" d="M2.5 3.5a1 1 0 0 1 1-1c5.523 0 10 4.477 10 10a1 1 0 1 1-2 0 8 8 0 0 0-8-8 1 1 0 0 1-1-1zm0 4a1 1 0 0 1 1-1 6 6 0 0 1 6 6 1 1 0 1 1-2 0 4 4 0 0 0-4-4 1 1 0 0 1-1-1z"/>
+          </svg>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-2">
+    <%= form_with(model: RssSource.new, html: { autocomplete: :off }) do |f| %>
+      <div class="bg-primary padding-primary flex items-stretch">
+        <%= f.url_field :url, placeholder: 'https://example.com/feed', class: "bg-white w-full appearance-none bg-transparent border border-color-primary text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", data: { target: 'bookmarks.input' } %>
+        <div class="rounded-sm shadow flex-shrink-0">
+          <%= f.button "Submit", class: "btn-primary", type: 'submit', data: {disable_with: disable_with_spinner(t("send"))} do  %>
+            <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            <%= t('submit_rss') %>
+          <% end %>
         </div>
       </div>
-      <div data-controller="listing" data-target="listing.container">
-        <%= render partial: "categories/list" %>
-      </div>
+    <% end %>
+  </div>
+  <div class="padding-primary">
+    <div data-controller="listing" data-target="listing.container">
+      <%= render partial: "categories/list" %>
     </div>
   </div>
 </div>

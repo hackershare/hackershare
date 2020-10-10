@@ -19,7 +19,14 @@ class RssRobotJob < ApplicationJob
         rss_source.touch(:processed_at, time: processed_at)
         return
       end
-      feed.entries.reverse_each do |entry|
+      init_rss_source_tag!(rss_source)
+      smart_published_at_array = \
+        if feed.entries.map(&:published).uniq.size == 1
+          get_smart_published_at_array(rss_source, feed.entries.size)
+        else
+          []
+        end
+      feed.entries.reverse_each.with_index do |entry, index|
         next if User.rss_robot.bookmarks.exists?(url: entry.url)
         title = entry.title.force_encoding("utf-8")
         description = (entry.summary || entry.content).force_encoding("utf-8")
@@ -30,19 +37,10 @@ class RssRobotJob < ApplicationJob
           url:         entry.url,
           title:       title,
           description: description,
-          created_at:  entry.published,
+          created_at:  (smart_published_at_array[index] || entry.published),
           lang:        lang,
         )
         if bookmark.save
-          if !rss_source.tag
-            tag = Tag.find_by(name: rss_source.tag_name)
-            if tag
-              tag.update!(is_rss: true)
-              rss_source.update!(tag: tag)
-            else
-              rss_source.create_tag!(is_rss: true, name: rss_source.tag_name, user: User.rss_robot)
-            end
-          end
           CreateTag.call(bookmark, [rss_source.tag_name], User.rss_robot)
         else
           logger.error "[RssRobotJob] Save bookmark failed: #{bookmark.errors.full_messages.to_sentence}"
@@ -50,18 +48,37 @@ class RssRobotJob < ApplicationJob
       end
       rss_source.touch(:processed_at, time: processed_at)
     rescue => e
-      logger.error "[RssRobotJob] process #{rss_source.tag_name} - #{rss_source.url} failed"
+      logger.error "[RssRobotJob] process #{rss_source.url} failed"
       logger.error e.message
       logger.error e.backtrace.join("\n")
+    end
+
+    def init_rss_source_tag!(rss_source)
+      if !rss_source.tag
+        tag = Tag.find_by(name: rss_source.tag_name)
+        if tag
+          tag.update!(is_rss: true)
+          rss_source.update!(tag: tag)
+        else
+          rss_source.create_tag!(is_rss: true, name: rss_source.tag_name, user: User.rss_robot)
+        end
+      end
+    end
+
+    def get_smart_published_at_array(rss_source, size)
+      start_time = rss_source.tag.bookmarks.maximum(:created_at) || 1.year.ago
+      between_time = Time.current - start_time
+      order_range = size.times.map { rand }.sort
+      order_range.map { |range| start_time + between_time * range }
     end
 
     def http
       @http ||= \
         if proxy = ENV["https_proxy"] || ENV["http_proxy"]
           uri = URI.parse(proxy)
-          HTTP.via(uri.host, uri.port)
+          HTTP.timeout(20).via(uri.host, uri.port)
         else
-          HTTP
+          HTTP.timeout(20)
         end
     end
 end

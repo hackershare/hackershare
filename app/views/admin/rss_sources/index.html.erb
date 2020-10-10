@@ -66,6 +66,7 @@
                 </td>
                 <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                   <%= link_to 'Edit', edit_admin_rss_source_path(rss_source), class: 'text-indigo-600 hover:text-indigo-900' %>
+                  <%= link_to 'Delete', admin_rss_source_path(rss_source), method: :delete, 'data-confirm': 'Are you sure?', class: 'text-indigo-600 hover:text-indigo-900' %>
                 </td>
               </tr>
             <% end %>
