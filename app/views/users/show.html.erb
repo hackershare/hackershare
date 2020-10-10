@@ -1,15 +1,23 @@
 <% title(t("my_profile")) %>
-<!-- 3 column wrapper -->
-<div class="">
-  <!-- Left sidebar & main wrapper -->
-  <div class="lg:flex min-w-0 bg-white">
-    <%= render partial: "users/user_side", locals: {user: @user } %>
-    <!-- Projects List -->
-    <div class="bg-white w-full" data-controller='bookmarks'>
-      <div class="lg:pl-4">
-        <div data-controller="listing" data-target="listing.container">
-          <%= render partial: "users/bookmarks_with_pagination" %>
-        </div>
+
+<div class="border border-color-primary rounded-primary">
+  <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+    <div class="flex justify-between items-center">
+      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+        <%= current_user == @user ? t("my_profile") : t("user_profile") %>
+      </h3>
+    </div>
+  </div>
+  <div class="padding-primary py-4">
+    <div class="lg:flex min-w-0 bg-white">
+      <%= render "users/user_side", user: @user %>
+      <!-- Projects List -->
+      <div class="bg-white w-full" data-controller='bookmarks'>
+        <div class="lg:pl-4">
+          <div data-controller="listing" data-target="listing.container">
+            <%= render partial: "users/bookmarks_with_pagination" %>
+          </div>
+      </div>
     </div>
   </div>
 </div>
