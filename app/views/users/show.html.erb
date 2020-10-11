@@ -1,23 +1,30 @@
 <% title(t("my_profile")) %>
 
-<div class="border border-color-primary rounded-primary">
-  <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
-    <div class="flex justify-between items-center">
-      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
-        <%= current_user == @user ? t("my_profile") : t("user_profile") %>
-      </h3>
+<div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
+  <div class="lg:w-80 lg:flex-shrink-0">
+    <div class="border border-color-primary rounded-primary">
+      <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+        <div class="flex justify-between items-center">
+          <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+            <%= current_user == @user ? t("my_profile") : t("user_profile") %>
+          </h3>
+        </div>
+      </div>
+      <div class="padding-primary py-4">
+        <div class="pb-8 lg:pb-12 lg:border-gray-200">
+          <div class="w-full items-center justify-between">
+            <%= render partial: "users/profile", locals: {user: @user}%>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="padding-primary py-4">
-    <div class="lg:flex min-w-0 bg-white">
-      <%= render "users/user_side", user: @user %>
-      <!-- Projects List -->
-      <div class="bg-white w-full" data-controller='bookmarks'>
-        <div class="lg:pl-4">
-          <div data-controller="listing" data-target="listing.container">
-            <%= render partial: "users/bookmarks_with_pagination" %>
-          </div>
-      </div>
+  <div class="lg:flex-auto">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary" data-controller='bookmarks'>
+        <div data-controller="listing" data-target="listing.container">
+          <%= render partial: "users/bookmarks_with_pagination" %>
+        </div>
     </div>
   </div>
 </div>

@@ -1,8 +1,9 @@
 <% title(t("notification")) %>
-<div class="overflow-hidden sm:rounded-lg sm:shadow">
-  <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
-    <div class="flex justify-between">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
+
+<div class="overflow-hidden border border-color-primary rounded-primary">
+  <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+    <div class="flex justify-between items-center">
+      <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
         <%= t("notification") %>
       </h3>
       <div>
@@ -11,7 +12,9 @@
       </div>
     </div>
   </div>
-  <div data-controller="listing" data-target="listing.container">
-    <%= render partial: "notifications/list" %>
+  <div class="padding-primary">
+    <div data-controller="listing" data-target="listing.container">
+      <%= render partial: "notifications/list" %>
+    </div>
   </div>
 </div>

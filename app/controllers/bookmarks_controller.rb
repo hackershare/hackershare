@@ -11,6 +11,7 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id]).only_first
     @comments = @bookmark.comments.order(id: :asc)
     @user = @bookmark.user
+    @similar_bookmarks = SimilarByTag.call(@bookmark).result
   end
 
   def goto

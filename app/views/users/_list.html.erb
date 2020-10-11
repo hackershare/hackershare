@@ -1,12 +1,10 @@
-<ul class="my-2 lg:my-4 text-center grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-4" data-target='bookmarks.list'>
+<ul class="my-2 lg:my-4 text-center grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-8" data-target='bookmarks.list'>
   <% @users.each do |user| %>
     <li>
-      <div class="space-y-4">
-        <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "mx-auto h-16 w-16 rounded-full lg:w-24 lg:h-24"), user_path(user) %>
-        <div class="space-y-2">
-          <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
-            <h4><%= user.username %></h4>
-          </div>
+      <div class="space-y-2">
+        <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "mx-auto h-12 w-12 rounded-full lg:w-20 lg:h-20"), user_path(user) %>
+        <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
+          <h4><%= user.username %></h4>
         </div>
       </div>
     </li>

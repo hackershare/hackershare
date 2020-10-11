@@ -1,16 +1,12 @@
-<div class="bg-white py-16 lg:pl-4 lg:col-span-3 py-8 lg:py-12">
-  <div class="">
-    <%= form_with(url: bookmark_comments_path(bookmark), method: :post, class: "grid grid-cols-1 row-gap-6") do |f| %>
-      <div>
-        <div class="relative rounded-md shadow-sm">
-          <%= f.text_area :comment, class: "form-input block w-full py-3 px-4 placeholder-gray-500 transition ease-in-out duration-150", rows: 4, data: { target: 'comments.input' } %>
-        </div>
-      </div>
-      <div class="">
-        <span class="inline-flex rounded-md shadow-sm">
-          <%= f.button t("comment"), type: :submit, class: "inline-flex justify-center py-3 px-6 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out", data: {disable_with: disable_with_spinner(t("comment"))}  %>
-        </span>
-      </div>
-    <% end %>
+<%= form_with(url: bookmark_comments_path(bookmark), method: :post, class: "grid grid-cols-1 row-gap-6") do |f| %>
+  <div>
+    <div class="relative rounded-md shadow-sm">
+      <%= f.text_area :comment, class: "form-input block w-full py-3 px-4 placeholder-gray-500 transition ease-in-out duration-150", rows: 4, data: { target: 'comments.input' } %>
+    </div>
   </div>
-</div>
+  <div class="">
+    <span class="inline-flex rounded-md shadow-sm">
+      <%= f.button t("comment"), type: :submit, class: "btn-primary", data: { disable_with: disable_with_spinner(t("comment")) }  %>
+    </span>
+  </div>
+<% end %>

@@ -10,45 +10,50 @@
   <%= @bookmark.description %>
 <% end %>
 
-<!-- 3 column wrapper -->
-<div class="flex-grow w-full max-w-7xl mx-auto lg:flex">
-  <!-- Left sidebar & main wrapper -->
-  <div class="flex-1 min-w-0 bg-white lg:flex">
-    <%= render partial: "users/user_side", locals: {user: @bookmark.only_first.user } %>
 
-    <!-- Projects List -->
-    <div class="bg-white lg:min-w-0 lg:flex-1">
-        <div class="lg:pl-4">
-          <ul class="relative z-0 divide-y divide-gray-200" >
-            <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first, locals: {bookmark_self: @bookmark} %>
-          </ul>
+<div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
+  <div class="lg:w-80 lg:flex-shrink-0">
+    <div class="border border-color-primary rounded-primary">
+      <div class="bg-primary rounded-t-md border-b border-color-primary padding-primary">
+        <div class="flex justify-between items-center">
+          <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+            <%= t("user_profile") %>
+          </h3>
         </div>
-
-       <%= render partial: "bookmarks/similars", locals: { bookmark: @bookmark.only_first } %>
-
-        <div data-controller="comments">
-          <div class="lg:flex-shrink-0" >
-            <div class="lg:pl-4 w-full">
-              <div class="bg-gray-50">
-                <div class="px-1 pt-6 pb-2">
-                  <h2 class="text-sm leading-5 font-semibold"><%= t("comments") %></h2>
-                </div>
-                <div class="px-1">
-                  <ul class="divide-y divide-gray-200 " data-target='comments.list'>
-                    <% if @comments.present? %>
-                      <% @comments.each do |comment| %>
-                        <%= render partial: "comments/comment", locals: {comment: comment} %>
-                      <% end %>
-                    <% else %>
-                      <div class="py-4 text-sm text-gray-500"><%= t("empty_data") %></div>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="padding-primary py-4">
+        <div class="pb-8 lg:pb-12 lg:border-gray-200">
+          <div class="w-full items-center justify-between">
+            <%= render partial: "users/profile", locals: { user: @bookmark.only_first.user } %>
           </div>
-          <%= render partial: 'comments/form', locals: {bookmark: @bookmark} %>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="lg:flex-auto">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary space-y-2 lg:space-y-4" data-controller='bookmarks comments'>
+        <ul class="relative z-0 divide-y divide-gray-200" >
+          <%= render partial: "bookmarks/bookmark", object: @bookmark.only_first, locals: {bookmark_self: @bookmark} %>
+        </ul>
+        <%= render partial: "bookmarks/similars", locals: { bookmark: @bookmark.only_first, similar_bookmarks: @similar_bookmarks } %>
+        <div class="bg-primary rounded-primary">
+          <div class="px-1 pt-6 pb-2">
+            <h2 class="text-sm leading-5 font-semibold"><%= t("comments") %></h2>
+          </div>
+          <div class="px-1">
+            <ul class="divide-y divide-gray-200 " data-target='comments.list'>
+              <% if @comments.present? %>
+                <% @comments.each do |comment| %>
+                  <%= render partial: "comments/comment", locals: {comment: comment} %>
+                <% end %>
+              <% else %>
+                <div class="py-4 text-sm text-gray-500"><%= t("empty_data") %></div>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <%= render partial: 'comments/form', locals: { bookmark: @bookmark } %>
     </div>
   </div>
 </div>
