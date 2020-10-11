@@ -7,7 +7,7 @@
 set :rails_env, :staging
 set :migrate_env, :staging
 set :sitemap_roles, :web
-set :rvm_custom_path, '/usr/share/rvm'  # only needed if not detected
+set :rvm_custom_path, "/usr/share/rvm"  # only needed if not detected
 server "hackershare.cn", user: "ubuntu", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
