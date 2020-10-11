@@ -30,7 +30,7 @@
       <div class="bg-primary padding-primary flex items-stretch">
         <%= f.url_field :url, placeholder: 'https://example.com/feed', class: "bg-white w-full appearance-none bg-transparent border border-color-primary text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", data: { target: 'bookmarks.input' } %>
         <div class="rounded-sm shadow flex-shrink-0">
-          <%= f.button "Submit", class: "btn-primary", type: 'submit', data: {disable_with: disable_with_spinner(t("send"))} do  %>
+          <%= f.button "Submit", class: "btn-primary", type: 'submit', data: { disable_with: disable_with_spinner(t("submit_rss")) } do %>
             <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
