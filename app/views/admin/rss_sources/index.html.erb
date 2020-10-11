@@ -16,36 +16,36 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Url
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Tag Name
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Is Display
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Processed At
               </th>
-              <th class="px-3 py-3 bg-gray-50"></th>
+              <th class="p-2 bg-gray-50"></th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200"> 
             <% @rss_sources.each do |rss_source| %>
               <tr>
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <%= rss_source.url %>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     <%= rss_source.tag_name %>
                   </span>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <% if rss_source.is_display? %>
                     <%= link_to undisplay_admin_rss_source_path(rss_source), method: 'patch', class: 'text-gray-500' do %>
                       <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,10 +61,10 @@
                     <% end %>
                   <% end %>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <%= rss_source.processed_at %>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <td class="p-2 text-right text-sm leading-5 font-medium">
                   <%= link_to 'Edit', edit_admin_rss_source_path(rss_source), class: 'text-indigo-600 hover:text-indigo-900' %>
                   <%= link_to 'Delete', admin_rss_source_path(rss_source), method: :delete, 'data-confirm': 'Are you sure?', class: 'text-indigo-600 hover:text-indigo-900' %>
                 </td>
@@ -74,7 +74,9 @@
             <!-- More rows... -->
           </tbody>
         </table>
-        <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        <div class="p-2">
+          <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        </div>
       </div>
     </div>
   </div>

@@ -6,28 +6,28 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Subscriptions
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Bookmarks
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Is RSS
               </th>
-              <th class="px-6 py-3 bg-gray-50"></th>
+              <th class="p-2 bg-gray-50"></th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200"> 
             <% @tags.each do |tag| %>
               <tr>
-                <td class="px-6 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <%= image_tag(tag.user.avatar_url, class: "h-10 w-10 rounded-full") %>
@@ -43,20 +43,20 @@
                   </div>
                 </td>
  
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     <%= tag.subscriptions_count %>
                   </span>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= tag.bookmarks_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= tag.is_rss %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <td class="p-2 text-right text-sm leading-5 font-medium">
                   <%=link_to "Edit", edit_admin_tag_path(tag), class: "text-indigo-600 hover:text-indigo-900" %>
                 </td>
               </tr>
@@ -65,7 +65,9 @@
             <!-- More rows... -->
           </tbody>
         </table>
-        <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        <div class="p-2">
+          <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        </div>
       </div>
     </div>
   </div>

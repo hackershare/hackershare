@@ -5,35 +5,35 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Score
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Smart Score
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Likes
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Dups
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Comments
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Tags
               </th>
 
-              <th class="px-3 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Clicks
               </th>
               <th class="px-6 py-3 bg-gray-50"></th>
@@ -42,7 +42,7 @@
           <tbody class="bg-white divide-y divide-gray-200"> 
             <% @bookmarks.each do |bookmark| %>
               <tr>
-                <td class="px-6 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <% if bookmark.favicon_local.attached? %>
@@ -77,36 +77,36 @@
                   </div>
                 </td>
  
-                <td class="px-3 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     <%= bookmark.score %>
                   </span>
                 </td>
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-                  <%= bookmark.smart_score %>
+                <td class="p-2 text-sm leading-5 text-gray-500">
+                  <%= bookmark.smart_score.round(2) %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.likes_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.dups_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.comments_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.tags_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.clicks_count %>
                 </td>
 
-                <td class="px-3 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <td class="p-2 text-right text-sm leading-5 font-medium">
                   <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                 </td>
               </tr>
@@ -115,7 +115,9 @@
             <!-- More rows... -->
           </tbody>
         </table>
-        <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        <div class="p-2">
+          <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>
+        </div>
       </div>
     </div>
   </div>

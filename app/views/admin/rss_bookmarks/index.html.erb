@@ -1,20 +1,20 @@
 <% content_for :title, 'RSS Bookmarks' %>
 
-<div class="mt-2 flex flex-col">
+<div class="flex flex-col">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
-              <th class="px-4 py-3 bg-gray-50"></th>
-              <th class="px-4 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50"></th>
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
-              <th class="px-4 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Tag
               </th>
-              <th class="px-4 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+              <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Created At
               </th>
             </tr>
@@ -22,7 +22,7 @@
           <tbody class="bg-white divide-y divide-gray-200"> 
             <% @rss_bookmarks.each do |bookmark| %>
               <tr>
-                <td class="px-4 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <td class="p-2 text-right text-sm leading-5 font-medium">
                   <% if bookmark.is_display? %>
                     <%= link_to undisplay_admin_rss_bookmark_path(bookmark), method: 'patch', class: 'text-gray-500' do %>
                       <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +38,7 @@
                     <% end %>
                   <% end %>
                 </td>
-                <td class="px-4 py-4 whitespace-no-wrap">
+                <td class="p-2">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <% if bookmark.favicon_local.attached? %>
@@ -63,21 +63,23 @@
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-4 whitespace-no-wrap text-sm leading-5">
+                <td class="p-2 text-sm leading-5">
                   <% bookmark.tags.each do |tag| %>
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                       <%= tag.name %>
                     </span>
                   <% end %>
                 </td>
-                <td class="px-4 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                <td class="p-2 text-sm leading-5 text-gray-500">
                   <%= bookmark.created_at %>
                 </td>
               </tr>
             <% end %>
           </tbody>
         </table>
-        <%= render partial: 'layouts/pagination', locals: { pagy: @pagy } %>
+        <div class="p-2">
+          <%= render partial: 'layouts/pagination', locals: { pagy: @pagy } %>
+        </div>
       </div>
     </div>
   </div>
