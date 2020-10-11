@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+RUBY_VERSION='2.6.5'
+BUNDLER_VERSION='2.1.4'
+POSTGRESQL_VERSION='12'
+
+# Adding Node.js repository
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+# Adding Yarn repository
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo add-apt-repository ppa:chris-lea/redis-server
+# Refresh our packages list with the new repositories
+sudo apt update
+# Install our dependencies for compiiling Ruby along with Node.js and Yarn
+sudo apt install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev dirmngr gnupg apt-transport-https ca-certificates redis-server redis-tools nodejs yarn
+
+# rbenv
+# git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+# echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+# echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+# git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+# echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+# git clone https://github.com/rbenv/rbenv-vars.git ~/.rbenv/plugins/rbenv-vars
+# exec $SHELL
+# git clone https://github.com/andorchen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror # For Chineses
+# rbenv install $RUBY_VERSION
+# rbenv global $RUBY_VERSION
+# ruby -v
+
+# RVM
+sudo apt-get install -y software-properties-common
+sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-get update
+sudo apt-get install -y rvm
+echo 'source "/etc/profile.d/rvm.sh"' >> ~/.bashrc
+exec $SHELL
+# echo "ruby_url=https://cache.ruby-china.com/pub/ruby" > ~/.rvm/user/db # For Chineses
+sudo rvm install $RUBY_VERSION
+
+# For Chinese
+# gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
+# gem sources -l
+# bundle config mirror.https://rubygems.org https://gems.ruby-china.com
+gem install bundler -v $BUNDLER_VERSION
+# Test and make sure bundler is installed correctly, you should see a version number.
+bundle -v
+
+# Install Nginx
+# Install the prerequisites:
+sudo apt install -y curl gnupg2 ca-certificates lsb-release
+# To set up the apt repository for stable nginx packages, run the following command:
+echo "deb http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+    | sudo tee /etc/apt/sources.list.d/nginx.list
+# If you would like to use mainline nginx packages, run the following command instead:
+# echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
+#     | sudo tee /etc/apt/sources.list.d/nginx.list
+# Next, import an official nginx signing key so apt could verify the packages authenticity:
+curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add -
+# Verify that you now have the proper key:
+sudo apt-key fingerprint ABF5BD827BD9BF62
+# The output should contain the full fingerprint 573B FD6B 3D8F BC64 1079 A6AB ABF5 BD82 7BD9 BF62 as follows:
+# pub   rsa2048 2011-08-19 [SC] [expires: 2024-06-14]
+#       573B FD6B 3D8F BC64 1079  A6AB ABF5 BD82 7BD9 BF62
+# uid   [ unknown] nginx signing key <signing-key@nginx.com>
+# To install nginx, run the following commands:
+sudo apt update
+sudo apt install -y nginx
+
+sudo apt install -y postgresql$POSTGRESQL_VERSION postgresql-contrib libpq-dev
+# sudo su - postgres
+# createuser --pwprompt deploy
+# createdb -O deploy myapp
+# exit
+
+sudo apt install -y postgresql-server-dev-12
+# scws
+cd /tmp
+wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2 | tar jxf -
+cd scws-1.2.3 && ./configure && sudo make install
+# zhparser
+git clone https://github.com/amutu/zhparser.git
+make && sudo make install
+git clone https://github.com/postgrespro/rum /tmp/rum
+cd /tmp/rum
+make USE_PGXS=1
+sudo make USE_PGXS=1 install
+sudo make USE_PGXS=1 installcheck
