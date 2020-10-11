@@ -1,42 +1,47 @@
 <ul class="divide-y divide-gray-200" aria-disabled="true">
-  <% @notifications.each do |notification| %>
-    <% n=notification.to_notification%>
-    <li class="">
-      <a href="<%= n.url %>" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-        <div class="px-1 py-2 lg:px-2 lg:py-4">
-          <div class="flex items-center justify-between">
-            <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
-              <div class="flex items-center  leading-5">
-                <span class="block h-2 w-2 rounded-full text-white shadow-solid <%= notification.read? ? 'bg-gray-400' : 'bg-red-400' %>"></span>
-                <div class="ml-2 <%= notification.read? ? 'text-gray-500' : '' %> "><%= n.message %></div>
-             </div>
-              
+  <% if @notifications.present? %>
+    <% @notifications.each do |notification| %>
+      <% n=notification.to_notification%>
+      <li class="">
+        <a href="<%= n.url %>" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+          <div class="px-1 py-2 lg:px-2 lg:py-4">
+            <div class="flex items-center justify-between">
+              <div class="text-sm leading-5 font-medium text-indigo-600 truncate">
+                <div class="flex items-center  leading-5">
+                  <span class="block h-2 w-2 rounded-full text-white shadow-solid <%= notification.read? ? 'bg-gray-400' : 'bg-red-400' %>"></span>
+                  <div class="ml-2 <%= notification.read? ? 'text-gray-500' : '' %> "><%= n.message %></div>
+              </div>
+                
+              </div>
+              <div class="ml-2 flex-shrink-0 flex">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  <%= n.type_name %>
+                </span>
+              </div>
             </div>
-            <div class="ml-2 flex-shrink-0 flex">
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                <%= n.type_name %>
-              </span>
-            </div>
-          </div>
-          <div class="mt-2 flex justify-between">
-            <div class="sm:flex">
+            <div class="mt-2 flex justify-between">
               <div class="mr-6 flex items-center text-sm leading-5 text-gray-500">
                 <% if n.class.to_s == "TagNotification" %>
-                  <svg  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M.5 7.5l-.354-.354a.5.5 0 000 .708L.5 7.5zm7 7l-.354.354a.5.5 0 00.708 0L7.5 14.5zm7-7l.354.354A.5.5 0 0015 7.5h-.5zm-7-7V0a.5.5 0 00-.354.146L7.5.5zM.146 7.854l7 7 .708-.708-7-7-.708.708zm7.708 7l7-7-.708-.708-7 7 .708.708zM15 7.5v-6h-1v6h1zM13.5 0h-6v1h6V0zM7.146.146l-7 7 .708.708 7-7-.708-.708zM15 1.5A1.5 1.5 0 0013.5 0v1a.5.5 0 01.5.5h1zM10.5 5a.5.5 0 01-.5-.5H9A1.5 1.5 0 0010.5 6V5zm.5-.5a.5.5 0 01-.5.5v1A1.5 1.5 0 0012 4.5h-1zm-.5-.5a.5.5 0 01.5.5h1A1.5 1.5 0 0010.5 3v1zm0-1A1.5 1.5 0 009 4.5h1a.5.5 0 01.5-.5V3z" fill="currentColor"></path></svg>
+                  <svg class="w-4 h-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                  </svg>
                   <%= n.tag&.name %>
                 <% else %>
-                  <svg viewBox="0 0 20 20" class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M3 13v.5h1V13H3zm8 0v.5h1V13h-1zm-7 0v-.5H3v.5h1zm2.5-3h2V9h-2v1zm4.5 2.5v.5h1v-.5h-1zM8.5 10a2.5 2.5 0 012.5 2.5h1A3.5 3.5 0 008.5 9v1zM4 12.5A2.5 2.5 0 016.5 10V9A3.5 3.5 0 003 12.5h1zM7.5 3A2.5 2.5 0 005 5.5h1A1.5 1.5 0 017.5 4V3zM10 5.5A2.5 2.5 0 007.5 3v1A1.5 1.5 0 019 5.5h1zM7.5 8A2.5 2.5 0 0010 5.5H9A1.5 1.5 0 017.5 7v1zm0-1A1.5 1.5 0 016 5.5H5A2.5 2.5 0 007.5 8V7zm0 7A6.5 6.5 0 011 7.5H0A7.5 7.5 0 007.5 15v-1zM14 7.5A6.5 6.5 0 017.5 14v1A7.5 7.5 0 0015 7.5h-1zM7.5 1A6.5 6.5 0 0114 7.5h1A7.5 7.5 0 007.5 0v1zm0-1A7.5 7.5 0 000 7.5h1A6.5 6.5 0 017.5 1V0z" fill="currentColor"></path></svg>
-
+                  <svg class="w-4 h-5 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <%= n.user&.username %>
                 <% end %>
               </div>
-
             </div>
-
           </div>
-        </div>
-      </a>
-    </li>
+        </a>
+      </li>
+    <% end %>
+  <% else %>
+    <div class="text-gray-500 text-sm">
+      <%= t("empty_data") %>
+    </div>
   <% end %>
 </ul>
 <%= render partial: 'layouts/pagination', locals: {pagy: @pagy} %>

@@ -1,11 +1,11 @@
-<div class="bg-primary rounded-primary">
-  <div class="px-1 pt-6 pb-2">
+<div class="bg-primary rounded-primary padding-primary">
+  <div class="mb-4">
     <h2 class="text-sm leading-5 font-semibold"><%= t("similar_bookmarks") %></h2>
   </div>
-  <div class="px-1">
-    <% if similar_bookmarks.present? %>
+  <% if similar_bookmarks.present? %>
+    <div class="my-2">
       <% similar_bookmarks.each do |bookmark| %>
-        <div class="mb-1 flex items-center space-x-2">
+        <div class="py-1 flex items-center space-x-1">
           <% if bookmark.favicon_local.attached? %>
             <span>
               <%= image_tag(bookmark.favicon_local, class: "h-4 w-4") %>
@@ -15,15 +15,15 @@
               <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
             </span>
           <% end %>
-          <span class="block break-all">
+          <div class="block break-all">
             <h2 class="text-sm font-medium leading-5">
               <%= link_to bookmark.title_or_url, bookmark_path(bookmark)  %>
             </h2>
-          </span>
+          </div>
         </div>
       <% end %>
-    <% else %>
-      <div class="py-4 text-sm text-gray-500"><%= t("empty_data") %></div>
-    <% end %>
-  </div>
+    </div>
+  <% else %>
+    <div class="my-2 text-sm text-gray-500"><%= t("empty_data") %></div>
+  <% end %>
 </div>
