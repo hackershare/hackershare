@@ -14,7 +14,7 @@ en:
   bookmark_destroy_fail: Bookmark destroyed failed
   bookmarks: Bookmarks
   unsubscribe: Unsubscribe
-  category: Category
+  category: Subscriptions
   chrome_extension_description: With the extension, you can add new bookmarks with the click of a button.
   comment: Comment
   comment_added: Comment added
@@ -44,12 +44,12 @@ en:
   logout_successed: Logout successed
   monthly: Monthly
   my_profile: My Profile
-  my_tags: My Tags
+  my_tags: My Subscriptions
   not_have_account?: Not have account?
   open_source: Open Source
   or_continue_with: Or continue with
   origin_link: Origin Link
-  other_hot_tags: Other Hot Tags
+  other_hot_tags: Other Hot Subscriptions
   page_overflow: The page is not found
   remember_me: Remember Me
   rss_source_add_successfully: RSS Source added successfully
@@ -74,7 +74,7 @@ en:
   tagging: Tagging
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: This information will be displayed publicly so be careful what you share
   top_hackers: Top Hackers
-  top_categories: Top Categories
+  top_categories: Top Subscriptions
   unfollow: Unfollow
   user_profile: User's Profile
   weekly: Weekly

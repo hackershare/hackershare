@@ -14,7 +14,7 @@ zh-CN:
   bookmark_destroy_fail: 书签删除失败
   bookmarks: 书签
   unsubscribe: 取消订阅
-  category: 标签
+  category: 订阅
   chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
   comment_added: 评论已添加
@@ -44,12 +44,12 @@ zh-CN:
   logout_successed: 退出成功
   monthly: 每月
   my_profile: 我的主页
-  my_tags: 我的标签
+  my_tags: 我的订阅
   not_have_account?: 没有账户？
   open_source: Open Source
   or_continue_with: 便捷登录
   origin_link: 原始链接
-  other_hot_tags: 其他热门标签
+  other_hot_tags: 其他热门订阅
   page_overflow: 页数不存在
   remember_me: 记住我
   rss_source_add_successfully: RSS 源添加成功
@@ -74,7 +74,7 @@ zh-CN:
   tagging: 打标签
   this_information_will_be_displayed_publicly_so_be_careful_what_you_share: 请注意，这些信息会公开
   top_hackers: 极客排行
-  top_categories: 热门标签
+  top_categories: 热门订阅
   unfollow: 取消关注
   user_profile: 用户主页
   weekly: 每周
