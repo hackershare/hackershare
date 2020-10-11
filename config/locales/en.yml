@@ -50,6 +50,7 @@ en:
   or_continue_with: Or continue with
   origin_link: Origin Link
   other_hot_tags: Other Hot Tags
+  page_overflow: The page is not found
   remember_me: Remember Me
   rss_source_add_successfully: RSS Source added successfully
   rss_source_invalid: RSS Source parsed failed

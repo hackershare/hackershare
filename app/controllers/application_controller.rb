@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :authenticate_user!, :current_user, :user_signed_in?, :default_host, :best_locale
 
+  rescue_from "Pagy::OverflowError" do |e|
+    switch_locale do
+      flash[:error] = t("page_overflow")
+      redirect_back fallback_location: root_path
+    end
+  end
+
   protected
 
     def default_host

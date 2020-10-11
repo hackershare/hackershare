@@ -50,6 +50,7 @@ zh-CN:
   or_continue_with: 便捷登录
   origin_link: 原始链接
   other_hot_tags: 其他热门标签
+  page_overflow: 页数不存在
   remember_me: 记住我
   rss_source_add_successfully: RSS 源添加成功
   rss_source_invalid: RSS 源解析失败
