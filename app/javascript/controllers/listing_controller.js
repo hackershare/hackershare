@@ -11,7 +11,7 @@ export default class extends Controller {
     let [data, status, xhr] = event.detail;
     this.containerTarget.innerHTML = xhr.response;
     const timeagos = document.querySelectorAll('.timeago');
-    const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
+    const lang = I18n.locale == 'zh-CN' ? 'zh_CN' : 'en_US'
     if (timeagos.length > 0){
       render(timeagos, lang);
     }

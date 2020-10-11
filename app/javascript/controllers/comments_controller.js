@@ -11,7 +11,7 @@ export default class extends Controller {
     }
     this.listTarget.innerHTML =  this.listTarget.innerHTML + xhr.response;
     const timeagos = document.querySelectorAll('.timeago');
-    const lang = I18n.locale == 'cn' ? 'zh_CN' : 'en_US'
+    const lang = I18n.locale == 'zh-CN' ? 'zh_CN' : 'en_US'
     render(timeagos, lang);
 
     this.inputTarget.value = '';

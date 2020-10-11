@@ -72,8 +72,8 @@ class User < ApplicationRecord
 
   def bookmark_lang
     locales_lang = {
-      en: "english",
-      cn: "chinese",
+      en:      "english",
+      'zh-CN': "chinese",
     }
     follow_website_lang? ? locales_lang[I18n.locale] : "language"
   end
