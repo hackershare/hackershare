@@ -9,6 +9,9 @@ development:
   <<: *default
 test:
   <<: *default
+staging:
+  <<: *default
+  concurrency: 20
 production:
   <<: *default
   concurrency: 20

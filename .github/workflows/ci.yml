@@ -43,4 +43,6 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         touch ~/.ssh/known_hosts
         ssh-keyscan hackershare.dev >> ~/.ssh/known_hosts
-        bundle exec cap production deploy && bundle exec cap production sitemap:refresh
+        bundle exec cap staging deploy
+        bundle exec cap production deploy
+        bundle exec cap production sitemap:refresh

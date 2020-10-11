@@ -4,7 +4,7 @@
 lock "~> 3.14.1"
 
 set :application, "hackershare"
-set :repo_url, "git@hackershare.github.com:hackershare/hackershare.git"
+set :repo_url, "https://github.com/hackershare/hackershare.git"
 
 set :assets_roles, [:app]
 
@@ -13,7 +13,7 @@ set :assets_roles, [:app]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/hackershare"
-set :rvm_ruby_version, "2.6.5"
+set :rvm_ruby_version, File.read(".ruby-version").strip
 
 set :puma_init_active_record, true
 
