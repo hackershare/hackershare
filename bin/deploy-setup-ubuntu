@@ -69,7 +69,7 @@ sudo apt install -y nginx
 
 sudo apt install -y postgresql$POSTGRESQL_VERSION postgresql-contrib libpq-dev
 # sudo su - postgres
-# createuser --pwprompt deploy
+# createuser --pwprompt --superuser deploy
 # createdb -O deploy myapp
 # exit
 
@@ -79,10 +79,8 @@ cd /tmp
 wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.3.tar.bz2 | tar jxf -
 cd scws-1.2.3 && ./configure && sudo make install
 # zhparser
-git clone https://github.com/amutu/zhparser.git
-make && sudo make install
+git clone https://github.com/amutu/zhparser.git /tmp/zhparser
+cd /tmp/zhparser && make && sudo make install
+# rum
 git clone https://github.com/postgrespro/rum /tmp/rum
-cd /tmp/rum
-make USE_PGXS=1
-sudo make USE_PGXS=1 install
-sudo make USE_PGXS=1 installcheck
+cd /tmp/rum && make USE_PGXS=1 && sudo make USE_PGXS=1 install && sudo make USE_PGXS=1 installcheck
