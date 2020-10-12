@@ -1,21 +1,17 @@
 # frozen_string_literal: true
-
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
-set :rails_env, :staging
-set :migrate_env, :staging
+set :rails_env, :production
+set :migrate_env, :production
 set :sitemap_roles, :web
 set :rvm_custom_path, "/usr/share/rvm"  # only needed if not detected
 server "hackershare.cn", user: "ubuntu", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-set :nginx_server_name, ".hackershare.cn"
-# set :nginx_use_ssl, true
-# set :nginx_ssl_certificate, "/etc/letsencrypt/live/hackershare.dev/fullchain.pem"
-# set :nginx_ssl_certificate_key, "/etc/letsencrypt/live/hackershare.dev/privkey.pem"
+
 
 # role-based syntax
 # ==================
