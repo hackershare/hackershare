@@ -20,8 +20,9 @@ task fetch_tags: :environment do
         tag = tag.preferred_or_self
         tag.update(description: attrs[:desc], remote_img_url: attrs[:img])
       else
-        Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
+        tag = Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
       end
+      tag.update(auto_extract: false) if tag && (tag.name.size < 3 || tag.name.size > 15)
     end
   end
 end
@@ -45,8 +46,9 @@ task fetch_tags_from_stackshare: :environment do
         tag = tag.preferred_or_self
         tag.update(description: attrs[:desc], remote_img_url: attrs[:img]) if tag.remote_img_url.blank?
       else
-        Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
+        tag = Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
       end
+      tag.update(auto_extract: false) if tag && (tag.name.size < 3 || tag.name.size > 10)
     end
   end
 end
