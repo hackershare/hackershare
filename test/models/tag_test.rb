@@ -7,8 +7,10 @@
 #  id                  :bigint           not null, primary key
 #  auto_extract        :boolean          default(TRUE)
 #  bookmarks_count     :integer          default(0)
+#  description         :text
 #  is_rss              :boolean          default(FALSE)
 #  name                :string
+#  remote_img_url      :string
 #  subscriptions_count :integer          default(0)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

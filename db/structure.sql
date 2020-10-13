@@ -668,7 +668,9 @@ CREATE TABLE public.tags (
     subscriptions_count integer DEFAULT 0,
     is_rss boolean DEFAULT false,
     preferred_id bigint,
-    auto_extract boolean DEFAULT true
+    auto_extract boolean DEFAULT true,
+    description text,
+    remote_img_url character varying
 );
 
 
@@ -1355,6 +1357,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200930135043'),
 ('20201002114935'),
 ('20201010110915'),
-('20201010113850');
+('20201010113850'),
+('20201012190758');
 
 
