@@ -19,7 +19,7 @@ class ExtractTag
        WHERE bookmarks.id = #{bookmark.id} 
              AND plainto_tsquery('zh', tags.name) @@ bookmarks.tsv
              AND tags.name not IN (#{Util.stop_words_for_where})
-             AND length(tags.name) > 3
+             AND length(tags.name) >= 3
              AND tags.auto_extract = 't'
     ORDER BY rev_score ASC
        LIMIT 10
