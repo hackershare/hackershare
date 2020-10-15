@@ -1,0 +1,13 @@
+<script type="text/javascript">
+  var res = "chrome-extension://pinmchdpdbjbhijbagmealcojjpeebmh/icon16.png";
+  var img = new Image();
+  img.onload = function() {
+    console.log('plugin installed')
+    var dom = document.getElementById("extension-banner")
+    if (dom) {
+      dom.style.display = "none"
+    }
+  };
+  img.onerror = console.log;
+  img.src = res;
+</script>
