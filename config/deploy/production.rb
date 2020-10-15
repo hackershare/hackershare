@@ -7,7 +7,7 @@
 set :rails_env, :production
 set :migrate_env, :production
 set :sitemap_roles, :web
-server "hackershare.dev", user: "root", roles: %w{app db web}, my_property: :my_value
+server "hackershare.dev", user: "ubuntu", roles: %w{app db web}
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
