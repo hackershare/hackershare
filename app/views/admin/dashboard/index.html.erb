@@ -114,7 +114,7 @@
     New Users
   </h3>
   <ul class="my-2 lg:my-4 text-center grid grid-cols-4 gap-4 lg:grid-cols-8 lg:gap-8" data-target='bookmarks.list'>
-    <% User.order(id: :desc).limit(20).each do |user| %>
+    <% User.order(id: :desc).limit(24).each do |user| %>
       <li>
         <div class="space-y-2">
           <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "mx-auto h-12 w-12 rounded-full lg:w-20 lg:h-20"), user_path(user) %>
