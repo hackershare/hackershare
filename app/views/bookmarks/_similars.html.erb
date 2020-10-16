@@ -8,7 +8,7 @@
         <div class="py-1 flex items-center space-x-1">
           <% if bookmark.favicon_local.attached? %>
             <span>
-              <%= image_tag(bookmark.favicon_local, class: "h-4 w-4") %>
+              <%= image_tag(bookmark.favicon_local.service_url, class: "h-4 w-4") %>
             </span>
           <% else %>
             <span>

@@ -41,7 +41,11 @@ module Hackershare
     config.action_mailer.deliver_later_queue_name = :default
     config.active_job.queue_adapter = :sidekiq
 
-    config.active_storage.service = :local
+    config.active_storage.service = :qiniu
+    config.active_storage.analyzers = [
+      ActiveStorage::Analyzer::QiniuImageAnalyzer,
+      ActiveStorage::Analyzer::QiniuVideoAnalyzer
+    ]
     config.active_storage.service_urls_expire_in = 99.years
     config.active_storage.content_types_to_serve_as_binary -= ["image/svg+xml"]
     config.active_storage.queue = :default

@@ -6,6 +6,15 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+qiniu:
+  service: Qiniu
+  access_key: <%= ENV['QINIU_ACCESS_KEY'] %>
+  secret_key: <%= ENV['QINIU_SECRET_KEY'] %>
+  bucket: <%= ENV['QINIU_BUCKET'] %>
+  domain: <%= ENV['QINIU_DOMAIN'] %>
+  protocol: <%= ENV.fetch("QINIU_PROTOCOL") { "http" } %>
+  bucket_private: <%= ENV['QINIU_BUCKET_PRIVATE'] || false  %>
+
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3

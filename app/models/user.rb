@@ -96,9 +96,9 @@ class User < ApplicationRecord
     read_attribute(:username) || email.split("@")[0]
   end
 
-  def avatar_url
+  def avatar_url(size = "80x80")
     if avatar.attached?
-      avatar.variant(resize_to_limit: [150, nil])
+      avatar.service_url(fop: "imageMogr2/thumbnail/#{size}")
     else
       ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(email)].join("/")
     end
