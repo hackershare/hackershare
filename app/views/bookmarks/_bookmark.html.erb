@@ -1,26 +1,34 @@
 <li data-controller="remote-forms" class="px-1 py-2 lg:py-4 relative hover:bg-gray-50" data-prefetch="<%= bookmark_path(bookmark) %>">
   <!-- Repo name and link -->
   <div class="min-w-0 space-y-3 w-full md:w-auto">
-    <div class="flex items-center space-x-2">
-      <% if bookmark.favicon_local.attached? %>
-        <span>
-          <%= image_tag(bookmark.favicon_local.service_url, class: "h-4 w-4") %>
-        </span>
-      <% else %>
-        <span>
-          <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
-        </span>
-      <% end %>
-      <span class="block break-all">
-        <h2 class="text-md font-medium leading-5">
-          <% if params[:controller] == 'bookmarks' && params[:action] == 'show' %>
-            <%= link_to bookmark.title_or_url, goto_bookmark_path(bookmark), target: '_blank', data: {prefetch: 'false' } %>
+    <%= link_to_bookmarks bookmark do %>
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <% if bookmark.favicon_local.attached? %>
+            <span>
+              <%= image_tag(bookmark.favicon_local.service_url, class: "h-4 w-4") %>
+            </span>
           <% else %>
-            <%= link_to bookmark.title_or_url, bookmark_path(bookmark) %>
+            <span>
+              <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
+            </span>
           <% end %>
-        </h2>
-      </span>
-    </div>
+          <span class="block break-all">
+            <h2 class="text-md font-medium leading-5">
+              <%= bookmark.title_or_url %>
+            </h2>
+          </span>
+        </div>
+        <% unless controller_name == "bookmarks" && action_name == "show" %>
+          <div class="flex items-center space-x-0.5 relative text-gray-500">
+            <svg class="w-6 h-6" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <span><%= bookmark.comments_count %></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
     <div class="flex flex-wrap pl-6 items-center space-x-1 lg:space-x-2">
       <% bookmark.tags.each do |tag| %>
         <%= tag_url_for(tag) %>
@@ -49,11 +57,10 @@
           </button>
         </span>
       </span>
-      <a href="<%= bookmark_path(bookmark) %>" class="flex items-center space-x-0.5 relative hover:text-gray-700">
-        <svg class="w-6 h-6" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      <a href="<%= goto_bookmark_path(bookmark) %>" target="_blank" data-prefetch="false" class="flex items-center space-x-0.5 relative hover:text-gray-700">
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
         </svg>
-        <span><%= bookmark.comments_count %></span>
       </a>
       <div @click.away="open = false" class="flex-shrink-0 relative" x-data="{ open: false }">
         <div class="hover:text-gray-900">
