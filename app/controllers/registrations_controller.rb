@@ -15,6 +15,7 @@ class RegistrationsController < ApplicationController
         value: @user.remember_token,
         expires: 1.year.from_now.utc
       }
+      SaveGavatarJob.perform_later(@user.id)
       redirect_to root_path
     else
       flash[:error] = t("sign_up_failed")
