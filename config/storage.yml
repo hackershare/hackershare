@@ -12,7 +12,7 @@ qiniu:
   secret_key: <%= ENV['QINIU_SECRET_KEY'] %>
   bucket: <%= ENV['QINIU_BUCKET'] %>
   domain: <%= ENV['QINIU_DOMAIN'] %>
-  protocol: <%= ENV.fetch("QINIU_PROTOCOL") { "http" } %>
+  protocol: <%= ENV.fetch("QINIU_PROTOCOL") { "https" } %>
   bucket_private: <%= ENV['QINIU_BUCKET_PRIVATE'] || false  %>
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
