@@ -4,16 +4,12 @@ on:
   push:
     branches:
       - master
-      - staging
-      - production
     paths-ignore:
       - 'README.md'
       - 'docs/**'
   pull_request:
     branches:
       - master
-      - staging
-      - production
     paths-ignore:
       - 'README.md'
       - 'docs/**'
@@ -29,8 +25,8 @@ jobs:
         ruby-version: 2.6
         bundler-cache: true
     - run: bundle exec rubocop
-  deploy_staging:
-    if: ${{ github.ref == 'refs/heads/staging' }}
+  deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs: build
     env:
       ID_RSA: ${{ secrets.ID_RSA }}
@@ -47,25 +43,5 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         touch ~/.ssh/known_hosts
         ssh-keyscan hackershare.cn >> ~/.ssh/known_hosts
-        bundle exec cap staging deploy
-        bundle exec cap staging sitemap:refresh
-  deploy_production:
-    if: ${{ github.ref == 'refs/heads/production' }}
-    needs: build
-    env:
-      ID_RSA: ${{ secrets.ID_RSA }}
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6
-        bundler-cache: true
-    - run: |
-        mkdir -p ~/.ssh/
-        echo "$ID_RSA" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        touch ~/.ssh/known_hosts
-        ssh-keyscan hackershare.dev >> ~/.ssh/known_hosts
         bundle exec cap production deploy
         bundle exec cap production sitemap:refresh
