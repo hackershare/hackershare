@@ -16,6 +16,10 @@ if Rails.env.production?
 end
 
 Rails.application.routes.draw do
+  # Compatible before
+  get "/cn", to: redirect("/")
+  get "/cn/*path", to: redirect("/%{path}")
+
   mount Sidekiq::Web => "/sidekiq"
   get "auth/:provider/callback", to: "sessions#create_from_oauth"
 
