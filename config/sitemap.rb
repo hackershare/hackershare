@@ -11,7 +11,7 @@ SitemapGenerator::Sitemap.sitemaps_path = "sitemap/"
 
 SitemapGenerator::Sitemap.create do
   # The path locale of english is nil
-  path_locales = [nil, "cn"]
+  path_locales = [nil, "en"]
   path_locales.each do |locale|
     add root_path(locale: locale), changefreq: "daily"
     add categories_path(locale: locale), changefreq: "daily"

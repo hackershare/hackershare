@@ -51,7 +51,7 @@ module Hackershare
     config.active_storage.queue = :default
 
     config.i18n.available_locales = %i[en zh-CN]
-    config.i18n.default_locale = :en
+    config.i18n.default_locale = :'zh-CN'
     config.generators do |g|
       g.stylesheets false
       g.javascripts false

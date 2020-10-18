@@ -17,7 +17,7 @@ window.I18n = I18n
 
 document.addEventListener("turbolinks:load", function () {
   const metaLocale = document.querySelector('meta[name=locale]');
-  I18n.locale = metaLocale && metaLocale.content || 'en';
+  I18n.locale = metaLocale && metaLocale.content || 'cn';
 
   const timeagos = document.querySelectorAll('.timeago');
   const lang = I18n.locale == 'zh-CN' ? 'zh_CN' : 'en_US'

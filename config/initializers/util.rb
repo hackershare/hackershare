@@ -19,6 +19,7 @@ module Util
       com
       www
       cn
+      en
       blog
     ]
   end

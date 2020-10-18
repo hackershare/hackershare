@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope "(:locale)", locale: /cn/ do
+  scope "(:locale)", locale: /en/ do
     resources :rss_sources, only: %i[create]
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]

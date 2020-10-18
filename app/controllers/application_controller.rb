@@ -61,17 +61,16 @@ class ApplicationController < ActionController::Base
       if request.path == "/" && best_locale != I18n.default_locale
         redirect_to root_path(locale: best_locale)
       elsif dync_locale_routes?
-        locale = best_locale == :cn ? :'zh-CN' : best_locale
-        I18n.with_locale(locale, &action)
+        I18n.with_locale(best_locale, &action)
       else
-        locale = params[:locale] == "cn" ? :'zh-CN' : I18n.default_locale
+        locale = params[:locale] if I18n.locale_available?(params[:locale])
         I18n.with_locale(locale, &action)
       end
     end
 
     # Cannot use this this method until I18n.locale is already setted
     def default_url_options
-      locale = I18n.locale == I18n.default_locale ? nil : "cn"
+      locale = I18n.locale == I18n.default_locale ? nil : I18n.locale
       {
         locale: locale,
       }
@@ -81,7 +80,7 @@ class ApplicationController < ActionController::Base
       @best_locale ||= begin
         cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
         lang = request.env["HTTP_ACCEPT_LANGUAGE"]&.scan(/^[a-z]{2}/)&.first
-        client_locale = lang == "zh" ? :cn : :en
+        client_locale = lang == "zh" ? :'zh-CN' : :en
         (cookie_locale || client_locale || I18n.default_locale).to_sym
       end
     end
