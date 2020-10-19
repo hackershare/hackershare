@@ -16,6 +16,7 @@
 #  description                   :text
 #  dups_count                    :integer          default(0)
 #  favicon                       :string
+#  images                        :string           default([]), is an Array
 #  is_display                    :boolean          default(TRUE), not null
 #  is_rss                        :boolean          default(FALSE), not null
 #  lang                          :integer          default("english"), not null

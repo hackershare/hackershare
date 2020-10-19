@@ -33,7 +33,7 @@ LinkThumbnailer.configure do |config|
 
   # List of attributes you want LinkThumbnailer to fetch on a website.
   #
-  config.attributes = %i[title description favicon]
+  config.attributes = %i[title description favicon images]
 
   # Prior favicon size. If the website doesn't have such size - returns the first favicon.
   # Value should be like '32x32' or '16x16'. Default value is nil.

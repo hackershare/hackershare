@@ -7,6 +7,10 @@ module ApplicationHelper
     content_for :title, text
   end
 
+  def default_image_url
+    "https://hackershare.dev/images/landing-feature-1.png"
+  end
+
   def disable_with_spinner(text)
     spinner = <<~SPINNER
       <svg class="animate-spin mr-1 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

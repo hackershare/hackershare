@@ -12,6 +12,7 @@ class RemoteFetchJob < ApplicationJob
     end
     parser = LinkThumbnailer.generate(bookmark.url, verify_ssl: false)
     favicon_url = parser.favicon
+    image_urls = parser.images.map(&:src)
     begin
       open(parser.favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
     rescue OpenURI::HTTPError, Errno::ENOENT
@@ -27,6 +28,7 @@ class RemoteFetchJob < ApplicationJob
     bookmark.title = parser.title.presence if bookmark.title.blank?
     bookmark.description = parser.description.presence if bookmark.description.blank?
     bookmark.favicon = favicon_url.presence if bookmark.favicon.blank?
+    bookmark.images = image_urls if bookmark.images.blank?
     lang = [bookmark.title, bookmark.description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
     bookmark.lang = lang
     if bookmark.save
