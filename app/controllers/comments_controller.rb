@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     if @comment.save
       CommentNotification.with(comment: @comment).deliver([@bookmark.user, @bookmark.comments.map { |x| x.user }].flatten.uniq - [current_user])
 
-      @bookmark.update(pinned_comment: @comment) if @bookmark.pinned_comment_id.blank?
+      @bookmark.update(pinned_comment: @comment) if @bookmark.pinned_comment_id.blank? && @comment.comment.to_s.size < Comment::MAX_PINNED_COMMENT_LENGTH
 
       respond_to do |format|
         # format.js { render @comment, content_type: "text/html" }

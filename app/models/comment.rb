@@ -17,6 +17,7 @@
 #  index_comments_on_user_id      (user_id)
 #
 class Comment < ApplicationRecord
+  MAX_PINNED_COMMENT_LENGTH = 280
   belongs_to :user, counter_cache: true
   belongs_to :bookmark, counter_cache: true
   validates :comment, presence: true
