@@ -26,6 +26,7 @@ zh-CN:
   daily: 每天
   delete: 删除
   email_or_password_is_wrong: 邮箱或密码错误
+  empty_comments: 暂时没有评论，不妨评论一下？
   empty_data: 暂无数据
   english: 英文
   forgot_your_password?: 忘记密码？

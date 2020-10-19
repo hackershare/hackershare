@@ -26,6 +26,7 @@ en:
   daily: Daily
   delete: Delete
   email_or_password_is_wrong: Email or password is wrong
+  empty_comments: There are no comments yet, why not comment?
   empty_data: Empty data
   english: English
   forgot_your_password?: Forgot your password?
