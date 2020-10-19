@@ -29,14 +29,15 @@ class RssRobotJob < ApplicationJob
       feed.entries.reverse_each.with_index do |entry, index|
         next if User.rss_robot.bookmarks.exists?(url: entry.url)
         title = entry.title.force_encoding("utf-8")
-        description = (entry.summary || entry.content).force_encoding("utf-8")
+        description = (entry.content || entry.summary).force_encoding("utf-8")
         lang = [title, description].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
         bookmark = User.rss_robot.bookmarks.new(
           is_rss:      true,
           is_display:  rss_source.is_display,
           url:         entry.url,
           title:       title,
-          description: description,
+          description: entry.summary.to_s.force_encoding("utf-8"),
+          content: description,
           created_at:  (smart_published_at_array[index] || entry.published),
           lang:        lang,
         )
