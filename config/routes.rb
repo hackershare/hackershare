@@ -84,7 +84,8 @@ Rails.application.routes.draw do
         put :update_setting
       end
     end
-    delete "sign_out" => "sessions#destroy", as: :destroy_session
+    get "about", to: "home#about"
+    delete "sign_out", to: "sessions#destroy", as: :destroy_session
     root "home#index"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
