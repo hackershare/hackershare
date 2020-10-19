@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
     @comment = @bookmark.comments.new(comment: params[:comment], user: current_user)
     if @comment.save
       CommentNotification.with(comment: @comment).deliver([@bookmark.user, @bookmark.comments.map { |x| x.user }].flatten.uniq - [current_user])
+
+      @bookmark.update(pinned_comment: @comment) if @bookmark.pinned_comment_id.blank?
+
       respond_to do |format|
         # format.js { render @comment, content_type: "text/html" }
         format.html do
