@@ -358,7 +358,8 @@ CREATE TABLE public.bookmarks (
     cached_tag_with_aliases_ids bigint[] DEFAULT '{}'::bigint[],
     is_display boolean DEFAULT true NOT NULL,
     tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
-    shared_at timestamp without time zone
+    shared_at timestamp without time zone,
+    pinned_comment_id bigint
 );
 
 
@@ -1358,6 +1359,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201002114935'),
 ('20201010110915'),
 ('20201010113850'),
-('20201012190758');
+('20201012190758'),
+('20201019145723');
 
 
