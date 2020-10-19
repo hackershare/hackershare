@@ -29,6 +29,7 @@
 #  url                           :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  pinned_comment_id             :bigint
 #  ref_id                        :bigint
 #  user_id                       :bigint
 #

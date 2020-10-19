@@ -25,7 +25,10 @@
           </svg>
           <span><%= bookmark.comments_count %></span>
           <span class="ml-1 lg:ml-2">
-            <%= bookmark.comments.first&.comment || t("empty_comments") %>
+            <%= bookmark.pinned_comment&.comment  %>
+            <% if bookmark.comments_count == 0 %>
+              <%= t("empty_comments") %>
+            <% end %>
           </span>
         </div>
       <% end %>
