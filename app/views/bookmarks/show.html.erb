@@ -10,6 +10,22 @@
   <%= @bookmark.description %>
 <% end %>
 
+<% content_for(:meta) do %>
+    <meta property="og:title" content="<%= @bookmark.title %>">
+    <meta property="og:description" content="<%= @bookmark.description %>">
+    <meta property="og:image" content="<%= @bookmark.images.first || default_image_url %>">
+    <meta property="og:url" content="<%= bookmark_url @bookmark %>">
+    <meta property="og:site_name" content="Hackershare">
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= bookmark_url(@bookmark) %>">
+    <meta name="twitter:title" content="<%= @bookmark.title %>">
+    <meta name="twitter:description" content="<%= @bookmark.description %>">
+    <meta name="twitter:image" content="<%= @bookmark.images.first || default_image_url %>">
+<% end %>
+
+
 
 <div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
   <div class="lg:w-80 lg:flex-shrink-0">
