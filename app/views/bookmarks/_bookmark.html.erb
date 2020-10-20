@@ -89,6 +89,11 @@
                 </svg>
               <span><%= t("share_to_twitter") %></span>
             <% end %>
+
+             <%= link_to "https://t.me/share/url?text=#{URI.encode bookmark.title.to_s}&url=#{URI.encode bookmark_url(bookmark)}", target: "_blank", class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800" do %>
+                <svg class="w-5 h-5" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M14.5 1.5l-14 5 4 2 6-4-4 5 6 4 2-12z" stroke="currentColor" stroke-linejoin="round"></path></svg>
+              <span><%= t("share_to_telegram") %></span>
+            <% end %>
             
             <% if bookmark_self.can_destroy_by?(current_user) %>
               <%= link_to bookmark_path(bookmark_self), method: :delete, remote: true, data: {confirm: t("confirm_delete")}, class: "relative flex items-center space-x-1 px-2 py-2 hover:text-gray-800" do %>

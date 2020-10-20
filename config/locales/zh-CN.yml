@@ -60,6 +60,7 @@ zh-CN:
   search_results: "搜索结果: %{query}"
   send: 分享
   share_to_twitter: 分享到推特
+  share_to_telegram: 分享到电报群
   settings: 个人资料设置
   sign_in: 登录
   sign_in_to_your_account: 登录账户
