@@ -5,7 +5,7 @@
       <div class="flex items-center space-x-2">
         <% if bookmark.favicon_local.attached? %>
           <span>
-            <%= image_tag(bookmark.favicon_local.service_url, class: "h-4 w-4") %>
+            <%= image_tag(bookmark.favicon_local.service_url, loading: 'lazy', class: "h-4 w-4") %>
           </span>
         <% else %>
           <span>

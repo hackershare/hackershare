@@ -47,7 +47,7 @@
                     <div class="flex-shrink-0 h-10 w-10">
                       <% if bookmark.favicon_local.attached? %>
                         <span>
-                          <%= image_tag(bookmark.favicon_local.service_url, class: "h-10 w-10") %>
+                          <%= image_tag(bookmark.favicon_local.service_url, loading: 'lazy', class: "h-10 w-10") %>
                         </span>
                       <% else %>
                         <span>

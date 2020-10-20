@@ -2,7 +2,7 @@
   <% @users.each do |user| %>
     <li>
       <div class="space-y-2">
-        <%= link_to image_tag(user.avatar_url, title: user.username, alt: user.username, class: "mx-auto h-12 w-12 rounded-full lg:w-20 lg:h-20"), user_path(user) %>
+        <%= link_to image_tag(user.avatar_url, title: user.username, loading: 'lazy', alt: user.username, class: "mx-auto h-12 w-12 rounded-full lg:w-20 lg:h-20"), user_path(user) %>
         <div class="text-xs leading-4 font-medium lg:text-sm lg:leading-5">
           <h4><%= user.username %></h4>
         </div>
