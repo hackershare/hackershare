@@ -9,8 +9,8 @@ import { createPopper } from '@popperjs/core';
 import { format, render, cancel, register } from 'timeago.js';
 import Tagify from '@yaireo/tagify';
 
-import TubrolinksPrefetch from 'turbolinks-prefetch'
-TubrolinksPrefetch.start()
+//import TubrolinksPrefetch from 'turbolinks-prefetch'
+//TubrolinksPrefetch.start()
 
 import I18n from "i18n-js"
 window.I18n = I18n
