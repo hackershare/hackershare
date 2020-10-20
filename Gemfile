@@ -111,3 +111,5 @@ gem "seed-fu", "~> 2.3", ">= 2.3.9"
 gem "active_storage_silent_logs", group: :development
 
 gem "activestorage_qiniu", "~> 0.2.2"
+
+gem "render_async", "~> 2.1"

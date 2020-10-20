@@ -299,6 +299,7 @@ GEM
       ffi (~> 1.0)
     redis (4.2.2)
     regexp_parser (1.7.1)
+    render_async (2.1.7)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -455,6 +456,7 @@ DEPENDENCIES
   rack-cors (~> 1.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   rails-i18n (~> 6.x)
+  render_async (~> 2.1)
   rubocop
   rubocop-performance
   rubocop-rails

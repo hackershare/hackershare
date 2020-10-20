@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       resources :tags, only: %i[new create]
     end
     resources :extensions, only: %i[create]
+
     resources :users do
       member do
         get :hover
@@ -82,6 +83,7 @@ Rails.application.routes.draw do
       collection do
         get :setting
         put :update_setting
+        get :top_hackers
       end
     end
     get "about", to: "home#about"

@@ -30,7 +30,7 @@
   </div>
   <div class="hidden lg:block w-80 flex-shrink-0">
     <div class="space-y-2 lg:space-y-4">
-      <%= render partial: "users/top_hackers" %>
+      <%= render_async top_hackers_users_path %>
       <%= render "bookmarks/tag_subscribe", followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags %>
     </div>
   </div>
