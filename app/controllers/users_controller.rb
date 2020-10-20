@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:hover, :show, :index]
+  skip_before_action :authenticate_user!, only: [:hover, :show, :index, :top_hackers]
 
   def show
     @user = User.find(params[:id])
@@ -29,6 +29,10 @@ class UsersController < ApplicationController
       format.js { render partial: "users/list", content_type: "text/html" }
       format.html
     end
+  end
+
+  def top_hackers
+    render partial: "top_hackers"
   end
 
   def hover
