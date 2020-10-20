@@ -113,7 +113,7 @@ class ApplicationController < ActionController::Base
       end
       @pagy, @bookmarks = pagy_countless(
         base.with_attached_favicon_local,
-        items: 25,
+        items: 15,
         link_extra: 'data-remote="true" data-action="ajax:success->listing#replace"'
       )
       @suggest_tags = Tag.order(bookmarks_count: :desc).where(is_rss: false).limit(5).pluck(:name)
