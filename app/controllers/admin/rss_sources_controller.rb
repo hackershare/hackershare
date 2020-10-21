@@ -48,6 +48,7 @@ class Admin::RssSourcesController < Admin::ApplicationController
 
   def display
     if @rss_source.update(is_display: true)
+      @rss_source.tag.bookmarks.rss.update_all(is_display: true) if @rss_source.tag
       flash[:success] = "Displayed successfully"
       redirect_to action: :index
     else
@@ -58,6 +59,7 @@ class Admin::RssSourcesController < Admin::ApplicationController
 
   def undisplay
     if @rss_source.update(is_display: false)
+      @rss_source.tag.bookmarks.rss.update_all(is_display: false) if @rss_source.tag
       flash[:success] = "Undisplayed successfully"
       redirect_to action: :index
     else
