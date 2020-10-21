@@ -44,9 +44,9 @@ module Hackershare
     config.lograge.enabled = true
     config.lograge.keep_original_rails_log = false
     config.lograge.custom_payload do |controller|
+      detector = DeviceDetector.new(controller.request.user_agent)
       {
-        user_agent: controller.request.user_agent,
-        user_id: controller.send(:current_user).try(:id),
+        user_agent: detector.device_type || detector.bot_name,
         ip: controller.request.remote_ip
       }
     end
