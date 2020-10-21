@@ -47,7 +47,7 @@ zh-CN:
   my_profile: 我的主页
   my_tags: 我的订阅
   not_have_account?: 没有账户？
-  open_source: Open Source
+  open_source: 开源
   or_continue_with: 便捷登录
   origin_link: 原始链接
   other_hot_tags: 其他热门订阅
@@ -79,7 +79,7 @@ zh-CN:
   top_hackers: 极客排行
   top_categories: 热门订阅
   unfollow: 取消关注
-  user_profile: 用户主页
+  user_profile: 用户信息
   weekly: 每周
   write_a_few_sentences_about_yourself: 简单介绍一下你自己。
   your_profile_updated_successfully: 你的资料更新成功。
