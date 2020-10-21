@@ -4,7 +4,11 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    base = Tag.main.preload(:user).order(subscriptions_count: :desc)
+    if current_user && params[:subscribed]
+      base = current_user.follow_tags.order(id: :desc)
+    else
+      base = Tag.main.preload(:user).order(subscriptions_count: :desc)
+    end
     base = base.where(is_rss: true) if params[:is_rss].present?
     @pagy, @tags = pagy_countless(
       base,

@@ -18,9 +18,10 @@ class RssSourcesController < ApplicationController
       redirect_back fallback_location: root_path
       return
     end
-    if @rss_source.update!(creator: current_user)
+    if @rss_source.update(creator: current_user)
+      current_user.tag_subscriptions.create!(tag: @rss_source.tag)
       flash[:success] = t("rss_source_add_successfully")
-      redirect_back fallback_location: root_path
+      redirect_to categories_path(subscribed: true)
     else
       flash[:error] = @rss_source.short_error_message
       redirect_back fallback_location: root_path
@@ -37,6 +38,13 @@ class RssSourcesController < ApplicationController
       res = http.get(@rss_source.url)
       feed = Feedjira.parse(res.to_s)
       @rss_source.tag_name = feed.title.force_encoding("utf-8")
+      tag = Tag.find_by(name: @rss_source.tag_name)
+      if tag
+        tag.update!(is_rss: true)
+        @rss_source.update!(tag: tag)
+      else
+        @rss_source.create_tag!(is_rss: true, name: @rss_source.tag_name, user: User.rss_robot)
+      end
     end
 
     def http
