@@ -39,6 +39,8 @@ zh-CN:
   install_the_chrome_extension: 安装 Chrome 插件
   language: 语言
   likes: 喜欢
+  link_is_rss: RSS
+  link_subscribed: 我的关注
   login_failed: 登录失败
   login_required: 需要先登录
   login_successed: 登录成功
