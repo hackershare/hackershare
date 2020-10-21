@@ -113,3 +113,5 @@ gem "active_storage_silent_logs", group: :development
 gem "activestorage_qiniu", "~> 0.2.2"
 
 gem "render_async", "~> 2.1"
+
+gem "lograge", "~> 0.11.2"

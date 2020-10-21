@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user
+    @current_user ||= User.where(remember_token: cookies[:remember_token_v2]).first if cookies[:remember_token_v2]
+    if request.headers["HTTP_EXTENSION_TOKEN"].present?
+      @current_user ||= User.where(extension_token: request.headers["HTTP_EXTENSION_TOKEN"]).first
+    end
+    @current_user
+  end
+
   protected
 
     def default_host
@@ -23,14 +31,6 @@ class ApplicationController < ActionController::Base
 
     def authenticate_user!
       redirect_to new_session_path, error: t("login_required") unless current_user
-    end
-
-    def current_user
-      @current_user ||= User.where(remember_token: cookies[:remember_token_v2]).first if cookies[:remember_token_v2]
-      if request.headers["HTTP_EXTENSION_TOKEN"].present?
-        @current_user ||= User.where(extension_token: request.headers["HTTP_EXTENSION_TOKEN"]).first
-      end
-      @current_user
     end
 
     def set_current_user(user, remember_me = true)

@@ -41,6 +41,16 @@ module Hackershare
     config.action_mailer.deliver_later_queue_name = :default
     config.active_job.queue_adapter = :sidekiq
 
+    config.lograge.enabled = true
+    config.lograge.keep_original_rails_log = false
+    config.lograge.custom_payload do |controller|
+      {
+        user_agent: controller.request.user_agent,
+        user_id: controller.send(:current_user).try(:id),
+        ip: controller.request.remote_ip
+      }
+    end
+
     config.active_storage.service = :qiniu
     config.active_storage.analyzers = [
       ActiveStorage::Analyzer::QiniuImageAnalyzer,
