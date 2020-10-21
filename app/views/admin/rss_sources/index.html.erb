@@ -16,18 +16,16 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
+              <th class="p-2 bg-gray-50"></th>
               <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Url
               </th>
-
               <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Tag Name
               </th>
-
               <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                Is Display
+                Creator
               </th>
-
               <th class="p-2 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Processed At
               </th>
@@ -37,14 +35,6 @@
           <tbody class="bg-white divide-y divide-gray-200"> 
             <% @rss_sources.each do |rss_source| %>
               <tr>
-                <td class="p-2">
-                  <%= rss_source.url %>
-                </td>
-                <td class="p-2">
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                    <%= rss_source.tag_name %>
-                  </span>
-                </td>
                 <td class="p-2">
                   <% if rss_source.is_display? %>
                     <%= link_to undisplay_admin_rss_source_path(rss_source), method: 'patch', class: 'text-gray-500' do %>
@@ -60,6 +50,17 @@
                       </svg>
                     <% end %>
                   <% end %>
+                </td>
+                <td class="p-2">
+                  <%= rss_source.url %>
+                </td>
+                <td class="p-2">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <%= rss_source.tag_name %>
+                  </span>
+                </td>
+                <td class="p-2">
+                  <%= link_to rss_source.creator.username, user_path(rss_source.creator) %>
                 </td>
                 <td class="p-2">
                   <%= rss_source.processed_at %>

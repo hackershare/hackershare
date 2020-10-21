@@ -18,7 +18,7 @@ class RssSourcesController < ApplicationController
       redirect_back fallback_location: root_path
       return
     end
-    if @rss_source.save
+    if @rss_source.update!(creator: current_user)
       flash[:success] = t("rss_source_add_successfully")
       redirect_back fallback_location: root_path
     else
