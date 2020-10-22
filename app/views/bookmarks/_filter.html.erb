@@ -1,7 +1,7 @@
 <div class="space-y-2 lg:space-y-4 bg-primary rounded-t-md padding-primary py-4">
   <div class="flex flex-wrap items-center">
     <div class="flex flex-wrap items-center">
-      <div @click.away="open = false" class="mb-1 flex-shrink-0 relative" x-data="{ open: false }">
+      <div @click.away="open = false" class="mb-1 mr-1 lg:mr-2 flex-shrink-0 relative" x-data="{ open: false }">
         <div class="rounded-sm shadow-md">
           <button @click="open = !open" type="button" class="space-x-1 rounded-sm flex items-center justify-center w-full border border-gray-200 px-2 py-1 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
             <%= t(sortby) %>
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <div @click.away="open = false" class="mb-1 flex-shrink-0 relative" x-data="{ open: false }">
+      <div @click.away="open = false" class="mb-1 mr-1 lg:mr-2 flex-shrink-0 relative" x-data="{ open: false }">
         <div class="rounded-sm shadow-md">
           <button @click="open = !open" type="button" class="space-x-1 rounded-sm flex items-center justify-center w-full border border-gray-200 px-2 py-1 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150" id="options-menu" aria-haspopup="true" aria-expanded="true">
             <%= t(lang) %>
