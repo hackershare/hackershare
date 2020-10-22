@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
 
   def index
     if current_user && params[:subscribed]
-      base = current_user.follow_tags.order(id: :desc)
+      base = current_user.follow_tags.order(updated_at: :desc)
     else
       base = Tag.main.preload(:user).order(subscriptions_count: :desc)
     end

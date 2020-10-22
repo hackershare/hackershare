@@ -16,7 +16,7 @@ class Admin::RssSourcesController < Admin::ApplicationController
 
   def create
     @rss_source = RssSource.new(rss_source_params)
-    if @rss_source.save
+    if @rss_source.update(creator: current_user)
       flash[:success] = "Created successfully"
       redirect_to action: :index
     else
