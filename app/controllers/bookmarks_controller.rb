@@ -16,7 +16,7 @@ class BookmarksController < ApplicationController
 
   def goto
     @bookmark = Bookmark.find(params[:id]).only_first
-    @bookmark.clicks.create(user: current_user)
+    @bookmark.clicks.create(user: current_user) unless DeviceDetector.new(request.user_agent).bot?
     redirect_to @bookmark.url
   end
 
