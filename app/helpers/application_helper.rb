@@ -36,7 +36,7 @@ module ApplicationHelper
 
   def render_twitter_share_link(bookmark)
     base = "https://twitter.com/intent/tweet?text="
-    base += URI.encode([
+    base += CGI.escape([
         bookmark.title.to_s,
         bookmark.tags.map { |x| "##{x.name}" }.join(" "),
         bookmark_url(bookmark)
@@ -46,7 +46,7 @@ module ApplicationHelper
   end
 
   def render_telegram_share_link(bookmark)
-    "https://t.me/share/url?text=#{URI.encode bookmark.title.to_s}&url=#{URI.encode bookmark_url(bookmark)}"
+    "https://t.me/share/url?text=#{CGI.escape bookmark.title.to_s}&url=#{CGI.escape bookmark_url(bookmark)}"
   end
 
   def link_to_active(text, url, options = {})
