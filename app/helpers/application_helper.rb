@@ -8,7 +8,8 @@ module ApplicationHelper
   end
 
   def default_image_url
-    "https://hackershare.dev/images/landing-feature-1.png"
+    keyword = %w[food drink nature girl film tech cat].sample
+    "https://source.unsplash.com/random/507x265?#{keyword}"
   end
 
   def disable_with_spinner(text)
