@@ -1,0 +1,79 @@
+<% if @weekly_selection %>
+  <% title = "#{t("issue_no", no: @weekly_selection.id)} (#{l @weekly_selection.created_at.to_date})" %>
+  <% content_for(:title, title) %>
+<% end %>
+
+<div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
+  <div class="lg:flex-auto">
+    <% unless @weekly_selection %>
+      <div>Coming soon...</div>
+    <% else %>
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+          <%= title %>
+        </h3>
+        <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
+      </div>
+      <div class="padding-primary space-y-2 lg:space-y-4">
+        <ul class="relative z-0 divide-y divide-gray-200" data-target='bookmarks.list'>
+          <% if @weekly_selection.bookmarks.present? %>
+            <% @weekly_selection.bookmarks.each do |bookmark| %>
+              <%= render "bookmarks/bookmark", bookmark: bookmark.only_first, bookmark_self: bookmark %>
+            <% end %>
+          <% else %>
+            <div class="px-1 py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
+          <% end %>
+        </ul>
+        <div class="flex justify-between">
+          <% if @last_weekly_selection %>
+            <%= link_to weekly_selection_path(@last_weekly_selection), class: "btn-primary" do %>
+              <svg class="w-4 h-4 -ml-1 mr-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+              <span><%= t("issue_last") %></span>
+            <% end %>
+          <% else %>
+            <div class="btn-primary disabled">
+              <svg class="w-4 h-4 -ml-1 mr-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+              </svg>
+              <span><%= t("issue_last") %></span>
+            </div>
+          <% end %>
+          <% if @next_weekly_selection %>
+            <%= link_to weekly_selection_path(@next_weekly_selection), class: "btn-primary" do %>
+              <span><%= t("issue_next") %></span>
+              <svg class="w-4 h-4 -mr-1 ml-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+              </svg>
+            <% end %>
+          <% else %>
+            <div class="btn-primary disabled">
+              <span><%= t("issue_next") %></span>
+              <svg class="w-4 h-4 -mr-1 ml-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+              </svg>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="lg:flex-shrink-0 lg:w-80">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+          <%= t("weekly_selection_describe") %>
+        </h3>
+      </div>
+      <div class="padding-primary">
+        <div class="text-sm text-gray-500">
+          <%= t("weekly_selection_hint") %>
+        </div>
+        <div><%= image_tag "https://cdn.hackershare.cn/wechat-barcode-hdgcs.jpg" %></div>
+      </div>
+    </div>
+  </div>
+</div>

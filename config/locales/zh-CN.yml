@@ -37,6 +37,9 @@ zh-CN:
   hackershare: 极客分享
   install: 安装
   install_the_chrome_extension: 安装 Chrome 插件
+  issue_last: 上一期
+  issue_next: 下一期
+  issue_no: "每周精选第 %{no} 期"
   language: 语言
   likes: 喜欢
   link_is_rss: RSS
@@ -83,6 +86,9 @@ zh-CN:
   unfollow: 取消关注
   user_profile: 用户信息
   weekly: 每周
+  weekly_selection: 每周精选
+  weekly_selection_describe: 订阅每周精选
+  weekly_selection_hint: 精选书签为用户分享，再根据书签质量以及热度每周精选 5 条出来。请关注我们运营的公众号，及时获得推送。
   write_a_few_sentences_about_yourself: 简单介绍一下你自己。
   your_profile_updated_successfully: 你的资料更新成功。
 

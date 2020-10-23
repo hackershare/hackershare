@@ -33,6 +33,7 @@
 #  pinned_comment_id             :bigint
 #  ref_id                        :bigint
 #  user_id                       :bigint
+#  weekly_selection_id           :bigint
 #
 # Indexes
 #
