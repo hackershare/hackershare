@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def default_image_url
     keyword = %w[food drink nature girl film tech cat].sample
-    "https://source.unsplash.com/random/507x265?#{keyword}"
+    "https://source.unsplash.com/random/507x265?#{keyword}=#{Random.hex(4)}"
   end
 
   def disable_with_spinner(text)
