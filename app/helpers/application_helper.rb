@@ -34,6 +34,21 @@ module ApplicationHelper
     end
   end
 
+  def render_twitter_share_link(bookmark)
+    base = "https://twitter.com/intent/tweet?text="
+    base += URI.encode([
+        bookmark.title.to_s,
+        bookmark.tags.map { |x| "##{x.name}" }.join(" "),
+        bookmark_url(bookmark)
+      ].join(" ")
+    )
+    base
+  end
+
+  def render_telegram_share_link(bookmark)
+    "https://t.me/share/url?text=#{URI.encode bookmark.title.to_s}&url=#{URI.encode bookmark_url(bookmark)}"
+  end
+
   def link_to_active(text, url, options = {})
     route = Rails.application.routes.recognize_path(url)
     if options[:class]
