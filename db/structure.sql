@@ -360,7 +360,8 @@ CREATE TABLE public.bookmarks (
     tsv tsvector GENERATED ALWAYS AS (((((setweight(to_tsvector('public.zh'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(url, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, (COALESCE(cached_tag_with_aliases_names, ''::character varying))::text), 'A'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(description, ''::text)), 'B'::"char")) || setweight(to_tsvector('public.zh'::regconfig, COALESCE(content, ''::text)), 'D'::"char"))) STORED,
     shared_at timestamp without time zone,
     pinned_comment_id bigint,
-    images character varying[] DEFAULT '{}'::character varying[]
+    images character varying[] DEFAULT '{}'::character varying[],
+    weekly_selection_id bigint
 );
 
 
@@ -745,6 +746,39 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: weekly_selections; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.weekly_selections (
+    id bigint NOT NULL,
+    bookmarks_count integer DEFAULT 0,
+    description text,
+    description_en text,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: weekly_selections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.weekly_selections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: weekly_selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.weekly_selections_id_seq OWNED BY public.weekly_selections.id;
+
+
+--
 -- Name: active_storage_attachments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -847,6 +881,13 @@ ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Name: weekly_selections id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.weekly_selections ALTER COLUMN id SET DEFAULT nextval('public.weekly_selections_id_seq'::regclass);
 
 
 --
@@ -983,6 +1024,14 @@ ALTER TABLE ONLY public.tags
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: weekly_selections weekly_selections_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.weekly_selections
+    ADD CONSTRAINT weekly_selections_pkey PRIMARY KEY (id);
 
 
 --
@@ -1365,6 +1414,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201019145723'),
 ('20201019155740'),
 ('20201019214125'),
-('20201021115854');
+('20201021115854'),
+('20201023130653'),
+('20201023130910');
 
 

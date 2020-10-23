@@ -33,6 +33,7 @@
 #  pinned_comment_id             :bigint
 #  ref_id                        :bigint
 #  user_id                       :bigint
+#  weekly_selection_id           :bigint
 #
 # Indexes
 #
@@ -50,6 +51,7 @@ class Bookmark < ApplicationRecord
   belongs_to :user, counter_cache: true, touch: true
   belongs_to :ref, class_name: "Bookmark", optional: true, counter_cache: :dups_count
   belongs_to :pinned_comment, class_name: "Comment", optional: true
+  belongs_to :weekly_selection, counter_cache: true, optional: true
   has_many :duplications, foreign_key: :ref_id, class_name: "Bookmark"
 
   has_many :likes, dependent: :destroy
@@ -231,6 +233,10 @@ class Bookmark < ApplicationRecord
 
   def destroy_notifications
     notifications.destroy_all
+  end
+
+  def weekly_selection?
+    !weekly_selection_id.nil?
   end
 
   private

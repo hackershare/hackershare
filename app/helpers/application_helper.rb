@@ -120,14 +120,4 @@ module ApplicationHelper
     ICON
     icon.html_safe if tag.is_rss?
   end
-
-  def link_to_bookmarks(bookmark, **options, &block)
-    if controller_name == "bookmarks" && action_name == "show"
-      url = goto_bookmark_path(bookmark)
-      options = options.merge(target: "_blank", data: { prefetch: "false" })
-    else
-      url = bookmark_path(bookmark)
-    end
-    link_to url, **options, &block
-  end
 end

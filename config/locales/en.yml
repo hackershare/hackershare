@@ -37,6 +37,9 @@ en:
   hackershare: Hackershare
   install: Install
   install_the_chrome_extension: Install the Chrome extension
+  issue_last: Last Issue
+  issue_next: Next Issue
+  issue_no: "Weekly selection #%{no}"
   language: Language
   likes: Likes
   link_is_rss: RSS
@@ -83,6 +86,9 @@ en:
   unfollow: Unfollow
   user_profile: User's Profile
   weekly: Weekly
+  weekly_selection: Weekly Selections
+  weekly_selection_describe: Subscribe to weekly selections
+  weekly_selection_hint: Featured bookmarks are shared for users, and then selected 5 items each week based on the quality and popularity of the bookmarks. Please pay attention to the official account we operate to get the push in time.
   write_a_few_sentences_about_yourself: Write a few sentences about yourself.
   your_profile_updated_successfully: Your profile updated successfully.
   clear_all: Clear All
