@@ -3,15 +3,13 @@
   <div class="min-w-0 space-y-3 w-full md:w-auto">
     <%= link_to goto_bookmark_path(bookmark), 'data-prefetch': "false", target: "_blank", class: "space-y-1 block" do %>
       <div class="flex items-center space-x-2">
-        <% if bookmark.favicon_local.attached? %>
-          <span>
+        <span class="flex-shrink-0">
+          <% if bookmark.favicon_local.attached? %>
             <%= image_tag(bookmark.favicon_local.service_url, loading: 'lazy', class: "h-4 w-4") %>
-          </span>
-        <% else %>
-          <span>
+          <% else %>
             <%= lavatar_tag(bookmark.letter_char, 16, class: "w-4 h-4") %>
-          </span>
-        <% end %>
+          <% end %>
+        </span>
         <span class="block break-all">
           <h2 class="text-md font-medium leading-5">
             <%= bookmark.title_or_url %>
