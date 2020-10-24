@@ -28,6 +28,10 @@ SitemapGenerator::Sitemap.create do
     Tag.find_each do |tag|
       add bookmarks_path(tag: tag.name, locale: locale), changefreq: "daily"
     end
+
+    WeeklySelection.find_each do |weekly_selection|
+      add weekly_selection_path(weekly_selection, locale: locale), changefreq: "daily"
+    end
   end
 end
 
