@@ -17,7 +17,9 @@
     <%= content_for :render_async %>
     <%= stylesheet_pack_tag "application", media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kindmetrics.io/js/kind.js" defer="true" data-domain="hackershare.dev"></script>
+
+    <script async defer data-domain="hackershare.dev" src="https://plausible.io/js/plausible.js"></script>
+
   </head>
   <body>
     <%= render 'layouts/javascripts' %>
