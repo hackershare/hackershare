@@ -34,11 +34,16 @@ module Hackershare
     # the framework and any gems in your application.
 
     config.active_record.schema_format = :sql
-    config.action_mailer.delivery_method = :sendgrid_actionmailer
-    config.action_mailer.sendgrid_actionmailer_settings = {
-      api_key: ENV["SENDGRID_API_KEY"],
-      raise_delivery_errors: true
-    }
+
+    if ENV["SMTP_SERVER"].present? && ENV["SMTP_PASSWORD"].present?
+      config.action_mailer.delivery_method = :smtp
+    else
+      config.action_mailer.sendgrid_actionmailer_settings = {
+        api_key: ENV["SENDGRID_API_KEY"],
+        raise_delivery_errors: true
+      }
+    end
+
     config.action_mailer.deliver_later_queue_name = :default
     config.active_job.queue_adapter = :sidekiq
 
