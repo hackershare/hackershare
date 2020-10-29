@@ -13,6 +13,7 @@ class ApplicationNotification < Noticed::Base
 
     def email_notifications?
       return if Rails.env.development?
+      return if recipient.email == User::RSS_BOT_EMAIL
       recipient.enable_email_notification? && recipient.email !~ /fakemail.com/
     end
 end
