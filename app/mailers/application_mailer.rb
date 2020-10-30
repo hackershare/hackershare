@@ -10,4 +10,11 @@ class ApplicationMailer < ActionMailer::Base
       locale: locale,
     }
   end
+
+  def email_notifications?(user)
+    return unless user
+    return if Rails.env.development?
+    return if user.email == User::RSS_BOT_EMAIL
+    user.enable_email_notification? && user.email !~ /fakemail.com/
+  end
 end
