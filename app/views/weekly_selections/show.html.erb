@@ -1,7 +1,4 @@
-<% if @weekly_selection %>
-  <% title = "#{t("issue_no", no: @weekly_selection.id)} (#{l @weekly_selection.created_at.to_date})" %>
-  <% content_for(:title, title) %>
-<% end %>
+<% content_for(:title, @weekly_selection&.full_title) %>
 
 <div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
   <div class="lg:flex-auto">
@@ -11,7 +8,8 @@
     <div class="border border-color-primary rounded-primary">
       <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
         <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
-          <%= title %>
+          <span><%= @weekly_selection&.full_title %></span>
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l @weekly_selection.published_at.to_date %></span>
         </h3>
         <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
       </div>

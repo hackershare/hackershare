@@ -4,17 +4,12 @@ class WeeklySelectionsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    @weekly_selection = WeeklySelection.includes(:bookmarks).last
-    if @weekly_selection
-      @last_weekly_selection = WeeklySelection.find_by("id < ?", @weekly_selection.id)
-      @next_weekly_selection = WeeklySelection.find_by("id > ?", @weekly_selection.id)
-    end
-    render :show
+    @weekly_selections = WeeklySelection.published.order(id: :desc).limit(100)
   end
 
   def show
-    @weekly_selection = WeeklySelection.includes(:bookmarks).find(params[:id])
-    @last_weekly_selection = WeeklySelection.find_by("id < ?", @weekly_selection.id)
-    @next_weekly_selection = WeeklySelection.find_by("id > ?", @weekly_selection.id)
+    @weekly_selection = WeeklySelection.published.includes(:bookmarks).find(params[:id])
+    @last_weekly_selection = WeeklySelection.published.order(id: :desc).find_by("id < ?", @weekly_selection.id)
+    @next_weekly_selection = WeeklySelection.published.order(:id).find_by("id > ?", @weekly_selection.id)
   end
 end

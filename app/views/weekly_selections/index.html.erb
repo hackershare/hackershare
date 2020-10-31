@@ -1,0 +1,44 @@
+<% content_for(:title, t('weekly_selection')) %>
+
+<div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
+  <div class="lg:flex-auto">
+    <div class="border border-color-primary rounded-primary min-h-screen">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+          <%= t('weekly_selection') %>
+        </h3>
+      </div>
+      <div class="padding-primary space-y-2 lg:space-y-4 divide-y divide-gray-200">
+        <table class="w-full">
+          <tbody>
+            <% @weekly_selections.each do |weekly_selection| %>
+              <tr>
+                <td class="py-2 align-middle">
+                  <span class="px-2 py-1 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l weekly_selection.published_at.to_date %></span>
+                </td>
+                <td class="py-2 align-middle">
+                  <%= link_to weekly_selection.full_title, weekly_selection_path(weekly_selection), class: 'text-sm leading-5 font-medium text-gray-900 hover:text-black' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="lg:flex-shrink-0 lg:w-80">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+          <%= t("weekly_selection_describe") %>
+        </h3>
+      </div>
+      <div class="padding-primary">
+        <div class="text-sm text-gray-500">
+          <%= t("weekly_selection_hint") %>
+        </div>
+        <div class="flex justify-center"><%= image_tag "https://cdn.hackershare.cn/wechat-barcode-hdgcs.jpg" %></div>
+      </div>
+    </div>
+  </div>
+</div>

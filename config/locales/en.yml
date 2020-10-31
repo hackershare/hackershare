@@ -64,6 +64,8 @@ en:
   save: Save
   search: Search
   search_results: "Search Results: %{query}"
+  selection_add: Add Selection
+  selection_cancel: Cancel Selection
   send: Send
   share_to_twitter: Share to twitter
   share_to_telegram: Share to telegram

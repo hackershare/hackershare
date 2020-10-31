@@ -64,6 +64,8 @@ zh-CN:
   save: 保存
   search: 搜索
   search_results: "搜索结果: %{query}"
+  selection_add: 设置精选
+  selection_cancel: 取消精选
   send: 分享
   share_to_twitter: 分享到推特
   share_to_telegram: 分享到电报群

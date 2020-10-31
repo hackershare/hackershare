@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  class ValidateError < StandardError; end
+
   include Pagy::Backend
   around_action :switch_locale
   before_action :authenticate_user!
@@ -100,7 +102,7 @@ class ApplicationController < ActionController::Base
     def render_bookmarks
       @tag = params[:tag]
       @query = Util.escape_quote(params[:query]) if params[:query]
-      base = Bookmark.includes(:pinned_comment, :tags).display.sorting(params).original.preload(:user, :tags)
+      base = Bookmark.includes(:pinned_comment, :tags, :weekly_selection).display.sorting(params).original.preload(:user, :tags)
       base = base.tag_filter(base, @tag) if @tag.present?
       user_lang = current_user.bookmark_lang if user_signed_in?
       @lang = (["language"] + Bookmark.langs.keys).include?(params[:lang]) ? params[:lang] : user_lang

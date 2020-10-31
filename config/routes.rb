@@ -46,6 +46,12 @@ Rails.application.routes.draw do
         patch :undisplay
       end
     end
+    resources :weekly_selections, only: %i[index] do
+      member do
+        post :publish
+        patch :titling
+      end
+    end
   end
 
   scope "(:locale)", locale: /en/ do
@@ -70,6 +76,7 @@ Rails.application.routes.draw do
         post :toggle_liking
         get :hover_like_users
         get :goto
+        patch :weekly_select
       end
       resources :comments
       resources :tags, only: %i[new create]
