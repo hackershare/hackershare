@@ -40,7 +40,7 @@ zh-CN:
   install_the_chrome_extension: 安装 Chrome 插件
   issue_last: 上一期
   issue_next: 下一期
-  issue_no: "每周精选第 %{no} 期"
+  issue_no: "极客分享第 %{no} 期"
   language: 语言
   likes: 喜欢
   link_is_rss: RSS
