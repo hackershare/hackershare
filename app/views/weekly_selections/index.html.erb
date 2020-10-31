@@ -11,12 +11,12 @@
       <div class="padding-primary space-y-2 lg:space-y-4 divide-y divide-gray-200">
         <table class="w-full">
           <tbody>
-            <% @weekly_selections.each do |weekly_selection| %>
-              <tr>
-                <td class="py-2 align-middle">
+            <% @weekly_selections.each_with_index do |weekly_selection, index| %>
+              <tr class="border-gray-200 <%= 'border-t' unless index.zero? %>">
+                <td class="py-4 align-middle">
                   <span class="px-2 py-1 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l weekly_selection.published_at.to_date %></span>
                 </td>
-                <td class="py-2 align-middle">
+                <td class="py-4 align-middle">
                   <%= link_to weekly_selection.full_title, weekly_selection_path(weekly_selection), class: 'text-sm leading-5 font-medium text-gray-900 hover:text-black' %>
                 </td>
               </tr>
