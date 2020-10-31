@@ -58,3 +58,8 @@
 .btn-tag:hover {
   @apply bg-gray-200;
 }
+
+.field-required:after {
+  content:" *";
+  color: red;
+}

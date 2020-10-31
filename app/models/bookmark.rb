@@ -135,6 +135,11 @@ class Bookmark < ApplicationRecord
     created_by?(user) || user.admin?
   end
 
+  def can_set_selection?(user)
+    return unless user
+    user.admin? && !weekly_selection&.published?
+  end
+
   def only_first
     ref || self
   end
@@ -235,8 +240,12 @@ class Bookmark < ApplicationRecord
     notifications.destroy_all
   end
 
-  def weekly_selection?
-    !weekly_selection_id.nil?
+  def weekly_selected?
+    weekly_selection_id.present?
+  end
+
+  def weekly_selection_title?
+    (title&.size || 0).in?(8..48)
   end
 
   private
