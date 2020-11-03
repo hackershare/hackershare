@@ -2,7 +2,11 @@
 
 [English](https://github.com/hackershare/hackershare/blob/master/README.md)
 
+极客分享（hackershare) 是一个基于书签社交的平台，你可以在这里发现技术圈新鲜事，也可以在这里检索工具和技术教程。
+
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
+
+## 关于
 
 hackershare是一个书签分享平台，你可以通过chrome extension一键分享你正在浏览的网页。与pocket之类书签管理工具不同的是，hackershare鼓励分享你的书签，而不是私藏，独乐乐不如众乐乐。
 
@@ -22,3 +26,15 @@ hackershare是一个开源项目，应用的范围很广，比如：如果拿来
 如果团队内部共享资料，就可以成为一个内部知识库。
 
 和普通论坛或CMS比，hackershare更轻量级，具有更好的信息架构，以及自动化特性，做一些导流站的话，你甚至可以省去写爬虫的时间。
+
+## 功能
+
+参见我们的功能介绍页面：
+
+[https://hackershare.dev/about](https://hackershare.dev/about)
+
+## 反馈
+
+你有任何想法或意见请添加我们，我们会第一时间拉你进反馈群：
+
+![wechat-hackershare](https://cdn.hackershare.cn/wechat-hackershare.jpeg)
