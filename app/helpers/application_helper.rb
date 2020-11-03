@@ -120,4 +120,12 @@ module ApplicationHelper
     ICON
     icon.html_safe if tag.is_rss?
   end
+
+  def feedback_link
+    if I18n.locale == :'zh-CN'
+      "https://cdn.hackershare.cn/wechat-hackershare.jpeg"
+    else
+      "https://github.com/hackershare/hackershare/issues/new"
+    end
+  end
 end
