@@ -9,6 +9,7 @@ zh-CN:
   bad_comment: 评论不合法
   bad_url: URL 不合法
   banner_chrome_extension: 请使用我们开发的 Chrome 插件，帮助你一键分享你当前浏览的网站。
+  blog: 博客
   bookmark_added: 书签已添加
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败

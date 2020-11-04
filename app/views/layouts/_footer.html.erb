@@ -5,12 +5,10 @@
       <a href="<%= about_path %>" class="text-gray-500 hover:text-gray-900">
         <%= t("about") %>
       </a>
+      <%= link_to t("blog"), "https://blog.hackershare.dev", class: "text-gray-500 hover:text-gray-900" %>
       <a href="https://github.com/hackershare/hackershare" target="_blank" class="text-gray-500 hover:text-gray-900">
         <%= t("open_source") %>
       </a>
-      <%= link_to feedback_link, target: "_blank", class: "text-gray-500 hover:text-gray-900" do %>
-        <%= t("feedback") %>
-      <% end %>
     </div>
   </div>
 </footer>
