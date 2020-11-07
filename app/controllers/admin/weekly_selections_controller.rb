@@ -11,6 +11,7 @@ class Admin::WeeklySelectionsController < Admin::ApplicationController
       raise ValidateError, "The bookmarks count of publishing weekly selection should be equal #{WeeklySelection::BOOKMARKS_COUNT}"
     end
     @weekly_selection.update!(weekly_selection_params)
+    WeeklyBookmarksJob.perform_later(@weekly_selection)
     flash[:success] = "Published successfully."
     redirect_back fallback_location: root_path
   rescue ValidateError, ActiveRecord::RecordInvalid => e
