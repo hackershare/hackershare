@@ -21,4 +21,14 @@ class CommentsController < ApplicationController
       redirect_to bookmark_path(@bookmark)
     end
   end
+
+  def pin
+    @comment = Comment.find(params[:id])
+    @comment.bookmark.update!(pinned_comment: @comment)
+    flash[:success] = "Pinned successfully."
+    redirect_back fallback_location: root_path
+  rescue ActiveRecord::RecordInvalid => e
+    flash[:error] = "Pinned failed: #{e.message}"
+    redirect_back fallback_location: root_path
+  end
 end

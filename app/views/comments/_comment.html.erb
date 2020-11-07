@@ -3,8 +3,27 @@
     <%= link_to image_tag(comment.user.avatar_url, class: "h-12 w-12 rounded-full"), user_path(comment.user) %>
     <div class="flex-1 space-y-1">
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-medium leading-5"><%= comment.user.username %></h3>
-        <span class="timeago text-sm leading-5 text-gray-500" datetime="<%= comment.created_at.to_s %>"></span>
+        <div class="flex items-center space-x-2">
+          <h3 class="text-sm font-medium leading-5"><%= link_to comment.user.username, user_path(comment.user) %></h3>
+          <span>·</span>
+          <span class="timeago text-sm leading-5 text-gray-500" datetime="<%= comment.created_at.to_s %>"></span>
+          <% if comment.bookmark.pinned_comment_id == comment.id %>
+            <span>·</span>
+            <svg class="w-5 h-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          <% end %>
+        </div>
+        <% if comment.bookmark.pinned_comment_id != comment.id %>
+          <div>
+            <%= link_to pin_comment_path(comment), method: 'PATCH', class: "flex items-center space-x-1 text-indigo-600 hover:text-indigo-700" do %>
+              <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              PIN
+            <% end %>
+          </div>
+        <% end %>
       </div>
       <p class="text-sm leading-5 text-gray-500">
         <%= comment.comment %>

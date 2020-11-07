@@ -78,8 +78,13 @@ Rails.application.routes.draw do
         get :goto
         patch :weekly_select
       end
-      resources :comments
+      resources :comments, only: %i[create]
       resources :tags, only: %i[new create]
+    end
+    resources :comments, only: %i[] do
+      member do
+        patch :pin
+      end
     end
     resources :extensions, only: %i[create]
 
