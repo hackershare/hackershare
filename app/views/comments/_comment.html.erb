@@ -14,7 +14,7 @@
             </svg>
           <% end %>
         </div>
-        <% if current_user.admin? && comment.bookmark.pinned_comment_id != comment.id %>
+        <% if current_user&.admin? && comment.bookmark.pinned_comment_id != comment.id %>
           <div>
             <%= link_to pin_comment_path(comment), method: 'PATCH', class: "flex items-center space-x-1 text-indigo-600 hover:text-indigo-700" do %>
               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
