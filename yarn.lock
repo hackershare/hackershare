@@ -1202,6 +1202,13 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
+ahoy.js@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.npm.taobao.org/ahoy.js/download/ahoy.js-0.3.7.tgz#545256a915ab0dc038ebeb3e8b6a65496dc9c2c6"
+  integrity sha1-VFJWqRWrDcA46+s+i2plSW3JwsY=
+  dependencies:
+    object-to-formdata "^4.0.0"
+
 ajv-errors@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ajv-errors/-/ajv-errors-1.0.1.tgz#f35986aceb91afadec4102fbd85014950cefa64d"
@@ -4991,6 +4998,11 @@ object-keys@^1.0.12, object-keys@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
+
+object-to-formdata@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/object-to-formdata/download/object-to-formdata-4.0.1.tgz#37457ac856c10580ec16bedfded56b0c09ccb0c8"
+  integrity sha1-N0V6yFbBBYDsFr7f3tVrDAnMsMg=
 
 object-visit@^1.0.0:
   version "1.0.1"
