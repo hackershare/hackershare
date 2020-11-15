@@ -5,6 +5,7 @@ default: &default
     - [default, 100]
     - [seldom, 40]
     - [hardly, 5]
+    - [ahoy, 5]
 development:
   <<: *default
 test:
