@@ -24,6 +24,8 @@
 #  index_tags_on_user_id              (user_id)
 #
 class Tag < ApplicationRecord
+  COLORS = %w[gray red yellow green blue indigo purple pink].freeze
+
   belongs_to :user, counter_cache: true
   has_one :rss_source
   has_many :taggings
@@ -84,5 +86,9 @@ class Tag < ApplicationRecord
   def followed_by?(user)
     return unless user
     user.follow_tag_ids.include?(self.id)
+  end
+
+  def color
+    @color ||= COLORS[id % COLORS.size]
   end
 end

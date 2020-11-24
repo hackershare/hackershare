@@ -55,6 +55,20 @@
       </div>
     <% end %>
   </div>
+  <div class="mt-2">
+    <%= form_with(url: categories_path, local: true, method: :get, class: "") do |f| %>
+      <label for="search" class="sr-only"><%= t("search") %></label>
+      <div class="relative bg-primary padding-primary">
+        <div class="absolute inset-y-0 pl-2 flex items-center pointer-events-none">
+          <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <%= f.search_field :query, value: params[:query], id: 'search', class: 'bg-white w-full pl-8 pr-3 py-2 border border-color-primary leading-5 text-gray-700 focus:outline-none', placeholder: t("search") %>
+        <input type="submit" hidden />
+      </div>
+    <% end %>
+  </div>
   <div class="padding-primary">
     <div data-controller="listing" data-target="listing.container">
       <%= render partial: "categories/list" %>

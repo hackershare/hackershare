@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
       base = Tag.main.preload(:user).order(subscriptions_count: :desc)
     end
     base = base.where(is_rss: true) if params[:is_rss].present?
+    base = base.where("name LIKE ?", "%#{params[:query]}%") if params[:query].present?
     @pagy, @tags = pagy_countless(
       base,
       items: 12,

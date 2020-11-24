@@ -1,18 +1,23 @@
 <div>
-  <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
     <% @tags.each do |tag| %>
-      <li class="col-span-1 flex shadow-sm rounded-md">
-    
-        <div class="flex-1 flex items-center justify-between border border-gray-200 rounded-md truncate">
-          <div class="flex-1 px-4 py-2 text-sm leading-5 truncate">
+      <li class="col-span-1 shadow-sm rounded-md">
+        <div class="h-4 bg-<%= tag.color %>-900 rounded-t-md"></div>
+        <div class="flex-1 flex items-center justify-between border border-gray-200 rounded-b-md">
+          <div class="flex-1 p-4 text-sm leading-5 space-y-2">
             <div class="flex"><%= tag_url_for(tag) %></div>
-            <p class="mt-2"><span class="text-gray-500">created by</span> <%= link_to tag.user.username, user_path(tag.user) %></p>
-            <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
-            <p><span class="text-xl"> <%=tag.subscriptions_count %></span> <span class="text-gray-500">subscriptions</span></p>
-            <div data-controller="follow-tag" class="mt-3">
+            <p class=""><%= tag.description %></p>
+            <div>
+              <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
+              <p><span class="text-xl"> <%=tag.subscriptions_count %></span> <span class="text-gray-500">subscriptions</span></p>
+            </div>
+            <div data-controller="follow-tag" class="flex justify-between items-center">
               <div data-target="follow-tag.container">
                 <%= render partial: "categories/follow_button", locals: {tag: tag, user: current_user} %>
               </div>
+              <% if tag.remote_img_url %>
+                <%= image_tag tag.remote_img_url, class: 'h-12' %>
+              <% end %>
             </div>
           </div>
         </div>
