@@ -3,15 +3,15 @@
     <% @tags.each do |tag| %>
       <li class="col-span-1 shadow-sm rounded-md">
         <div class="h-4 bg-<%= tag.color %>-900 rounded-t-md"></div>
-        <div class="flex-1 flex items-center justify-between border border-gray-200 rounded-b-md">
-          <div class="flex-1 p-4 text-sm leading-5 space-y-2">
+        <div class="border border-gray-200 rounded-b-md">
+          <div class="p-4 text-sm leading-5 space-y-2">
             <div class="flex"><%= tag_url_for(tag) %></div>
-            <p class=""><%= tag.description %></p>
+            <p class="h-20 overflow-y-hidden"><%= tag.description %></p>
             <div>
               <p><span class="text-xl"> <%=tag.bookmarks_count %></span> <span class="text-gray-500">bookmarks created</span></p>
               <p><span class="text-xl"> <%=tag.subscriptions_count %></span> <span class="text-gray-500">subscriptions</span></p>
             </div>
-            <div data-controller="follow-tag" class="flex justify-between items-center">
+            <div data-controller="follow-tag" class="h-12 flex justify-between items-center">
               <div data-target="follow-tag.container">
                 <%= render partial: "categories/follow_button", locals: {tag: tag, user: current_user} %>
               </div>

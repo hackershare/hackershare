@@ -20,6 +20,7 @@ if (process.env.RAILS_ENV === "production") {
       keyframes: true,
       whitelistPatterns: [
           /^tagify(.*?)$/,
+          /^bg-(gray|red|yellow|green|blue|indigo|purple|pink)-900$/,
         ],
       content: [
         './app/**/*.html.erb',

@@ -24,6 +24,7 @@
 #  index_tags_on_user_id              (user_id)
 #
 class Tag < ApplicationRecord
+  # Update postcss.config.js together for tailwindcss purge problems
   COLORS = %w[gray red yellow green blue indigo purple pink].freeze
 
   belongs_to :user, counter_cache: true
