@@ -6,7 +6,7 @@ task fetch_tags: :environment do
   base_url = "https://github.com/topics?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = open(url).read
+    html = URI.open(url).read
     doc = Nokogiri::HTML(html)
     list = doc.css("li.py-4.border-bottom")
     break if list.blank?
@@ -23,6 +23,7 @@ task fetch_tags: :environment do
         tag = Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
       end
       tag.update(auto_extract: false) if tag && (tag.name.size < 3 || tag.name.size > 15)
+      save_remote_img(tag)
     end
   end
 end
@@ -32,7 +33,7 @@ task fetch_tags_from_stackshare: :environment do
   base_url = "https://stackshare.io/tools/top?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = open(url).read
+    html = URI.open(url).read
     doc = Nokogiri::HTML(html)
     list = doc.css("#trending-box")
     break if list.blank?
@@ -49,6 +50,21 @@ task fetch_tags_from_stackshare: :environment do
         tag = Tag.create!(name: attrs[:name], user: User.rss_robot, description: attrs[:desc], remote_img_url: attrs[:img])
       end
       tag.update(auto_extract: false) if tag && (tag.name.size < 3 || tag.name.size > 10)
+      save_remote_img(tag)
     end
   end
+end
+
+private
+
+def save_remote_img(tag)
+  if tag.remote_img_url.present?
+    downloaded_image = URI.open(tag.remote_img_url, read_timeout: 10)
+    tag.img.attach(
+      io: downloaded_image,
+      filename: File.basename(URI.parse(tag.remote_img_url).path)
+    )
+  end
+rescue => e
+  Rails.logger.error "Save remote img failed: #{e.message}"
 end

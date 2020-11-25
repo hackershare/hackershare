@@ -27,6 +27,7 @@ class Tag < ApplicationRecord
   # Update postcss.config.js together for tailwindcss purge problems
   COLORS = %w[gray red yellow green blue indigo purple pink].freeze
 
+  has_one_attached :img
   belongs_to :user, counter_cache: true
   has_one :rss_source
   has_many :taggings

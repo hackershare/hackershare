@@ -15,8 +15,8 @@
               <div data-target="follow-tag.container">
                 <%= render partial: "categories/follow_button", locals: {tag: tag, user: current_user} %>
               </div>
-              <% if tag.remote_img_url %>
-                <%= image_tag tag.remote_img_url, class: 'h-12' %>
+              <% if tag.img.attached? %>
+                <%= image_tag tag.img.service_url, class: 'h-12' %>
               <% end %>
             </div>
           </div>
