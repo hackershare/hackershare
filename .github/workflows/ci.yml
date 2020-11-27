@@ -45,7 +45,7 @@ jobs:
         bundle exec cap production sitemap:refresh
 
   docker:
-    needs: create_release
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,3 +70,4 @@ jobs:
             hooopo/hackershare:latest
           build-args: |
             SECRET_KEY_BASE=precompile_placeholder
+            RAILS_ENV=production
