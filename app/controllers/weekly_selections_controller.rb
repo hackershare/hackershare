@@ -12,4 +12,12 @@ class WeeklySelectionsController < ApplicationController
     @last_weekly_selection = WeeklySelection.published.order(id: :desc).find_by("id < ?", @weekly_selection.id)
     @next_weekly_selection = WeeklySelection.published.order(:id).find_by("id > ?", @weekly_selection.id)
   end
+
+  def markdown
+    if current_user.admin?
+      @weekly_selection = WeeklySelection.published.includes(bookmarks: %i[pinned_comment tags]).find(params[:id])
+    else
+      head 403
+    end
+  end
 end

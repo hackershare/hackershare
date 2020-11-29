@@ -3,7 +3,7 @@
 <div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
   <div class="lg:flex-auto">
     <% unless @weekly_selection %>
-      <div>Coming soon...</div>
+      <div>Publish your first one now!</div>
     <% else %>
     <div class="border border-color-primary rounded-primary">
       <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
@@ -12,6 +12,9 @@
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l @weekly_selection.published_at.to_date %></span>
         </h3>
         <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
+        <% if current_user&.admin? %>
+        <%= link_to 'Markdown', markdown_weekly_selection_path(@weekly_selection, format: 'txt'), class: 'btn-primary mt-2' %>
+        <% end %>
       </div>
       <div class="padding-primary space-y-2 lg:space-y-4">
         <ul class="relative z-0 divide-y divide-gray-200" data-target='bookmarks.list'>

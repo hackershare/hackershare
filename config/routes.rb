@@ -55,7 +55,11 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /en/ do
-    resources :weekly_selections, only: %i[index show]
+    resources :weekly_selections, only: %i[index show] do
+      member do
+        get :markdown
+      end
+    end
     resources :rss_sources, only: %i[create]
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]
