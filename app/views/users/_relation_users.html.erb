@@ -1,0 +1,29 @@
+<%= render "users/filter", user: user %>
+<ul class="grid grid-rows-1 lg:grid-cols-3 gap-12 mb-8">
+  <% relation_users.each do |user| %>
+    <li class="flex items-center space-x-2">
+      <div>
+        <%= link_to user_path(user) do %>
+          <%= image_tag user.avatar_url, class: 'h-12 w-12 rounded-full' %>
+        <% end %>
+      </div>
+      <div>
+        <div class="font-medium">
+          <%= link_to user_path(user) do %>
+            @<%= user.username %>
+          <% end %>
+        </div>
+        <div class="text-sm">
+          <%= link_to toggle_following_user_path(user), method: :post, class: "flex items-center space-x-1" do %>
+            <svg class="h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+            </svg>
+            <span>
+              <%= render_follow_text(user) %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

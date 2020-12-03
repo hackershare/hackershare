@@ -13,7 +13,48 @@
       <div class="padding-primary py-4">
         <div class="pb-8 lg:pb-12 lg:border-gray-200">
           <div class="w-full items-center justify-between">
-            <%= render partial: "users/profile", locals: {user: @user}%>
+            <div class="space-y-2 lg:space-y-4">
+              <div class="flex items-center space-x-2">
+                <div class="flex-shrink-0">
+                  <%= image_tag @user.avatar_url, class: 'h-12 w-12 rounded-full' %>
+                </div>
+                <div class="space-y-1 lg:space-y-2">
+                  <div class="text-lg leading-5 font-medium text-gray-900">@<%= @user.username %></div>
+                </div>
+              </div>
+              <!-- Action buttons -->
+              <div class="space-y-2 lg:space-y-4">
+                <div class="text-sm leading-5 text-gray-900"><%= @user.about %></div>
+                <div class="text-sm leading-5 font-medium text-gray-900"><%= link_to @user.homepage, @user.homepage if @user.homepage.present? %></div>
+              </div>
+              <div class="flex justify-between px-4">
+                <%= link_to user_path(@user, type: 'created') do %>
+                  <div class="py-2 text-center">
+                    <p class="font-medium text-2xl"><%= @user.bookmarks_count %></p>
+                    <p class="text-gray-500"><%= t("bookmarks") %></p>
+                  </div>
+                <% end %>
+                <%= link_to user_path(@user, type: 'follower_users') do %>
+                  <div class="py-2 text-center">
+                    <p class="font-medium text-2xl"><%= @user.followers_count %></p>
+                    <p class="text-gray-500"><%= t("follower_users") %></p>
+                  </div>
+                <% end %>
+                <%= link_to user_path(@user, type: 'follow_users') do %>
+                  <div class="py-2 text-center">
+                    <p class="font-medium text-2xl"><%= @user.followings_count %></p>
+                    <p class="text-gray-500"><%= t("follow_users") %></p>
+                  </div>
+                <% end %>
+              </div>
+              <div class="space-y-2 lg:space-y-4">
+                <span data-controller="follows" class="rounded-md shadow-sm">
+                  <%= link_to toggle_following_user_path(@user), method: :post, type: :button, remote: true, data: {type: :json, action: "ajax:success->follows#toggle"}, class: "w-full max-w-sm inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white focus:outline-none transition ease-in-out duration-150 #{@user.followed_by?(current_user) ? 'bg-gray-600 hover:bg-gray-500  focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700' : 'bg-indigo-600 hover:bg-indigo-500  focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700'} ", "data-target": "follows.button" do %>
+                    <%= render_follow_text(@user) %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -23,7 +64,11 @@
     <div class="border border-color-primary rounded-primary">
       <div class="padding-primary" data-controller='bookmarks'>
         <div data-controller="listing" data-target="listing.container">
-          <%= render partial: "users/bookmarks_with_pagination" %>
+          <% if %w[follower_users follow_users].include?(params[:type]) %>
+            <%= render "users/relation_users", relation_users: @relation_users, user: @user %>
+          <% else %>
+            <%= render "users/bookmarks_with_pagination" %>
+          <% end %>
         </div>
     </div>
   </div>
