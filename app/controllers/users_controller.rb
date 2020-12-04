@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path }
-      format.js { render json: { follow: @follow, user: @user.as_json(only: %i[id followers_count]) } }
+      format.json { render json: { follow: @follow, user: @user.as_json(only: %i[id followers_count]) } }
     end
   end
 
