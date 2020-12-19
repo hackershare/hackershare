@@ -61,14 +61,15 @@ zh-CN:
   origin_link: 原始链接
   other_hot_tags: 其他热门订阅
   page_overflow: 页数不存在
+  priority_excellent: 优先精选
   remember_me: 记住我
   rss_source_add_successfully: RSS 源添加成功
   rss_source_invalid: RSS 源解析失败
   save: 保存
   search: 搜索
   search_results: "搜索结果: %{query}"
-  selection_add: 设置精选
-  selection_cancel: 取消精选
+  excellent_add: 设置精选
+  excellent_cancel: 取消精选
   send: 分享
   share_to_twitter: 分享到推特
   share_to_telegram: 分享到电报群

@@ -15,9 +15,11 @@
 #  content                       :text
 #  description                   :text
 #  dups_count                    :integer          default(0)
+#  excellented_at                :datetime
 #  favicon                       :string
 #  images                        :string           default([]), is an Array
 #  is_display                    :boolean          default(TRUE), not null
+#  is_excellent                  :boolean          default(FALSE), not null
 #  is_rss                        :boolean          default(FALSE), not null
 #  lang                          :integer          default("english"), not null
 #  likes_count                   :integer          default(0)
@@ -72,8 +74,7 @@ class Bookmark < ApplicationRecord
 
   scope :rss, lambda { where(is_rss: true) }
   scope :unrss, lambda { where(is_rss: false) }
-  scope :display, lambda { where(is_display: true) }
-  scope :undisplay, lambda { where(is_display: false) }
+  scope :weekly_selecting, lambda { where(is_excellent: true, weekly_selection_id: nil) }
 
   enum lang: {
     english: 0,
@@ -133,11 +134,6 @@ class Bookmark < ApplicationRecord
   def can_destroy_by?(user)
     return unless user
     created_by?(user) || user.admin?
-  end
-
-  def can_set_selection?(user)
-    return unless user
-    user.admin? && !weekly_selection&.published?
   end
 
   def only_first
