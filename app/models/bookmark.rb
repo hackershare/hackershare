@@ -72,8 +72,6 @@ class Bookmark < ApplicationRecord
 
   scope :rss, lambda { where(is_rss: true) }
   scope :unrss, lambda { where(is_rss: false) }
-  scope :display, lambda { where(is_display: true) }
-  scope :undisplay, lambda { where(is_display: false) }
 
   enum lang: {
     english: 0,
