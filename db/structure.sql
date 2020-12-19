@@ -447,7 +447,9 @@ CREATE TABLE public.bookmarks (
     shared_at timestamp without time zone,
     pinned_comment_id bigint,
     images character varying[] DEFAULT '{}'::character varying[],
-    weekly_selection_id bigint
+    weekly_selection_id bigint,
+    excellented_at timestamp without time zone,
+    is_excellent boolean DEFAULT false NOT NULL
 );
 
 
@@ -837,13 +839,12 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 CREATE TABLE public.weekly_selections (
     id bigint NOT NULL,
-    bookmarks_count integer DEFAULT 0,
+    bookmarks_count integer DEFAULT 0 NOT NULL,
     description text,
     description_en text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    title character varying,
-    published_at timestamp without time zone
+    title character varying NOT NULL
 );
 
 
@@ -1578,6 +1579,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201023130653'),
 ('20201023130910'),
 ('20201031005219'),
-('20201115035517');
+('20201115035517'),
+('20201216235411');
 
 

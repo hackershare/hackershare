@@ -61,14 +61,15 @@ en:
   origin_link: Origin Link
   other_hot_tags: Other Hot Subscriptions
   page_overflow: The page is not found
+  priority_excellent: Priority Selection
   remember_me: Remember Me
   rss_source_add_successfully: RSS Source added successfully
   rss_source_invalid: RSS Source parsed failed
   save: Save
   search: Search
   search_results: "Search Results: %{query}"
-  selection_add: Add Selection
-  selection_cancel: Cancel Selection
+  excellent_add: Add Excellent
+  excellent_cancel: Cancel Excellent
   send: Send
   share_to_twitter: Share to twitter
   share_to_telegram: Share to telegram

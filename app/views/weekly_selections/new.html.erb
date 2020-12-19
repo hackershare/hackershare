@@ -1,0 +1,67 @@
+<div class="space-y-4 lg:space-y-0 lg:flex lg:space-x-4">
+  <div class="lg:flex-auto">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <%= form_with model: @weekly_selection, method: 'post', local: true do |f| %>
+          <%= f.hidden_field :id %>
+          <div class="space-y-4">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">New Weekly Selection</h3>
+            <div>
+              <%= f.label :title, class: 'block text-sm font-medium leading-5 text-gray-700 field-required' %>
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <%= f.text_field :title, class: 'form-input flex-1 block w-full rounded-none rounded-l-md transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
+                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                  | <%= t("issue_no", no: @weekly_selection.id) %>
+                </span>
+              </div>
+            </div>
+            <div>
+              <%= f.label :description, class: 'block text-sm font-medium leading-5 text-gray-700' %>
+              <div class="rounded-md shadow-sm">
+                <%= f.text_area :description, rows: '3', class: 'form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
+              </div>
+            </div>
+            <div>
+              <%= f.label :description_en, class: 'block text-sm font-medium leading-5 text-gray-700' %>
+              <div class="rounded-md shadow-sm">
+                <%= f.text_area :description_en, rows: '3', class: 'form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
+              </div>
+            </div>
+            <div class="flex space-x-4 items-end">
+              <%= f.submit 'Publish', class: "btn-primary #{'disabled' if !policy(@weekly_selection).create?}", disabled: !policy(@weekly_selection).create? %>
+              <div class="text-sm text-gray-500">
+                Notice: Only the first <%= WeeklySelection::BOOKMARKS_COUNT %> of the following bookmarks will be published.
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="padding-primary space-y-2 lg:space-y-4">
+        <ul class="relative z-0 divide-y divide-gray-200" data-target='bookmarks.list'>
+          <% if @weekly_selecting_bookmarks.present? %>
+            <% @weekly_selecting_bookmarks.each do |bookmark| %>
+              <%= render "bookmarks/bookmark", bookmark: bookmark.only_first, bookmark_self: bookmark %>
+            <% end %>
+          <% else %>
+            <div class="px-1 py-4 lg:py-8 relative hover:bg-gray-50 text-sm text-gray-500"><%= t("empty_data") %></div>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="lg:flex-shrink-0 lg:w-80">
+    <div class="border border-color-primary rounded-primary">
+      <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
+        <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
+          <%= t("weekly_selection_describe") %>
+        </h3>
+      </div>
+      <div class="padding-primary">
+        <div class="text-sm text-gray-500">
+          <%= t("weekly_selection_hint") %>
+        </div>
+        <div class="flex justify-center"><%= image_tag "https://cdn.hackershare.cn/wechat-barcode-hdgcs.jpg" %></div>
+      </div>
+    </div>
+  </div>
+</div>

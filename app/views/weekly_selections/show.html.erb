@@ -9,7 +9,7 @@
       <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
         <h3 class="mr-2 text-lg leading-6 font-medium text-gray-900 py-2">
           <span><%= @weekly_selection&.full_title %></span>
-          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l @weekly_selection.published_at.to_date %></span>
+          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l @weekly_selection.created_at.to_date %></span>
         </h3>
         <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
         <% if current_user&.admin? %>

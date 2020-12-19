@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   class ValidateError < StandardError; end
 
   include Pagy::Backend
+  include Pundit
   around_action :switch_locale
   before_action :authenticate_user!
   before_action :mark_notification
@@ -14,6 +15,18 @@ class ApplicationController < ActionController::Base
     switch_locale do
       flash[:error] = t("page_overflow")
       redirect_back fallback_location: root_path
+    end
+  end
+
+  rescue_from "Pundit::NotAuthorizedError" do |e|
+    respond_to do |format|
+      format.html do
+        flash[:error] = e.message
+        redirect_back fallback_location: root_path
+      end
+      format.all do
+        head :forbidden
+      end
     end
   end
 

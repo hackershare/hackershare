@@ -72,23 +72,21 @@ class BookmarksController < ApplicationController
     render layout: false
   end
 
-  def weekly_select
-    @bookmark = Bookmark.find(params[:id])
-    raise ValidateError, "No permission" unless @bookmark.can_set_selection?(current_user)
-    if @bookmark.weekly_selected?
-      @bookmark.update!(weekly_selection_id: nil)
-      flash[:success] = "Cancel weekly selection successfully."
-    else
-      weekly_selection = WeeklySelection.unpublished.order(:id).find_or_create_by!({})
-      if weekly_selection.bookmarks_count >= WeeklySelection::BOOKMARKS_COUNT
-        raise ValidateError, "The count of next weekly selection is enough, you can manage bookmarks in the admin console."
-      end
-      @bookmark.update!(weekly_selection_id: weekly_selection.id)
-      flash[:success] = "Add weekly selection successfully."
-    end
+  def set_excellent
+    @bookmark = authorize Bookmark.find(params[:id])
+    @bookmark.toggle!(:is_excellent)
+    @bookmark.touch(:excellented_at)
+    flash[:success] = "Set excellent successfully."
     redirect_back fallback_location: root_path
-  rescue ValidateError, ActiveRecord::RecordInvalid => e
+  rescue ActiveRecord::RecordInvalid => e
     flash[:error] = e.message
+    redirect_back fallback_location: root_path
+  end
+
+  def priority_excellent
+    @bookmark = authorize Bookmark.find(params[:id])
+    @bookmark.touch(:excellented_at)
+    flash[:success] = "Priority selection successfully."
     redirect_back fallback_location: root_path
   end
 
