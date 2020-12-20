@@ -2,6 +2,7 @@ class ChangeWeeklySeletion < ActiveRecord::Migration[6.0]
   def change
     reversible do |dir|
       dir.up do
+        WeeklySelection.where(title: nil).delete_all
         WeeklySelection.where.not(published_at: nil).update_all('created_at = published_at')
       end
     end
@@ -13,7 +14,6 @@ class ChangeWeeklySeletion < ActiveRecord::Migration[6.0]
     reversible do |dir|
       dir.up do
         Bookmark.where.not(weekly_selection_id: nil).update_all(is_excellent: true)
-        WeeklySelection.where(title: nil).delete_all
       end
     end
   end
