@@ -27,16 +27,17 @@ class RssRobotJob < ApplicationJob
           []
         end
       feed.entries.reverse_each.with_index do |entry, index|
-        next if User.rss_robot.bookmarks.exists?(url: entry.url)
-        title = entry.title.force_encoding("utf-8")
-        description = (entry.content || entry.summary).force_encoding("utf-8")
-        lang = [title, description].any? { |text| text.match?(/\p{Han}/) } ? :chinese : :english
+        url = get_complete_url(rss_source.url, entry.url)
+        next if User.rss_robot.bookmarks.exists?(url: url)
+        title = entry.title&.force_encoding("utf-8")
+        description = (entry.content || entry.summary)&.force_encoding("utf-8")
+        lang = [title, description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
         bookmark = User.rss_robot.bookmarks.new(
           is_rss:      true,
           is_display:  rss_source.is_display,
-          url:         entry.url,
+          url:         url,
           title:       title,
-          description: entry.summary.to_s.force_encoding("utf-8"),
+          description: entry.summary&.force_encoding("utf-8"),
           content: description,
           created_at:  (smart_published_at_array[index] || entry.published),
           lang:        lang,
@@ -81,5 +82,15 @@ class RssRobotJob < ApplicationJob
         else
           HTTP.timeout(20)
         end
+    end
+
+    def get_complete_url(rss_url, entry_url)
+      url = URI.parse(entry_url)
+      return entry_url if url.host
+      rss_url = URI.parse(rss_url)
+      url.host = rss_url.host
+      url.scheme = rss_url.scheme
+      url.port = rss_url.port
+      url.to_s
     end
 end
