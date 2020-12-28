@@ -10,6 +10,24 @@ import { format, render, cancel, register } from 'timeago.js';
 import Tagify from '@yaireo/tagify';
 
 import ahoy from "ahoy.js";
+ahoy.debug();
+ahoy.configure({
+  urlPrefix: "http://localhost:8000",
+  visitsUrl: "/ahoy/visits",
+  eventsUrl: "/ahoy/events",
+  page: null,
+  platform: "Web",
+  useBeacon: true,
+  startOnReady: true,
+  trackVisits: true,
+  cookies: true,
+  cookieDomain: null,
+  headers: {},
+  visitParams: {},
+  withCredentials: false,
+  visitDuration: 4 * 60, // 4 hours
+  visitorDuration: 2 * 365 * 24 * 60 // 2 years
+});
 ahoy.trackAll();
 
 //import TubrolinksPrefetch from 'turbolinks-prefetch'
