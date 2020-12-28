@@ -13,7 +13,7 @@
         </h3>
         <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
         <% if current_user&.admin? %>
-        <%= link_to 'Markdown', markdown_weekly_selection_path(@weekly_selection, format: 'txt'), class: 'btn-primary mt-2' %>
+        <%= link_to 'Markdown', markdown_weekly_selection_path(@weekly_selection, format: 'md'), class: 'btn-primary mt-2' %>
         <% end %>
       </div>
       <div class="padding-primary space-y-2 lg:space-y-4">
