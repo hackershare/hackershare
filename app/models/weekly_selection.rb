@@ -8,6 +8,7 @@
 #  bookmarks_count :integer          default(0), not null
 #  description     :text
 #  description_en  :text
+#  is_published    :boolean          default(FALSE), not null
 #  title           :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

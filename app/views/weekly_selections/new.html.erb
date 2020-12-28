@@ -28,9 +28,9 @@
               </div>
             </div>
             <div class="flex space-x-4 items-end">
-              <%= f.submit 'Publish', class: "btn-primary #{'disabled' if !policy(@weekly_selection).create?}", disabled: !policy(@weekly_selection).create? %>
+              <%= f.submit 'Create', class: "btn-primary #{'disabled' if !policy(@weekly_selection).create?}", disabled: !policy(@weekly_selection).create? %>
               <div class="text-sm text-gray-500">
-                Notice: Only the first <%= WeeklySelection::BOOKMARKS_COUNT %> of the following bookmarks will be published.
+                Notice: Only the first <%= WeeklySelection::BOOKMARKS_COUNT %> of the following bookmarks will be included.
               </div>
             </div>
           </div>

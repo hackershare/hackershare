@@ -844,7 +844,8 @@ CREATE TABLE public.weekly_selections (
     description_en text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    title character varying NOT NULL
+    title character varying NOT NULL,
+    is_published boolean DEFAULT false NOT NULL
 );
 
 
@@ -1580,6 +1581,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201023130910'),
 ('20201031005219'),
 ('20201115035517'),
-('20201216235411');
+('20201216235411'),
+('20201228134656');
 
 

@@ -2,3 +2,8 @@ RssRobotJob:
   every: ['1h', first_in: '0.1h']
   class: RssRobotJob
   queue: hardly
+
+WeeklyBookmarksJob:
+  cron: "0 0 * * Mon"
+  class: WeeklyBookmarksJob
+  queue: default

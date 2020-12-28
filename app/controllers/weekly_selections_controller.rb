@@ -26,8 +26,7 @@ class WeeklySelectionsController < ApplicationController
     @weekly_selection = WeeklySelection.create!(weekly_selection_params)
     @weekly_selection.bookmarks = Bookmark.weekly_selecting.order(excellented_at: :desc).limit(5)
     @weekly_selection.save!
-    WeeklyBookmarksJob.perform_later(@weekly_selection)
-    flash[:success] = "Published successfully."
+    flash[:success] = "Created successfully."
     redirect_to weekly_selection_path(@weekly_selection)
   rescue ActiveRecord::RecordInvalid
     flash.now[:error] = @weekly_selection.short_error_message
