@@ -121,3 +121,5 @@ gem "device_detector", "~> 1.0"
 gem "ahoy_matey", "~> 3.0"
 
 gem "pundit", "~> 2.1"
+
+gem "sidekiq-worker-killer", "~> 1.0"
