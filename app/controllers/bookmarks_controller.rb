@@ -15,6 +15,8 @@ class BookmarksController < ApplicationController
   end
 
   def goto
+    # https://developers.google.com/search/reference/robots_meta_tag#using-the-x-robots-tag-http-header
+    headers["X-Robots-Tag"] = "none"
     @bookmark = Bookmark.find(params[:id]).only_first
     @bookmark.clicks.create(user: current_user) unless DeviceDetector.new(request.user_agent).bot?
     redirect_to @bookmark.url
