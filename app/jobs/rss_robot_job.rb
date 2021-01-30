@@ -15,9 +15,16 @@ class RssRobotJob < ApplicationJob
       processed_at = Time.current
       res = http.get(rss_source.url)
       feed = Feedjira.parse(res.to_s)
-      if rss_source.processed_at && feed.try(:last_built) && rss_source.processed_at > feed.last_built
-        rss_source.touch(:processed_at, time: processed_at)
-        return
+      if rss_source.processed_at && feed.try(:last_built)
+        last_built_date = \
+          if feed.last_built.is_a?(String)
+            Time.zone.parse(feed.last_built).to_date
+          else
+            feed.last_built.to_date
+          end
+        if rss_source.processed_at.to_date > last_built_date
+          return
+        end
       end
       init_rss_source_tag!(rss_source)
       smart_published_at_array = \
