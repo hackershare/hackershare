@@ -89,7 +89,7 @@ module ApplicationHelper
   end
 
   def ga_tracking_id
-    ENV["GA_TRACKING_ID"] || "UA-175643791-1"
+    ENV["GA_TRACKING_ID"] || "G-PJBVFLBFSB"
   end
 
   def tag_url_for(tag)
