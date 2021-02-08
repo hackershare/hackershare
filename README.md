@@ -3,7 +3,7 @@
 Social bookmarks website for hackers. Alternative to delicious, hackernews, pocket. 
 Hackershare is the open source software which powers [hackershare.dev](https://hackershare.dev)
 
-There is also a project introduction article for your reference: [hackershare: Social bookmarking reinvented!](https://www.v2ex.com/t/709437)
+There is also a project introduction article for your reference: [hackershare: Social bookmarking reinvented!](https://blog.hackershare.dev/2020/09/22/hackershare-social-bookmarking-reinvented/)
 
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
 
