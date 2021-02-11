@@ -14,7 +14,7 @@ class WeeklySelectionsController < ApplicationController
   end
 
   def new
-    @weekly_selecting_bookmarks = Bookmark.weekly_selecting.order(excellented_at: :desc)
+    @weekly_selecting_bookmarks = Bookmark.weekly_selecting.excellented_order
     @weekly_selection = WeeklySelection.new(
       id: (WeeklySelection.maximum(:id)&.next || 1),
       title: @weekly_selecting_bookmarks.first&.title,
@@ -24,7 +24,7 @@ class WeeklySelectionsController < ApplicationController
   def create
     authorize WeeklySelection
     @weekly_selection = WeeklySelection.create!(weekly_selection_params)
-    @weekly_selection.bookmarks = Bookmark.weekly_selecting.order(excellented_at: :desc).limit(5)
+    @weekly_selection.bookmarks = Bookmark.weekly_selecting.excellented_order.limit(WeeklySelection::BOOKMARKS_COUNT)
     @weekly_selection.save!
     flash[:success] = "Created successfully."
     redirect_to weekly_selection_path(@weekly_selection)

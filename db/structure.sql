@@ -449,7 +449,8 @@ CREATE TABLE public.bookmarks (
     images character varying[] DEFAULT '{}'::character varying[],
     weekly_selection_id bigint,
     excellented_at timestamp without time zone,
-    is_excellent boolean DEFAULT false NOT NULL
+    is_excellent boolean DEFAULT false NOT NULL,
+    excellented_priority integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1582,6 +1583,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201031005219'),
 ('20201115035517'),
 ('20201216235411'),
-('20201228134656');
+('20201228134656'),
+('20210208141143');
 
 

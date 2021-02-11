@@ -15,7 +15,7 @@
 #
 class WeeklySelection < ApplicationRecord
   BOOKMARKS_COUNT = 5
-  has_many :bookmarks
+  has_many :bookmarks, lambda { excellented_order }
   validates :title, :bookmarks_count, presence: true
 
   def full_title

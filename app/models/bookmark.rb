@@ -16,6 +16,7 @@
 #  description                   :text
 #  dups_count                    :integer          default(0)
 #  excellented_at                :datetime
+#  excellented_priority          :integer          default(0), not null
 #  favicon                       :string
 #  images                        :string           default([]), is an Array
 #  is_display                    :boolean          default(TRUE), not null
@@ -75,6 +76,7 @@ class Bookmark < ApplicationRecord
   scope :rss, lambda { where(is_rss: true) }
   scope :unrss, lambda { where(is_rss: false) }
   scope :weekly_selecting, lambda { where(is_excellent: true, weekly_selection_id: nil) }
+  scope :excellented_order, lambda { order(excellented_priority: :desc, excellented_at: :asc) }
 
   enum lang: {
     english: 0,

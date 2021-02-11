@@ -76,8 +76,11 @@ class BookmarksController < ApplicationController
 
   def set_excellent
     @bookmark = authorize Bookmark.find(params[:id])
-    @bookmark.toggle!(:is_excellent)
-    @bookmark.touch(:excellented_at)
+    if @bookmark.is_excellent?
+      @bookmark.update!(is_excellent: false, excellented_at: nil)
+    else
+      @bookmark.update!(is_excellent: true, excellented_at: Time.current)
+    end
     flash[:success] = "Set excellent successfully."
     redirect_back fallback_location: root_path
   rescue ActiveRecord::RecordInvalid => e
@@ -87,7 +90,8 @@ class BookmarksController < ApplicationController
 
   def priority_excellent
     @bookmark = authorize Bookmark.find(params[:id])
-    @bookmark.touch(:excellented_at)
+    max_priority = Bookmark.weekly_selecting.maximum(:excellented_priority) || 0
+    @bookmark.update!(excellented_priority: max_priority + 1)
     flash[:success] = "Priority selection successfully."
     redirect_back fallback_location: root_path
   end
