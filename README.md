@@ -19,7 +19,7 @@ There is also a project introduction article for your reference: [hackershare: S
 
 ## Setup local
 
-* [PG extension install](https://github.com/hackershare/hackershare/blob/master/pg_extension.md)
+* [PG extension install](https://github.com/hackershare/hackershare/blob/main/pg_extension.md)
 * rails db:create
 * rails db:migrate
 * rails db:seed_fu
