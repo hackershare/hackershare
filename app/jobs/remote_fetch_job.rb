@@ -3,6 +3,7 @@
 require "open-uri"
 
 class RemoteFetchJob < ApplicationJob
+  GOOGLE_FAVICON_SERVICE = 'https://www.google.com/s2/favicons?domain='.freeze
   queue_as :default
 
   def perform(bookmark_id)
@@ -11,28 +12,15 @@ class RemoteFetchJob < ApplicationJob
       return
     end
     parser = LinkThumbnailer.generate(bookmark.url, verify_ssl: false)
-    favicon_url = parser.favicon
     image_urls = parser.images.sort_by { |image| -(image.size[0].to_i) }.map(&:src)
-    begin
-      open(parser.favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
-    rescue OpenURI::HTTPError, Errno::ENOENT
-      url_parser = URI.parse(bookmark.url)
-      favicon_url = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
-      begin
-        result = open(favicon_url, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
-        favicon_url = nil if /html|text/i.match?(result.content_type)
-      rescue OpenURI::HTTPError, Errno::ENOENT
-        favicon_url = nil
-      end
-    end
     bookmark.title = parser.title.presence if bookmark.title.blank?
     bookmark.description = parser.description.presence if bookmark.description.blank?
-    bookmark.favicon = favicon_url.presence if bookmark.favicon.blank?
     bookmark.images = image_urls if bookmark.images.blank?
     lang = [bookmark.title, bookmark.description].any? { |text| text.to_s.match?(/\p{Han}/) } ? :chinese : :english
     bookmark.lang = lang
+    set_bookmark_favicon(bookmark, parser) unless bookmark.favicon
     if bookmark.save
-      bookmark.save_favicon if bookmark.favicon.present?
+      bookmark.save_favicon if bookmark.favicon
       CreateTag.call(bookmark, ExtractTag.call(bookmark).result.map(&:name), bookmark.user, false)
       InitComment.call(bookmark)
     else
@@ -40,5 +28,30 @@ class RemoteFetchJob < ApplicationJob
     end
   rescue LinkThumbnailer::HTTPError
     # TODO
+  end
+
+  private
+
+  def set_bookmark_favicon(bookmark, parser)
+    favicons = [
+      parser.favicon,
+      "#{GOOGLE_FAVICON_SERVICE}#{URI.parse(bookmark.url).host}",
+    ]
+    favicons.each do |favicon|
+      retryed = false
+      begin
+        result = open(favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+        unless /html|text/i.match?(result.content_type)
+          bookmark.favicon = favicon
+          return
+        end
+      rescue OpenURI::HTTPError, Errno::ENOENT
+        break if retryed
+        url_parser = URI.parse(bookmark.url)
+        favicon = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
+        retryed = true
+        retry
+      end
+    end
   end
 end
