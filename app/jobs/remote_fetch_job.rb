@@ -46,7 +46,7 @@ class RemoteFetchJob < ApplicationJob
             return
           end
         rescue OpenURI::HTTPError, Errno::ENOENT
-          break if retryed
+          next if retryed
           url_parser = URI.parse(bookmark.url)
           favicon = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
           retryed = true
