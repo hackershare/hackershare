@@ -3,7 +3,7 @@
 require "open-uri"
 
 class RemoteFetchJob < ApplicationJob
-  GOOGLE_FAVICON_SERVICE = 'https://www.google.com/s2/favicons?domain='.freeze
+  GOOGLE_FAVICON_SERVICE = "https://www.google.com/s2/favicons?domain="
   queue_as :default
 
   def perform(bookmark_id)
@@ -32,26 +32,26 @@ class RemoteFetchJob < ApplicationJob
 
   private
 
-  def set_bookmark_favicon(bookmark, parser)
-    favicons = [
-      parser.favicon,
-      "#{GOOGLE_FAVICON_SERVICE}#{URI.parse(bookmark.url).host}",
-    ]
-    favicons.each do |favicon|
-      retryed = false
-      begin
-        result = open(favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
-        unless /html|text/i.match?(result.content_type)
-          bookmark.favicon = favicon
-          return
+    def set_bookmark_favicon(bookmark, parser)
+      favicons = [
+        parser.favicon,
+        "#{GOOGLE_FAVICON_SERVICE}#{URI.parse(bookmark.url).host}",
+      ]
+      favicons.each do |favicon|
+        retryed = false
+        begin
+          result = open(favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+          unless /html|text/i.match?(result.content_type)
+            bookmark.favicon = favicon
+            return
+          end
+        rescue OpenURI::HTTPError, Errno::ENOENT
+          break if retryed
+          url_parser = URI.parse(bookmark.url)
+          favicon = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
+          retryed = true
+          retry
         end
-      rescue OpenURI::HTTPError, Errno::ENOENT
-        break if retryed
-        url_parser = URI.parse(bookmark.url)
-        favicon = [url_parser.scheme, "://", url_parser.host, "/favicon.ico"].join
-        retryed = true
-        retry
       end
     end
-  end
 end
