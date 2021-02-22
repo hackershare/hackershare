@@ -14,7 +14,6 @@ zh-CN:
   bookmark_destroy_ok: 书签删除成功
   bookmark_destroy_fail: 书签删除失败
   bookmarks: 书签
-  unsubscribe: 取消订阅
   category: 订阅
   chrome_extension_description: 使用 Chrome 插件，你只需单击插件即可分享。
   comment: 评论
@@ -27,6 +26,7 @@ zh-CN:
   daily: 每天
   delete: 删除
   email_or_password_is_wrong: 邮箱或密码错误
+  email_wrong_tips: '邮件展示有问题? 你也可以在网站上查看：'
   empty_comments: 暂时没有评论，不妨评论一下？
   empty_data: 暂无数据
   english: 英文
@@ -91,6 +91,7 @@ zh-CN:
   top_hackers: 极客排行
   top_categories: 标签订阅
   unfollow: 取消关注
+  unsubscribe: 取消订阅
   user_profile: 用户信息
   weekly: 每周
   weekly_selection: 每周精选

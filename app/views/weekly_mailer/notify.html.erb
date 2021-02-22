@@ -1,353 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html data-editor-version="2" xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-  <!--[if !mso]><!-->
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-  <!--<![endif]-->
-  <!--[if (gte mso 9)|(IE)]>
-    <xml>
-    <o:OfficeDocumentSettings>
-    <o:AllowPNG/>
-    <o:PixelsPerInch>96</o:PixelsPerInch>
-    </o:OfficeDocumentSettings>
-    </xml>
-    <![endif]-->
-  <!--[if (gte mso 9)|(IE)]>
-    <style type="text/css">
-      body {width: 600px;margin: 0 auto;}
-      table {border-collapse: collapse;}
-      table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
-      img {-ms-interpolation-mode: bicubic;}
-    </style>
-    <![endif]-->
-
-  <style type="text/css">
-    body,
-    p,
-    div {
-      font-family: arial, helvetica, sans-serif;
-      font-size: 16px;
-    }
-
-    body {
-      color: #333333;
-    }
-
-    body a {
-      color: #0690FA;
-      text-decoration: none;
-    }
-
-    p {
-      margin: 0;
-      padding: 0;
-    }
-
-    table.wrapper {
-      width: 100% !important;
-      table-layout: fixed;
-      -webkit-font-smoothing: antialiased;
-      -webkit-text-size-adjust: 100%;
-      -moz-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-    }
-
-    img.max-width {
-      max-width: 100% !important;
-    }
-
-    .column.of-2 {
-      width: 50%;
-    }
-
-    .column.of-3 {
-      width: 33.333%;
-    }
-
-    .column.of-4 {
-      width: 25%;
-    }
-
-    @media screen and (max-width:480px) {
-
-      .preheader .rightColumnContent,
-      .footer .rightColumnContent {
-        text-align: left !important;
-      }
-
-      .preheader .rightColumnContent div,
-      .preheader .rightColumnContent span,
-      .footer .rightColumnContent div,
-      .footer .rightColumnContent span {
-        text-align: left !important;
-      }
-
-      .preheader .rightColumnContent,
-      .preheader .leftColumnContent {
-        font-size: 80% !important;
-        padding: 5px 0;
-      }
-
-      table.wrapper-mobile {
-        width: 100% !important;
-        table-layout: fixed;
-      }
-
-      img.max-width {
-        height: auto !important;
-        max-width: 480px !important;
-      }
-
-      a.bulletproof-button {
-        display: block !important;
-        width: auto !important;
-        font-size: 80%;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-      }
-
-      .columns {
-        width: 100% !important;
-      }
-
-      .column {
-        display: block !important;
-        width: 100% !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
-    }
-  </style>
-  <!--user entered Head Start-->
-
-  <!--End Head user entered-->
-</head>
-
-<body>
-  <div class="wrapper" data-link-color="#0690FA"
-    data-body-style="font-size: 16px; font-family: arial,helvetica,sans-serif; color: #333333; background-color: #f5f8fa;">
-    <div class="webkit">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#f5f8fa">
-        <tr>
-          <td valign="top" bgcolor="#f5f8fa" width="100%">
-            <table width="100%" role="content-container" class="outer" align="center" cellpadding="0" cellspacing="0"
-              border="0">
-              <tr>
-                <td width="100%">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td>
-                        <!--[if mso]>
-                          <center>
-                          <table><tr><td width="600">
-                          <![endif]-->
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%"
-                          align="center">
-                          <tr>
-                            <td role="modules-container"
-                              style="padding: 0px 0px 0px 0px; color: #333333; text-align: left;" bgcolor="#f5f8fa"
-                              width="100%" align="left">
-
-                              <table class="module preheader preheader-hide" role="module" data-type="preheader"
-                                border="0" cellpadding="0" cellspacing="0" width="100%"
-                                style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
-                                <tr>
-                                  <td role="module-content">
-                                    <p>Hackershare Weekly</p>
-                                  </td>
-                                </tr>
-                              </table>
-
-                              <table class="module" role="module" data-type="text" border="0" cellpadding="0"
-                                cellspacing="0" width="100%" style="table-layout: fixed;">
-                                <tr>
-                                  <td style="padding:0px 018px 0px 0px;" height="100%" valign="top" bgcolor="">
-                                    <div style="text-align: right;"><span
-                                        style="font-family:verdana,geneva,sans-serif;"><span
-                                          style="font-size:10px;">邮件展示有问题?
-                                          你也可以在网站上查看：<%= link_to 'hackershare.dev', weekly_selection_url(@weekly_selection), target: '_blank' %></span></span>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
-
-                              <table class="module" role="module" data-type="text" border="0" cellpadding="0"
-                                cellspacing="0" width="100%" style="table-layout: fixed;">
-                                <tr>
-                                  <td
-                                    style="background-color:#f5f8fa;padding:12px 0px 12px 0px;line-height:24px;text-align:inherit;"
-                                    height="100%" valign="top" bgcolor="#f5f8fa">
-                                    <div style="text-align: center;"><span
-                                        style="font-size:20px;"><strong><%= @weekly_selection.full_title %></strong></span>
-                                    </div>
-
-                                    <div style="text-align: center;"><%= l @weekly_selection.created_at.to_date %>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </table>
-
-                              <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%"
-                                role="module" data-type="columns" data-version="2"
-                                style="padding:0px 0px 0px 0px;box-sizing:border-box;" bgcolor="">
-                                <tr role='module-content'>
-                                  <td height="100%" valign="top">
-                                    <!--[if (gte mso 9)|(IE)]>
-              <center>
-                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-spacing:0;border-collapse:collapse;table-layout: fixed;" >
-                  <tr>
-            <![endif]-->
-
-                                    <!--[if (gte mso 9)|(IE)]>
-      <td width="300.000px" valign="top" style="padding: 0px 0px 0px 0px;border-collapse: collapse;" >
-    <![endif]-->
-
-
-                              </table>
-
-                              <!--[if (gte mso 9)|(IE)]>
-      </td>
-    <![endif]-->
-                              <!--[if (gte mso 9)|(IE)]>
-                  <tr>
-                </table>
-              </center>
-            <![endif]-->
-                            </td>
-                          </tr>
-                        </table>
-
-
-
-
-
-                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0"
-                          width="100%" style="table-layout: fixed;">
-                          <tr>
-                            <td
-                              style="background-color:#ffffff;padding:18px 18px 18px 18px;line-height:22px;text-align:inherit;"
-                              height="100%" valign="top" bgcolor="#ffffff">
-                              <div>
-
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-
-
-
-                        <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0"
-                          width="100%" style="table-layout: fixed;">
-                          <tr>
-                            <td
-                              style="background-color:#ffffff;padding:18px 18px 18px 18px;line-height:22px;text-align:inherit;"
-                              height="100%" valign="top" bgcolor="#ffffff">
-                              <h1 style="color: rgb(6, 144, 250);"><span style="font-size:28px;"><span
-                                    data-end-index="35269" data-start-index="35239">每周精选书签</span></span></h1>
-                            </td>
-                          </tr>
-                        </table>
-                        <div style="
-    background: #fff;
-    padding: 18px;
-    color: gray;
-  "><%= @weekly_selection.description %></div>
-                        <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="0"
-                          width="100%" style="table-layout: fixed;">
-                          <tr>
-                            <td height="100%" valign="top">
-                              <div style="background-color: white;">
-
-                                <% @weekly_selection.bookmarks.each do |bookmark| %>
-                                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonBlock" width="100%">
-                                  <tbody class="mcnButtonBlockOuter">
-                                    <tr>
-                                      <td
-                                        style="width: 60px; padding-top:15px;padding-right:0px;padding-bottom:15px;padding-left:15px;border-collapse:collapse;color:#606060;font-family:Helvetica;font-size:15px;line-height:150%;text-align:left;border-bottom: 1px solid #EAEAEA"
-                                        valign="top">
-                                        <a href="<%= bookmark_url(bookmark) %>">
-                                          <% if bookmark.favicon_local.attached? %>
-                                          <%= image_tag(bookmark.favicon_local.service_url, loading: 'lazy', class: "service-logo", style: "width: 60px; border-radius: 3px; border: 1px solid #ebebeb; height: 60px;background-color: #fff;") %>
-                                          <% else %>
-                                          <%= lavatar_tag(bookmark.letter_char, 56, class: "service-logo", style: "width: 60px; border-radius: 3px; border: 1px solid #ebebeb; height: 60px;background-color: #fff;") %>
-                                          <% end %>
-                                        </a>
-                                      </td>
-                                      <td
-                                        style="padding-top:14px;padding-right:18px;padding-bottom:14px;padding-left:18px;border-collapse:collapse;color:#606060;font-family:Helvetica;font-size:15px;line-height:150%;text-align:left;border-bottom: 1px solid #EAEAEA"
-                                        valign="top">
-                                        <a style="color: #0690FA; font-weight: bold; text-decoration:none;"
-                                          href="<%= bookmark_url(bookmark) %>"><%= bookmark.title %></a>
-                                        <div style="font-size: 11px;line-height: 15px;color: grey;">
-                                          <%= bookmark.cached_tag_names %></div>
-                                        <%= bookmark.pinned_comment&.comment %>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                                <% end %>
-
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                        <div style="padding: 18px;">
-                          <table class="module" role="module" data-type="social" align="center" border="0" cellpadding="0"
-                            cellspacing="0" width="100%" style="table-layout: fixed;">
-                            <tbody>
-                              <tr>
-                                <td valign="top" style="padding:0px 0px 0px 0px;font-size:6px;line-height:10px;">
-                                  <table align="center">
-                                    <tbody>
-                                      <tr>
-
-                                        <td style="padding: 0px 5px;">
-                                          <a role="social-icon-link" href="https://twitter.com/hooopo" target="_blank"
-                                            alt="Twitter" data-nolink="false" title="Twitter "
-                                            style="-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;display:inline-block;background-color:#7AC4F7;">
-                                            <img role="social-icon" alt="Twitter" title="Twitter " height="30" width="30"
-                                              style="height: 30px, width: 30px"
-                                              src="https://marketing-image-production.s3.amazonaws.com/social/white/twitter.png" />
-                                          </a>
-                                        </td>
-
-
-
-                                        <td style="padding: 0px 5px;">
-                                          <a role="social-icon-link" href="https://github.com/hackershare" target="_blank"
-                                            alt="Github" data-nolink="false" title="Github "
-                                            style="-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;display:inline-block;background-color:#0077B5;">
-                                            <img role="social-icon" alt="Github" title="Github " height="30" width="30"
-                                              style="height: 30px, width: 30px"
-                                              src="https://img.stackshare.io/service/27/sBsvBbjY.png" />
-                                          </a>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div style="font-size: 10px; line-height: 150%; margin-top: 12px; text-align: right;">
-                            <a href="<%= setting_users_url %>"><span>Unsubscribe</span></a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+<div style="font-family: arial, helvetica, sans-serif; font-size: 14px;">
+  <div style="background: #f5f8fa; padding: 24px;">
+    <div style="margin-bottom: 12px; text-align: right; font-family: verdana, geneva, sans-serif; font-size: 10px; color: #333;">
+      <%= t 'email_wrong_tips' %>
+      <a target="_blank" href="<%= weekly_selection_url(@weekly_selection.id) %>" style="text-decoration: none; color: #0690FA;">weekly_selections/<%= @weekly_selection.id %></a>
+    </div>
+    <div style="margin-bottom: 8px; text-align: center; font-size: 20px; color: #333; font-weight: 700;">
+      <%= @weekly_selection.full_title %>
+    </div>
+    <div style="text-align: center; font-size: 16px; color: #333;">
+      <%= l @weekly_selection.created_at.to_date %>
     </div>
   </div>
-</body>
-</html>
+  <div style="padding: 0px 20px; margin: 20px 0px; color: gray; font-size: 16px;">
+    <%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %>
+  </div>
+  <div style="padding: 0px 20px;">
+    <% @weekly_selection.bookmarks.each_with_index do |bookmark, index| %>
+      <a target="_blank" href="<%= bookmark_url(bookmark) %>" style="display: flex; align-items: center; text-decoration: none; padding: 12px 0px; <%= 'border-top: solid 1px #eee;' unless index.zero? %>">
+        <div style="margin-right: 24px;">
+          <% if bookmark.favicon_local.attached? %>
+            <%= image_tag bookmark.favicon_local.service_url, width: '60', height: '60', style: "vertical-align: middle;" %>
+          <% else %>
+            <%= lavatar_tag bookmark.letter_char, 60 %>
+          <% end %>
+        </div>
+        <div>
+          <div style="margin-bottom: 2px; color: #0690FA; font-weight: bold;">
+            <%= bookmark.title %>
+          </div>
+          <div style="margin-bottom: 2px; font-size: 10px; color: grey;">
+            <%= bookmark.cached_tag_names %>
+          </div>
+          <div style="font-size: 14px; color: #606060;">
+            <%= bookmark.pinned_comment&.comment %>
+          </div>
+        </div>
+      </a>
+    <% end %>
+  </div>
+  <div style="background: #f5f8fa; padding: 24px;">
+    <div style="display: flex; justify-content: center; margin-bottom: 4px;">
+      <a target="_blank" href="https://twitter.com/hooopo" style="display: block; margin-right: 8px; background-color: #7AC4F7;">
+        <img style="vertical-align: middle;" width="30" height="30" src="https://cdn.hackershare.cn/twitter-logo.png" />
+      </a>
+      <a target="_blank" href="https://github.com/hackershare" style="display: block;">
+        <img style="vertical-align: middle;" width="30" height="30" src="https://cdn.hackershare.cn/github-logo.png" />
+      </a>
+    </div>
+    <div style="text-align: right; font-family: verdana, geneva, sans-serif;">
+      <a target="_blank" href="<%= setting_users_url %>" style="text-decoration: none; color: #0690FA; font-size: 10px;">
+        <%= t 'unsubscribe' %>
+      </a>
+    </div>
+  </div>
+</div>

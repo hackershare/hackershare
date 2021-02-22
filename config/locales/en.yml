@@ -14,7 +14,6 @@ en:
   bookmark_destroy_ok: Bookmark destroyed successfully
   bookmark_destroy_fail: Bookmark destroyed failed
   bookmarks: Bookmarks
-  unsubscribe: Unsubscribe
   category: Subscriptions
   chrome_extension_description: With the extension, you can add new bookmarks with the click of a button.
   comment: Comment
@@ -27,6 +26,7 @@ en:
   daily: Daily
   delete: Delete
   email_or_password_is_wrong: Email or password is wrong
+  email_wrong_tips: 'Any problem with the mail? You can also see on the website:'
   empty_comments: There are no comments yet, why not comment?
   empty_data: Empty data
   english: English
@@ -91,6 +91,7 @@ en:
   top_hackers: Top Hackers
   top_categories: Top Subscriptions
   unfollow: Unfollow
+  unsubscribe: Unsubscribe
   user_profile: User's Profile
   weekly: Weekly
   weekly_selection: Weekly Selections
