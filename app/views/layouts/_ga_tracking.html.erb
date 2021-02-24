@@ -4,13 +4,4 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '<%= ga_tracking_id %>', {transport_url: 'https://learnsql.io/c7f4edce-58c3-4917-8f18-a2ea6c1b93dc'});
-
-  document.addEventListener('turbolinks:load', event => {
-    if (typeof gtag === 'function') {
-      gtag('config', '<%= ga_tracking_id %>', {
-        transport_url: 'https://learnsql.io/c7f4edce-58c3-4917-8f18-a2ea6c1b93dc',
-        'page_location': event.data.url
-      });
-    }
-  });
 </script>
