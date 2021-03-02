@@ -1,5 +1,5 @@
 RssRobotJob:
-  every: ['1h', first_in: '0.1h']
+  every: ['2h', first_in: '0.1h']
   class: RssRobotJob
   queue: hardly
 
