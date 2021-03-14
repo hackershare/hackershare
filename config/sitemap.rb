@@ -8,6 +8,7 @@ SitemapGenerator::Sitemap.default_host = "https://hackershare.dev"
 # SitemapGenerator::Sitemap.public_path = "public/sitemap"
 
 SitemapGenerator::Sitemap.sitemaps_path = "sitemap/"
+SitemapGenerator::Sitemap.compress = false
 
 SitemapGenerator::Sitemap.create do
   # The path locale of english is nil

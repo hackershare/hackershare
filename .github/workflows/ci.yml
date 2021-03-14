@@ -42,7 +42,6 @@ jobs:
         echo "$ID_RSA" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         bundle exec cap production deploy
-        bundle exec cap production sitemap:refresh
 
   docker:
     needs: build
