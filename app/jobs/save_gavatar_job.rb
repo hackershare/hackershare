@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SaveGavatarJob < ApplicationJob
-  queue_as :default
+  queue_as :critical
 
   def perform(user_id)
     user = User.find(user_id)
