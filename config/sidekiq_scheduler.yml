@@ -7,3 +7,8 @@ WeeklyBookmarksJob:
   cron: "0 0 * * Mon"
   class: WeeklyBookmarksJob
   queue: default
+
+CleanNotificationJob:
+  every: ['8h', first_in: '0.5h']
+  class: CleanNotificationJob
+  queue: hardly
