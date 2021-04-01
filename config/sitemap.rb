@@ -20,6 +20,7 @@ SitemapGenerator::Sitemap.create do
     add bookmarks_path(locale: locale), changefreq: "daily"
     Bookmark.find_each do |bookmark|
       add bookmark_path(bookmark, locale: locale), lastmod: bookmark.updated_at, changefreq: "daily"
+      add goto_bookmark_path(bookmark, locale: nil), lastmod: bookmark.updated_at, changefreq: "daily" if locale.nil?
     end
 
     User.find_each do |user|
