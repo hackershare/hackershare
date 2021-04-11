@@ -15,6 +15,7 @@
 #  followers_count           :integer          default(0)
 #  followings_count          :integer          default(0)
 #  homepage                  :string
+#  lang                      :integer          default("english"), not null
 #  password_digest           :string
 #  remember_token            :string
 #  score                     :integer

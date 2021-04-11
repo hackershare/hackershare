@@ -5,7 +5,10 @@ class WeeklyMailer < ApplicationMailer
     user = params[:user]
     @weekly_selection = params[:weekly_selection]
     if params[:preview] || email_notifications?(user)
-      mail(to: user.email, subject: @weekly_selection.full_title)
+      locale = user.english? ? :en : :'zh-CN'
+      I18n.with_locale(locale) do
+        mail(to: user.email, subject: @weekly_selection.full_title)
+      end
     end
   end
 end

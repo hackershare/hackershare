@@ -17,6 +17,7 @@
 #  followers_count           :integer          default(0)
 #  followings_count          :integer          default(0)
 #  homepage                  :string
+#  lang                      :integer          default("english"), not null
 #  password_digest           :string
 #  remember_token            :string
 #  score                     :integer
@@ -68,6 +69,11 @@ class User < ApplicationRecord
   enum default_bookmark_lang: {
     all_lang:            0,
     follow_website_lang: 1,
+  }
+
+  enum lang: {
+    english: 0,
+    chinese: 1,
   }
 
   def bookmark_lang

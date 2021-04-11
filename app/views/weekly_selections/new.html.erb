@@ -3,15 +3,15 @@
     <div class="border border-color-primary rounded-primary">
       <div class="padding-primary bg-primary rounded-t-md border-b border-color-primary">
         <%= form_with model: @weekly_selection, method: 'post', local: true do |f| %>
-          <%= f.hidden_field :id %>
+          <%= f.hidden_field :issue_no %>
           <div class="space-y-4">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">New Weekly Selection</h3>
+            <h3 class="text-lg font-medium leading-6 text-gray-900"><%= t 'new_weekly_selection' %></h3>
             <div>
               <%= f.label :title, class: 'block text-sm font-medium leading-5 text-gray-700 field-required' %>
               <div class="mt-1 flex rounded-md shadow-sm">
                 <%= f.text_field :title, class: 'form-input flex-1 block w-full rounded-none rounded-l-md transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
                 <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                  | <%= t("issue_no", no: @weekly_selection.id) %>
+                  | <%= t("issue_no", no: @weekly_selection.issue_no) %>
                 </span>
               </div>
             </div>
@@ -21,16 +21,10 @@
                 <%= f.text_area :description, rows: '3', class: 'form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
               </div>
             </div>
-            <div>
-              <%= f.label :description_en, class: 'block text-sm font-medium leading-5 text-gray-700' %>
-              <div class="rounded-md shadow-sm">
-                <%= f.text_area :description_en, rows: '3', class: 'form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5' %>
-              </div>
-            </div>
             <div class="flex space-x-4 items-end">
-              <%= f.submit 'Create', class: "btn-primary #{'disabled' if !policy(@weekly_selection).create?}", disabled: !policy(@weekly_selection).create? %>
+              <%= f.submit t('create'), class: "btn-primary #{'disabled' if !policy(@weekly_selection).create?}", disabled: !policy(@weekly_selection).create? %>
               <div class="text-sm text-gray-500">
-                Notice: Only the first <%= WeeklySelection::BOOKMARKS_COUNT %> of the following bookmarks will be included.
+                <%= t("weekly_selection_notice", count: WeeklySelection::BOOKMARKS_COUNT) %>
               </div>
             </div>
           </div>

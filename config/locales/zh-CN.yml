@@ -19,7 +19,10 @@ zh-CN:
   comment: 评论
   comment_added: 评论已添加
   comments: 评论列表
+  create: 创建
   created: 分享
+  change_to_chinese: 改为中文
+  change_to_english: 改为英文
   chinese: 中文
   chrome_extension: Chrome 插件
   confirm_delete: 确定删除吗?
@@ -55,8 +58,11 @@ zh-CN:
   monthly: 每月
   my_profile: 我的主页
   my_tags: 我的订阅
+  new_publish: 发布新期
+  new_weekly_selection: 发布每周精选
   not_have_account?: 没有账户？
   open_source: 开源
+  operation_succeeded: 操作成功
   or_continue_with: 便捷登录
   origin_link: 原始链接
   other_hot_tags: 其他热门订阅
@@ -97,6 +103,7 @@ zh-CN:
   weekly_selection: 每周精选
   weekly_selection_describe: 订阅每周精选
   weekly_selection_hint: 精选书签为用户分享，再根据书签质量以及热度每周精选 5 条出来。请关注我们运营的公众号，及时获得推送。
+  weekly_selection_notice: '注意: 仅前 %{count} 条书签会被发布。'
   write_a_few_sentences_about_yourself: 简单介绍一下你自己。
   your_profile_updated_successfully: 你的资料更新成功。
 

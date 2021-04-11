@@ -27,13 +27,20 @@
         <% end %>
       </div>
       <div class="flex flex-shrink-0 items-center space-x-1 md:space-x-2">
-        <%= link_to url_for(set_locale: true, locale: (I18n.locale == I18n.default_locale ? 'en' : nil)), data: {prefetch: 'false'}, class: 'whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150' do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-          </svg>
-        <% end %>
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open" class="flex text-sm border-transparent rounded-full focus:outline-none text-gray-500 hover:text-white transition ease-in-out duration-150" id="user-menu" aria-label="User menu" aria-haspopup="true" x-bind:aria-expanded="open">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </button>
+          <div x-show="open" x-description="Profile dropdown panel, show/hide based on dropdown state." x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10" style="display: none;">
+            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+              <%= link_to 'English', url_for(set_locale: true, locale: 'en'), class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
+              <%= link_to '中文', url_for(set_locale: true, locale: nil), class: "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out", role: "menuitem" %>
+            </div>
+          </div>
+        </div>
         <% if current_user %>
-        
           <a href="<%= notifications_path %>" class="relative whitespace-no-wrap text-base leading-6 font-medium text-gray-500 hover:text-white transition ease-in-out duration-150" aria-label="Notifications">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>

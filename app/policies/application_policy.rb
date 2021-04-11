@@ -48,4 +48,15 @@ class ApplicationPolicy
       scope.all
     end
   end
+
+  private
+
+    def locale_lang
+      case I18n.locale
+      when :en
+        :english
+      when :'zh-CN'
+        :chinese
+      end
+    end
 end

@@ -7,3 +7,5 @@ en:
     about: About
     enable_email_notification: Enable Email Notification
     default_bookmark_lang: Default bookmark language
+    title: Title
+    description: Description

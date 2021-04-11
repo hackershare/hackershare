@@ -74,6 +74,17 @@ class BookmarksController < ApplicationController
     render layout: false
   end
 
+  def change_lang
+    @bookmark = authorize Bookmark.find(params[:id])
+    if @bookmark.english?
+      @bookmark.update!(lang: :chinese)
+    else
+      @bookmark.update!(lang: :english)
+    end
+    flash[:success] = t("operation_succeeded")
+    redirect_back fallback_location: root_path
+  end
+
   def set_excellent
     @bookmark = authorize Bookmark.find(params[:id])
     if @bookmark.is_excellent?
@@ -81,7 +92,7 @@ class BookmarksController < ApplicationController
     else
       @bookmark.update!(is_excellent: true, excellented_at: Time.current)
     end
-    flash[:success] = "Set excellent successfully."
+    flash[:success] = t("operation_succeeded")
     redirect_back fallback_location: root_path
   rescue ActiveRecord::RecordInvalid => e
     flash[:error] = e.message
@@ -92,7 +103,7 @@ class BookmarksController < ApplicationController
     @bookmark = authorize Bookmark.find(params[:id])
     max_priority = Bookmark.weekly_selecting.maximum(:excellented_priority) || 0
     @bookmark.update!(excellented_priority: max_priority + 1)
-    flash[:success] = "Priority selection successfully."
+    flash[:success] = t("operation_succeeded")
     redirect_back fallback_location: root_path
   end
 

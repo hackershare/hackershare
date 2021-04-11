@@ -8,7 +8,7 @@
           <%= t('weekly_selection') %>
         </h3>
         <% if current_user&.admin? %>
-          <%= link_to 'New Publish', new_weekly_selection_path, class: 'btn-primary mt-2' %>
+          <%= link_to t('new_publish'), new_weekly_selection_path, class: 'btn-primary mt-2' %>
         <% end %>
       </div>
       <div class="padding-primary space-y-2 lg:space-y-4 divide-y divide-gray-200">

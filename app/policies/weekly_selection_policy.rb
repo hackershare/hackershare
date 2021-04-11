@@ -2,6 +2,6 @@
 
 class WeeklySelectionPolicy < ApplicationPolicy
   def create?
-    Bookmark.weekly_selecting.count >= WeeklySelection::BOOKMARKS_COUNT
+    Bookmark.where(lang: locale_lang).weekly_selecting.count >= WeeklySelection::BOOKMARKS_COUNT
   end
 end

@@ -12,7 +12,7 @@
     </div>
   </div>
   <div style="padding: 0px 20px; margin: 20px 0px; color: gray; font-size: 16px;">
-    <%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %>
+    <%= @weekly_selection.description %>
   </div>
   <div style="padding: 0px 20px;">
     <% @weekly_selection.bookmarks.each_with_index do |bookmark, index| %>

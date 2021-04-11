@@ -74,6 +74,7 @@ Rails.application.routes.draw do
         post :toggle_liking
         get :hover_like_users
         get :goto
+        patch :change_lang
         patch :set_excellent
         patch :priority_excellent
       end

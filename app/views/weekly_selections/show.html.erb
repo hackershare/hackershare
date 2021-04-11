@@ -11,7 +11,7 @@
           <span><%= @weekly_selection&.full_title %></span>
           <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l @weekly_selection.created_at.to_date %></span>
         </h3>
-        <p class="text-sm text-gray-500"><%= I18n.locale == :en ? @weekly_selection.description_en : @weekly_selection.description %></p>
+        <p class="text-sm text-gray-500"><%= @weekly_selection.description %></p>
         <% if current_user&.admin? %>
         <%= link_to 'Markdown', markdown_weekly_selection_path(@weekly_selection, format: 'md'), class: 'btn-primary mt-2' %>
         <% end %>
