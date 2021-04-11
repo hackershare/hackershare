@@ -19,7 +19,10 @@ en:
   comment: Comment
   comment_added: Comment added
   comments: Comments
+  create: Create
   created: Created
+  change_to_chinese: Change to Chinese
+  change_to_english: Change to English
   chinese: Chinese
   chrome_extension: Chrome Extension
   confirm_delete: Are you sure?
@@ -55,8 +58,11 @@ en:
   monthly: Monthly
   my_profile: My Profile
   my_tags: My Subscriptions
+  new_publish: New Publish
+  new_weekly_selection: New Weekly Selection
   not_have_account?: Not have account?
   open_source: Open Source
+  operation_succeeded: Operation succeeded
   or_continue_with: Or continue with
   origin_link: Origin Link
   other_hot_tags: Other Hot Subscriptions
@@ -97,6 +103,7 @@ en:
   weekly_selection: Weekly Selections
   weekly_selection_describe: Subscribe to weekly selections
   weekly_selection_hint: Featured bookmarks are shared for users, and then selected 5 items each week based on the quality and popularity of the bookmarks. Please pay attention to the official account we operate to get the push in time.
+  weekly_selection_notice: 'Notice: Only the first %{count} of the following bookmarks will be included.'
   write_a_few_sentences_about_yourself: Write a few sentences about yourself.
   your_profile_updated_successfully: Your profile updated successfully.
   clear_all: Clear All

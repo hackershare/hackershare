@@ -6,4 +6,13 @@ class ApplicationRecord < ActiveRecord::Base
   def short_error_message
     errors.full_messages.to_sentence
   end
+
+  def locale_lang
+    case I18n.locale
+    when :en
+      :english
+    when :'zh-CN'
+      :chinese
+    end
+  end
 end

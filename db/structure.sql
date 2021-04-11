@@ -811,7 +811,8 @@ CREATE TABLE public.users (
     admin boolean DEFAULT false,
     follow_tags_count integer DEFAULT 0,
     default_bookmark_lang integer DEFAULT 0 NOT NULL,
-    enable_email_notification boolean DEFAULT true
+    enable_email_notification boolean DEFAULT true,
+    lang integer DEFAULT 0 NOT NULL
 );
 
 
@@ -842,11 +843,12 @@ CREATE TABLE public.weekly_selections (
     id bigint NOT NULL,
     bookmarks_count integer DEFAULT 0 NOT NULL,
     description text,
-    description_en text,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     title character varying NOT NULL,
-    is_published boolean DEFAULT false NOT NULL
+    is_published boolean DEFAULT false NOT NULL,
+    lang integer DEFAULT 0 NOT NULL,
+    issue_no bigint
 );
 
 
@@ -1584,6 +1586,10 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201115035517'),
 ('20201216235411'),
 ('20201228134656'),
-('20210208141143');
+('20210208141143'),
+('20210405033047'),
+('20210405062117'),
+('20210411031231'),
+('20210411042558');
 
 

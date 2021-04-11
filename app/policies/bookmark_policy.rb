@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class BookmarkPolicy < ApplicationPolicy
+  def change_lang?
+    user&.admin?
+  end
+
   def set_excellent?
     user&.admin? && !record.weekly_selected?
   end

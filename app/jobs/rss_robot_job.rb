@@ -6,7 +6,7 @@ class RssRobotJob < ApplicationJob
 
   def perform
     RssSource.find_each do |rss_source|
-      ProcessRssJob.perform_later(rss_source.id)
+      ProcessRssJob.perform_now(rss_source.id)
     end
   end
 end
