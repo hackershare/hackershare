@@ -75,11 +75,20 @@ class ApplicationController < ActionController::Base
       end
       if request.path == "/" && best_locale != I18n.default_locale
         redirect_to root_path(locale: best_locale)
-      elsif dync_locale_routes?
-        I18n.with_locale(best_locale, &action)
-      else
-        locale = params[:locale] if I18n.locale_available?(params[:locale])
-        I18n.with_locale(locale, &action)
+        return
+      end
+
+      locale = \
+        if dync_locale_routes?
+          best_locale
+        elsif I18n.locale_available?(params[:locale])
+          params[:locale]
+        else
+          I18n.default_locale
+        end
+      I18n.with_locale(locale) do
+        current_user&.update!(lang: locale_lang)
+        action.call
       end
     end
 
@@ -96,7 +105,7 @@ class ApplicationController < ActionController::Base
         cookie_locale = I18n.locale_available?(cookies[:locale]) ? cookies[:locale] : nil
         lang = request.env["HTTP_ACCEPT_LANGUAGE"]&.scan(/^[a-z]{2}/)&.first
         client_locale = lang == "zh" ? :'zh-CN' : :en
-        (cookie_locale || client_locale || I18n.default_locale).to_sym
+        (cookie_locale || client_locale).to_sym
       end
     end
 
@@ -137,6 +146,15 @@ class ApplicationController < ActionController::Base
       respond_to do |format|
         format.js { render partial: "bookmarks/bookmarks_with_pagination", content_type: "text/html", locals: { suggest_tags: @suggest_tags, lang: @lang } }
         format.html { render "bookmarks/index" }
+      end
+    end
+
+    def locale_lang
+      case I18n.locale
+      when :en
+        :english
+      when :'zh-CN'
+        :chinese
       end
     end
 end
