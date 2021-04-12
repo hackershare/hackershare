@@ -128,4 +128,15 @@ module ApplicationHelper
       "https://github.com/hackershare/hackershare/issues/new"
     end
   end
+
+  def pretty_weekly_selection_path(weekly_selection)
+    case weekly_selection.lang
+    when "english"
+      custom_weekly_selection_path(lang: "en", issue_no: weekly_selection.issue_no)
+    when "chinese"
+      custom_weekly_selection_path(lang: "cn", issue_no: weekly_selection.issue_no)
+    when "all_lang"
+      weekly_selection_path(weekly_selection)
+    end
+  end
 end

@@ -20,7 +20,7 @@
                   <span class="px-2 py-1 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><%= l weekly_selection.created_at.to_date %></span>
                 </td>
                 <td class="py-4 align-middle">
-                  <%= link_to weekly_selection.full_title, weekly_selection_path(weekly_selection), class: 'text-sm leading-5 font-medium text-gray-900 hover:text-black' %>
+                  <%= link_to weekly_selection.full_title, pretty_weekly_selection_path(weekly_selection), class: 'text-sm leading-5 font-medium text-gray-900 hover:text-black' %>
                 </td>
               </tr>
             <% end %>

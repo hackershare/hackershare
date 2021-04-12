@@ -8,7 +8,18 @@ class WeeklySelectionsController < ApplicationController
   end
 
   def show
-    @weekly_selection = WeeklySelection.includes(:bookmarks).find(params[:id])
+    if params[:lang] && params[:issue_no]
+      lang = \
+        case params[:lang]
+        when "en"
+          "english"
+        when "cn"
+          "chinese"
+        end
+      @weekly_selection = WeeklySelection.includes(:bookmarks).find_by!(lang: lang, issue_no: params[:issue_no])
+    else
+      @weekly_selection = WeeklySelection.includes(:bookmarks).find(params[:id])
+    end
     @last_weekly_selection = WeeklySelection.where(lang: [locale_lang, :all_lang]).order(issue_no: :desc).find_by("issue_no < ?", @weekly_selection.issue_no)
     @next_weekly_selection = WeeklySelection.where(lang: [locale_lang, :all_lang]).order(:issue_no).find_by("issue_no > ?", @weekly_selection.issue_no)
   end
