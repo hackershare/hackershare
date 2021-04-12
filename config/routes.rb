@@ -49,12 +49,12 @@ Rails.application.routes.draw do
   end
 
   scope "(:locale)", locale: /en/ do
-    get "weekly_selections/:lang/:issue_no", to: "weekly_selections#show", as: "custom_weekly_selection"
     resources :weekly_selections, only: %i[index show new create] do
       member do
         get :markdown
       end
     end
+    get "weekly_selections/:lang/:issue_no", to: "weekly_selections#show", as: "custom_weekly_selection"
     resources :rss_sources, only: %i[create]
     resources :registrations, only: %i[new create]
     resources :sessions, only: %i[new create]
