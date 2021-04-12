@@ -10,5 +10,7 @@ class WeeklyBookmarksJob < ApplicationJob
       weekly_selection = user.english? ? english_weekly_selection : chinese_weekly_selection
       WeeklyMailer.with(user: user, weekly_selection: weekly_selection).notify.deliver_later if weekly_selection
     end
+    chinese_weekly_selection&.update!(is_published: true)
+    english_weekly_selection&.update!(is_published: true)
   end
 end
