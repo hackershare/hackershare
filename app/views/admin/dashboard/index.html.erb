@@ -10,7 +10,7 @@
             Total Bookmarks
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Bookmark.count %>
+            <%= FastCount.new(Bookmark.all).call %>
           </dd>
         </dl>
       </div>
@@ -22,7 +22,7 @@
             Total Users
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= User.count %>
+            <%= FastCount.new(User.all).call %>
           </dd>
         </dl>
       </div>
@@ -35,7 +35,7 @@
             Total Tags
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Tag.count %>
+            <%= FastCount.new(Tag.all).call %>
           </dd>
         </dl>
       </div>
@@ -48,7 +48,7 @@
             Total Likes
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Like.count %>
+            <%= FastCount.new(Like.all).call %>
           </dd>
         </dl>
       </div>
@@ -61,7 +61,7 @@
             Total Clicks
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Click.count %>
+            <%= FastCount.new(Click.all).call %>
           </dd>
         </dl>
       </div>
@@ -74,7 +74,7 @@
             Total Comments
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Comment.count %>
+            <%= FastCount.new(Comment.all).call %>
           </dd>
         </dl>
       </div>
@@ -87,7 +87,7 @@
             Total Follows
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= Follow.count %>
+            <%= FastCount.new(Follow.all).call %>
           </dd>
         </dl>
       </div>
@@ -100,7 +100,7 @@
             Total Subscriptions
           </dt>
           <dd class="mt-1 text-3xl leading-9 font-semibold text-gray-900">
-            <%= TagSubscription.count %>
+            <%= FastCount.new(TagSubscription.all).call %>
           </dd>
         </dl>
       </div>
