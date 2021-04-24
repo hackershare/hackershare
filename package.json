@@ -16,6 +16,7 @@
     "ahoy.js": "^0.3.7",
     "alpinejs": "^2.5.0",
     "i18n-js": "^3.7.1",
+    "is-svg": "^4.2.2",
     "rails-erb-loader": "^5.5.2",
     "smoothscroll-polyfill": "^0.4.4",
     "ssri": "8.0.1",
