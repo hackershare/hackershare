@@ -6954,6 +6954,13 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
+ssri@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npm.taobao.org/ssri/download/ssri-8.0.1.tgz?cache=0&sync_timestamp=1617826295004&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fssri%2Fdownload%2Fssri-8.0.1.tgz#638e4e439e2ffbd2cd289776d5ca457c4f51a2af"
+  integrity sha1-Y45OQ54v+9LNKJd21cpFfE9Roq8=
+  dependencies:
+    minipass "^3.1.1"
+
 ssri@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.2.tgz#157939134f20464e7301ddba3e90ffa8f7728ac5"

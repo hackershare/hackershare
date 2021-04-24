@@ -18,6 +18,7 @@
     "i18n-js": "^3.7.1",
     "rails-erb-loader": "^5.5.2",
     "smoothscroll-polyfill": "^0.4.4",
+    "ssri": "8.0.1",
     "stimulus": "^1.1.1",
     "tailwindcss": "^1.6",
     "tailwindcss-stimulus-components": "^2.0.2",
