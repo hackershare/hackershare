@@ -325,7 +325,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     retries (0.0.5)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rubocop (0.88.0)
       parallel (~> 1.10)
       parser (>= 2.7.1.1)
