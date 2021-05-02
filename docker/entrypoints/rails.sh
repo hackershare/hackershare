@@ -24,6 +24,8 @@ bundle install
 
 BUNDLE="bundle check"
 
+bundle exec rails db:create && bundle exec rails db:migrate
+
 until $BUNDLE
 do
   sleep 2;
