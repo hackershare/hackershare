@@ -5,6 +5,7 @@
 # Table name: rss_sources
 #
 #  id           :bigint           not null, primary key
+#  enabled      :boolean          default(TRUE)
 #  is_display   :boolean          default(TRUE), not null
 #  processed_at :datetime
 #  tag_name     :string           not null

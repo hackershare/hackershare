@@ -650,7 +650,8 @@ CREATE TABLE public.rss_sources (
     tag_id bigint,
     processed_at timestamp without time zone,
     is_display boolean DEFAULT true NOT NULL,
-    creator_id bigint DEFAULT 100 NOT NULL
+    creator_id bigint DEFAULT 100 NOT NULL,
+    enabled boolean DEFAULT true
 );
 
 
@@ -1590,6 +1591,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210405033047'),
 ('20210405062117'),
 ('20210411031231'),
-('20210411042558');
+('20210411042558'),
+('20210502191459');
 
 
