@@ -7,15 +7,15 @@ There is also a project introduction article for your reference: [hackershare: S
 
 [![CI](https://github.com/hackershare/hackershare/workflows/CI/badge.svg)](https://github.com/hackershare/hackershare/actions)
 
-## Dependency
+## Dependencies
 
-* Postgresql 12
-* Rails 6
-* Stimulusjs 
-* Turbolinks 5
-* rails-ujs
-* imagemagic
-* redis
+* [Postgresql 12](https://www.postgresql.org)
+* [Rails 6](https://github.com/rails/rails)
+* [Stimulusjs](https://github.com/hotwired/stimulus)
+* [Turbolinks 5](https://github.com/turbolinks/turbolinks)
+* [rails-ujs](https://github.com/rails/rails/tree/main/actionview/app/assets/javascripts)
+* [ImageMagick](https://github.com/ImageMagick/ImageMagick)
+* [Redis](https://redis.io)
 
 ## Setup local
 
@@ -68,11 +68,11 @@ docker-compose down
 * Nginx conf sync: bundle exec cap production puma:nginx_config
 * Deploy: bundle exec cap production deploy
 
-## chrome extension
+## Chrome extension
 
 * https://github.com/hackershare/hackershare-ext
 * https://chrome.google.com/webstore/detail/hackershare/pinmchdpdbjbhijbagmealcojjpeebmh
 
-## refresh sitemap
+## Refresh sitemap
 
 * bundle exec rake sitemap:refresh
