@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "open-uri"
-
 class RemoteFetchJob < ApplicationJob
   GOOGLE_FAVICON_SERVICE = "https://www.google.com/s2/favicons?domain="
   queue_as :default
@@ -40,8 +38,8 @@ class RemoteFetchJob < ApplicationJob
     favicons.each do |favicon|
       retryed = false
       begin
-        result = URI.parse(favicon).open(read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
-        unless /html|text/i.match?(result.content_type)
+        result = URI.parse(favicon).try(:open, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+        unless /html|text/i.match?(result&.content_type)
           bookmark.favicon = favicon
           break
         end
