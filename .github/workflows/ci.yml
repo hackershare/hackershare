@@ -44,6 +44,7 @@ jobs:
         bundle exec cap production deploy
 
   docker:
+    if: ${{ github.ref == 'refs/heads/main' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
