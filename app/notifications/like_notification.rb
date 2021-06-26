@@ -31,7 +31,7 @@ class LikeNotification < ApplicationNotification
   def message
     [params[:like]&.user&.username, t(".liked_your_bookmark"), params[:like]&.bookmark&.title].join(" ")
   end
-  #
+
   def url
     bookmark_path(params[:like]&.bookmark, n_id: record.id)
   end

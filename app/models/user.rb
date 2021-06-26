@@ -36,7 +36,7 @@
 #  index_users_on_updated_at          (updated_at)
 #
 class User < ApplicationRecord
-  RSS_BOT_NAME  = "hackershare"
+  RSS_BOT_NAME = "hackershare"
   RSS_BOT_EMAIL = "robot@hackershare.dev"
   has_secure_password
   has_one_attached :avatar
@@ -67,19 +67,19 @@ class User < ApplicationRecord
   before_create { generate_token(:extension_token) }
 
   enum default_bookmark_lang: {
-    all_lang:            0,
-    follow_website_lang: 1,
+    all_lang: 0,
+    follow_website_lang: 1
   }
 
   enum lang: {
     english: 0,
-    chinese: 1,
+    chinese: 1
   }
 
   def bookmark_lang
     locales_lang = {
-      en:      "english",
-      'zh-CN': "chinese",
+      en: "english",
+      'zh-CN': "chinese"
     }
     follow_website_lang? ? locales_lang[I18n.locale] : "language"
   end
@@ -134,7 +134,6 @@ class User < ApplicationRecord
       auth_provider.data = auth
       if user = User.where("lower(email) = ?", email_or_fake(auth).downcase).first
         auth_provider.user = user
-        auth_provider.save
       else
         user = auth_provider.build_user(
           email: email_or_fake(auth),
@@ -143,8 +142,8 @@ class User < ApplicationRecord
           about: auth_provider.description,
           homepage: auth_provider.homepage
         )
-        auth_provider.save
       end
+      auth_provider.save
     else
       user = auth_provider.user
     end

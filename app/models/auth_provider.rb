@@ -24,7 +24,7 @@ class AuthProvider < ApplicationRecord
     user.homepage = homepage if user.homepage.blank?
     user.about = description if user.about.blank?
     user.save
-    SaveAvatarJob.perform_later(self.id) unless user.avatar.attached?
+    SaveAvatarJob.perform_later(id) unless user.avatar.attached?
   end
 
   def description

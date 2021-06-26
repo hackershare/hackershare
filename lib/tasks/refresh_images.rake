@@ -6,7 +6,7 @@ task refresh_images: :environment do
     next if bookmark.images.present?
     result = LinkThumbnailer.generate(bookmark.url)
     next if result.images.blank?
-    bookmark.update(images: result.images.sort_by { |x| -(x.size[0].to_i) }).map(&:src)
+    bookmark.update(images: result.images.sort_by { |x| -x.size[0].to_i }).map(&:src)
   rescue
   end
 end

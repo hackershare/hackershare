@@ -4,10 +4,10 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    if current_user && params[:subscribed]
-      base = current_user.follow_tags.order(updated_at: :desc)
+    base = if current_user && params[:subscribed]
+      current_user.follow_tags.order(updated_at: :desc)
     else
-      base = Tag.main.preload(:user).order(subscriptions_count: :desc)
+      Tag.main.preload(:user).order(subscriptions_count: :desc)
     end
     base = base.where(is_rss: true) if params[:is_rss].present?
     base = base.where("name LIKE ?", "%#{params[:query]}%") if params[:query].present?
@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
       @current_user.tag_subscriptions.create(tag: @tag)
     end
     current_user.reload
-    render partial: "categories/follow_button", locals: { tag: @tag, user: current_user }
+    render partial: "categories/follow_button", locals: {tag: @tag, user: current_user}
   end
 
   def toggle_subscribe
@@ -43,6 +43,6 @@ class CategoriesController < ApplicationController
     end
     @followed_tags = current_user.follow_tags.order(bookmarks_count: :desc)
     @unfollowed_tags = Tag.order(bookmarks_count: :desc).where.not(is_rss: true, id: @followed_tags.pluck(:id)).limit(10)
-    render partial: "bookmarks/tag_subscribe_container", locals: { followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags }
+    render partial: "bookmarks/tag_subscribe_container", locals: {followed_tags: @followed_tags, unfollowed_tags: @unfollowed_tags}
   end
 end

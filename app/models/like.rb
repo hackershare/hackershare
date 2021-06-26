@@ -38,7 +38,7 @@ class Like < ApplicationRecord
   end
 
   def notifications
-    @notifications ||= Notification.where(params: { like: self })
+    @notifications ||= Notification.where(params: {like: self})
   end
 
   before_destroy :destroy_notifications

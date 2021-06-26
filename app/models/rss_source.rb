@@ -16,7 +16,7 @@
 #  tag_id       :bigint
 #
 class RssSource < ApplicationRecord
-  validates :url, uniqueness: true, url: { no_local: true }
+  validates :url, uniqueness: true, url: {no_local: true}
   validates :tag_name, presence: true
   belongs_to :creator, class_name: "User"
   belongs_to :tag, optional: true

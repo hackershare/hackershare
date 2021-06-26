@@ -5,7 +5,7 @@ class AddIndexForNotification < ActiveRecord::Migration[6.0]
       recipient_id: :desc,
       read_at: :desc,
       created_at: :desc
-    }, name: 'notifications_idx_0'
+    }, name: "notifications_idx_0"
 
     add_index :notifications, :params
   end

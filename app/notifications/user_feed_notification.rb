@@ -32,7 +32,7 @@ class UserFeedNotification < ApplicationNotification
   def message
     [params[:bookmark]&.user&.username, t(".shared"), params[:bookmark]&.title].join(" ")
   end
-  #
+
   def url
     bookmark_path(params[:bookmark]&.only_first, n_id: record.id)
   end

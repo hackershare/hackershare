@@ -29,9 +29,9 @@ class CommentNotification < ApplicationNotification
   end
 
   def message
-    [params[:comment]&.user&.username, t(".commented"),  params[:comment]&.bookmark&.title].join(" ")
+    [params[:comment]&.user&.username, t(".commented"), params[:comment]&.bookmark&.title].join(" ")
   end
-  #
+
   def url
     bookmark_path(params[:comment]&.bookmark, n_id: record.id)
   end

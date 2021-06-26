@@ -66,7 +66,7 @@ class Tag < ApplicationRecord
   def alias_names=(text)
     # text format: [{"value":"mysql"},{"value":"Mysql"},{"value":"a"}]
     return if text.blank?
-    alias_name_array = JSON.parse(text).map { |x| x["value"] }.reject { |x| x == self.name }.uniq
+    alias_name_array = JSON.parse(text).map { |x| x["value"] }.reject { |x| x == name }.uniq
     new_aliases = alias_name_array.map do |alias_name|
       Tag.create_with(user: User.rss_robot).find_or_create_by(name: alias_name)
     end
@@ -74,11 +74,11 @@ class Tag < ApplicationRecord
     remove_aliases = aliases.to_a - new_aliases
     remove_aliases.each { |t| t.update(preferred: nil) }
     new_aliases.each { |t| t.update(preferred: self) }
-    Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(self.reload.self_with_aliases_ids)).each { |b| b.sync_cached_tag_ids }
+    Bookmark.where("cached_tag_with_aliases_ids && ?", Util.to_pg_array(reload.self_with_aliases_ids)).each { |b| b.sync_cached_tag_ids }
   end
 
   def similar_tag_names(limit = 10)
-    Tag.where("ratio(name, ?) >= 50", self.name).where("id != ?", self.id).limit(limit).map(&:name).join(",")
+    Tag.where("ratio(name, ?) >= 50", name).where("id != ?", id).limit(limit).map(&:name).join(",")
   end
 
   def self.list_names(limit)
@@ -87,7 +87,7 @@ class Tag < ApplicationRecord
 
   def followed_by?(user)
     return unless user
-    user.follow_tag_ids.include?(self.id)
+    user.follow_tag_ids.include?(id)
   end
 
   def color

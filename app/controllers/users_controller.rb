@@ -6,16 +6,16 @@ class UsersController < ApplicationController
 
   def show
     if %w[follower_users follow_users].include?(params[:type])
-      if params[:type] == "follower_users"
-        @relation_users = @user.follower_users
+      @relation_users = if params[:type] == "follower_users"
+        @user.follower_users
       else
-        @relation_users = @user.follow_users
+        @user.follow_users
       end
       respond_to do |format|
         format.js do
           render partial: "users/relation_users",
-                 content_type: "text/html",
-                 locals: { relation_users: @relation_users, user: @user }
+            content_type: "text/html",
+            locals: {relation_users: @relation_users, user: @user}
         end
         format.html
       end
@@ -72,28 +72,27 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path }
-      format.json { render json: { follow: @follow, user: @user.as_json(only: %i[id followers_count]) } }
+      format.json { render json: {follow: @follow, user: @user.as_json(only: %i[id followers_count])} }
     end
   end
 
   def update_setting
     @user = current_user
     @user.update(params.require(:user).permit(
-                   :username,
+      :username,
       :default_bookmark_lang,
       :about,
       :avatar,
       :homepage,
       :enable_email_notification
-      )
-    )
+    ))
     flash[:success] = t("your_profile_updated_successfully")
     redirect_to setting_users_path
   end
 
   private
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

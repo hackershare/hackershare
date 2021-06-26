@@ -41,10 +41,10 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    if current_user.admin?
-      @bookmark = Bookmark.find(params[:id])
+    @bookmark = if current_user.admin?
+      Bookmark.find(params[:id])
     else
-      @bookmark = current_user.bookmarks.find(params[:id])
+      current_user.bookmarks.find(params[:id])
     end
     @bookmark.do_destroy!
     if @bookmark.destroyed?
@@ -65,7 +65,7 @@ class BookmarksController < ApplicationController
       like = @bookmark.likes.create(user: current_user)
       LikeNotification.with(like: like).deliver(@bookmark.user)
     end
-    render json: { like: @like, bookmark: @bookmark.as_json(only: %i[id url likes_count]) }
+    render json: {like: @like, bookmark: @bookmark.as_json(only: %i[id url likes_count])}
   end
 
   def hover_like_users
@@ -109,7 +109,7 @@ class BookmarksController < ApplicationController
 
   private
 
-    def bookmark_params
-      params.require(:bookmark).permit(:url)
-    end
+  def bookmark_params
+    params.require(:bookmark).permit(:url)
+  end
 end

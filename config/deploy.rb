@@ -15,7 +15,7 @@ set :branch, :main
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/hackershare"
 set :rvm_ruby_version, File.read(".ruby-version").strip
-set :rvm_custom_path, "/usr/share/rvm"  # only needed if not detected
+set :rvm_custom_path, "/usr/share/rvm" # only needed if not detected
 
 set :puma_init_active_record, true
 

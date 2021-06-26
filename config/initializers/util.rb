@@ -3,7 +3,7 @@
 module Util
   def self.escape_quote(str)
     return "" if str.nil?
-    str.gsub(/'/, { "'" => "\\'" })
+    str.gsub(/'/, {"'" => "\\'"})
   end
 
   def self.to_pg_array(array)

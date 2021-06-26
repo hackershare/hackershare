@@ -71,7 +71,7 @@ class Bookmark < ApplicationRecord
 
   has_many :bookmark_stats, dependent: :destroy
 
-  validates :url, url: { no_local: true }, uniqueness: { scope: :user }
+  validates :url, url: {no_local: true}, uniqueness: {scope: :user}
 
   scope :rss, lambda { where(is_rss: true) }
   scope :unrss, lambda { where(is_rss: false) }
@@ -80,7 +80,7 @@ class Bookmark < ApplicationRecord
 
   enum lang: {
     english: 0,
-    chinese: 1,
+    chinese: 1
   }
 
   def title_or_url
@@ -92,7 +92,7 @@ class Bookmark < ApplicationRecord
   after_create do
     if original = Bookmark.where(url: url).where("id !=?", id).first
       BookmarkStat.incr_dups_count(original.id)
-      self.update!(ref: original)
+      update!(ref: original)
       original.touch(:created_at)
     end
   end
@@ -103,20 +103,18 @@ class Bookmark < ApplicationRecord
 
   def do_destroy!
     if duplications.blank?
-      self.destroy
-    else
-      if new_root = duplications.first
-        Bookmark.transaction do
-          new_root.likes.destroy_all
-          new_root.bookmark_stats.destroy_all
-          likes.update(bookmark: new_root)
-          comments.update(bookmark: new_root)
-          bookmark_stats.update(bookmark: new_root)
-          duplications.where("id != ?", new_root.id).update(ref: new_root)
-          new_root.update!(ref: nil)
-          new_root.sync_cached_like_user_ids
-          self.destroy!
-        end
+      destroy
+    elsif new_root = duplications.first
+      Bookmark.transaction do
+        new_root.likes.destroy_all
+        new_root.bookmark_stats.destroy_all
+        likes.update(bookmark: new_root)
+        comments.update(bookmark: new_root)
+        bookmark_stats.update(bookmark: new_root)
+        duplications.where("id != ?", new_root.id).update(ref: new_root)
+        new_root.update!(ref: nil)
+        new_root.sync_cached_like_user_ids
+        destroy!
       end
     end
     self
@@ -148,7 +146,7 @@ class Bookmark < ApplicationRecord
 
   def tag_names_for(user)
     return [] if user.blank?
-    tags.where(taggings: { user: user }).map { |tag| tag.name }
+    tags.where(taggings: {user: user}).map { |tag| tag.name }
   end
 
   def sync_cached_like_user_ids
@@ -209,7 +207,7 @@ class Bookmark < ApplicationRecord
   end
 
   def self.filter(user, params)
-    return user.bookmarks.order(id: :desc) if !%w[created likes followings subscriptions].include?(params[:type])
+    return user.bookmarks.order(id: :desc) unless %w[created likes followings subscriptions].include?(params[:type])
     if params[:type] == "created"
       return user.bookmarks.order(id: :desc)
     end
@@ -224,12 +222,12 @@ class Bookmark < ApplicationRecord
     end
 
     if params[:type] == "followings"
-      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: { user_id: user.id }).order(id: :desc)
+      Bookmark.joins("INNER JOIN follows ON follows.following_user_id = bookmarks.user_id").where(follows: {user_id: user.id}).order(id: :desc)
     end
   end
 
   def notifications
-    @notifications ||= Notification.where(params: { bookmark: self }).where(type: "UserFeedNotification")
+    @notifications ||= Notification.where(params: {bookmark: self}).where(type: "UserFeedNotification")
   end
 
   before_destroy :destroy_notifications
@@ -248,7 +246,7 @@ class Bookmark < ApplicationRecord
 
   private
 
-    def set_defaults
-      self.shared_at ||= Time.current
-    end
+  def set_defaults
+    self.shared_at ||= Time.current
+  end
 end

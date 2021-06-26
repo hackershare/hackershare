@@ -6,7 +6,7 @@ class WeeklyMailerPreview < ActionMailer::Preview
     WeeklyMailer.with(
       user: User.last,
       weekly_selection: WeeklySelection.last,
-      preview: true,
+      preview: true
     ).notify
   end
 end

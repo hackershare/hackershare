@@ -23,7 +23,7 @@ class Tagging < ApplicationRecord
   belongs_to :user, counter_cache: :taggings_count
   belongs_to :tag, counter_cache: :bookmarks_count
 
-  validates :tag_id, uniqueness: { scope: :bookmark_id }
+  validates :tag_id, uniqueness: {scope: :bookmark_id}
 
   after_create :sync_cached_tag_ids
   after_destroy :sync_cached_tag_ids
@@ -37,7 +37,7 @@ class Tagging < ApplicationRecord
   end
 
   def notifications
-    @notifications ||= Notification.where(params: { tagging: self }).where(type: "TagNotification")
+    @notifications ||= Notification.where(params: {tagging: self}).where(type: "TagNotification")
   end
 
   before_destroy :destroy_notifications

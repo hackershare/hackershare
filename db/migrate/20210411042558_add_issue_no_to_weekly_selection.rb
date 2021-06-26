@@ -3,7 +3,7 @@ class AddIssueNoToWeeklySelection < ActiveRecord::Migration[6.0]
     add_column :weekly_selections, :issue_no, :bigint
     reversible do |dir|
       dir.up do
-        WeeklySelection.update_all('issue_no = id')
+        WeeklySelection.update_all("issue_no = id")
       end
     end
   end

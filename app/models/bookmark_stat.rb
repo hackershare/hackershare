@@ -24,8 +24,8 @@ class BookmarkStat < ApplicationRecord
   enum date_type: %w[daily weekly monthly].map { |name| [name, name] }.to_h
 
   def self.dt_params
-    daily_dt   = Date.today
-    weekly_dt  = daily_dt.beginning_of_week
+    daily_dt = Date.today
+    weekly_dt = daily_dt.beginning_of_week
     monthly_dt = daily_dt.beginning_of_month
     {
       daily: daily_dt,

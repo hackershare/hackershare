@@ -1,4 +1,4 @@
-require_relative '20200917131007_add_code_to_rss_sources'
+require_relative "20200917131007_add_code_to_rss_sources"
 
 class ChangeRssSources < ActiveRecord::Migration[6.0]
   def change

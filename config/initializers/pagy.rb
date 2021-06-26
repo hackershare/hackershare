@@ -157,6 +157,6 @@ require "pagy/extras/countless"
 # Default i18n key
 # Pagy::VARS[:i18n_key] = 'pagy.item_name'   # default
 
-Pagy::I18n.load({ locale: "en" },
-                { locale: "zh-CN" })
+Pagy::I18n.load({locale: "en"},
+  {locale: "zh-CN"})
 require "pagy/extras/i18n"

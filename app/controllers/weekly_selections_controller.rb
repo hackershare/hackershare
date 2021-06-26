@@ -28,7 +28,7 @@ class WeeklySelectionsController < ApplicationController
     @weekly_selecting_bookmarks = Bookmark.where(lang: locale_lang).weekly_selecting.excellented_order
     @weekly_selection = WeeklySelection.where(lang: locale_lang).new(
       issue_no: (WeeklySelection.where(lang: [locale_lang, :all_lang]).maximum(:issue_no)&.next || 1),
-      title: @weekly_selecting_bookmarks.first&.title,
+      title: @weekly_selecting_bookmarks.first&.title
     )
   end
 
@@ -54,11 +54,11 @@ class WeeklySelectionsController < ApplicationController
 
   private
 
-    def weekly_selection_params
-      params.require(:weekly_selection).permit(
-        :issue_no,
-        :title,
-        :description,
-      )
-    end
+  def weekly_selection_params
+    params.require(:weekly_selection).permit(
+      :issue_no,
+      :title,
+      :description
+    )
+  end
 end

@@ -13,26 +13,24 @@ class Admin::RssBookmarksController < Admin::ApplicationController
   def display
     if @rss_bookmark.update(is_display: true)
       flash[:success] = "Displayed successfully"
-      redirect_to action: :index
     else
       flash[:error] = "Displayed failed: #{@rss_bookmark.short_error_message}"
-      redirect_to action: :index
     end
+    redirect_to action: :index
   end
 
   def undisplay
     if @rss_bookmark.update(is_display: false)
       flash[:success] = "Undisplayed successfully"
-      redirect_to action: :index
     else
       flash[:error] = "Undisplayed failed: #{@rss_bookmark.short_error_message}"
-      redirect_to action: :index
     end
+    redirect_to action: :index
   end
 
   private
 
-    def set_rss_bookmark
-      @rss_bookmark = Bookmark.rss.find(params[:id])
-    end
+  def set_rss_bookmark
+    @rss_bookmark = Bookmark.rss.find(params[:id])
+  end
 end

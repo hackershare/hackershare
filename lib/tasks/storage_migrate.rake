@@ -3,7 +3,7 @@
 module ActiveStorage
   class Downloader
     def initialize(blob, tempdir: nil)
-      @blob    = blob
+      @blob = blob
       @tempdir = tempdir
     end
 
@@ -17,28 +17,28 @@ module ActiveStorage
 
     private
 
-      attr_reader :blob, :tempdir
+    attr_reader :blob, :tempdir
 
-      def open_tempfile
-        file = Tempfile.open(["ActiveStorage-#{blob.id}-", blob.filename.extension_with_delimiter], tempdir)
+    def open_tempfile
+      file = Tempfile.open(["ActiveStorage-#{blob.id}-", blob.filename.extension_with_delimiter], tempdir)
 
-        begin
-          yield file
-        ensure
-          file.close!
-        end
+      begin
+        yield file
+      ensure
+        file.close!
       end
+    end
 
-      def download_blob_to(file)
-        file.binmode
-        blob.download { |chunk| file.write(chunk) }
-        file.flush
-        file.rewind
-      end
+    def download_blob_to(file)
+      file.binmode
+      blob.download { |chunk| file.write(chunk) }
+      file.flush
+      file.rewind
+    end
 
-      def verify_integrity_of(file)
-        raise ActiveStorage::IntegrityError unless Digest::MD5.file(file).base64digest == blob.checksum
-      end
+    def verify_integrity_of(file)
+      raise ActiveStorage::IntegrityError unless Digest::MD5.file(file).base64digest == blob.checksum
+    end
   end
 end
 
@@ -55,7 +55,7 @@ end
 def migrate(from, to)
   configs = Rails.configuration.active_storage.service_configurations
   from_service = ActiveStorage::Service.configure from, configs
-  to_service   = ActiveStorage::Service.configure to, configs
+  to_service = ActiveStorage::Service.configure to, configs
 
   ActiveStorage::Blob.service = from_service
 

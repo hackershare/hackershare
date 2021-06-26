@@ -32,7 +32,7 @@ class FollowNotification < ApplicationNotification
   def message
     [params[:follow]&.user&.username, t(".followed_you")].join(" ")
   end
-  #
+
   def url
     user_path(params[:follow]&.user, n_id: record.id)
   end

@@ -3,7 +3,7 @@ class ChangeWeeklySeletion < ActiveRecord::Migration[6.0]
     reversible do |dir|
       dir.up do
         WeeklySelection.where(title: nil).delete_all
-        WeeklySelection.where.not(published_at: nil).update_all('created_at = published_at')
+        WeeklySelection.where.not(published_at: nil).update_all("created_at = published_at")
       end
     end
     remove_column :weekly_selections, :published_at, :datetime

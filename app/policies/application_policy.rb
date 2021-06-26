@@ -51,12 +51,12 @@ class ApplicationPolicy
 
   private
 
-    def locale_lang
-      case I18n.locale
-      when :en
-        :english
-      when :'zh-CN'
-        :chinese
-      end
+  def locale_lang
+    case I18n.locale
+    when :en
+      :english
+    when :'zh-CN'
+      :chinese
     end
+  end
 end

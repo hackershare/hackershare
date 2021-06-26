@@ -6,6 +6,6 @@ class AddSmartScore < ActiveRecord::Migration[6.0]
       add column smart_score float 
       generated always as (log(likes_count + dups_count + 1.1) + EXTRACT(EPOCH FROM(created_at - '2020-08-10')) / 4500) stored
     SQL
-    add_index :bookmarks, :smart_score, order: { smart_score: :desc }
+    add_index :bookmarks, :smart_score, order: {smart_score: :desc}
   end
 end

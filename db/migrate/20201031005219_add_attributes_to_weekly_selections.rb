@@ -5,7 +5,7 @@ class AddAttributesToWeeklySelections < ActiveRecord::Migration[6.0]
     reversible do |dir|
       dir.up do
         WeeklySelection.where.not(published_at: nil).find_each do |ws|
-          ws.update!(published_at: ws.created_at, title: 'TODO', description: 'TODO', description_en: 'TODO')
+          ws.update!(published_at: ws.created_at, title: "TODO", description: "TODO", description_en: "TODO")
         end
       end
     end

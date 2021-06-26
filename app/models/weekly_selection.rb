@@ -22,7 +22,7 @@ class WeeklySelection < ApplicationRecord
   enum lang: {
     english: 0,
     chinese: 1,
-    all_lang: 2,
+    all_lang: 2
   }
 
   def full_title

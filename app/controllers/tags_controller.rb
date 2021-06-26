@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   def new
     @bookmark = Bookmark.find(params[:bookmark_id])
     respond_to do |format|
-      format.html { }
+      format.html {}
       format.js { render "new", content_type: "text/html" }
     end
   end

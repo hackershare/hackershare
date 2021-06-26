@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
   validates :comment, presence: true
 
   def notifications
-    @notifications ||= Notification.where(params: { comment: self })
+    @notifications ||= Notification.where(params: {comment: self})
   end
 
   before_destroy :destroy_notifications

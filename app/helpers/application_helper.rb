@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def auth_provider_url(provider = :github)
     if params["chrome-callback"].present?
-      "/auth/#{provider}?chrome-callback=#{params['chrome-callback']}"
+      "/auth/#{provider}?chrome-callback=#{params["chrome-callback"]}"
     else
       "/auth/#{provider}"
     end
@@ -38,11 +38,10 @@ module ApplicationHelper
   def render_twitter_share_link(bookmark)
     base = "https://twitter.com/intent/tweet?text="
     base += CGI.escape([
-        bookmark.title.to_s,
-        bookmark.tags.map { |x| "##{x.name}" }.join(" "),
-        bookmark_url(bookmark)
-      ].join(" ")
-    )
+      bookmark.title.to_s,
+      bookmark.tags.map { |x| "##{x.name}" }.join(" "),
+      bookmark_url(bookmark)
+    ].join(" "))
     base
   end
 
@@ -53,11 +52,11 @@ module ApplicationHelper
   def link_to_active(text, url, options = {})
     route = Rails.application.routes.recognize_path(url)
     if options[:class]
-      if controller_name == route[:controller] || (route[:controller] == "bookmarks" && controller_name == "home")
-        options[:class] = options[:class] << " bg-gray-900"
-      else
-        options[:class] = options[:class] << " hover:bg-gray-700"
-      end
+      options[:class] = options[:class] << if controller_name == route[:controller] || (route[:controller] == "bookmarks" && controller_name == "home")
+                          " bg-gray-900"
+                        else
+                          " hover:bg-gray-700"
+                        end
     end
     link_to text, url, options
   end
@@ -94,7 +93,7 @@ module ApplicationHelper
 
   def tag_url_for(tag)
     if controller_name == "users"
-      link_to bookmarks_path(request.query_parameters.except(:page).merge(tag: tag.name, only_path: true)), class: "btn-tag mr-1 lg:mr-2 mb-1", data: { remote: true, action: "ajax:success->listing#replace" } do
+      link_to bookmarks_path(request.query_parameters.except(:page).merge(tag: tag.name, only_path: true)), class: "btn-tag mr-1 lg:mr-2 mb-1", data: {remote: true, action: "ajax:success->listing#replace"} do
         concat "##{tag.name}"
         concat render_rss_icon(tag)
       end

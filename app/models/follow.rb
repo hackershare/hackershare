@@ -19,7 +19,7 @@ class Follow < ApplicationRecord
   belongs_to :following_user, counter_cache: :followers_count, class_name: "User"
 
   def notifications
-    @notifications ||= Notification.where(params: { follow: self })
+    @notifications ||= Notification.where(params: {follow: self})
   end
 
   before_destroy :destroy_notifications
