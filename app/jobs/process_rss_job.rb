@@ -82,13 +82,15 @@ class ProcessRssJob < ApplicationJob
   end
 
   def http
-    @http ||= \
-      if proxy = ENV["https_proxy"] || ENV["http_proxy"]
+    @http ||= begin
+      proxy = ENV["https_proxy"] || ENV["http_proxy"]
+      if proxy
         uri = URI.parse(proxy)
         HTTP.timeout(20).via(uri.host, uri.port)
       else
         HTTP.timeout(20)
       end
+    end
   end
 
   def get_complete_url(rss_url, entry_url)

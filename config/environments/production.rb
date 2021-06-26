@@ -78,7 +78,7 @@ Rails.application.configure do
   config.action_controller.asset_host = ENV["ASSET_HOST"] if ENV["ASSET_HOST"].present?
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end

@@ -40,10 +40,10 @@ class RemoteFetchJob < ApplicationJob
     favicons.each do |favicon|
       retryed = false
       begin
-        result = open(favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+        result = URI.parse(favicon).open(read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
         unless /html|text/i.match?(result.content_type)
           bookmark.favicon = favicon
-          return
+          break
         end
       rescue OpenURI::HTTPError, Errno::ENOENT
         next if retryed

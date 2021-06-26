@@ -6,8 +6,7 @@ class RssRobotJob < ApplicationJob
 
   def perform
     RssSource.find_each do |rss_source|
-      return unless rss_source.enabled?
-      ProcessRssJob.perform_now(rss_source.id)
+      ProcessRssJob.perform_now(rss_source.id) if rss_source.enabled?
     end
   end
 end

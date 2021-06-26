@@ -115,9 +115,8 @@ class ApplicationController < ActionController::Base
 
   def mark_notification
     if current_user && params[:n_id].present?
-      if notification = current_user.notifications.where(id: params[:n_id]).first
-        notification.mark_as_read!
-      end
+      notification = current_user.notifications.where(id: params[:n_id]).first
+      notification&.mark_as_read!
     end
   end
 

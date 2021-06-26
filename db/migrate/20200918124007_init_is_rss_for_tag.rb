@@ -1,7 +1,8 @@
 class InitIsRssForTag < ActiveRecord::Migration[6.0]
   def change
     RssSource.all.each do |s|
-      if tag = Tag.where(name: s.tag_name).first
+      tag = Tag.where(name: s.tag_name).first
+      if tag
         Tag.transaction do
           tag.update(is_rss: true)
           s.update(tag: tag)

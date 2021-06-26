@@ -48,12 +48,14 @@ class RssSourcesController < ApplicationController
   end
 
   def http
-    @http ||= \
-      if proxy = ENV["https_proxy"] || ENV["http_proxy"]
+    @http ||= begin
+      proxy = ENV["https_proxy"] || ENV["http_proxy"]
+      if proxy
         uri = URI.parse(proxy)
         HTTP.via(uri.host, uri.port)
       else
         HTTP
       end
+    end
   end
 end

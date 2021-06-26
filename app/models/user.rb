@@ -85,12 +85,13 @@ class User < ApplicationRecord
   end
 
   def generate_token(column)
-    begin
+    loop do
       self[column] = SecureRandom.hex(32)
-    end while User.exists?(column => self[column])
+      break unless User.exists?(column => self[column])
+    end
   end
 
-  attr_accessor :remember_me
+  attr_writer :remember_me
 
   has_many :bookmarks, dependent: :destroy
 
@@ -132,7 +133,8 @@ class User < ApplicationRecord
     auth_provider = AuthProvider.find_or_initialize_by(provider: auth["provider"], uid: auth["uid"])
     if auth_provider.new_record?
       auth_provider.data = auth
-      if user = User.where("lower(email) = ?", email_or_fake(auth).downcase).first
+      user = User.where("lower(email) = ?", email_or_fake(auth).downcase).first
+      if user
         auth_provider.user = user
       else
         user = auth_provider.build_user(

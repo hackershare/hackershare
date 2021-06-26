@@ -90,7 +90,8 @@ class Bookmark < ApplicationRecord
   after_initialize :set_defaults, if: :new_record?
 
   after_create do
-    if original = Bookmark.where(url: url).where("id !=?", id).first
+    original = Bookmark.where(url: url).where("id !=?", id).first
+    if original
       BookmarkStat.incr_dups_count(original.id)
       update!(ref: original)
       original.touch(:created_at)
@@ -102,9 +103,10 @@ class Bookmark < ApplicationRecord
   end
 
   def do_destroy!
+    new_root = duplications.first
     if duplications.blank?
       destroy
-    elsif new_root = duplications.first
+    elsif new_root
       Bookmark.transaction do
         new_root.likes.destroy_all
         new_root.bookmark_stats.destroy_all
@@ -141,7 +143,7 @@ class Bookmark < ApplicationRecord
   end
 
   def letter_char
-    URI.parse(url).host.split(".")[-2..-1][0][0].upcase
+    URI.parse(url).host.split(".")[-2..][0][0].upcase
   end
 
   def tag_names_for(user)
@@ -164,7 +166,7 @@ class Bookmark < ApplicationRecord
   end
 
   def save_favicon
-    downloaded_image = open(favicon, read_timeout: 10)
+    downloaded_image = URI.parse(favicon).open(read_timeout: 10)
     favicon_local.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(favicon).path)

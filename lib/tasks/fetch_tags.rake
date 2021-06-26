@@ -6,7 +6,7 @@ task fetch_tags: :environment do
   base_url = "https://github.com/topics?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = URI.open(url).read
+    html = URI.parse(url).open.read
     doc = Nokogiri::HTML(html)
     list = doc.css("li.py-4.border-bottom")
     break if list.blank?
@@ -16,7 +16,8 @@ task fetch_tags: :environment do
         desc: li.css("p.f5.text-gray").text.strip,
         img: li.css("img.rounded-1")&.attribute("src")&.value
       }
-      if tag = Tag.where("lower(name) = ?", attrs[:name].downcase).first
+      tag = Tag.where("lower(name) = ?", attrs[:name].downcase).first
+      if tag
         tag = tag.preferred_or_self
         tag.update(description: attrs[:desc], remote_img_url: attrs[:img])
       else
@@ -33,7 +34,7 @@ task fetch_tags_from_stackshare: :environment do
   base_url = "https://stackshare.io/tools/top?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = URI.open(url).read
+    html = URI.parse(url).open.read
     doc = Nokogiri::HTML(html)
     list = doc.css("#trending-box")
     break if list.blank?
@@ -43,7 +44,8 @@ task fetch_tags_from_stackshare: :environment do
         desc: li.css(".trending-description").text.strip,
         img: li.css(".tool-logo img")&.attribute("src")&.value
       }
-      if tag = Tag.where("lower(name) = ?", attrs[:name].downcase).first
+      tag = Tag.where("lower(name) = ?", attrs[:name].downcase).first
+      if tag
         tag = tag.preferred_or_self
         tag.update(description: attrs[:desc], remote_img_url: attrs[:img]) if tag.remote_img_url.blank?
       else
@@ -59,7 +61,7 @@ private
 
 def save_remote_img(tag)
   if tag.remote_img_url.present?
-    downloaded_image = URI.open(tag.remote_img_url, read_timeout: 10)
+    downloaded_image = URI.parse(tag.remote_img_url).open(read_timeout: 10)
     tag.img.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(tag.remote_img_url).path)
