@@ -39,7 +39,7 @@ class RemoteFetchJob < ApplicationJob
       retryed = false
       begin
         result = URI.parse(favicon).try(:open, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
-        unless /html|text/i.match?(result&.content_type)
+        if result && !/html|text/i.match?(result.content_type)
           bookmark.favicon = favicon
           break
         end
