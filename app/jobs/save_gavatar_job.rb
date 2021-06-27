@@ -8,7 +8,7 @@ class SaveGavatarJob < ApplicationJob
     return if /fakemail.com/.match?(user.email)
     return if user.avatar.attached?
     img_url = ["https://www.gravatar.com/avatar", Digest::MD5.hexdigest(user.email)].join("/")
-    downloaded_image = URI.parse(img_url).open(read_timeout: 10)
+    downloaded_image = URI.open(img_url, read_timeout: 10) # rubocop:disable Security/Open
     user.avatar.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(img_url).path)

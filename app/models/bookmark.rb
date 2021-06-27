@@ -166,7 +166,7 @@ class Bookmark < ApplicationRecord
   end
 
   def save_favicon
-    downloaded_image = URI.parse(favicon).open(read_timeout: 10)
+    downloaded_image = URI.open(favicon, read_timeout: 10) # rubocop:disable Security/Open
     favicon_local.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(favicon).path)

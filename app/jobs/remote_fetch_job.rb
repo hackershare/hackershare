@@ -38,7 +38,7 @@ class RemoteFetchJob < ApplicationJob
     favicons.each do |favicon|
       retryed = false
       begin
-        result = URI.parse(favicon).try(:open, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE)
+        result = URI.open(favicon, read_timeout: 10, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE) # rubocop:disable Security/Open
         if result && !/html|text/i.match?(result.content_type)
           bookmark.favicon = favicon
           break

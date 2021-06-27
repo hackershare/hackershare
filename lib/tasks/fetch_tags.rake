@@ -6,7 +6,7 @@ task fetch_tags: :environment do
   base_url = "https://github.com/topics?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = URI.parse(url).open.read
+    html = URI.open(url).read # rubocop:disable Security/Open
     doc = Nokogiri::HTML(html)
     list = doc.css("li.py-4.border-bottom")
     break if list.blank?
@@ -34,7 +34,7 @@ task fetch_tags_from_stackshare: :environment do
   base_url = "https://stackshare.io/tools/top?page="
   (1..).each do |i|
     url = base_url + i.to_s
-    html = URI.parse(url).open.read
+    html = URI.open(url).read # rubocop:disable Security/Open
     doc = Nokogiri::HTML(html)
     list = doc.css("#trending-box")
     break if list.blank?
@@ -61,7 +61,7 @@ private
 
 def save_remote_img(tag)
   if tag.remote_img_url.present?
-    downloaded_image = URI.parse(tag.remote_img_url).open(read_timeout: 10)
+    downloaded_image = URI.open(tag.remote_img_url, read_timeout: 10) # rubocop:disable Security/Open
     tag.img.attach(
       io: downloaded_image,
       filename: File.basename(URI.parse(tag.remote_img_url).path)
