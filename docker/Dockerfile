@@ -17,6 +17,8 @@ ENV BUNDLE_PATH="/gems"
 
 RUN apk update \
   && apk add \
+    --no-cache \
+    python2 \
     openssl \
     tar \
     build-base \
