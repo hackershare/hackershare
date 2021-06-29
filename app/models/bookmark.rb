@@ -48,6 +48,8 @@
 #  index_bookmarks_on_smart_score                  (smart_score)
 #  index_bookmarks_on_url_and_user_id              (url,user_id) UNIQUE
 #  index_bookmarks_on_user_id                      (user_id)
+#  index_bookmarks_on_weekly_selection_id          (weekly_selection_id)
+#  new_weekly_selection_idx                        (is_excellent,weekly_selection_id,excellented_priority DESC,excellented_at)
 #
 class Bookmark < ApplicationRecord
   has_one_attached :favicon_local

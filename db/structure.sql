@@ -1313,6 +1313,13 @@ CREATE INDEX index_bookmarks_on_user_id ON public.bookmarks USING btree (user_id
 
 
 --
+-- Name: index_bookmarks_on_weekly_selection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_bookmarks_on_weekly_selection_id ON public.bookmarks USING btree (weekly_selection_id);
+
+
+--
 -- Name: index_clicks_on_bookmark_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1495,6 +1502,13 @@ CREATE INDEX index_users_on_updated_at ON public.users USING btree (updated_at D
 
 
 --
+-- Name: new_weekly_selection_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX new_weekly_selection_idx ON public.bookmarks USING btree (is_excellent, weekly_selection_id, excellented_priority DESC, excellented_at);
+
+
+--
 -- Name: notifications_idx_0; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1592,6 +1606,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20210405062117'),
 ('20210411031231'),
 ('20210411042558'),
-('20210502191459');
+('20210502191459'),
+('20210504170854'),
+('20210504184032');
 
 
