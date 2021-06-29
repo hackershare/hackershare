@@ -13,7 +13,7 @@ services:
     tty: true
     stdin_open: true
     image: hackershare:development
-    env_file: .env
+    env_file: .docker.env
 
   rails:
     <<: *base
