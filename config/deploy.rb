@@ -30,7 +30,7 @@ Rake::Task["deploy:assets:backup_manifest"].clear_actions
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, ".env"
+append :linked_files, ".env.local"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/uploads", "storage", "public/sitemap"

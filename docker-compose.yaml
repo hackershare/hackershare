@@ -13,7 +13,7 @@ services:
     tty: true
     stdin_open: true
     image: hackershare:development
-    env_file: .docker.env
+    env_file: .env
 
   rails:
     <<: *base
@@ -33,8 +33,7 @@ services:
       - webpack
       - sidekiq
     ports:
-      - 3001:3000
-    env_file: .docker.env
+      - ${RAILS_PORT}:3000
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack
       - NODE_ENV=development
@@ -71,8 +70,8 @@ services:
       - packs:/app/public/packs
       - cache:/app/tmp/cache
       - bundle:/usr/local/bundle
-    ports:
-      - "3035" # Webpack dev server
+    # ports:
+    #   - "3035" # Webpack dev server
     environment:
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
       - NODE_ENV=development
@@ -83,8 +82,8 @@ services:
   postgres:
     image: hooopo/pg12-zhparser-rum
     restart: always
-    ports:
-      - '5432:5432'
+    # ports:
+    #   - '5432:5432'
     volumes:
       - postgres:/data/postgres
     environment:
@@ -95,12 +94,11 @@ services:
   redis:
     image: redis:alpine
     restart: always
-    command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
-    env_file: .docker.env
+    command: ["sh", "-c", "redis-server"]
     volumes:
       - redis:/data/redis
-    ports:
-      - '6379:6379'
+    # ports:
+    #   - '6379:6379'
 
 volumes:
   postgres:

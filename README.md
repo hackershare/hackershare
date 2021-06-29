@@ -29,7 +29,7 @@ There is also a project introduction article for your reference: [hackershare: S
 1. Make a copy of the example environment file and modify as required [optional].
 
 ```
-cp .docker.env .env
+cp .env .env.local
 ```
 
 2. Build the images.
