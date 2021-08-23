@@ -1,19 +1,17 @@
 ## 什么是“极客分享每周精选”
 
-“极客分享”是一个书签分享的网站（[hackershare.dev](https://hackershare.dev)），“每周精选”是该网站汇总精选书签的一个栏目。
+“极客分享”是一个书签分享的网站（hackershare.dev），“每周精选”是该网站汇总精选书签的一个栏目。
 
 ## 本期正文
-
-**原文链接:** [<%= weekly_selection_url(@weekly_selection) %>](<%= weekly_selection_url(@weekly_selection) %>)
 
 <%= @weekly_selection.description %>
 
 <% @weekly_selection.bookmarks.each_with_index do |bookmark, index| %>
-### [<%= index + 1 %>. <%= bookmark.title %>](<%= goto_bookmark_url(bookmark) %>)
+### [<%= bookmark.title %>](<%= bookmark.url %>)
 
 > <%= bookmark.pinned_comment&.comment %>
 
-**标签:** <%= bookmark.tags.pluck(:name).map { |name| "##{name}" }.join(" ") %>
+标签: <%= bookmark.tags.pluck(:name).map { |name| "*##{name}*" }.join(" ") %>
 
 <% end %>
 
