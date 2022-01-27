@@ -99,7 +99,7 @@ gem "feedjira", "~> 3.1", ">= 3.1.1"
 
 gem "httplog", "~> 1.4"
 
-gem "sidekiq", "~> 6.2"
+gem "sidekiq", "~> 6.4"
 
 gem "sidekiq-scheduler", "~> 3.0", ">= 3.0.1"
 
