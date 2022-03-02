@@ -70,7 +70,7 @@ gem "validate_url", "~> 1.0"
 
 gem "pagy", "~> 3.8"
 
-gem "image_processing", "~> 1.11"
+gem "image_processing", "~> 1.12"
 
 gem "omniauth", "~> 1.9"
 
