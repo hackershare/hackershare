@@ -18,6 +18,7 @@ set :rvm_ruby_version, File.read(".ruby-version").strip
 set :rvm_custom_path, "/usr/share/rvm" # only needed if not detected
 
 set :puma_init_active_record, true
+set :log_level, :debug
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
