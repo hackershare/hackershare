@@ -8,7 +8,7 @@ gem "rails", "~> 6.0.3", ">= 6.0.3.2"
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
 # Use Puma as the app server
-gem "puma", "~> 4.3"
+gem "puma"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem "webpacker", "~> 4.0"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -70,7 +70,7 @@ gem "validate_url", "~> 1.0"
 
 gem "pagy", "~> 3.8"
 
-gem "image_processing", "~> 1.11"
+gem "image_processing", "~> 1.12"
 
 gem "omniauth", "~> 1.9"
 
@@ -99,7 +99,7 @@ gem "feedjira", "~> 3.1", ">= 3.1.1"
 
 gem "httplog", "~> 1.4"
 
-gem "sidekiq", "~> 6.2"
+gem "sidekiq", "~> 6.4"
 
 gem "sidekiq-scheduler", "~> 3.0", ">= 3.0.1"
 
