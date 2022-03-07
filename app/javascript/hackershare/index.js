@@ -9,9 +9,6 @@ import { createPopper } from '@popperjs/core';
 import { format, render, cancel, register } from 'timeago.js';
 import Tagify from '@yaireo/tagify';
 
-import ahoy from "ahoy.js";
-ahoy.trackAll();
-
 //import TubrolinksPrefetch from 'turbolinks-prefetch'
 //TubrolinksPrefetch.start()
 
