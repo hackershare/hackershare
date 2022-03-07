@@ -12,4 +12,4 @@ test:
   <<: *default
 production:
   <<: *default
-  concurrency: 20
+  concurrency: 10
