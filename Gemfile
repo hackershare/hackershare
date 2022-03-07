@@ -116,8 +116,6 @@ gem "lograge", "~> 0.11.2"
 
 gem "device_detector", "~> 1.0"
 
-gem "ahoy_matey", "~> 3.0"
-
 gem "pundit", "~> 2.1"
 gem 'rbnacl', '< 5.0', :require => false
 gem 'rbnacl-libsodium', :require => false
