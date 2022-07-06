@@ -12,7 +12,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
     "@tailwindcss/ui": "^0.3.1",
-    "@yaireo/tagify": "^3.17.10",
+    "@yaireo/tagify": "^4.9.8",
     "ahoy.js": "^0.3.7",
     "alpinejs": "^2.5.0",
     "i18n-js": "^3.7.1",
